@@ -1,0 +1,44 @@
+{
+    "name": "jonathanballands.me",
+    "version": "3.0.0",
+    "description": "Third version of my personal website",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "dev": "./node_modules/.bin/webpack-dev-server --config webpack.config.dev.js",
+        "build": "./node_modules/.bin/webpack --config webpack.config.prod.js",
+        "fresh": "find ./public -name \"*.js\" -type f -delete"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/jballands/jonathanballands.me.git"
+    },
+    "author": "Jon Ballands <jballands@gmail.com>",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/jballands/jonathanballands.me/issues"
+    },
+    "homepage": "http://jonathanballands.me",
+    "dependencies": {
+        "babel-preset-es2015": "^6.24.0",
+        "babel-preset-react": "^6.23.0",
+        "babel-preset-stage-0": "^6.22.0",
+        "css-loader": "^0.27.3",
+        "react": "^15.4.2",
+        "react-dom": "^15.4.2"
+    },
+    "devDependencies": {
+        "autoprefixer-loader": "^3.2.0",
+        "babel-core": "^6.24.0",
+        "babel-loader": "^6.4.0",
+        "babel-plugin-transform-class-properties": "^6.23.0",
+        "img-loader": "^1.3.1",
+        "node-sass": "^4.5.0",
+        "react-loader": "^2.4.0",
+        "sass-loader": "^6.0.3",
+        "source-map-loader": "^0.2.0",
+        "style-loader": "^0.13.2",
+        "url-loader": "^0.5.8",
+        "webpack": "^2.2.1",
+        "webpack-dev-server": "^2.4.1"
+    }
+}
