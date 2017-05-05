@@ -6,6 +6,7 @@
 //
 
 import React from 'react';
+import NavigationBar from '../NavigationBar';
 
 import './App.scss';
 
@@ -15,9 +16,11 @@ export default class App extends React.Component {
 
     render() {
         return (
-            <div className="hello-world">
-                Hello world!
+            <div>
+                <NavigationBar />
+                {this.props.children}
             </div>
+
         );
     }
 

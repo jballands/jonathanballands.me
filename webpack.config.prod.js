@@ -6,6 +6,7 @@
 //
 
 const path = require('path');
+const webpack = require('webpack'); 
 
 // -----------------------------------------------------------------------------
 
@@ -34,7 +35,7 @@ module.exports = {
             }
         ]
     },
-    devServer: {
-        publicPath: '/public/'
-    }
+    plugins: [
+        new webpack.optimize.UglifyJsPlugin()
+    ]
 };
