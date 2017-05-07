@@ -7,43 +7,36 @@
 
 import React from 'react';
 import { render } from 'react-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
-import App from './components/App';
-import Particles from './components/Particles';
-import Link from './components/Link';
+import NavigationBar from 'components/NavigationBar';
+import Footer from 'components/Footer';
 
-import '../styles/index.scss';
+import About from 'routes/About';
+import Blog from 'routes/Blog';
+
+import 'styles/normalize.scss';
+import 'styles/fonts.scss';
 
 // -----------------------------------------------------------------------------
 
-class Home extends React.Component {
+class App extends React.Component {
 
     render() {
         return (
-            <App>
-                <div className="index-hero-unit-container">
-                    <Particles>
-                        <div className="index-hero-unit">
-                            <div className="index-hero-unit-title">
-                                Howdy, I'm Pretty Rad
-                            </div>
-                            <div className="index-hero-unit-subtitle">
-                                But you can call me Jon.
-                            </div>
-                            <Link link='' external>
-                                View My Résumé
-                            </Link>
-                        </div>
-                    </Particles>
-                </div>
+            <Router>
+                <div>
+                    <NavigationBar />
 
-                <div className="index-about-me">
+                        <Route exact path="/" component={About}/>
+                        <Route exact path="/blog" component={Blog}/>
 
+                    <Footer />
                 </div>
-            </App>
+            </Router>
         );
     }
 
 }
 
-render(<Home />, document.getElementById('reactroot'));
+render(<App />, document.getElementById('reactroot'));

@@ -11,8 +11,7 @@ const path = require('path');
 
 module.exports = {
     entry: {
-        'index.bundle': './src/js/index',
-        'blog.bundle': './src/js/blog'
+        'bundle': './src/js/index',
     },
     output: {
         path: path.resolve(__dirname, './public/assets'),
@@ -41,8 +40,17 @@ module.exports = {
             }
         ]
     },
+    resolve: {
+        alias: {
+            'components': path.resolve(__dirname, './src/js/components'),
+            'routes': path.resolve(__dirname, './src/js/routes'),
+            'svg': path.resolve(__dirname, './src/js/svg'),
+            'styles': path.resolve(__dirname, './src/styles'),
+        }
+    },
     devServer: {
         publicPath: '/assets/',
-        contentBase: './public'
+        contentBase: './public',
+        historyApiFallback: true
     }
 };

@@ -6,6 +6,7 @@
 //
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import './NavigationBarItem.scss';
 
@@ -15,9 +16,9 @@ export default class NavigationBarItem extends React.Component {
 
     render() {
         return (
-            <a className="navigation-bar-item" href={this.props.link}>
+            <Link className="navigation-bar-item" to={this.props.link}>
                 <span>{this.props.children}</span>
-            </a>
+            </Link>
         );
     }
 
