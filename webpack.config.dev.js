@@ -11,10 +11,12 @@ const path = require('path');
 
 module.exports = {
     entry: {
-        'index.bundle': './src/js/index'
+        'index.bundle': './src/js/index',
+        'blog.bundle': './src/js/blog'
     },
     output: {
-        path: path.resolve(__dirname, 'public'),
+        path: path.resolve(__dirname, './public/assets'),
+        publicPath: path.resolve(__dirname, './public'),
         filename: '[name].js'
     },
     module: {
@@ -40,6 +42,7 @@ module.exports = {
         ]
     },
     devServer: {
-        publicPath: '/public/'
+        publicPath: '/assets/',
+        contentBase: './public'
     }
 };

@@ -4,8 +4,8 @@
     "description": "Third version of my personal website",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "dev": "./node_modules/.bin/webpack-dev-server --config webpack.config.dev.js",
-        "build": "./node_modules/.bin/webpack --config webpack.config.prod.js",
+        "dev": "yarn fresh && ./node_modules/.bin/webpack-dev-server --config webpack.config.dev.js",
+        "build": "yarn fresh && ./node_modules/.bin/webpack --config webpack.config.prod.js",
         "fresh": "find ./public -name \"*.js\" -type f -delete"
     },
     "repository": {

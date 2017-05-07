@@ -6,16 +6,17 @@
 //
 
 const path = require('path');
-const webpack = require('webpack'); 
+const webpack = require('webpack');
 
 // -----------------------------------------------------------------------------
 
 module.exports = {
     entry: {
-        'index.bundle': './src/js/index'
+        'index.bundle': './src/js/index',
+        'blog.bundle': './src/js/blog'
     },
     output: {
-        path: path.resolve(__dirname, 'public'),
+        path: path.resolve(__dirname, 'public/assets'),
         filename: '[name].js'
     },
     module: {
