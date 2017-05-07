@@ -42,6 +42,7 @@ export default class NavigationBar extends React.Component {
         return (
             <div className="particles-container">
                 <Particles width="100%" height="500px" params={params} />
+
                 <div className="particles-content-positioning">
                     <div className="particles-content-container">
                         {this.props.children}
