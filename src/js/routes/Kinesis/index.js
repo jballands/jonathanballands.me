@@ -1,6 +1,6 @@
 //
 //  jonathanballands.me
-//  routes/Blog.js
+//  routes/Kinesis.js
 //
 //  © 2017 Jonathan Ballands
 //
@@ -10,14 +10,14 @@ import React from 'react';
 import Particles from 'components/Particles';
 import LinkWrapper from 'components/LinkWrapper';
 
-import './Blog.scss';
+import './Kinesis.scss';
 
-export default class Blog extends React.Component {
+export default class Kinesis extends React.Component {
 
     render() {
         return (
             <div>
-                
+
             </div>
         );
     }

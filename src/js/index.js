@@ -13,6 +13,7 @@ import NavigationBar from 'components/NavigationBar';
 import Footer from 'components/Footer';
 
 import About from 'routes/About';
+import Kinesis from 'routes/Kinesis';
 import Blog from 'routes/Blog';
 
 import 'styles/normalize.scss';
@@ -27,10 +28,9 @@ class App extends React.Component {
             <Router>
                 <div>
                     <NavigationBar />
-
                         <Route exact path="/" component={About}/>
+                        <Route exact path="/kinesis" component={Kinesis}/>
                         <Route exact path="/blog" component={Blog}/>
-
                     <Footer />
                 </div>
             </Router>

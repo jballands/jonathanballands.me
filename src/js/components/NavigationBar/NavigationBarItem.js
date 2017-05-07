@@ -14,9 +14,16 @@ import './NavigationBarItem.scss';
 
 export default class NavigationBarItem extends React.Component {
 
+    static contextTypes = {
+        router: React.PropTypes.object
+    }
+
     render() {
+        const isCurrentRoute = this.context.router.route.location.pathname === this.props.link;
+        const curr = isCurrentRoute ? ' navigation-bar-current-route' : '';
+
         return (
-            <Link className="navigation-bar-item" to={this.props.link}>
+            <Link className={`navigation-bar-item ${curr}`} to={this.props.link}>
                 <span>{this.props.children}</span>
             </Link>
         );

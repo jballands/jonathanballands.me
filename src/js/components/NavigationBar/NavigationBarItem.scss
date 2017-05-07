@@ -29,7 +29,7 @@
     transition: all 0.2s ease-out 0s;
 }
 
-.navigation-bar-item > span:hover:after {
+.navigation-bar-item > span:hover:after, .navigation-bar-current-route > span:after {
     visibility: visible;
     -webkit-transform: scaleX(1);
     transform: scaleX(1);
