@@ -16,7 +16,7 @@ export default class About extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="about-container">
                 <div className="about-hero-unit-container">
                     <Particles>
                         <div className="about-hero-unit">

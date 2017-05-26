@@ -46,6 +46,7 @@ module.exports = {
             'routes': path.resolve(__dirname, './src/js/routes'),
             'svg': path.resolve(__dirname, './src/js/svg'),
             'styles': path.resolve(__dirname, './src/styles'),
+            '~': path.resolve(__dirname, '.')
         }
     },
     devServer: {

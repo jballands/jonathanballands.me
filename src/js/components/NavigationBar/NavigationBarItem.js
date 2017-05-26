@@ -6,6 +6,7 @@
 //
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import './NavigationBarItem.scss';
@@ -15,7 +16,7 @@ import './NavigationBarItem.scss';
 export default class NavigationBarItem extends React.Component {
 
     static contextTypes = {
-        router: React.PropTypes.object
+        router: PropTypes.object
     }
 
     render() {

@@ -18,6 +18,7 @@ import Blog from 'routes/Blog';
 
 import 'styles/normalize.scss';
 import 'styles/fonts.scss';
+import './index.scss';
 
 // -----------------------------------------------------------------------------
 
@@ -26,7 +27,7 @@ class App extends React.Component {
     render() {
         return (
             <Router>
-                <div>
+                <div className="app-container">
                     <NavigationBar />
                         <Route exact path="/" component={About}/>
                         <Route exact path="/kinesis" component={Kinesis}/>

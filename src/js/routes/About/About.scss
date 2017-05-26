@@ -1,9 +1,13 @@
+.about-container {
+    width: 100%;
+}
+
 .about-hero-unit-container {
-    background: #24292e;
-    background: -webkit-linear-gradient(top, #24292e, #69f4ff);
-    background: -o-linear-gradient(top, #24292e, #69f4ff);
-    background: -moz-linear-gradient(top, #24292e, #69f4ff);
-    background: linear-gradient(to bottom, #24292e, #69f4ff);
+    background: #525252;
+    background: -webkit-linear-gradient(top, #fcd400, #b020b8, #642da3);
+    background: -o-linear-gradient(top, #fcd400, #b020b8, #642da3);
+    background: -moz-linear-gradient(top, #fcd400, #b020b8, #642da3);
+    background: linear-gradient(to bottom, #fcd400, #b020b8, #642da3);
 }
 
 .about-hero-unit {
@@ -31,7 +35,7 @@
 }
 
 .about-me {
-    background: #69f4ff;
+    background: #642da3;
     width: 100%;
     height: 600px;
 }
