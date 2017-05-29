@@ -7,8 +7,7 @@
 
 import React from 'react';
 
-import Particles from 'components/Particles';
-import LinkWrapper from 'components/LinkWrapper';
+import BlogEntryPreview from 'components/BlogEntryPreview';
 
 import BlogConfig from '~/blog.config.js';
 
@@ -20,7 +19,15 @@ export default class Blog extends React.Component {
         return (
             <div className="blog-container">
                 <div className="blog-article-selection-container">
-                    
+
+                    {BlogConfig.map((entry, i) => {
+                    	return (
+                    		<div key={`blog-entry-${i}`}>
+                    			<BlogEntryPreview {...entry} />
+                    		</div>
+                    	);
+                    })}
+
                 </div>
             </div>
         );

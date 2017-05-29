@@ -1,6 +1,6 @@
 //
 //  jonathanballands.me
-//  Teaser/index.js
+//  LinkWrapper/index.js
 //
 //  © 2017 Jonathan Ballands
 //
@@ -12,7 +12,7 @@ import './LinkWrapper.scss';
 
 // -----------------------------------------------------------------------------
 
-export default class Teaser extends React.Component {
+export default class LinkWrapper extends React.Component {
 
     static defaultProps = {
         external: false

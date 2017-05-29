@@ -1,0 +1,22 @@
+.blog-entry-preview-container {
+	width: 230px;
+	height: 175px;
+	margin: 10px 0;
+	padding: 10px;
+	background: #fff1c1;
+
+	border: 1px solid #ffe489;
+	transition: border 0.15s ease-in-out;
+	transition: transform 0.15s ease-in-out;
+
+	&:hover {
+		transform: translate(0,-6px);
+		border: 1px solid #ffcd2b;
+		cursor: pointer;
+	}
+}
+
+.blog-entry-preview-title {
+	font-family: 'Roboto', 'serif';
+	font-size: 18px;
+}
