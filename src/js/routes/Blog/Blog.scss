@@ -1,13 +1,10 @@
 .blog-container {
     width: 100%;
-    background-color: #ffefb9;
+    background-color: #ffffff;
     flex: 1 0;
 }
 
 .blog-article-selection-container {
 	width: 780px;
-	margin: 0 auto;
-	display: flex;
-	flex-flow: row wrap;
-	justify-content: space-between;
+	margin: 10px auto;
 }

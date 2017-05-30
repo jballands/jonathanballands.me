@@ -6,6 +6,7 @@
 //
 
 import React from 'react';
+import Masonry from 'react-masonry-component';
 
 import BlogEntryPreview from 'components/BlogEntryPreview';
 
@@ -18,7 +19,7 @@ export default class Blog extends React.Component {
     render() {
         return (
             <div className="blog-container">
-                <div className="blog-article-selection-container">
+                <Masonry className="blog-article-selection-container" options={{ transitionDuration: 0 }}>
 
                     {BlogConfig.map((entry, i) => {
                     	return (
@@ -28,7 +29,7 @@ export default class Blog extends React.Component {
                     	);
                     })}
 
-                </div>
+                </Masonry>
             </div>
         );
     }
