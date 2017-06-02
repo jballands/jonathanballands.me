@@ -38,7 +38,7 @@ module.exports = {
     resolve: {
         alias: {
             'components': path.resolve(__dirname, './src/js/components'),
-            'routes': path.resolve(__dirname, './src/js/routes'),
+            'containers': path.resolve(__dirname, './src/js/containers'),
             'svg': path.resolve(__dirname, './src/js/svg'),
             'styles': path.resolve(__dirname, './src/styles'),
             '~': path.resolve(__dirname, '.')

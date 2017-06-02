@@ -7,37 +7,32 @@
 
 import React from 'react';
 import { render } from 'react-dom';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, IndexRoute } from 'react-router-dom';
 
-import NavigationBar from 'components/NavigationBar';
-import Footer from 'components/Footer';
-
-import About from 'routes/About';
-import Kinesis from 'routes/Kinesis';
-import Blog from 'routes/Blog';
+import App from 'containers/App';
+import About from 'containers/About';
+import Kinesis from 'containers/Kinesis';
+import Blog from 'containers/Blog';
 
 import 'styles/normalize.scss';
 import 'styles/fonts.scss';
-import './index.scss';
 
 // -----------------------------------------------------------------------------
 
-class App extends React.Component {
+class JonathanBallandsDotMe extends React.Component {
 
     render() {
         return (
             <Router>
-                <div className="app-container">
-                    <NavigationBar />
-                        <Route exact path="/" component={About}/>
-                        <Route exact path="/kinesis" component={Kinesis}/>
-                        <Route exact path="/blog" component={Blog}/>
-                    <Footer />
-                </div>
+                <Route path="/" component={App}>
+                    <IndexRoute component={About} />
+                    <Route path="/kinesis" component={Kinesis} />
+                    <Route path="/blog" component={Blog} />
+                </Route>
             </Router>
         );
     }
 
 }
 
-render(<App />, document.getElementById('reactroot'));
+render(<JonathanBallandsDotMe />, document.getElementById('reactroot'));
