@@ -1,6 +1,6 @@
 //
 //  jonathanballands.me
-//  routes/About.js
+//  About/index.js
 //
 //  © 2017 Jonathan Ballands
 //

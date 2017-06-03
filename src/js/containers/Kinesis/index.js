@@ -1,6 +1,6 @@
 //
 //  jonathanballands.me
-//  routes/Kinesis.js
+//  Kinesis/index.js
 //
 //  © 2017 Jonathan Ballands
 //

@@ -1,12 +1,12 @@
 //
 //  jonathanballands.me
-//  routes/Blog.js
+//  Blog/index.js
 //
 //  © 2017 Jonathan Ballands
 //
 
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import Masonry from 'react-masonry-component';
 
 import BlogSelector from 'containers/BlogSelector';
@@ -19,7 +19,7 @@ export default class Blog extends React.Component {
     render() {
         return (
             <div className="blog-container">
-                Rawr
+                Blog!
             </div>
         );
     }
