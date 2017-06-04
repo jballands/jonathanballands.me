@@ -15,9 +15,11 @@ import './Kinesis.scss';
 export default class Kinesis extends React.Component {
 
     render() {
+        console.log('rendering kinesis');
+        
         return (
             <div>
-
+            Kinesis!
             </div>
         );
     }

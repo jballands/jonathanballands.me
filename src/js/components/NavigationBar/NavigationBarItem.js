@@ -20,12 +20,24 @@ export default class NavigationBarItem extends React.Component {
     }
 
     render() {
-        const isCurrentRoute = this.context.router.route.location.pathname === this.props.link;
+        const route = this.context.router.route.location.pathname;
+        const { children, link } = this.props;
+
+        // Do some logic to determine if the current route is part of the base link
+        // We treat / special, though, since that doesn't have subroutes
+        let isCurrentRoute = false;
+        if (link === '/') {
+            isCurrentRoute = route === '/';
+        }
+        else {
+            isCurrentRoute = route.startsWith(this.props.link);
+        }
+
         const curr = isCurrentRoute ? ' navigation-bar-current-route' : '';
 
         return (
-            <Link className={`navigation-bar-item ${curr}`} to={this.props.link}>
-                <span>{this.props.children}</span>
+            <Link className={`navigation-bar-item ${curr}`} to={link}>
+                <span>{children}</span>
             </Link>
         );
     }

@@ -9,6 +9,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import createHistory from 'history/createBrowserHistory'
+import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 
 import About from 'containers/About';
 import Kinesis from 'containers/Kinesis';
@@ -28,15 +29,24 @@ class App extends React.Component {
     render() {
         return (
             <Router history={createHistory()}>
-                <div className="app-container">
+                <Route render={({ location, history }) => {
+                    console.log(location);
+
+                    return (
+                    <div className="app-container">
                     <NavigationBar />
-                    <Switch>
-                        <Route exact path="/" component={About} />
-                        <Route path="/kinesis" component={Kinesis} />
-                        <Route path="/blog" component={Blog} />
-                    </Switch>
+                    <CSSTransitionGroup transitionName="fade" transitionEnterTimeout={300} transitionLeaveTimeout={300} className="app-main-router-switch">
+
+                        <Switch key={location.key} location={location}>
+                            <Route exact path="/" component={About} />
+                            <Route path="/kinesis" component={Kinesis} />
+                            <Route path="/blog" component={Blog} />
+                        </Switch>
+
+                    </CSSTransitionGroup>
                     <Footer />
                 </div>   
+                )}} />
             </Router>
         );
     }

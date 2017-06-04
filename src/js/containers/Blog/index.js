@@ -18,8 +18,7 @@ export default class Blog extends React.Component {
 
     render() {
         const { match } = this.props;
-
-        // console.log(match);
+        console.log('rendering blog');
 
         return (
             <div className="blog-container">
