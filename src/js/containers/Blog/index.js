@@ -6,7 +6,7 @@
 //
 
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Link, Route, Switch } from 'react-router-dom';
 import Masonry from 'react-masonry-component';
 
 import BlogSelector from 'containers/BlogSelector';
@@ -17,10 +17,31 @@ import './Blog.scss';
 export default class Blog extends React.Component {
 
     render() {
+        const { match } = this.props;
+
+        // console.log(match);
+
         return (
             <div className="blog-container">
-                Blog!
+                <Route path={`${match.url}/rawr`} component={Dummy} />
+                <Route exact path={match.url}>
+                    <span>Welcome to the blog</span>
+                </Route>
             </div>
+        );
+    }
+
+}
+
+class Dummy extends React.Component {
+
+    render() {
+        const { match } = this.props;
+
+        console.log(match);
+
+        return (
+            <div>Rawr!</div>
         );
     }
 

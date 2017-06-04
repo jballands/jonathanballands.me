@@ -7,7 +7,8 @@
 
 import React from 'react';
 import { render } from 'react-dom';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import createHistory from 'history/createBrowserHistory'
 
 import About from 'containers/About';
 import Kinesis from 'containers/Kinesis';
@@ -26,24 +27,14 @@ class App extends React.Component {
 
     render() {
         return (
-            <Router>
+            <Router history={createHistory()}>
                 <div className="app-container">
                     <NavigationBar />
-                    <Route exact path="/" component={About} />
-                    <Route path="/kinesis" component={Kinesis} />
-                    <Route path="/blog" component={Blog} />
-
-                    <Route path="/rawr">
-                        <div>
-                            <Route path="poo">
-                                <span>💩</span>
-                            </Route>
-                            <Route path="bear">
-                                <span>🐻</span>
-                            </Route>
-                        </div>
-                    </Route>
-
+                    <Switch>
+                        <Route exact path="/" component={About} />
+                        <Route path="/kinesis" component={Kinesis} />
+                        <Route path="/blog" component={Blog} />
+                    </Switch>
                     <Footer />
                 </div>   
             </Router>

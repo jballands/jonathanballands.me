@@ -19,6 +19,7 @@
     },
     "homepage": "http://jonathanballands.me",
     "dependencies": {
+        "history": "^4.6.1",
         "prop-types": "^15.5.8",
         "react": "^15.4.2",
         "react-dom": "^15.4.2",

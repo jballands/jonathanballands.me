@@ -10,12 +10,13 @@ const path = require('path');
 // -----------------------------------------------------------------------------
 
 module.exports = {
+    context: path.resolve(__dirname),
     entry: {
-        'bundle': './src/js/index',
+        'bundle': './src/js/index'
     },
     output: {
         path: path.resolve(__dirname, './public/assets'),
-        publicPath: path.resolve(__dirname, './public'),
+        publicPath: path.resolve(__dirname, './public/assets'),
         filename: '[name].js'
     },
     module: {
@@ -52,6 +53,7 @@ module.exports = {
     devServer: {
         publicPath: '/assets/',
         contentBase: './public',
-        historyApiFallback: true
+        historyApiFallback: true,
+        port: 3000
     }
 };
