@@ -19,7 +19,7 @@ export default class Kinesis extends React.Component {
         
         return (
             <div>
-            Kinesis!
+                Kinesis!
             </div>
         );
     }

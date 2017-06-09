@@ -10,7 +10,6 @@
 .app-main-router-switch {
     width: 100%;
     flex: 1 0;
-    position: relative;
 }
 
 .fade-enter {
@@ -25,10 +24,10 @@
 
 .fade-enter.fade-enter-active {
   opacity: 1;
-  transition: opacity 250ms ease-in;
+  transition: opacity 300ms ease;
 }
 
 .fade-leave.fade-leave-active {
   opacity: 0;
-  transition: opacity 250ms ease-in;
+  transition: opacity 300ms ease;
 }

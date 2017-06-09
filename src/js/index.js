@@ -11,7 +11,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import createHistory from 'history/createBrowserHistory'
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 
-import About from 'containers/About';
+import About from 'components/About';
 import Kinesis from 'containers/Kinesis';
 import Blog from 'containers/Blog';
 
@@ -35,7 +35,11 @@ class App extends React.Component {
                     return (
                     <div className="app-container">
                     <NavigationBar />
-                    <CSSTransitionGroup transitionName="fade" transitionEnterTimeout={300} transitionLeaveTimeout={300} className="app-main-router-switch">
+                    <CSSTransitionGroup 
+                        transitionName="fade"
+                        transitionEnterTimeout={300}
+                        transitionLeaveTimeout={300}
+                        className="app-main-router-switch">
 
                         <Switch key={location.key} location={location}>
                             <Route exact path="/" component={About} />
