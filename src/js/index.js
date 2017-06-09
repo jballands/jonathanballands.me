@@ -26,21 +26,21 @@ import './App.scss';
 
 class App extends React.Component {
 
-    renderAbout = ({ match }) => (
+    renderAbout = props => (
         <FooterWrapper>
-            <About match={match} />
+            <About {...props} />
         </FooterWrapper>
     );
 
-    renderKinesis = ({ match }) => (
+    renderKinesis = props => (
         <FooterWrapper>
-            <Kinesis match={match} />
+            <Kinesis {...props} />
         </FooterWrapper>
     );
 
-    renderBlog = ({ match }) => (
+    renderBlog = props => (
         <FooterWrapper>
-            <Blog match={match} />
+            <Blog {...props} />
         </FooterWrapper>
     );
 
@@ -50,21 +50,21 @@ class App extends React.Component {
                 <Route render={({ location }) => {
                     return (
                     <div className="app-container">
-                    <NavigationBar />
-                    <CSSTransitionGroup 
-                        transitionName="anim-fade"
-                        transitionEnterTimeout={300}
-                        transitionLeaveTimeout={300}
-                        className="app-main-router-switch">
+                        <NavigationBar />
+                        <CSSTransitionGroup 
+                            transitionName="anim-fade"
+                            transitionEnterTimeout={300}
+                            transitionLeaveTimeout={300}
+                            className="app-main-router-switch">
 
-                        <Switch key={location.key} location={location}>
-                            <Route exact path="/" render={this.renderAbout} />
-                            <Route path="/kinesis" component={this.renderKinesis} />
-                            <Route path="/blog" component={this.renderBlog} />
-                        </Switch>
+                            <Switch key={location.key} location={location}>
+                                <Route exact path="/" render={this.renderAbout} />
+                                <Route path="/kinesis" component={this.renderKinesis} />
+                                <Route path="/blog" component={this.renderBlog} />
+                            </Switch>
 
-                    </CSSTransitionGroup>
-                </div>   
+                        </CSSTransitionGroup>
+                    </div>   
                 )}} />
             </Router>
         );
