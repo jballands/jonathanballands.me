@@ -1,3 +1,7 @@
+body {
+    background: #24292e;
+}
+
 .app-container {
     min-height: 100vh;
     width: 100%;
@@ -10,24 +14,19 @@
 .app-main-router-switch {
     width: 100%;
     flex: 1 0;
+    position: relative;
 }
 
-.fade-enter {
+.anim-fade-enter {
   opacity: 0;
   z-index: 1;
 }
 
-.fade-leave {
+.anim-fade-leave {
   opacity: 1;
-  z-index: 1;
 }
 
-.fade-enter.fade-enter-active {
+.anim-fade-enter.anim-fade-enter-active {
   opacity: 1;
-  transition: opacity 300ms ease;
-}
-
-.fade-leave.fade-leave-active {
-  opacity: 0;
   transition: opacity 300ms ease;
 }
