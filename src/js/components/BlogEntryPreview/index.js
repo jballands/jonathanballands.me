@@ -26,25 +26,13 @@ export default class BlogEntryPreview extends React.Component {
         link: PropTypes.string.isRequired
     };
 
-    render() {
+    renderImage() {
         return (
-            <Link to={this.props.link}>
-                <div className="blog-entry-preview-container">
-
-                    { this.props.image ? this._image(): null }
-
-                    <div className="blog-entry-preview-details">
-                        <div className="blog-entry-preview-title">{this.props.name}</div>
-                        <div className="blog-entry-preview-date">{this.props.date.toLocaleDateString()}</div>
-                        { this.props.description ? this._description() : null }
-                    </div>
-
-                </div>
-            </Link>
+            <Img className="blog-entry-preview-image" src={this.props.image} />
         );
     }
 
-    _description() {
+    renderDescription() {
         return (
             <div className="blog-entry-preview-description">
                 {this.props.description}
@@ -52,9 +40,21 @@ export default class BlogEntryPreview extends React.Component {
         );
     }
 
-    _image() {
+    render() {
         return (
-            <Img className="blog-entry-preview-image" src={this.props.image} />
+            <Link to={encodeToUri(this.props.link)}>
+                <div className="blog-entry-preview-container">
+
+                    { this.props.image ? this.renderImage() : null }
+
+                    <div className="blog-entry-preview-details">
+                        <div className="blog-entry-preview-title">{this.props.name}</div>
+                        <div className="blog-entry-preview-date">{this.props.date.toLocaleDateString()}</div>
+                        { this.props.description ? this.renderDescription() : null }
+                    </div>
+
+                </div>
+            </Link>
         );
     }
 

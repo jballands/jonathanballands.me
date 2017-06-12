@@ -1,6 +1,6 @@
 //
 //  jonathanballands.me
-//  containers/BlogSelector.js
+//  BlogSelector/index.js
 //
 //  © 2017 Jonathan Ballands
 //
