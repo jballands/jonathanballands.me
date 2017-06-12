@@ -21,25 +21,8 @@ export default class Blog extends React.Component {
 
         return (
             <div className="blog-container">
-                <Route path={`${match.url}/rawr`} component={Dummy} />
-                <Route exact path={match.url}>
-                    <span>Welcome to the blog</span>
-                </Route>
+                <Route exact path={match.url} component={BlogSelector} />
             </div>
-        );
-    }
-
-}
-
-class Dummy extends React.Component {
-
-    render() {
-        const { match } = this.props;
-
-        console.log(match);
-
-        return (
-            <div>Rawr!</div>
         );
     }
 

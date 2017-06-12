@@ -18,15 +18,15 @@ body {
 }
 
 .anim-fade-enter {
-  opacity: 0;
-  z-index: 1;
+    opacity: 0;
+    z-index: 1000;
 }
 
 .anim-fade-leave {
-  opacity: 1;
+    opacity: 1;
 }
 
 .anim-fade-enter.anim-fade-enter-active {
-  opacity: 1;
-  transition: opacity 300ms ease;
+    opacity: 1;
+    transition: opacity 300ms ease;
 }

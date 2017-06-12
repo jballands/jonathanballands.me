@@ -6,8 +6,11 @@
 //
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Img from 'react-image';
+
+import encodeToUri from 'helpers/encodeToUri';
 
 import './BlogEntryPreview.scss';
 
@@ -18,25 +21,26 @@ export default class BlogEntryPreview extends React.Component {
     static propTypes = {
         name: PropTypes.string.isRequired,
         date: PropTypes.instanceOf(Date).isRequired,
-        endpoint: PropTypes.string.isRequired,
         image: PropTypes.string,
-        description: PropTypes.string
+        description: PropTypes.string,
+        link: PropTypes.string.isRequired
     };
 
     render() {
-        console.log(this.props);
-
         return (
-            <div className="blog-entry-preview-container">
+            <Link to={this.props.link}>
+                <div className="blog-entry-preview-container">
 
-                <div className="blog-entry-preview-details">
-                    <div className="blog-entry-preview-title">{this.props.name}</div>
-                    <div className="blog-entry-preview-date">{this.props.date.toLocaleDateString()}</div>
-                    { this.props.description ? this._description() : null }
+                    { this.props.image ? this._image(): null }
+
+                    <div className="blog-entry-preview-details">
+                        <div className="blog-entry-preview-title">{this.props.name}</div>
+                        <div className="blog-entry-preview-date">{this.props.date.toLocaleDateString()}</div>
+                        { this.props.description ? this._description() : null }
+                    </div>
+
                 </div>
-
-                { this.props.image ? this._image(): null }
-            </div>
+            </Link>
         );
     }
 
