@@ -8,12 +8,8 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
-import createHistory from 'history/createBrowserHistory';
+import createHistory from 'history/createBrowserHistory'
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
-
-// TODO: Import the root reducer here
 
 import About from 'components/About';
 import Kinesis from 'containers/Kinesis';
@@ -49,33 +45,28 @@ class App extends React.Component {
     );
 
     render() {
-        // TODO: Give the root reducer to the Redux store
-        const store = createStore(() => {{}});
-
         return (
-            <Provider store={store}>
-                <Router history={createHistory()}>
-                    <Route render={({ location }) => {
-                        return (
-                        <div className="app-container">
-                            <NavigationBar />
-                            <CSSTransitionGroup 
-                                transitionName="anim-fade"
-                                transitionEnterTimeout={300}
-                                transitionLeaveTimeout={300}
-                                className="app-main-router-switch">
+            <Router history={createHistory()}>
+                <Route render={({ location }) => {
+                    return (
+                    <div className="app-container">
+                        <NavigationBar />
+                        <CSSTransitionGroup 
+                            transitionName="anim-fade"
+                            transitionEnterTimeout={300}
+                            transitionLeaveTimeout={300}
+                            className="app-main-router-switch">
 
-                                <Switch key={location.key} location={location}>
-                                    <Route exact path="/" render={this.renderAbout} />
-                                    <Route path="/kinesis" component={this.renderKinesis} />
-                                    <Route path="/blog" component={this.renderBlog} />
-                                </Switch>
+                            <Switch key={location.key} location={location}>
+                                <Route exact path="/" render={this.renderAbout} />
+                                <Route path="/kinesis" component={this.renderKinesis} />
+                                <Route path="/blog" component={this.renderBlog} />
+                            </Switch>
 
-                            </CSSTransitionGroup>
-                        </div>   
-                    )}} />
-                </Router>
-            </Provider>
+                        </CSSTransitionGroup>
+                    </div>   
+                )}} />
+            </Router>
         );
     }
 
