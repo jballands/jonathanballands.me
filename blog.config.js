@@ -5,7 +5,7 @@
 //  © 2017 Jonathan Ballands
 //
 
-module.exports = [
+export const blogPosts = [
     {
         name: 'Swag Affogato',
         date: new Date(2017, 4, 14),

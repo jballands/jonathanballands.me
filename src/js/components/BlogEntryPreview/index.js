@@ -14,8 +14,6 @@ import encodeToUri from 'helpers/encodeToUri';
 
 import './BlogEntryPreview.scss';
 
-// -----------------------------------------------------------------------------
-
 export default class BlogEntryPreview extends React.Component {
 
     static propTypes = {
@@ -23,12 +21,14 @@ export default class BlogEntryPreview extends React.Component {
         date: PropTypes.instanceOf(Date).isRequired,
         image: PropTypes.string,
         description: PropTypes.string,
-        link: PropTypes.string.isRequired
+        uri: PropTypes.string.isRequired
     };
 
     render() {
+        console.log(this.props);
+
         return (
-            <Link to={this.props.link}>
+            <Link to={this.props.uri}>
                 <div className="blog-entry-preview-container">
 
                     { this.props.image ? this._image(): null }

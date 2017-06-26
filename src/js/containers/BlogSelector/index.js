@@ -11,25 +11,24 @@ import Masonry from 'react-masonry-component';
 
 import BlogEntryPreview from 'components/BlogEntryPreview';
 
-import BlogConfig from '~/blog.config.js';
+import { BlogConfig } from 'helpers/blog.js';
 
 import './BlogSelector.scss';
 
 export default class BlogSelector extends React.Component {
 
-    static propTypes = {
-        blogConfig: PropTypes.arrayOf(PropTypes.object)
-    };
-
     render() {
         return (
             <Masonry className="blog-article-selection-container" options={{ transitionDuration: 0 }}>
 
-                {BlogConfig.map((entry, i) => {
+                {Object.keys(BlogConfig).map((uri, i) => {
+                    const entry = BlogConfig[uri];
                     return (
-                        <div key={`blog-entry-${i}`}>
-                            <BlogEntryPreview {...entry} />
-                        </div>
+                        <BlogEntryPreview
+                            key={`blog-entry-${i}`}
+                            uri={`${this.props.match.path}/${uri}`}
+                            {...entry}
+                        />
                     );
                 })}
 

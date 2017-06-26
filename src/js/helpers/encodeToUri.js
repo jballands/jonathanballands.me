@@ -1,6 +1,6 @@
 //
 //  jonathanballands.me
-//  encodeToUri.js
+//  helpers/encodeToUri.js
 //
 //  © 2017 Jonathan Ballands
 //

@@ -13,7 +13,7 @@ import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 
 import About from 'components/About';
 import Kinesis from 'containers/Kinesis';
-import Blog from 'containers/Blog';
+import Blog from 'components/Blog';
 
 import NavigationBar from 'components/NavigationBar';
 import FooterWrapper from 'components/FooterWrapper';
