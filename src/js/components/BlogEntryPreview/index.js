@@ -24,6 +24,7 @@ export default class BlogEntryPreview extends React.Component {
         uri: PropTypes.string.isRequired
     };
 
+<<<<<<< HEAD
     render() {
         console.log(this.props);
 
@@ -41,10 +42,15 @@ export default class BlogEntryPreview extends React.Component {
 
                 </div>
             </Link>
+=======
+    renderImage() {
+        return (
+            <Img className="blog-entry-preview-image" src={this.props.image} />
+>>>>>>> 5fcabb5e5400c2bbc93ded48f101e73488445bc9
         );
     }
 
-    _description() {
+    renderDescription() {
         return (
             <div className="blog-entry-preview-description">
                 {this.props.description}
@@ -52,9 +58,21 @@ export default class BlogEntryPreview extends React.Component {
         );
     }
 
-    _image() {
+    render() {
         return (
-            <Img className="blog-entry-preview-image" src={this.props.image} />
+            <Link to={encodeToUri(this.props.link)}>
+                <div className="blog-entry-preview-container">
+
+                    { this.props.image ? this.renderImage() : null }
+
+                    <div className="blog-entry-preview-details">
+                        <div className="blog-entry-preview-title">{this.props.name}</div>
+                        <div className="blog-entry-preview-date">{this.props.date.toLocaleDateString()}</div>
+                        { this.props.description ? this.renderDescription() : null }
+                    </div>
+
+                </div>
+            </Link>
         );
     }
 
