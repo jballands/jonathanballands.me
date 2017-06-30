@@ -11,9 +11,9 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import createHistory from 'history/createBrowserHistory'
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 
-import About from 'components/About';
-import Kinesis from 'containers/Kinesis';
-import Blog from 'components/Blog';
+import About from 'routes/About';
+import Kinesis from 'routes/Kinesis';
+import Blog from 'routes/Blog';
 
 import NavigationBar from 'components/NavigationBar';
 import FooterWrapper from 'components/FooterWrapper';

@@ -36,10 +36,12 @@ module.exports = {
         ]
     },
     resolve: {
+        extensions: ['.js', '.jsx'],
         alias: {
             'components': path.resolve(__dirname, './src/js/components'),
             'containers': path.resolve(__dirname, './src/js/containers'),
             'helpers': path.resolve(__dirname, './src/js/helpers'),
+            'routes': path.resolve(__dirname, './src/js/routes'),
             'svg': path.resolve(__dirname, './src/js/svg'),
             'styles': path.resolve(__dirname, './src/styles'),
             '~': path.resolve(__dirname, '.')

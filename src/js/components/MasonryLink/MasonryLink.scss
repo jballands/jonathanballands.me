@@ -1,4 +1,4 @@
-.blog-entry-preview-container {
+.masonry-link {
 	width: 230px;
 	margin: 5px;
 	background: #e5e5e5;
@@ -13,30 +13,30 @@
 	}
 }
 
-.blog-entry-preview-details {
+.masonry-link-details {
 	padding: 20px;
 }
 
-.blog-entry-preview-title {
+.masonry-link-title {
 	font-family: 'Roboto', 'serif';
 	font-size: 18px;
 	color: #232323;
 }
 
-.blog-entry-preview-date {
+.masonry-link-date {
 	font-family: 'Roboto', 'serif';
 	font-size: 12px;
 	color: #424242;
 }
 
-.blog-entry-preview-description {
+.masonry-link-description {
 	font-family: 'Roboto', 'serif';
 	font-size: 13px;
 	color: #424242;
 	margin-top: 8px;
 }
 
-.blog-entry-preview-image {
+.masonry-link-image {
 	width: 100%;
 	display: block;
 	border-radius: 5px 5px 0 0;
