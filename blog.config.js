@@ -39,7 +39,7 @@ export const blogPosts = [
         image: null,
         description: 'Normcore tote bag organic post-ironic, yr subway tile next level.' +
         'Fam shaman copper mug microdosing, kitsch narwhal seitan bushwick austin '+
-        '3 wolf moon ennui man bun iceland. '
+        '3 wolf moon ennui man bun iceland.'
     },
     {
         name: 'Beard Pitchfork Pork Belly Small Batch Tattooed Street Art Banh Mid',

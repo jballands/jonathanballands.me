@@ -8,9 +8,6 @@
 import React from 'react';
 import { Link, Route, Switch } from 'react-router-dom';
 
-import MasonryLayout from 'components/MasonryLayout';
-import MasonryLink from 'components/MasonryLink';
-
 import { BlogConfig } from 'helpers/blog';
 
 import './Blog.scss';
@@ -23,18 +20,7 @@ export default class Blog extends React.Component {
         return (
             <div className="blog-container">
                 <Route exact path={match.url}>
-                    <MasonryLayout>
-                        {Object.keys(BlogConfig).map((uri, i) => {
-                            const entry = BlogConfig[uri];
-                            return (
-                                <MasonryLink
-                                    key={`masonry-layout-item-${i}`}
-                                    uri={`${this.props.match.path}/${uri}`}
-                                    {...entry}
-                                />
-                            );
-                        })}
-                    </MasonryLayout>
+                   
                 </Route>
             </div>
         );
