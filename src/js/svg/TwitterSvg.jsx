@@ -1,13 +1,11 @@
 //
-//  jonathanballands.me
-//  Twitter.js
+//	jballands/jonathanballands.me
+//	TwitterSvg.jsx
 //
-//  © 2017 Jonathan Ballands
+//	© 2017 Jonathan Ballands
 //
 
 import React from 'react';
-
-// -----------------------------------------------------------------------------
 
 export default class TwitterSvg extends React.Component {
 	static defaultProps = {

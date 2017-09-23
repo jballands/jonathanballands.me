@@ -1,13 +1,11 @@
 //
-//  jonathanballands.me
-//  Github.jsx
+//	jballands/jonathanballands.me
+//	GithubSvg.jsx
 //
-//  © 2017 Jonathan Ballands
+//	© 2017 Jonathan Ballands
 //
 
 import React from 'react';
-
-// -----------------------------------------------------------------------------
 
 export default class GithubSvg extends React.Component {
 	static defaultProps = {

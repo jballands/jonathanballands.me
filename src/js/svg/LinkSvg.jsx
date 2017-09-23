@@ -1,13 +1,11 @@
 //
-//  jonathanballands.me
-//  LinkSvg.jsx
+//	jballands/jonathanballands.me
+//	LinkSvg.jsx
 //
-//  © 2017 Jonathan Ballands
+//	© 2017 Jonathan Ballands
 //
 
 import React from 'react';
-
-// -----------------------------------------------------------------------------
 
 export default class LinkSvg extends React.Component {
 	static defaultProps = {

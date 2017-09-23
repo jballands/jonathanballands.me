@@ -1,8 +1,8 @@
 //
-//  jonathanballands.me
-//  index.js
+//	jballands/jonathanballands.me
+//	index.jsx
 //
-//  © 2017 Jonathan Ballands
+//	© 2017 Jonathan Ballands
 //
 
 import React from 'react';

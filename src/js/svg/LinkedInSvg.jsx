@@ -1,13 +1,11 @@
 //
-//  jonathanballands.me
-//  LinkedIn.jsx
+//	jballands/jonathanballands.me
+//	LinkedInSvg.jsx
 //
-//  © 2017 Jonathan Ballands
+//	© 2017 Jonathan Ballands
 //
 
 import React from 'react';
-
-// -----------------------------------------------------------------------------
 
 export default class LinkedInSvg extends React.Component {
 	static defaultProps = {
