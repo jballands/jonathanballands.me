@@ -7,6 +7,8 @@
 
 import React from 'react';
 import { render } from 'react-dom';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import createHistory from 'history/createBrowserHistory';
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
@@ -18,6 +20,8 @@ import Blog from 'routes/Blog';
 
 import NavigationBar from 'components/NavigationBar';
 import FooterWrapper from 'components/FooterWrapper';
+
+import rootReducer from 'reducers/index';
 
 import 'styles/normalize.scss';
 import 'styles/fonts.scss';
@@ -73,40 +77,44 @@ class App extends React.Component {
 	);
 
 	render() {
+		const store = createStore(rootReducer);
+
 		return (
-			<Router history={createHistory()}>
-				<Route
-					render={({ location }) => {
-						return (
-							<AppContainer>
-								<NavigationBar />
-								<StyledCSSTransitionGroup
-									transitionName="anim-fade"
-									transitionEnterTimeout={300}
-									transitionLeaveTimeout={300}>
-									<Switch
-										key={location.key}
-										location={location}>
-										<Route
-											exact
-											path="/"
-											render={this.renderAbout}
-										/>
-										<Route
-											path="/kinesis"
-											component={this.renderKinesis}
-										/>
-										<Route
-											path="/blog"
-											component={this.renderBlog}
-										/>
-									</Switch>
-								</StyledCSSTransitionGroup>
-							</AppContainer>
-						);
-					}}
-				/>
-			</Router>
+			<Provider store={store}>
+				<Router history={createHistory()}>
+					<Route
+						render={({ location }) => {
+							return (
+								<AppContainer>
+									<NavigationBar />
+									<StyledCSSTransitionGroup
+										transitionName="anim-fade"
+										transitionEnterTimeout={300}
+										transitionLeaveTimeout={300}>
+										<Switch
+											key={location.key}
+											location={location}>
+											<Route
+												exact
+												path="/"
+												render={this.renderAbout}
+											/>
+											<Route
+												path="/kinesis"
+												component={this.renderKinesis}
+											/>
+											<Route
+												path="/blog"
+												component={this.renderBlog}
+											/>
+										</Switch>
+									</StyledCSSTransitionGroup>
+								</AppContainer>
+							);
+						}}
+					/>
+				</Router>
+			</Provider>
 		);
 	}
 }

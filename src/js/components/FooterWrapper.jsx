@@ -22,6 +22,7 @@ const FooterWrapperContent = styled.div`
 	background: #fff;
 	min-height: calc(100% - 70px);
 	display: flex;
+	position: relative;
 `;
 
 export default class FooterWrapper extends React.Component {

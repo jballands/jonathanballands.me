@@ -38,6 +38,8 @@ const FooterSocialMediaContainer = styled.div`
 `;
 
 export default class Footer extends React.Component {
+	static displayName = 'Footer';
+
 	socialMediaDim = 25;
 
 	render() {

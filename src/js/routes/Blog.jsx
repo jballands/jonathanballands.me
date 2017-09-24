@@ -7,7 +7,8 @@
 
 import React from 'react';
 import styled from 'styled-components';
-import { Link, Route, Switch } from 'react-router-dom';
+
+import BlogBrowserContainer from 'containers/BlogBrowserContainer';
 
 import { BlogConfig } from 'helpers/blog';
 
@@ -22,7 +23,7 @@ export default class Blog extends React.Component {
 
 		return (
 			<BlogContainer>
-				<Route exact path={match.url} />
+				<BlogBrowserContainer />
 			</BlogContainer>
 		);
 	}

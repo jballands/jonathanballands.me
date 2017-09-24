@@ -6,8 +6,18 @@
 //
 
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default class LinkSvg extends React.Component {
+	static displayName = 'LinkSvg';
+
+	static propTypes = {
+		color: PropTypes.string,
+		height: PropTypes.number,
+		strokeWidth: PropTypes.number,
+		width: PropTypes.number,
+	};
+
 	static defaultProps = {
 		color: '#fff',
 		strokeWidth: 18,
