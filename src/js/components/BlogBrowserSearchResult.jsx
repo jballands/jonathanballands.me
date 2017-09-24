@@ -8,8 +8,47 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import moment from 'moment';
 
-const BlogBrowserSearchResultContainer = styled.div``;
+import EyeSvg from 'svg/EyeSvg';
+
+const BlogBrowserSearchResultContainer = styled.div`
+	display: flex;
+	flex-flow: row nowrap;
+	font-size: 20px;
+	padding: 10px 20px;
+
+	&:hover {
+		background: #0cd1a3;
+		cursor: pointer;
+	}
+`;
+
+const Content = styled.div`
+	display: flex;
+	flex-flow: column nowrap;
+`;
+
+const Title = styled.div`
+	font-size: 20px;
+	color: white;
+	display: flex;
+	flex-flow: row;
+`;
+
+const Subtitle = styled.div`
+	color: #247261;
+	font-size: 12px;
+`;
+
+const ActiveIcon = styled.div`
+	width: 30px;
+	flex: 0 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-right: 15px;
+`;
 
 export default class BlogBrowserSearchResult extends React.Component {
 	static displayName = 'BlogBrowserSearchResult';
@@ -22,10 +61,25 @@ export default class BlogBrowserSearchResult extends React.Component {
 		title: PropTypes.string,
 	};
 
+	renderHashtags = () => {
+		const { hashtags } = this.props;
+		return hashtags.map(h => `#${h}`).join(', ');
+	};
+
 	render() {
+		const { active, date, title } = this.props;
 		return (
 			<BlogBrowserSearchResultContainer>
-				{this.props.title}
+				{active && (
+					<ActiveIcon>
+						<EyeSvg width={28} height={27} />
+					</ActiveIcon>
+				)}
+				<Content>
+					<Title>{title}</Title>
+					<Subtitle>{moment(date).format('MMMM Do, YYYY')}</Subtitle>
+					<Subtitle>{this.renderHashtags()}</Subtitle>
+				</Content>
 			</BlogBrowserSearchResultContainer>
 		);
 	}

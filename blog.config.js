@@ -5,11 +5,6 @@
 //  © 2017 Jonathan Ballands
 //
 
-import Immutable from 'immutable';
-import moment from 'moment';
-
-import encodeToUri from 'helpers/encodeToUri';
-
 const blogPosts = [
 	{
 		name: 'Swag Affogato',
@@ -25,7 +20,7 @@ const blogPosts = [
 		name: 'Roof Party Echo Park Single-origin Coffee',
 		date: new Date(2017, 0, 1),
 		endpoint: '75bc33c6f1683785fab03b09830a2a9e',
-		hashtags: ['lifestyle, coffee'],
+		hashtags: ['lifestyle', 'coffee'],
 		description:
 			'Taxidermy post-ironic keytar portland, copper mug live-edge ' +
 			'cronut blue bottle photo booth keffiyeh.',
@@ -62,19 +57,4 @@ const blogPosts = [
 	},
 ];
 
-export default function(sortOrder) {
-	return Immutable.OrderedMap(
-		blogPosts
-			.sort((a, b) => {
-				if (sortOrder === 'later') {
-					return moment(a.date).isAfter(b.date);
-				}
-				return moment(a.date).isBefore(b.date);
-			})
-			.reduce((map, post) => {
-				const uri = encodeToUri(post.name);
-				map[uri] = post;
-				return map;
-			}, {}),
-	);
-}
+export default blogPosts;

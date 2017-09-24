@@ -33,10 +33,7 @@ const BlogBrowserContainer = styled.div`
 	overflow: hidden;
 `;
 
-const BlogBrowserControlsContainer = styled.div`
-	padding: 30px 20px;
-	width: ${DRAWER_OPEN_WIDTH - 40}px;
-`;
+const BlogBrowserControlsContainer = styled.div`width: ${DRAWER_OPEN_WIDTH}px;`;
 
 const TitleContainer = styled.div`
 	display: flex;
@@ -68,12 +65,18 @@ const StyledRadioGroup = styled(RadioGroup)`
 `;
 
 const OpenDrawerButton = styled.div`
+	padding: 20px;
 	&:hover {
 		cursor: pointer;
 	}
 `;
 
-const SearchResultsContainer = styled.div`padding: 20px 0;`;
+const FiltersContainer = styled.div`
+	padding: 20px;
+	width: calc(100% - 40px);
+`;
+
+const SearchResultsContainer = styled.div`margin: 20px 0;`;
 
 export default class BlogBrowser extends React.Component {
 	static displayName = 'BlogBrowser';
@@ -126,7 +129,10 @@ export default class BlogBrowser extends React.Component {
 					.map(result => (
 						<BlogBrowserSearchResult
 							title={result[1].name}
+							date={result[1].date}
+							hashtags={result[1].hashtags}
 							key={result[0]}
+							active
 						/>
 					))}
 			</SearchResultsContainer>
@@ -146,31 +152,33 @@ export default class BlogBrowser extends React.Component {
 
 		return (
 			<div>
-				<TitleContainer onClick={this.closeDrawer}>
-					<LeftArrowSvg width={21} height={21} />
-					<Title>Browse</Title>
-				</TitleContainer>
+				<FiltersContainer>
+					<TitleContainer onClick={this.closeDrawer}>
+						<LeftArrowSvg width={21} height={21} />
+						<Title>Browse</Title>
+					</TitleContainer>
 
-				<StyledTextInput
-					color="white"
-					hintColor="#247261"
-					accentColor="#2dedca"
-					title="Search"
-					hint="Search for topics, hashtags, and more"
-					icon={<MagnifyingGlassSvg />}
-					value={searchTerms}
-					onUpdate={this.handleSearchChange}
-				/>
+					<StyledTextInput
+						color="white"
+						hintColor="#247261"
+						accentColor="#2dedca"
+						title="Search"
+						hint="Search for topics, hashtags, and more"
+						icon={<MagnifyingGlassSvg />}
+						value={searchTerms}
+						onUpdate={this.handleSearchChange}
+					/>
 
-				<StyledRadioGroup
-					defaultSelection={sortOrder}
-					title="Sort Order"
-					color="white"
-					accentColor="#2dedca"
-					onOptionClick={this.handleSetSortOrder}>
-					<RadioItem id="later">Later Posts First</RadioItem>
-					<RadioItem id="earlier">Earlier Posts First</RadioItem>
-				</StyledRadioGroup>
+					<StyledRadioGroup
+						defaultSelection={sortOrder}
+						title="Sort Order"
+						color="white"
+						accentColor="#2dedca"
+						onOptionClick={this.handleSetSortOrder}>
+						<RadioItem id="later">Later Posts First</RadioItem>
+						<RadioItem id="earlier">Earlier Posts First</RadioItem>
+					</StyledRadioGroup>
+				</FiltersContainer>
 
 				{this.renderSearchResults()}
 			</div>
