@@ -5,7 +5,12 @@
 //  © 2017 Jonathan Ballands
 //
 
-export const blogPosts = [
+import Immutable from 'immutable';
+import moment from 'moment';
+
+import encodeToUri from 'helpers/encodeToUri';
+
+const blogPosts = [
 	{
 		name: 'Swag Affogato',
 		date: new Date(2017, 4, 14),
@@ -48,7 +53,7 @@ export const blogPosts = [
 	{
 		name:
 			'Beard Pitchfork Pork Belly Small Batch Tattooed Street Art Banh Mid',
-		date: new Date(2017, 6, 20),
+		date: new Date(2017, 6, 22),
 		endpoint: '75bc33c6f1683785fab03b09830a2a9e',
 		hashtags: ['tech'],
 		description:
@@ -56,3 +61,20 @@ export const blogPosts = [
 			'asymmetrical edison bulb authentic tote bag intelligentsia direct trade.',
 	},
 ];
+
+export default function(sortOrder) {
+	return Immutable.OrderedMap(
+		blogPosts
+			.sort((a, b) => {
+				if (sortOrder === 'later') {
+					return moment(a.date).isAfter(b.date);
+				}
+				return moment(a.date).isBefore(b.date);
+			})
+			.reduce((map, post) => {
+				const uri = encodeToUri(post.name);
+				map[uri] = post;
+				return map;
+			}, {}),
+	);
+}

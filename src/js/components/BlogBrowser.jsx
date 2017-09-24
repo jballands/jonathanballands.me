@@ -80,7 +80,7 @@ export default class BlogBrowser extends React.Component {
 
 	static propTypes = {
 		searchBlogPosts: PropTypes.func,
-		searchResults: PropTypes.instanceOf(Immutable.Map),
+		filteredEntries: PropTypes.instanceOf(Immutable.Map),
 		searchTerms: PropTypes.string,
 		setSortOrder: PropTypes.func,
 		sortOrder: PropTypes.string,
@@ -118,10 +118,10 @@ export default class BlogBrowser extends React.Component {
 	};
 
 	renderSearchResults = () => {
-		const { searchResults } = this.props;
+		const { filteredEntries } = this.props;
 		return (
 			<SearchResultsContainer>
-				{searchResults
+				{filteredEntries
 					.entrySeq()
 					.map(result => (
 						<BlogBrowserSearchResult

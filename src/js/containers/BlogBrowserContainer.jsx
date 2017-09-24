@@ -16,8 +16,8 @@ import BlogBrowser from 'components/BlogBrowser';
 
 function mapStateToProps(state) {
 	return {
+		filteredEntries: state.blog.filteredEntries,
 		searchTerms: state.blog.searchTerms,
-		searchResults: state.blog.searchResults,
 		sortOrder: state.blog.sortOrder,
 	};
 }
@@ -33,8 +33,8 @@ class BlogBrowserContainer extends React.Component {
 	static displayName = 'BlogBrowserContainer';
 
 	static propTypes = {
+		filteredEntries: PropTypes.instanceOf(Immutable.Map),
 		searchBlogPosts: PropTypes.func,
-		searchResults: PropTypes.instanceOf(Immutable.Map),
 		searchTerms: PropTypes.string,
 		setSortOrder: PropTypes.func,
 		sortOrder: PropTypes.string,
@@ -43,7 +43,7 @@ class BlogBrowserContainer extends React.Component {
 	render() {
 		const {
 			searchBlogPosts,
-			searchResults,
+			filteredEntries,
 			searchTerms,
 			setSortOrder,
 			sortOrder,
@@ -52,7 +52,7 @@ class BlogBrowserContainer extends React.Component {
 		return (
 			<BlogBrowser
 				searchBlogPosts={searchBlogPosts}
-				searchResults={searchResults}
+				filteredEntries={filteredEntries}
 				searchTerms={searchTerms}
 				setSortOrder={setSortOrder}
 				sortOrder={sortOrder}
