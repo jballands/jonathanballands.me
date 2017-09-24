@@ -10,8 +10,6 @@ import styled from 'styled-components';
 
 import BlogBrowserContainer from 'containers/BlogBrowserContainer';
 
-import { BlogConfig } from 'helpers/blog';
-
 const BlogContainer = styled.div`
 	width: 100%;
 	background: #fff;
