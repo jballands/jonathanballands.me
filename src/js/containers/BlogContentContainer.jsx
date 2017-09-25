@@ -26,7 +26,8 @@ class BlogContentContainer extends React.Component {
 		const { selectedEntry } = this.props;
 
 		return (
-			<div style={{ flex: '0 1', height: '1500px' }}>
+			<div style={{ flex: '0 1 100%' }}>
+				<img src="http://cpascount.org/wp-content/uploads/2016/05/austin-aerial-2.jpg" />
 				<img src="http://cpascount.org/wp-content/uploads/2016/05/austin-aerial-2.jpg" />
 			</div>
 		);

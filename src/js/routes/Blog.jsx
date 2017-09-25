@@ -7,7 +7,6 @@
 
 import React from 'react';
 import styled from 'styled-components';
-import { StickyContainer } from 'react-sticky';
 
 import BlogBrowserContainer from 'containers/BlogBrowserContainer';
 import BlogContentContainer from 'containers/BlogContentContainer';

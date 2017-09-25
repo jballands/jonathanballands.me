@@ -71,6 +71,6 @@ module.exports = {
 		publicPath: '/assets/',
 		contentBase: './public',
 		historyApiFallback: true,
-		port: 3000,
+		port: 3001,
 	},
 };

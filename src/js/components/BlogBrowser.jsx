@@ -7,7 +7,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Sticky } from 'react-sticky';
+import { StickyContainer, Sticky } from 'react-sticky';
 import Immutable from 'immutable';
 import { spring, Motion } from 'react-motion';
 import styled from 'styled-components';
@@ -26,7 +26,6 @@ const DRAWER_CLOSED_WIDTH = 70;
 
 const BlogBrowserContainer = styled.div`
 	height: 100%;
-	flex: 0 0 ${props => props.width}px;
 	background: #00ad86;
 	overflow: hidden;
 	position: relative;
@@ -96,6 +95,8 @@ const NoSearchResultsDetails = styled.div`
 
 const SearchResultsContainer = styled.div`margin: 20px 0;`;
 
+const StyledStickyContainer = styled(StickyContainer)`height: 100%;`;
+
 export default class BlogBrowser extends React.Component {
 	static displayName = 'BlogBrowser';
 
@@ -115,7 +116,7 @@ export default class BlogBrowser extends React.Component {
 
 	state = {
 		drawerIsOpen: this.props.drawerOpen,
-		width: DRAWER_OPEN_WIDTH,
+		width: this.props.drawerOpen ? DRAWER_OPEN_WIDTH : DRAWER_CLOSED_WIDTH,
 	};
 
 	handleSearchChange = terms => {
@@ -231,14 +232,20 @@ export default class BlogBrowser extends React.Component {
 				{interpolated => (
 					<BlogBrowserContainer
 						drawerOpen={drawerIsOpen}
-						width={interpolated.width}>
-						<BlogBrowserControlsContainer>
-							{drawerIsOpen ? (
-								this.renderOpenDrawer()
-							) : (
-								this.renderClosedDrawer()
-							)}
-						</BlogBrowserControlsContainer>
+						style={{ flex: `0 0 ${interpolated.width}px` }}>
+						<StyledStickyContainer>
+							<Sticky>
+								{() => (
+									<BlogBrowserControlsContainer>
+										{drawerIsOpen ? (
+											this.renderOpenDrawer()
+										) : (
+											this.renderClosedDrawer()
+										)}
+									</BlogBrowserControlsContainer>
+								)}
+							</Sticky>
+						</StyledStickyContainer>
 					</BlogBrowserContainer>
 				)}
 			</Motion>
