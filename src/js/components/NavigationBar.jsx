@@ -36,6 +36,8 @@ const NavigationBarList = styled.div`
 `;
 
 export default class NavigationBar extends React.Component {
+	static displayName = 'NavigationBar';
+
 	render() {
 		return (
 			<NavigationBarContainer>

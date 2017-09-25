@@ -7,6 +7,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Sticky } from 'react-sticky';
 import Immutable from 'immutable';
 import { spring, Motion } from 'react-motion';
 import styled from 'styled-components';
@@ -25,7 +26,7 @@ const DRAWER_CLOSED_WIDTH = 70;
 
 const BlogBrowserContainer = styled.div`
 	height: 100%;
-	width: ${props => props.width}px;
+	flex: 0 0 ${props => props.width}px;
 	background: #00ad86;
 	overflow: hidden;
 	position: relative;
@@ -150,9 +151,7 @@ export default class BlogBrowser extends React.Component {
 		if (filteredEntries.size <= 0) {
 			return (
 				<NoSearchResultsContainer>
-					<NoSearchResultsTitle>
-						No Blog Posts :(
-					</NoSearchResultsTitle>
+					<NoSearchResultsTitle>No Results :(</NoSearchResultsTitle>
 					<NoSearchResultsDetails>
 						Try a different search, or type something more broad
 					</NoSearchResultsDetails>
