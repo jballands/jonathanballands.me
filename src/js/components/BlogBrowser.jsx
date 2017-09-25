@@ -24,13 +24,11 @@ const DRAWER_OPEN_WIDTH = 425;
 const DRAWER_CLOSED_WIDTH = 70;
 
 const BlogBrowserContainer = styled.div`
-	position: absolute;
-	top: 0;
-	left: 0;
 	height: 100%;
 	width: ${props => props.width}px;
 	background: #00ad86;
 	overflow: hidden;
+	position: relative;
 `;
 
 const BlogBrowserControlsContainer = styled.div`width: ${DRAWER_OPEN_WIDTH}px;`;
@@ -76,15 +74,36 @@ const FiltersContainer = styled.div`
 	width: calc(100% - 40px);
 `;
 
+const NoSearchResultsContainer = styled.div`
+	padding: 20px;
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: center;
+`;
+
+const NoSearchResultsTitle = styled.div`
+	color: white;
+	font-size: 20px;
+	text-transform: uppercase;
+`;
+
+const NoSearchResultsDetails = styled.div`
+	color: #247261;
+	font-size: 14px;
+	margin-top: 5px;
+`;
+
 const SearchResultsContainer = styled.div`margin: 20px 0;`;
 
 export default class BlogBrowser extends React.Component {
 	static displayName = 'BlogBrowser';
 
 	static propTypes = {
-		searchBlogPosts: PropTypes.func,
+		chooseEntry: PropTypes.func,
 		filteredEntries: PropTypes.instanceOf(Immutable.Map),
+		searchBlogPosts: PropTypes.func,
 		searchTerms: PropTypes.string,
+		selectedEntry: PropTypes.object,
 		setSortOrder: PropTypes.func,
 		sortOrder: PropTypes.string,
 	};
@@ -106,6 +125,11 @@ export default class BlogBrowser extends React.Component {
 		this.props.setSortOrder(sortOrder);
 	};
 
+	handleChooseBlogEntry = uri => {
+		this.closeDrawer();
+		this.props.chooseEntry(uri);
+	};
+
 	closeDrawer = () => {
 		this.setState({
 			drawerIsOpen: false,
@@ -122,6 +146,20 @@ export default class BlogBrowser extends React.Component {
 
 	renderSearchResults = () => {
 		const { filteredEntries } = this.props;
+
+		if (filteredEntries.size <= 0) {
+			return (
+				<NoSearchResultsContainer>
+					<NoSearchResultsTitle>
+						No Blog Posts :(
+					</NoSearchResultsTitle>
+					<NoSearchResultsDetails>
+						Try a different search, or type something more broad
+					</NoSearchResultsDetails>
+				</NoSearchResultsContainer>
+			);
+		}
+
 		return (
 			<SearchResultsContainer>
 				{filteredEntries
@@ -132,7 +170,8 @@ export default class BlogBrowser extends React.Component {
 							date={result[1].date}
 							hashtags={result[1].hashtags}
 							key={result[0]}
-							active
+							onClick={this.handleChooseBlogEntry}
+							uri={result[0]}
 						/>
 					))}
 			</SearchResultsContainer>

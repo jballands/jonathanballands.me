@@ -9,10 +9,13 @@ import React from 'react';
 import styled from 'styled-components';
 
 import BlogBrowserContainer from 'containers/BlogBrowserContainer';
+import BlogContentContainer from 'containers/BlogContentContainer';
 
 const BlogContainer = styled.div`
 	width: 100%;
 	background: #fff;
+	display: flex;
+	flex-flow: row nowrap;
 `;
 
 export default class Blog extends React.Component {
@@ -22,6 +25,7 @@ export default class Blog extends React.Component {
 		return (
 			<BlogContainer>
 				<BlogBrowserContainer />
+				<BlogContentContainer />
 			</BlogContainer>
 		);
 	}

@@ -58,7 +58,13 @@ export default class BlogBrowserSearchResult extends React.Component {
 		date: PropTypes.object,
 		endpoint: PropTypes.string,
 		hashtags: PropTypes.array,
+		onClick: PropTypes.func,
+		uri: PropTypes.string,
 		title: PropTypes.string,
+	};
+
+	handleOnClick = () => {
+		this.props.onClick(this.props.uri);
 	};
 
 	renderHashtags = () => {
@@ -69,7 +75,7 @@ export default class BlogBrowserSearchResult extends React.Component {
 	render() {
 		const { active, date, title } = this.props;
 		return (
-			<BlogBrowserSearchResultContainer>
+			<BlogBrowserSearchResultContainer onClick={this.handleOnClick}>
 				{active && (
 					<ActiveIcon>
 						<EyeSvg width={28} height={27} />

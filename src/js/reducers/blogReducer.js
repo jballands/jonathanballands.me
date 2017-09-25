@@ -9,7 +9,11 @@ import Immutable from 'immutable';
 import moment from 'moment';
 import _lowerCase from 'lodash.lowercase';
 
-import { BLOG_SEARCH_POSTS, BLOG_SET_SORT_ORDER } from 'actions/BlogActions';
+import {
+	BLOG_SEARCH_POSTS,
+	BLOG_SET_SORT_ORDER,
+	BLOG_CHOOSE_ENTRY,
+} from 'actions/BlogActions';
 
 import encodeToUri from 'helpers/encodeToUri';
 
@@ -20,6 +24,10 @@ const InitialStateRecord = Immutable.Record({
 	searchTerms: '',
 	sortOrder: 'later',
 	filteredEntries: sortedEntries,
+	selectedEntry:
+		sortedEntries.keySeq().size > 0
+			? sortedEntries.get(sortedEntries.keySeq().get(0))
+			: null,
 });
 
 function sortBlogEntries(sortOrder, entries) {
@@ -34,6 +42,7 @@ function sortBlogEntries(sortOrder, entries) {
 			.reduce((map, post) => {
 				const uri = encodeToUri(post.name);
 				map[uri] = post;
+				map[uri].uri = uri;
 				return map;
 			}, {}),
 	);
@@ -72,6 +81,8 @@ export default function(state = new InitialStateRecord(), action) {
 					'filteredEntries',
 					filterBlogEntries(state.searchTerms, sortedEntries),
 				);
+		case BLOG_CHOOSE_ENTRY:
+			return state.set('selectedEntry', sortedEntries.get(action.uri));
 		default:
 			return state;
 	}
