@@ -32,6 +32,13 @@ const BlogBrowserContainer = styled.div`
 	position: relative;
 `;
 
+const StyledStickyContainer = styled(StickyContainer)`
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	clip: rect(0, auto, auto, 0);
+`;
+
 const BlogBrowserControlsContainer = styled.div`
 	width: ${DRAWER_OPEN_WIDTH}px;
 	height: 100vh;
@@ -104,8 +111,6 @@ const SearchResultsContainer = styled.div`
 	overflow: auto;
 	flex: 1 0;
 `;
-
-const StyledStickyContainer = styled(StickyContainer)`height: 100%;`;
 
 export default class BlogBrowser extends React.Component {
 	static displayName = 'BlogBrowser';
