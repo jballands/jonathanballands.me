@@ -21,6 +21,7 @@
     "dependencies": {
         "history": "^4.6.1",
         "immutable": "^3.8.1",
+        "lodash.assign": "^4.2.0",
         "lodash.lowercase": "^4.3.0",
         "lodash.tolower": "^4.1.2",
         "moment": "^2.18.1",

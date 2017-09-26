@@ -11,6 +11,7 @@ import { StickyContainer, Sticky } from 'react-sticky';
 import Immutable from 'immutable';
 import { spring, Motion } from 'react-motion';
 import styled from 'styled-components';
+import _assign from 'lodash.assign';
 import TextInput from '@jballands/vespyr/lib/TextInput';
 import RadioGroup from '@jballands/vespyr/lib/RadioGroup';
 import RadioItem from '@jballands/vespyr/lib/RadioItem';
@@ -31,7 +32,12 @@ const BlogBrowserContainer = styled.div`
 	position: relative;
 `;
 
-const BlogBrowserControlsContainer = styled.div`width: ${DRAWER_OPEN_WIDTH}px;`;
+const BlogBrowserControlsContainer = styled.div`
+	width: ${DRAWER_OPEN_WIDTH}px;
+	height: 100vh;
+	display: flex;
+	flex-flow: column nowrap;
+`;
 
 const TitleContainer = styled.div`
 	display: flex;
@@ -93,9 +99,15 @@ const NoSearchResultsDetails = styled.div`
 	margin-top: 5px;
 `;
 
-const SearchResultsContainer = styled.div`margin: 20px 0;`;
+const SearchResultsContainer = styled.div`
+	margin-top: 20px;
+	overflow: auto;
+	flex: 1 0;
+`;
 
 const StyledStickyContainer = styled(StickyContainer)`height: 100%;`;
+
+const StyledSticky = styled(Sticky)`overflow: hidden;`;
 
 export default class BlogBrowser extends React.Component {
 	static displayName = 'BlogBrowser';
@@ -190,7 +202,7 @@ export default class BlogBrowser extends React.Component {
 		const { searchTerms, sortOrder } = this.props;
 
 		return (
-			<div>
+			<BlogBrowserControlsContainer>
 				<FiltersContainer>
 					<TitleContainer onClick={this.closeDrawer}>
 						<LeftArrowSvg width={21} height={21} />
@@ -220,31 +232,45 @@ export default class BlogBrowser extends React.Component {
 				</FiltersContainer>
 
 				{this.renderSearchResults()}
+			</BlogBrowserControlsContainer>
+		);
+	};
+
+	renderStickyDrawer = (distanceFromBottom, calculatedHeight, style) => {
+		const { drawerIsOpen } = this.state;
+
+		return (
+			<div style={style}>
+				{drawerIsOpen ? (
+					this.renderOpenDrawer()
+				) : (
+					this.renderClosedDrawer()
+				)}
 			</div>
 		);
 	};
 
 	render() {
-		const { drawerIsOpen, width } = this.state;
+		const { width } = this.state;
 
 		return (
 			<Motion style={{ width }}>
 				{interpolated => (
 					<BlogBrowserContainer
-						drawerOpen={drawerIsOpen}
 						style={{ flex: `0 0 ${interpolated.width}px` }}>
 						<StyledStickyContainer>
-							<Sticky>
-								{() => (
-									<BlogBrowserControlsContainer>
-										{drawerIsOpen ? (
-											this.renderOpenDrawer()
-										) : (
-											this.renderClosedDrawer()
-										)}
-									</BlogBrowserControlsContainer>
-								)}
-							</Sticky>
+							<StyledSticky>
+								{({
+									distanceFromBottom,
+									calculatedHeight,
+									style,
+								}) =>
+									this.renderStickyDrawer(
+										distanceFromBottom,
+										calculatedHeight,
+										style,
+									)}
+							</StyledSticky>
 						</StyledStickyContainer>
 					</BlogBrowserContainer>
 				)}
