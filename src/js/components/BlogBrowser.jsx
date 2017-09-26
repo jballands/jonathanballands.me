@@ -107,8 +107,6 @@ const SearchResultsContainer = styled.div`
 
 const StyledStickyContainer = styled(StickyContainer)`height: 100%;`;
 
-const StyledSticky = styled(Sticky)`overflow: hidden;`;
-
 export default class BlogBrowser extends React.Component {
 	static displayName = 'BlogBrowser';
 
@@ -259,7 +257,7 @@ export default class BlogBrowser extends React.Component {
 					<BlogBrowserContainer
 						style={{ flex: `0 0 ${interpolated.width}px` }}>
 						<StyledStickyContainer>
-							<StyledSticky>
+							<Sticky>
 								{({
 									distanceFromBottom,
 									calculatedHeight,
@@ -270,7 +268,7 @@ export default class BlogBrowser extends React.Component {
 										calculatedHeight,
 										style,
 									)}
-							</StyledSticky>
+							</Sticky>
 						</StyledStickyContainer>
 					</BlogBrowserContainer>
 				)}
