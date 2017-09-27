@@ -11,7 +11,6 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import createHistory from 'history/createBrowserHistory';
-import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 import styled from 'styled-components';
 
 import About from 'routes/About';
@@ -35,7 +34,7 @@ const AppContainer = styled.div`
 	align-items: center;
 `;
 
-const StyledCSSTransitionGroup = styled(CSSTransitionGroup)`
+const RouteWrapper = styled.div`
 	width: 100%;
 	flex: 1 0;
 	position: relative;
@@ -58,6 +57,10 @@ const StyledCSSTransitionGroup = styled(CSSTransitionGroup)`
 // -----------------------------------------------------------------------------
 
 class App extends React.Component {
+	shouldComponentUpdate(nextProps) {
+		return false;
+	}
+
 	renderAbout = props => (
 		<FooterWrapper>
 			<About {...props} />
@@ -86,37 +89,23 @@ class App extends React.Component {
 		return (
 			<Provider store={store}>
 				<Router history={createHistory()}>
-					<Route
-						render={({ location }) => {
-							return (
-								<AppContainer>
-									<NavigationBar />
-									<StyledCSSTransitionGroup
-										transitionName="anim-fade"
-										transitionEnterTimeout={300}
-										transitionLeaveTimeout={300}>
-										<Switch
-											key={location.key}
-											location={location}>
-											<Route
-												exact
-												path="/"
-												render={this.renderAbout}
-											/>
-											<Route
-												path="/kinesis"
-												component={this.renderKinesis}
-											/>
-											<Route
-												path="/blog"
-												component={this.renderBlog}
-											/>
-										</Switch>
-									</StyledCSSTransitionGroup>
-								</AppContainer>
-							);
-						}}
-					/>
+					<AppContainer>
+						<NavigationBar />
+						<RouteWrapper>
+							<Switch key={location.key} location={location}>
+								<Route
+									exact
+									path="/"
+									render={this.renderAbout}
+								/>
+								<Route
+									path="/kinesis"
+									render={this.renderKinesis}
+								/>
+								<Route path="/blog" render={this.renderBlog} />
+							</Switch>
+						</RouteWrapper>
+					</AppContainer>
 				</Router>
 			</Provider>
 		);

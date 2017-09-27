@@ -41,6 +41,8 @@ class BlogBrowserContainer extends React.Component {
 	static propTypes = {
 		chooseEntry: PropTypes.func,
 		filteredEntries: PropTypes.instanceOf(Immutable.Map),
+		history: PropTypes.object,
+		match: PropTypes.object,
 		searchBlogPosts: PropTypes.func,
 		searchTerms: PropTypes.string,
 		selectedEntry: PropTypes.object,
@@ -48,9 +50,14 @@ class BlogBrowserContainer extends React.Component {
 		sortOrder: PropTypes.string,
 	};
 
+	handleChooseEntry = uri => {
+		const { chooseEntry, history, match } = this.props;
+		history.push(`${match.url}/${uri}`);
+		chooseEntry(uri);
+	};
+
 	render() {
 		const {
-			chooseEntry,
 			searchBlogPosts,
 			filteredEntries,
 			searchTerms,
@@ -61,7 +68,7 @@ class BlogBrowserContainer extends React.Component {
 
 		return (
 			<BlogBrowser
-				chooseEntry={chooseEntry}
+				chooseEntry={this.handleChooseEntry}
 				searchBlogPosts={searchBlogPosts}
 				filteredEntries={filteredEntries}
 				searchTerms={searchTerms}
