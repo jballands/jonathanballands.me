@@ -41,7 +41,6 @@ const StyledStickyContainer = styled(StickyContainer)`
 
 const BlogBrowserControlsContainer = styled.div`
 	width: ${DRAWER_OPEN_WIDTH}px;
-	height: 100vh;
 	display: flex;
 	flex-flow: column nowrap;
 `;
@@ -108,7 +107,7 @@ const NoSearchResultsDetails = styled.div`
 
 const SearchResultsContainer = styled.div`
 	margin-top: 20px;
-	overflow: auto;
+	overflow-y: scroll;
 	flex: 1 0;
 `;
 
@@ -201,11 +200,25 @@ export default class BlogBrowser extends React.Component {
 		);
 	};
 
-	renderOpenDrawer = () => {
+	renderOpenDrawer = (distanceFromTop, distanceFromBottom) => {
 		const { searchTerms, sortOrder } = this.props;
 
+		let compensation = 0;
+		let padding = 0;
+		if (distanceFromTop > 0) {
+			compensation = distanceFromTop;
+		} else if (distanceFromBottom < 0) {
+			compensation = -distanceFromBottom;
+			padding = compensation;
+		}
+
+		const compensatedStyle = {
+			paddingTop: `${padding}px`,
+			height: `calc(100vh - ${compensation}px)`,
+		};
+
 		return (
-			<BlogBrowserControlsContainer>
+			<BlogBrowserControlsContainer style={compensatedStyle}>
 				<FiltersContainer>
 					<TitleContainer onClick={this.closeDrawer}>
 						<LeftArrowSvg width={21} height={21} />
@@ -239,13 +252,13 @@ export default class BlogBrowser extends React.Component {
 		);
 	};
 
-	renderStickyDrawer = (distanceFromBottom, calculatedHeight, style) => {
+	renderStickyDrawer = (distanceFromTop, distanceFromBottom, style) => {
 		const { drawerIsOpen } = this.state;
 
 		return (
 			<div style={style}>
 				{drawerIsOpen ? (
-					this.renderOpenDrawer()
+					this.renderOpenDrawer(distanceFromTop, distanceFromBottom)
 				) : (
 					this.renderClosedDrawer()
 				)}
@@ -264,13 +277,13 @@ export default class BlogBrowser extends React.Component {
 						<StyledStickyContainer>
 							<Sticky>
 								{({
+									distanceFromTop,
 									distanceFromBottom,
-									calculatedHeight,
 									style,
 								}) =>
 									this.renderStickyDrawer(
+										distanceFromTop,
 										distanceFromBottom,
-										calculatedHeight,
 										style,
 									)}
 							</Sticky>
