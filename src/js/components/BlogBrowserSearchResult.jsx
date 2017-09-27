@@ -22,6 +22,14 @@ const BlogBrowserSearchResultContainer = styled.div`
 		background: #0cd1a3;
 		cursor: pointer;
 	}
+
+	&:first-child {
+		margin-top: 25px;
+	}
+
+	&:last-child {
+		margin-bottom: 25px;
+	}
 `;
 
 const Content = styled.div`

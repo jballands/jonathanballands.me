@@ -7,11 +7,11 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { StickyContainer, Sticky } from 'react-sticky';
 import Immutable from 'immutable';
+import { animateScroll } from 'react-scroll';
+import { StickyContainer, Sticky } from 'react-sticky';
 import { spring, Motion } from 'react-motion';
 import styled from 'styled-components';
-import _assign from 'lodash.assign';
 import TextInput from '@jballands/vespyr/lib/TextInput';
 import RadioGroup from '@jballands/vespyr/lib/RadioGroup';
 import RadioItem from '@jballands/vespyr/lib/RadioItem';
@@ -24,6 +24,7 @@ import OpenDrawerSvg from 'svg/OpenDrawerSvg';
 
 const DRAWER_OPEN_WIDTH = 425;
 const DRAWER_CLOSED_WIDTH = 70;
+const ACCENT_COLOR = '#ffb159';
 
 const BlogBrowserContainer = styled.div`
 	height: 100%;
@@ -109,6 +110,7 @@ const SearchResultsContainer = styled.div`
 	margin-top: 20px;
 	overflow-y: scroll;
 	flex: 1 0;
+	border-top: 1px solid #247261;
 `;
 
 export default class BlogBrowser extends React.Component {
@@ -143,6 +145,7 @@ export default class BlogBrowser extends React.Component {
 
 	handleChooseBlogEntry = uri => {
 		this.closeDrawer();
+		animateScroll.scrollToTop({ duration: 500 });
 		this.props.chooseEntry(uri);
 	};
 
@@ -222,13 +225,13 @@ export default class BlogBrowser extends React.Component {
 				<FiltersContainer>
 					<TitleContainer onClick={this.closeDrawer}>
 						<LeftArrowSvg width={21} height={21} />
-						<Title>Browse</Title>
+						<Title>Posts</Title>
 					</TitleContainer>
 
 					<StyledTextInput
 						color="white"
 						hintColor="#247261"
-						accentColor="#2dedca"
+						accentColor={ACCENT_COLOR}
 						title="Search"
 						hint="Search for topics, hashtags, and more"
 						icon={<MagnifyingGlassSvg />}
@@ -240,7 +243,7 @@ export default class BlogBrowser extends React.Component {
 						defaultSelection={sortOrder}
 						title="Sort Order"
 						color="white"
-						accentColor="#2dedca"
+						accentColor={ACCENT_COLOR}
 						onOptionClick={this.handleSetSortOrder}>
 						<RadioItem id="later">Later Posts First</RadioItem>
 						<RadioItem id="earlier">Earlier Posts First</RadioItem>
