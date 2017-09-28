@@ -24,10 +24,7 @@ const InitialStateRecord = Immutable.Record({
 	searchTerms: '',
 	sortOrder: 'later',
 	filteredEntries: sortedEntries,
-	selectedEntry:
-		sortedEntries.keySeq().size > 0
-			? sortedEntries.get(sortedEntries.keySeq().get(0))
-			: null,
+	selectedEntry: null,
 });
 
 function sortBlogEntries(sortOrder, entries) {
@@ -40,9 +37,9 @@ function sortBlogEntries(sortOrder, entries) {
 				return moment(a.date).isAfter(b.date);
 			})
 			.reduce((map, post) => {
-				const uri = encodeToUri(post.name);
-				map[uri] = post;
-				map[uri].uri = uri;
+				const id = encodeToUri(post.name);
+				map[id] = post;
+				map[id].id = id;
 				return map;
 			}, {}),
 	);

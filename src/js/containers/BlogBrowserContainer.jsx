@@ -52,6 +52,7 @@ class BlogBrowserContainer extends React.Component {
 
 	handleChooseEntry = uri => {
 		const { chooseEntry, history, match } = this.props;
+
 		history.push(`${match.url}/${uri}`);
 		chooseEntry(uri);
 	};

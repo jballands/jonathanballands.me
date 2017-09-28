@@ -13,16 +13,16 @@ export default class BlogContent extends React.Component {
 	static displayName = 'BlogContent';
 
 	static propTypes = {
-		selectedEntry: PropTypes.object,
+		selectedEntry: PropTypes.object.isRequired,
 	};
 
 	render() {
-		console.log(this.props);
+		const { selectedEntry } = this.props;
 
 		return (
 			<div>
 				<div style={{ marginBottom: '1000px' }}>
-					<span>{this.props.selectedEntry.name}</span>
+					<span>{selectedEntry.name}</span>
 					<br />
 					<span>Scroll down...</span>
 				</div>
