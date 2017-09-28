@@ -19,6 +19,7 @@ import Blog from 'routes/Blog';
 
 import NavigationBar from 'components/NavigationBar';
 import FooterWrapper from 'components/FooterWrapper';
+import FadingComponent from 'components/FadingComponent';
 
 import rootReducer from 'reducers/index';
 
@@ -38,20 +39,6 @@ const RouteWrapper = styled.div`
 	width: 100%;
 	flex: 1 0;
 	position: relative;
-
-	.anim-fade-enter {
-		opacity: 0;
-		z-index: 1000;
-	}
-
-	.anim-fade-leave {
-		opacity: 1;
-	}
-
-	.anim-fade-enter.anim-fade-enter-active {
-		opacity: 1;
-		transition: opacity 300ms ease;
-	}
 `;
 
 // -----------------------------------------------------------------------------
