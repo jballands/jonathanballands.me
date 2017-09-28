@@ -20,9 +20,15 @@ export default class BlogContent extends React.Component {
 		console.log(this.props);
 
 		return (
-			<Route>
-				<div>{this.props.selectedEntry.name}</div>
-			</Route>
+			<div>
+				<div style={{ marginBottom: '1000px' }}>
+					<span>{this.props.selectedEntry.name}</span>
+					<br />
+					<span>Scroll down...</span>
+				</div>
+
+				<img src="https://media3.giphy.com/media/OQBZYsrOTPRjW/giphy.gif" />
+			</div>
 		);
 	}
 }

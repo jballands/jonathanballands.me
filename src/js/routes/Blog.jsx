@@ -7,7 +7,6 @@
 
 import React from 'react';
 import styled from 'styled-components';
-import { Route } from 'react-router-dom';
 
 import BlogBrowserContainer from 'containers/BlogBrowserContainer';
 import BlogContentContainer from 'containers/BlogContentContainer';
@@ -26,10 +25,7 @@ export default class Blog extends React.Component {
 		return (
 			<BlogContainer>
 				<BlogBrowserContainer history={history} match={match} />
-				<Route
-					path={`${match.url}/:blogId`}
-					component={BlogContentContainer}
-				/>
+				<BlogContentContainer history={history} match={match} />
 			</BlogContainer>
 		);
 	}

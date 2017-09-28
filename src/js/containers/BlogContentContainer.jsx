@@ -19,28 +19,12 @@ function mapStateToProps(state) {
 	};
 }
 
-function mapDispatchToProps(dispatch) {
-	return {
-		chooseEntry: uri => dispatch(chooseEntry(uri)),
-	};
-}
-
 class BlogContentContainer extends React.Component {
 	static displayName = 'BlogContentContainer';
 
 	static propTypes = {
-		chooseEntry: PropTypes.func,
 		selectedEntry: PropTypes.object,
 	};
-
-	componentDidMount() {
-		// TODO: I don't really like this...
-		// The redux store should just automagically have the correct selection when the route changes
-		const uri = this.props.match.params.blogId;
-		if (uri && uri !== '') {
-			this.props.chooseEntry(this.props.match.params.blogId);
-		}
-	}
 
 	render() {
 		const { selectedEntry } = this.props;
@@ -48,6 +32,4 @@ class BlogContentContainer extends React.Component {
 	}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-	BlogContentContainer,
-);
+export default connect(mapStateToProps)(BlogContentContainer);
