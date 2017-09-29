@@ -13,11 +13,12 @@ import {
 	BLOG_SEARCH_POSTS,
 	BLOG_SET_SORT_ORDER,
 	BLOG_CHOOSE_ENTRY,
+	BLOG_CHOOSE_ENTRY_START_LOADING,
+	BLOG_CHOOSE_ENTRY_LOADING_SUCCESS,
+	BLOG_CHOOSE_ENTRY_LOADING_FAILURE,
 } from 'actions/BlogActions';
 
-import encodeToUri from 'helpers/encodeToUri';
-
-import blogEntries from '~/blog.config.js';
+import blogEntries from 'helpers/blogEntries';
 
 let sortedEntries = sortBlogEntries('later', blogEntries);
 const InitialStateRecord = Immutable.Record({
@@ -25,24 +26,18 @@ const InitialStateRecord = Immutable.Record({
 	sortOrder: 'later',
 	filteredEntries: sortedEntries,
 	selectedEntry: null,
+	content: null,
+	contentLoading: true,
+	error: null,
 });
 
 function sortBlogEntries(sortOrder, entries) {
-	return Immutable.OrderedMap(
-		entries
-			.sort((a, b) => {
-				if (sortOrder === 'later') {
-					return moment(a.date).isBefore(b.date);
-				}
-				return moment(a.date).isAfter(b.date);
-			})
-			.reduce((map, post) => {
-				const id = encodeToUri(post.name);
-				map[id] = post;
-				map[id].id = id;
-				return map;
-			}, {})
-	);
+	return entries.toOrderedMap().sort((a, b) => {
+		if (sortOrder === 'later') {
+			return moment(a.date).isBefore(b.date);
+		}
+		return moment(a.date).isAfter(b.date);
+	});
 }
 
 function filterBlogEntries(terms, entries) {
@@ -60,14 +55,16 @@ function filterBlogEntries(terms, entries) {
 	});
 }
 
-export default function (state = new InitialStateRecord(), action) {
+export const entries = sortBlogEntries;
+
+export default function(state = new InitialStateRecord(), action) {
 	switch (action.type) {
 		case BLOG_SEARCH_POSTS:
 			return state
 				.set('searchTerms', action.terms)
 				.set(
 					'filteredEntries',
-					filterBlogEntries(action.terms, sortedEntries)
+					filterBlogEntries(action.terms, sortedEntries),
 				);
 		case BLOG_SET_SORT_ORDER:
 			sortedEntries = sortBlogEntries(action.sortOrder, blogEntries);
@@ -76,10 +73,20 @@ export default function (state = new InitialStateRecord(), action) {
 				.set('sortOrder', action.sortOrder)
 				.set(
 					'filteredEntries',
-					filterBlogEntries(state.searchTerms, sortedEntries)
+					filterBlogEntries(state.searchTerms, sortedEntries),
 				);
 		case BLOG_CHOOSE_ENTRY:
-			return state.set('selectedEntry', sortedEntries.get(action.id));
+			return state.set('selectedEntry', blogEntries.get(action.id));
+		case BLOG_CHOOSE_ENTRY_START_LOADING:
+			return state.set('contentLoading', true).set('error', null);
+		case BLOG_CHOOSE_ENTRY_LOADING_SUCCESS:
+			return state
+				.set('content', action.data)
+				.set('contentLoading', false);
+		case BLOG_CHOOSE_ENTRY_LOADING_FAILURE:
+			return state
+				.set('error', action.error)
+				.set('contentLoading', false);
 		default:
 			return state;
 	}

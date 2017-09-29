@@ -6,7 +6,7 @@
 //
 
 import axios from 'axios';
-import { put, takeLatest, all } from 'redux-saga/effects';
+import { all, call, put, takeLatest } from 'redux-saga/effects';
 
 import {
 	BLOG_CHOOSE_ENTRY,
@@ -14,10 +14,32 @@ import {
 	BLOG_CHOOSE_ENTRY_LOADING_SUCCESS,
 	BLOG_CHOOSE_ENTRY_LOADING_FAILURE,
 } from 'actions/BlogActions';
+import blogEntries from 'helpers/blogEntries';
+
+function fetchBlogEntry(endpoint) {
+	return axios.get(endpoint);
+}
 
 function* loadBlogEntry(action) {
 	yield put({ type: BLOG_CHOOSE_ENTRY_START_LOADING });
-	console.log(action.id);
+
+	const endpoint = blogEntries.get(action.id).endpoint;
+	try {
+		const { data, status } = yield call(fetchBlogEntry, endpoint);
+
+		if (status === 200) {
+			return yield put({ type: BLOG_CHOOSE_ENTRY_LOADING_SUCCESS, data });
+		}
+		yield put({
+			type: BLOG_CHOOSE_ENTRY_LOADING_FAILURE,
+			error: "Couldn'nt fetch the blog post",
+		});
+	} catch (e) {
+		yield put({
+			type: BLOG_CHOOSE_ENTRY_LOADING_FAILURE,
+			error: "Couldn'nt fetch the blog post",
+		});
+	}
 }
 
 function* loadBlogEntrySaga() {

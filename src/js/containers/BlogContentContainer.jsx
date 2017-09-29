@@ -16,6 +16,8 @@ import BlogContent from 'components/BlogContent';
 
 function mapStateToProps(state) {
 	return {
+		content: state.blog.content,
+		contentLoading: state.blog.contentLoading,
 		filteredEntries: state.blog.filteredEntries,
 		selectedEntry: state.blog.selectedEntry,
 	};
@@ -31,6 +33,7 @@ class BlogContentContainer extends React.Component {
 	static displayName = 'BlogContentContainer';
 
 	static propTypes = {
+		content: PropTypes.string,
 		filteredEntries: PropTypes.instanceOf(Immutable.OrderedMap),
 		selectedEntry: PropTypes.object,
 	};
@@ -72,12 +75,18 @@ class BlogContentContainer extends React.Component {
 	}
 
 	render() {
-		const { selectedEntry } = this.props;
+		const { content, contentLoading, selectedEntry } = this.props;
 
 		if (!selectedEntry) {
 			return null;
 		}
-		return <BlogContent selectedEntry={selectedEntry} />;
+		return (
+			<BlogContent
+				selectedEntry={selectedEntry}
+				content={content}
+				contentLoading={contentLoading}
+			/>
+		);
 	}
 }
 
