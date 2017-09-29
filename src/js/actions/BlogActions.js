@@ -6,8 +6,16 @@
 //
 
 export const BLOG_SEARCH_POSTS = 'BLOG_SEARCH_POSTS';
+
 export const BLOG_SET_SORT_ORDER = 'BLOG_SET_SORT_ORDER';
+
 export const BLOG_CHOOSE_ENTRY = 'BLOG_CHOOSE_ENTRY';
+export const BLOG_CHOOSE_ENTRY_START_LOADING =
+	'BLOG_CHOOSE_ENTRY_START_LOADING';
+export const BLOG_CHOOSE_ENTRY_LOADING_SUCCESS =
+	'BLOG_CHOOSE_ENTRY_LOADING_SUCCESS';
+export const BLOG_CHOOSE_ENTRY_LOADING_FAILED =
+	'BLOG_CHOOSE_ENTRY_LOADING_FAILED';
 
 export function searchBlogPosts(terms) {
 	return {
@@ -23,9 +31,9 @@ export function setSortOrder(sortOrder) {
 	};
 }
 
-export function chooseEntry(uri) {
+export function chooseEntry(id) {
 	return {
 		type: BLOG_CHOOSE_ENTRY,
-		uri,
+		id,
 	};
 }

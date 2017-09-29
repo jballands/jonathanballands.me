@@ -41,7 +41,7 @@ function sortBlogEntries(sortOrder, entries) {
 				map[id] = post;
 				map[id].id = id;
 				return map;
-			}, {}),
+			}, {})
 	);
 }
 
@@ -60,14 +60,14 @@ function filterBlogEntries(terms, entries) {
 	});
 }
 
-export default function(state = new InitialStateRecord(), action) {
+export default function (state = new InitialStateRecord(), action) {
 	switch (action.type) {
 		case BLOG_SEARCH_POSTS:
 			return state
 				.set('searchTerms', action.terms)
 				.set(
 					'filteredEntries',
-					filterBlogEntries(action.terms, sortedEntries),
+					filterBlogEntries(action.terms, sortedEntries)
 				);
 		case BLOG_SET_SORT_ORDER:
 			sortedEntries = sortBlogEntries(action.sortOrder, blogEntries);
@@ -76,10 +76,10 @@ export default function(state = new InitialStateRecord(), action) {
 				.set('sortOrder', action.sortOrder)
 				.set(
 					'filteredEntries',
-					filterBlogEntries(state.searchTerms, sortedEntries),
+					filterBlogEntries(state.searchTerms, sortedEntries)
 				);
 		case BLOG_CHOOSE_ENTRY:
-			return state.set('selectedEntry', sortedEntries.get(action.uri));
+			return state.set('selectedEntry', sortedEntries.get(action.id));
 		default:
 			return state;
 	}

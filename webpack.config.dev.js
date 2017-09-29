@@ -62,6 +62,7 @@ module.exports = {
 			helpers: path.resolve(__dirname, './src/js/helpers'),
 			reducers: path.resolve(__dirname, './src/js/reducers'),
 			routes: path.resolve(__dirname, './src/js/routes'),
+			sagas: path.resolve(__dirname, './src/js/sagas'),
 			svg: path.resolve(__dirname, './src/js/svg'),
 			styles: path.resolve(__dirname, './src/styles'),
 			'~': path.resolve(__dirname, '.'),
