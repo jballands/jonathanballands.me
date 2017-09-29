@@ -163,7 +163,7 @@ export default class BlogBrowser extends React.Component {
 	};
 
 	renderSearchResults = () => {
-		const { filteredEntries, match } = this.props;
+		const { filteredEntries, match, selectedEntry } = this.props;
 
 		if (filteredEntries.size <= 0) {
 			return (
@@ -178,9 +178,8 @@ export default class BlogBrowser extends React.Component {
 
 		return (
 			<SearchResultsContainer>
-				{filteredEntries
-					.entrySeq()
-					.map(result => (
+				{filteredEntries.entrySeq().map(result => {
+					return (
 						<BlogBrowserSearchResult
 							title={result[1].name}
 							date={result[1].date}
@@ -189,8 +188,16 @@ export default class BlogBrowser extends React.Component {
 							onClick={this.handleChooseBlogEntry}
 							id={result[0]}
 							match={match}
+							active={
+								selectedEntry ? (
+									selectedEntry.id === result[0]
+								) : (
+									false
+								)
+							}
 						/>
-					))}
+					);
+				})}
 			</SearchResultsContainer>
 		);
 	};

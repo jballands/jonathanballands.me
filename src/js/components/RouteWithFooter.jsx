@@ -8,6 +8,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Route } from 'react-router-dom';
+import { CSSTransition } from 'react-transition-group';
+import _omit from 'lodash.omit';
 
 import FooterWrapper from 'components/FooterWrapper';
 
@@ -23,6 +25,7 @@ export default class RouteWithFooter extends React.Component {
 	};
 
 	render() {
-		return <Route {...this.props} render={this.renderChildren} />;
+		const props = _omit(this.props, ['children']);
+		return <Route {...props} render={this.renderChildren} />;
 	}
 }

@@ -55,7 +55,7 @@ const AboutMe = styled.div`
 export default class About extends React.Component {
 	render() {
 		return (
-			<AboutContainer>
+			<AboutContainer className={this.props.className}>
 				<AboutHeroUnitContainer>
 					<Particles>
 						<AboutHeroUnit>
