@@ -9,6 +9,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { animateScroll } from 'react-scroll';
 
+import LoadingAnimation from 'components/LoadingAnimation';
+
 export default class BlogContent extends React.Component {
 	static displayName = 'BlogContent';
 
@@ -26,7 +28,7 @@ export default class BlogContent extends React.Component {
 				<div style={{ marginBottom: '1000px' }}>
 					<span>{selectedEntry.name}</span>
 					<br />
-					<span>Scroll down...</span>
+					<LoadingAnimation />
 				</div>
 
 				<img src="https://media3.giphy.com/media/OQBZYsrOTPRjW/giphy.gif" />
