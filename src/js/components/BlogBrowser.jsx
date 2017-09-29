@@ -119,6 +119,7 @@ export default class BlogBrowser extends React.Component {
 	static propTypes = {
 		chooseEntry: PropTypes.func,
 		filteredEntries: PropTypes.instanceOf(Immutable.Map),
+		match: PropTypes.object,
 		searchBlogPosts: PropTypes.func,
 		searchTerms: PropTypes.string,
 		selectedEntry: PropTypes.object,
@@ -164,7 +165,7 @@ export default class BlogBrowser extends React.Component {
 	};
 
 	renderSearchResults = () => {
-		const { filteredEntries } = this.props;
+		const { filteredEntries, match } = this.props;
 
 		if (filteredEntries.size <= 0) {
 			return (
@@ -189,6 +190,7 @@ export default class BlogBrowser extends React.Component {
 							key={result[0]}
 							onClick={this.handleChooseBlogEntry}
 							id={result[0]}
+							match={match}
 						/>
 					))}
 			</SearchResultsContainer>

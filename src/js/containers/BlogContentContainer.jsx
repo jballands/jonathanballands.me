@@ -41,22 +41,25 @@ class BlogContentContainer extends React.Component {
 		// When the component mounts, we need to initialize the state to have
 		// a selected blog entry by default
 
-		// blogId is an optional param here in the route. If it's empty, we
-		// just pick from first blog and move on
+		// blogId is an optional param here in the route. This if-block
+		// is executed when you open up a route that already has a blogId
+		// associated with it, in which case we just choose it
 		const blogId = match.params.blogId;
 		if (blogId && blogId !== '') {
 			return this.props.chooseEntry(blogId);
 		}
 
-		// An entry may already be chosen implicitly in the Redux state. Hydrate
-		// the route
+		// An entry may already be chosen implicitly in the Redux state. This
+		// if-block is executed when you leave the blog page but stay on my
+		// website and then click back to the blog tab
 		if (selectedEntry !== null) {
 			history.push(`${match.url}/${selectedEntry.id}`);
 			return this.props.chooseEntry(selectedEntry.id);
 		}
 
-		// If there's no param and there's no selected entry, then this is the first
-		// time we've accessed this page, so we simply pick the first entry and go
+		// This if-block gets executed when you open the blog page up for the
+		// first time, which case we just pick the latest available blog and
+		// move on
 		const firstEntry =
 			filteredEntries.keySeq().size > 0
 				? filteredEntries.get(filteredEntries.keySeq().get(0))

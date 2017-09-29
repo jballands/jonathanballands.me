@@ -9,6 +9,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import moment from 'moment';
+import { Link } from 'react-router-dom';
 
 import EyeSvg from 'svg/EyeSvg';
 
@@ -67,6 +68,7 @@ export default class BlogBrowserSearchResult extends React.Component {
 		endpoint: PropTypes.string,
 		hashtags: PropTypes.array,
 		id: PropTypes.string,
+		match: PropTypes.object,
 		title: PropTypes.string,
 	};
 
@@ -80,20 +82,24 @@ export default class BlogBrowserSearchResult extends React.Component {
 	};
 
 	render() {
-		const { active, date, title } = this.props;
+		const { active, date, id, match, title } = this.props;
 		return (
-			<BlogBrowserSearchResultContainer onClick={this.handleOnClick}>
-				{active && (
-					<ActiveIcon>
-						<EyeSvg width={28} height={27} />
-					</ActiveIcon>
-				)}
-				<Content>
-					<Title>{title}</Title>
-					<Subtitle>{moment(date).format('MMMM Do, YYYY')}</Subtitle>
-					<Subtitle>{this.renderHashtags()}</Subtitle>
-				</Content>
-			</BlogBrowserSearchResultContainer>
+			<Link to={`${match.url}/${id}`}>
+				<BlogBrowserSearchResultContainer onClick={this.handleOnClick}>
+					{active && (
+						<ActiveIcon>
+							<EyeSvg width={28} height={27} />
+						</ActiveIcon>
+					)}
+					<Content>
+						<Title>{title}</Title>
+						<Subtitle>
+							{moment(date).format('MMMM Do, YYYY')}
+						</Subtitle>
+						<Subtitle>{this.renderHashtags()}</Subtitle>
+					</Content>
+				</BlogBrowserSearchResultContainer>
+			</Link>
 		);
 	}
 }

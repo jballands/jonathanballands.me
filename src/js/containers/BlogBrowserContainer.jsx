@@ -53,7 +53,7 @@ class BlogBrowserContainer extends React.Component {
 	handleChooseEntry = uri => {
 		const { chooseEntry, history, match } = this.props;
 
-		history.push(`${match.url}/${uri}`);
+		// history.push(`${match.url}/${uri}`);
 		chooseEntry(uri);
 	};
 
@@ -61,6 +61,7 @@ class BlogBrowserContainer extends React.Component {
 		const {
 			searchBlogPosts,
 			filteredEntries,
+			match,
 			searchTerms,
 			selectedEntry,
 			setSortOrder,
@@ -76,6 +77,7 @@ class BlogBrowserContainer extends React.Component {
 				selectedEntry={selectedEntry}
 				setSortOrder={setSortOrder}
 				sortOrder={sortOrder}
+				match={match}
 			/>
 		);
 	}
