@@ -7,6 +7,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import { animateScroll } from 'react-scroll';
 
 export default class BlogContent extends React.Component {
 	static displayName = 'BlogContent';
@@ -17,6 +18,8 @@ export default class BlogContent extends React.Component {
 
 	render() {
 		const { selectedEntry } = this.props;
+
+		animateScroll.scrollToTop({ duration: 300 });
 
 		return (
 			<div>

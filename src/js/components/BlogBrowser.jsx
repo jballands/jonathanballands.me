@@ -8,7 +8,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Immutable from 'immutable';
-import { animateScroll } from 'react-scroll';
 import { StickyContainer, Sticky } from 'react-sticky';
 import { spring, Motion } from 'react-motion';
 import styled from 'styled-components';
@@ -146,7 +145,6 @@ export default class BlogBrowser extends React.Component {
 
 	handleChooseBlogEntry = id => {
 		this.closeDrawer();
-		animateScroll.scrollToTop({ duration: 500 });
 		this.props.chooseEntry(id);
 	};
 
