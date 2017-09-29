@@ -17,7 +17,6 @@ import {
 
 function* loadBlogEntry(action) {
 	yield put({ type: BLOG_CHOOSE_ENTRY_START_LOADING });
-
 	console.log(action.id);
 }
 
