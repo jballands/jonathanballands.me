@@ -143,10 +143,10 @@ export default class BlogBrowser extends React.Component {
 		this.props.setSortOrder(sortOrder);
 	};
 
-	handleChooseBlogEntry = uri => {
+	handleChooseBlogEntry = id => {
 		this.closeDrawer();
 		animateScroll.scrollToTop({ duration: 500 });
-		this.props.chooseEntry(uri);
+		this.props.chooseEntry(id);
 	};
 
 	closeDrawer = () => {
@@ -188,7 +188,7 @@ export default class BlogBrowser extends React.Component {
 							hashtags={result[1].hashtags}
 							key={result[0]}
 							onClick={this.handleChooseBlogEntry}
-							uri={result[0]}
+							id={result[0]}
 						/>
 					))}
 			</SearchResultsContainer>

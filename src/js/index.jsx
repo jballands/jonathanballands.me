@@ -9,63 +9,17 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import createHistory from 'history/createBrowserHistory';
-import styled from 'styled-components';
 
-import About from 'routes/About';
-import Kinesis from 'routes/Kinesis';
-import Blog from 'routes/Blog';
-
-import NavigationBar from 'components/NavigationBar';
-import FooterWrapper from 'components/FooterWrapper';
-import FadingComponent from 'components/FadingComponent';
+import App from 'routes/App';
 
 import rootReducer from 'reducers/index';
 
 import 'styles/normalize.scss';
 import 'styles/fonts.scss';
 
-const AppContainer = styled.div`
-	min-height: 100vh;
-	width: 100%;
-	display: flex;
-	flex-flow: column;
-	justify-content: space-between;
-	align-items: center;
-`;
-
-const RouteWrapper = styled.div`
-	width: 100%;
-	flex: 1 0;
-	position: relative;
-`;
-
-// -----------------------------------------------------------------------------
-
-class App extends React.Component {
-	shouldComponentUpdate(nextProps) {
-		return false;
-	}
-
-	renderAbout = props => (
-		<FooterWrapper>
-			<About {...props} />
-		</FooterWrapper>
-	);
-
-	renderKinesis = props => (
-		<FooterWrapper>
-			<Kinesis {...props} />
-		</FooterWrapper>
-	);
-
-	renderBlog = props => (
-		<FooterWrapper>
-			<Blog {...props} />
-		</FooterWrapper>
-	);
-
+class JonathanBallandsMe extends React.Component {
 	render() {
 		const store = createStore(
 			rootReducer,
@@ -76,27 +30,11 @@ class App extends React.Component {
 		return (
 			<Provider store={store}>
 				<Router history={createHistory()}>
-					<AppContainer>
-						<NavigationBar />
-						<RouteWrapper>
-							<Switch key={location.key} location={location}>
-								<Route
-									exact
-									path="/"
-									render={this.renderAbout}
-								/>
-								<Route
-									path="/kinesis"
-									render={this.renderKinesis}
-								/>
-								<Route path="/blog" render={this.renderBlog} />
-							</Switch>
-						</RouteWrapper>
-					</AppContainer>
+					<Route path="/" component={App} />
 				</Router>
 			</Provider>
 		);
 	}
 }
 
-render(<App />, document.getElementById('reactroot'));
+render(<JonathanBallandsMe />, document.getElementById('reactroot'));

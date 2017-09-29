@@ -10,7 +10,7 @@ import styled from 'styled-components';
 
 import Particles from 'components/Particles';
 import LinkWrapper from 'components/LinkWrapper';
-import FadingComponent from 'components/FadingComponent';
+import FooterWrapper from 'components/FooterWrapper';
 
 const AboutContainer = styled.div`width: 100%;`;
 

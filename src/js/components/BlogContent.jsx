@@ -7,7 +7,6 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Route } from 'react-router-dom';
 
 export default class BlogContent extends React.Component {
 	static displayName = 'BlogContent';

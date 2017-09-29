@@ -66,13 +66,12 @@ export default class BlogBrowserSearchResult extends React.Component {
 		date: PropTypes.object,
 		endpoint: PropTypes.string,
 		hashtags: PropTypes.array,
-		onClick: PropTypes.func,
-		uri: PropTypes.string,
+		id: PropTypes.string,
 		title: PropTypes.string,
 	};
 
 	handleOnClick = () => {
-		this.props.onClick(this.props.uri);
+		this.props.onClick(this.props.id);
 	};
 
 	renderHashtags = () => {

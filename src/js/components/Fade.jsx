@@ -8,24 +8,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { CSSTransition } from 'react-transition-group';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
-const FadingComponentContainer = styled.div`
-	.fading-component-enter {
+const FadingComponentContainer = styled(TransitionGroup)`
+	.fade-enter {
 		opacity: 0;
 		z-index: 1000;
 	}
-	.fading-component-exit {
+	.fade-exit {
 		opacity: 1;
 	}
-	.fading-component-enter.fading-component-enter-active {
+	.fade-enter.fade-enter-active {
 		opacity: 1;
 		transition: opacity 300ms ease;
 	}
 `;
 
-export default class FadingComponent extends React.Component {
-	static displayName = 'FadingComponent';
+export default class Fade extends React.Component {
+	static displayName = 'Fade';
 
 	static propTypes = {
 		children: PropTypes.node,
@@ -34,7 +34,7 @@ export default class FadingComponent extends React.Component {
 	render() {
 		return (
 			<FadingComponentContainer>
-				<CSSTransition classNames="fading-component" timeout={300}>
+				<CSSTransition classNames="fade" timeout={300}>
 					{this.props.children}
 				</CSSTransition>
 			</FadingComponentContainer>
