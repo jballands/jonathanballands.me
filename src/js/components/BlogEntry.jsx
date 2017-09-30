@@ -18,7 +18,7 @@ const BlogEntryContainer = styled.div`
 `;
 
 const BlogTitle = styled.div`
-	font-size: 40px;
+	font-size: 42px;
 	color: white;
 `;
 
@@ -32,21 +32,91 @@ const BlogSubtitle = styled.div`
 const BlogBody = styled(Markdown)`
 	margin-top: 50px;
 	color: white;
+	line-height: 1.5em;
+
+	p {
+		margin: 20px 0;
+	}
 
 	h1,
 	h2,
-	h3 {
+	h3,
+	h4 {
 		font-weight: 400;
 	}
 
 	h1 {
-		font-size: 35px;
+		font-size: 36px;
 	}
 	h2 {
 		font-size: 28px;
 	}
 	h3 {
 		font-size: 23px;
+	}
+	h4 {
+		font-size: 19px;
+	}
+	h5 {
+		font-size: 16px;
+	}
+	h6 {
+		font-size: 13px;
+	}
+
+	a {
+		color: ${props => props.accentColor};
+		position: relative;
+
+		&:hover:after {
+			visibility: visible;
+			transform: scaleX(1);
+		}
+
+		&:after {
+			content: '';
+			position: absolute;
+			width: 100%;
+			height: 1px;
+			bottom: 0;
+			left: 0;
+			background-color: ${props => props.accentColor};
+			visibility: hidden;
+			transform: scaleX(0);
+			transition: all 0.2s ease-out 0s;
+		}
+	}
+
+	blockquote {
+		border-left: 1px solid ${props => props.accentColor};
+		padding: 1px 15px;
+		margin: 30px 0;
+		font-family: 'Droid Serif', 'serif';
+	}
+
+	hr {
+		border-top: 0px;
+		border-bottom: 1px solid ${props => props.accentColor};
+		margin: 50px 0;
+	}
+
+	code {
+		padding: 2px 4px;
+		background: #00b78c;
+		border-radius: 3px;
+		color: ${props => props.accentColor};
+	}
+
+	pre {
+		padding: 10px 15px;
+		background: #00b78c;
+		border-radius: 3px;
+		color: ${props => props.accentColor};
+
+		code {
+			padding: 0;
+			background: transparent;
+		}
 	}
 `;
 
@@ -74,7 +144,7 @@ export default class BlogEntry extends React.Component {
 						{selectedEntry.hashtags.map(h => `#${h}`).join(', ')}
 					</div>
 				</BlogSubtitle>
-				<BlogBody source={content} />
+				<BlogBody source={content} accentColor={accentColor} />
 			</BlogEntryContainer>
 		);
 	}

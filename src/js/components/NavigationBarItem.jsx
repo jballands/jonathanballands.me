@@ -24,7 +24,6 @@ const StyledLink = styled(Link)`
 	& > span:hover:after,
 	&.navigation-bar-current-route > span:after {
 		visibility: visible;
-		-webkit-transform: scaleX(1);
 		transform: scaleX(1);
 	}
 
@@ -37,9 +36,7 @@ const StyledLink = styled(Link)`
 		left: 0;
 		background-color: white;
 		visibility: hidden;
-		-webkit-transform: scaleX(0);
 		transform: scaleX(0);
-		-webkit-transition: all 0.2s ease-out 0s;
 		transition: all 0.2s ease-out 0s;
 	}
 `;
