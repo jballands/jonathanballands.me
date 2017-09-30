@@ -13,8 +13,8 @@ export default class EyeSvg extends React.Component {
 
 	static propTypes = {
 		color: PropTypes.string,
-		height: PropTypes.number,
-		width: PropTypes.number,
+		height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+		width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 	};
 
 	static defaultProps = {

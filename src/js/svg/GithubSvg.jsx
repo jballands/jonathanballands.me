@@ -6,8 +6,15 @@
 //
 
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default class GithubSvg extends React.Component {
+	static propTypes = {
+		color: PropTypes.string,
+		height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+		width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+	};
+
 	static defaultProps = {
 		color: '#fff',
 		width: 15,

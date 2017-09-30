@@ -44,6 +44,8 @@ const StyledLink = styled(Link)`
 	}
 `;
 
+const StyledExternalink = StyledLink.withComponent('a');
+
 const Children = styled.span`position: relative;`;
 
 export default class NavigationBarItem extends React.Component {
@@ -53,7 +55,18 @@ export default class NavigationBarItem extends React.Component {
 
 	render() {
 		const route = this.context.router.route.location.pathname;
-		const { children, link } = this.props;
+		const { children, external, link } = this.props;
+
+		if (external) {
+			return (
+				<StyledExternalink
+					className="navigation-bar-item"
+					href={link}
+					target="_blank">
+					<Children>{children}</Children>
+				</StyledExternalink>
+			);
+		}
 
 		// Do some logic to determine if the current route is part of the base link
 		// We treat / special, though, since that doesn't have subroutes

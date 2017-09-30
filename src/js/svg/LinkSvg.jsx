@@ -13,9 +13,9 @@ export default class LinkSvg extends React.Component {
 
 	static propTypes = {
 		color: PropTypes.string,
-		height: PropTypes.number,
+		height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 		strokeWidth: PropTypes.number,
-		width: PropTypes.number,
+		width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 	};
 
 	static defaultProps = {
