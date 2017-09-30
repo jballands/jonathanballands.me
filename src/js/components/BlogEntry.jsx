@@ -33,9 +33,11 @@ const BlogBody = styled(Markdown)`
 	margin-top: 50px;
 	color: white;
 	line-height: 1.5em;
+	display: flex;
+	flex-flow: column;
 
 	p {
-		margin: 20px 0;
+		margin: 10px 0;
 	}
 
 	h1,
@@ -64,6 +66,10 @@ const BlogBody = styled(Markdown)`
 		font-size: 13px;
 	}
 
+	img {
+		max-width: 100%;
+	}
+
 	a {
 		color: ${props => props.accentColor};
 		position: relative;
@@ -90,14 +96,14 @@ const BlogBody = styled(Markdown)`
 	blockquote {
 		border-left: 1px solid ${props => props.accentColor};
 		padding: 1px 15px;
-		margin: 30px 0;
+		margin: 20px 0;
 		font-family: 'Droid Serif', 'serif';
 	}
 
 	hr {
 		border-top: 0px;
 		border-bottom: 1px solid ${props => props.accentColor};
-		margin: 50px 0;
+		margin: 30px 0;
 	}
 
 	code {

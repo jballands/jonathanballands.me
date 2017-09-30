@@ -273,6 +273,8 @@ export default class BlogBrowser extends React.Component {
 	renderStickyDrawer = (distanceFromTop, distanceFromBottom, style) => {
 		const { drawerIsOpen } = this.state;
 
+		console.log(drawerIsOpen);
+
 		return (
 			<div style={style}>
 				{drawerIsOpen ? (

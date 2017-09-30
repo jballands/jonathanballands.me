@@ -6,7 +6,7 @@
 //
 
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 import styled from 'styled-components';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
@@ -15,7 +15,6 @@ import Kinesis from 'routes/Kinesis';
 import Blog from 'routes/Blog';
 
 import NavigationBar from 'components/NavigationBar';
-import FooterWrapper from 'components/FooterWrapper';
 import RouteWithFooter from 'components/RouteWithFooter';
 
 const AppContainer = styled.div`
