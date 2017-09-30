@@ -10,7 +10,7 @@ const blogPosts = [
 		name: 'Swag Affogato',
 		date: new Date(2017, 4, 14),
 		endpoint:
-			'https://gist.githubusercontent.com/jballands/75bc33c6f1683785fab03b09830a2a9e/raw/d7dcd5580808f99b429999e34408d940e1caea50/Test.md',
+			'https://gist.githubusercontent.com/jballands/75bc33c6f1683785fab03b09830a2a9e/raw/d7b8ad16b1aaa3dee1a3dabee71b3f5439ff5bf7/Test.md',
 		hashtags: ['lifestyle'],
 	},
 	{

@@ -23,11 +23,12 @@ import OpenDrawerSvg from 'svg/OpenDrawerSvg';
 
 const DRAWER_OPEN_WIDTH = 425;
 const DRAWER_CLOSED_WIDTH = 70;
-const ACCENT_COLOR = '#ffb159';
+const ACCENT_COLOR = '#005b46';
+const COLOR = 'white';
 
 const BlogBrowserContainer = styled.div`
 	height: 100%;
-	background: #00ad86;
+	background: #00c195;
 	overflow: hidden;
 	position: relative;
 `;
@@ -61,7 +62,7 @@ const Title = styled.span`
 	text-transform: uppercase;
 	color: white;
 	margin-left: 10px;
-	color: #247261;
+	color: ${ACCENT_COLOR};
 `;
 
 const StyledTextInput = styled(TextInput)`
@@ -100,7 +101,7 @@ const NoSearchResultsTitle = styled.div`
 `;
 
 const NoSearchResultsDetails = styled.div`
-	color: #247261;
+	color: ${ACCENT_COLOR};
 	font-size: 14px;
 	margin-top: 5px;
 `;
@@ -117,6 +118,7 @@ export default class BlogBrowser extends React.Component {
 
 	static propTypes = {
 		chooseEntry: PropTypes.func,
+		drawerOpen: PropTypes.bool,
 		filteredEntries: PropTypes.instanceOf(Immutable.Map),
 		match: PropTypes.object,
 		searchBlogPosts: PropTypes.func,
@@ -181,6 +183,8 @@ export default class BlogBrowser extends React.Component {
 				{filteredEntries.entrySeq().map(result => {
 					return (
 						<BlogBrowserSearchResult
+							accentColor={ACCENT_COLOR}
+							color={COLOR}
 							title={result[1].name}
 							date={result[1].date}
 							hashtags={result[1].hashtags}
@@ -205,7 +209,7 @@ export default class BlogBrowser extends React.Component {
 	renderClosedDrawer = () => {
 		return (
 			<OpenDrawerButton onClick={this.openDrawer}>
-				<OpenDrawerSvg height={27} />
+				<OpenDrawerSvg color={ACCENT_COLOR} height={27} />
 			</OpenDrawerButton>
 		);
 	};
@@ -231,17 +235,21 @@ export default class BlogBrowser extends React.Component {
 			<BlogBrowserControlsContainer style={compensatedStyle}>
 				<FiltersContainer>
 					<TitleContainer onClick={this.closeDrawer}>
-						<LeftArrowSvg width={21} height={21} />
+						<LeftArrowSvg
+							width={21}
+							height={21}
+							color={ACCENT_COLOR}
+						/>
 						<Title>Posts</Title>
 					</TitleContainer>
 
 					<StyledTextInput
-						color="white"
-						hintColor="#247261"
+						color={COLOR}
+						hintColor="#187f68"
 						accentColor={ACCENT_COLOR}
 						title="Search"
 						hint="Search for topics, hashtags, and more"
-						icon={<MagnifyingGlassSvg />}
+						icon={<MagnifyingGlassSvg color={COLOR} />}
 						value={searchTerms}
 						onUpdate={this.handleSearchChange}
 					/>
@@ -249,7 +257,7 @@ export default class BlogBrowser extends React.Component {
 					<StyledRadioGroup
 						defaultSelection={sortOrder}
 						title="Sort Order"
-						color="white"
+						color={COLOR}
 						accentColor={ACCENT_COLOR}
 						onOptionClick={this.handleSetSortOrder}>
 						<RadioItem id="later">Later Posts First</RadioItem>

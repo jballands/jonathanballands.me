@@ -18,8 +18,8 @@ const LoadingContainer = styled.div`
 
 const Text = styled.div`
 	color: ${props => props.color};
-	font-size: 13px;
-	margin-top: 5px;
+	font-size: 14px;
+	margin-top: 7px;
 `;
 
 const LoadingAnimationContainer = styled.div`
@@ -110,22 +110,24 @@ export default class LoadingAnimation extends React.Component {
 	static displayName = 'LoadingAnimation';
 
 	static propTypes = {
+		className: PropTypes.string,
 		color: PropTypes.string,
 		duration: PropTypes.number,
+		style: PropTypes.object,
 		text: PropTypes.string,
 	};
 
 	static defaultProps = {
 		color: 'black',
 		duration: 1.7,
-		text: 'Wait a sec',
+		text: 'Gimme a sec',
 	};
 
 	render() {
-		const { color, duration, text } = this.props;
+		const { className, color, duration, style, text } = this.props;
 
 		return (
-			<LoadingContainer>
+			<LoadingContainer className={className} style={style}>
 				<LoadingAnimationContainer>
 					<AnimationLeft color={color} duration={duration} />
 					<AnimationRight color={color} duration={duration} />

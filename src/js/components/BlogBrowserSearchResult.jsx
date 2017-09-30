@@ -13,23 +13,29 @@ import { Link } from 'react-router-dom';
 
 import EyeSvg from 'svg/EyeSvg';
 
-const BlogBrowserSearchResultContainer = styled.div`
+const BlogBrowserSearchResultContainer = styled(Link)`
 	display: flex;
 	flex-flow: row nowrap;
 	font-size: 20px;
 	padding: 10px 20px;
 
 	&:hover {
-		background: #0cd1a3;
+		background: #00af87;
 		cursor: pointer;
 	}
 
 	&:first-child {
-		margin-top: 25px;
+		margin-top: 10px;
+	}
+	&:not(:first-child) {
+		margin-top: 5px;
 	}
 
 	&:last-child {
-		margin-bottom: 25px;
+		margin-bottom: 10px;
+	}
+	&:not(:last-child) {
+		margin-bottom: 5px;
 	}
 `;
 
@@ -39,23 +45,22 @@ const Content = styled.div`
 `;
 
 const Title = styled.div`
-	font-size: 20px;
-	color: white;
+	font-size: 16px;
+	color: ${props => props.color};
 	display: flex;
 	flex-flow: row;
 `;
 
 const Subtitle = styled.div`
-	color: #247261;
+	color: ${props => props.color};
 	font-size: 12px;
 `;
 
 const ActiveIcon = styled.div`
-	width: 30px;
-	flex: 0 0;
+	flex: 0 0 25px;
 	display: flex;
-	align-items: center;
 	justify-content: center;
+	align-items: center;
 	margin-right: 15px;
 `;
 
@@ -63,13 +68,16 @@ export default class BlogBrowserSearchResult extends React.Component {
 	static displayName = 'BlogBrowserSearchResult';
 
 	static propTypes = {
+		accentColor: PropTypes.string,
 		active: PropTypes.bool,
+		color: PropTypes.string,
 		date: PropTypes.object,
 		endpoint: PropTypes.string,
 		hashtags: PropTypes.array,
 		id: PropTypes.string,
 		match: PropTypes.object,
 		title: PropTypes.string,
+		onClick: PropTypes.func,
 	};
 
 	handleOnClick = () => {
@@ -82,24 +90,32 @@ export default class BlogBrowserSearchResult extends React.Component {
 	};
 
 	render() {
-		const { active, date, id, match, title } = this.props;
+		const {
+			accentColor,
+			active,
+			color,
+			date,
+			id,
+			match,
+			title,
+		} = this.props;
 		return (
-			<Link to={`${match.url}/${id}`}>
-				<BlogBrowserSearchResultContainer onClick={this.handleOnClick}>
-					{active && (
-						<ActiveIcon>
-							<EyeSvg width={28} height={27} />
-						</ActiveIcon>
-					)}
-					<Content>
-						<Title>{title}</Title>
-						<Subtitle>
-							{moment(date).format('MMMM Do, YYYY')}
-						</Subtitle>
-						<Subtitle>{this.renderHashtags()}</Subtitle>
-					</Content>
-				</BlogBrowserSearchResultContainer>
-			</Link>
+			<BlogBrowserSearchResultContainer
+				to={`${match.url}/${id}`}
+				onClick={this.handleOnClick}>
+				<ActiveIcon>
+					{active && <EyeSvg color={accentColor} width="100%" />}
+				</ActiveIcon>
+				<Content>
+					<Title color={color}>{title}</Title>
+					<Subtitle color={accentColor}>
+						{moment(date).format('MMMM Do, YYYY')}
+					</Subtitle>
+					<Subtitle color={accentColor}>
+						{this.renderHashtags()}
+					</Subtitle>
+				</Content>
+			</BlogBrowserSearchResultContainer>
 		);
 	}
 }
