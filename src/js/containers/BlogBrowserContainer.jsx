@@ -10,13 +10,13 @@ import PropTypes from 'prop-types';
 import Immutable from 'immutable';
 import { connect } from 'react-redux';
 
+import BlogBrowser from 'components/BlogBrowser';
+
 import {
 	searchBlogPosts,
 	setSortOrder,
 	chooseEntry,
 } from 'actions/BlogActions';
-
-import BlogBrowser from 'components/BlogBrowser';
 
 function mapStateToProps(state) {
 	return {
@@ -51,10 +51,9 @@ class BlogBrowserContainer extends React.Component {
 	};
 
 	handleChooseEntry = uri => {
-		const { chooseEntry, history, match } = this.props;
-
-		// history.push(`${match.url}/${uri}`);
+		const { chooseEntry } = this.props;
 		chooseEntry(uri);
+		console.log(uri);
 	};
 
 	render() {

@@ -6,6 +6,7 @@
 //
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Route } from 'react-router-dom';
 
@@ -20,6 +21,11 @@ const BlogContainer = styled.div`
 `;
 
 export default class Blog extends React.Component {
+	static propTypes = {
+		history: PropTypes.object,
+		match: PropTypes.object,
+	};
+
 	render() {
 		const { history, match } = this.props;
 

@@ -18,6 +18,8 @@ export const black = '#000';
 //
 //	Color
 //
+export const romantic = '#ffcfb1';
+export const bittersweet = '#ff6b6b';
 export const frostedMint = '#dbfffc';
 export const puertoRico = '#4ecdc4';
 export const fuchsiaBlue = '#7953c1';

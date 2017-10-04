@@ -8,11 +8,30 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Particles from 'components/Particles';
-import LinkWrapper from 'components/LinkWrapper';
+import BrowserDrawer from 'components/BrowserDrawer';
+
+import { bittersweet, romantic } from 'helpers/palette';
+
+const KinesisContainer = styled.div`
+	width: 100%;
+	background: #fff;
+	display: flex;
+	flex-flow: row nowrap;
+`;
 
 export default class Kinesis extends React.Component {
 	render() {
-		return <div>Kinesis!</div>;
+		return (
+			<KinesisContainer>
+				<BrowserDrawer
+					color={bittersweet}
+					backgroundColor={romantic}
+					title="Experiments">
+					{close => {
+						<div>Hello world!</div>;
+					}}
+				</BrowserDrawer>
+			</KinesisContainer>
+		);
 	}
 }
