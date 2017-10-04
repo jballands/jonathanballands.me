@@ -35,12 +35,12 @@ function* loadBlogEntry(action) {
 		}
 		yield put({
 			type: BLOG_CHOOSE_ENTRY_LOADING_FAILURE,
-			error: "Couldn'nt fetch the blog post",
+			error: "Couldn't fetch the blog post",
 		});
 	} catch (e) {
 		yield put({
 			type: BLOG_CHOOSE_ENTRY_LOADING_FAILURE,
-			error: "Couldn'nt fetch the blog post",
+			error: "Couldn't fetch the blog post",
 		});
 	}
 }

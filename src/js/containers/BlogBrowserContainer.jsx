@@ -53,7 +53,6 @@ class BlogBrowserContainer extends React.Component {
 	handleChooseEntry = uri => {
 		const { chooseEntry } = this.props;
 		chooseEntry(uri);
-		console.log(uri);
 	};
 
 	render() {

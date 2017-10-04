@@ -20,6 +20,7 @@ const Text = styled.div`
 	color: ${props => props.color};
 	font-size: 14px;
 	margin-top: 7px;
+	text-align: center;
 `;
 
 const LoadingAnimationContainer = styled.div`

@@ -57,7 +57,12 @@ export default class BlogContent extends React.Component {
 		const { content, contentLoading, selectedEntry } = this.props;
 
 		if (contentLoading) {
-			return <StyledLoadingAnimation color={puertoRico} />;
+			return (
+				<StyledLoadingAnimation
+					color={puertoRico}
+					text={selectedEntry.name}
+				/>
+			);
 		}
 		return <BlogEntry content={content} selectedEntry={selectedEntry} />;
 	};

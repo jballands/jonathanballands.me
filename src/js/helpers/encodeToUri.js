@@ -8,5 +8,9 @@
 import _toLower from 'lodash.tolower';
 
 export default function(str) {
-	return encodeURI(_toLower(str).replace(/ /g, '-'));
+	return encodeURI(
+		_toLower(str)
+			.replace(/ /g, '-')
+			.replace(/\./g, '-'),
+	);
 }
