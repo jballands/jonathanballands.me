@@ -10,37 +10,11 @@ import PropTypes from 'prop-types';
 import { animateScroll } from 'react-scroll';
 import styled from 'styled-components';
 
+import BackgroundGradient from 'components/BackgroundGradient';
 import BlogEntry from 'components/BlogEntry';
 import LoadingAnimation from 'components/LoadingAnimation';
 
-import { frostedMint, puertoRico, white } from 'helpers/palette';
-
-const ContentContainer = styled.div`
-	width: 100%;
-	height: 100%;
-	background: white;
-	position: relative;
-`;
-
-const BackgroundGradient = styled.div`
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 500px;
-	background: -webkit-linear-gradient(top, ${frostedMint}, ${white});
-	background: -o-linear-gradient(top, ${frostedMint}, ${white});
-	background: -moz-linear-gradient(top, ${frostedMint}, ${white});
-	background: linear-gradient(to bottom, ${frostedMint}, ${white});
-`;
-
-const Content = styled.div`
-	flex: 1 0;
-	display: flex;
-	flex-flow: column nowrap;
-	align-items: center;
-	position: relative;
-`;
+import { frostedMint, puertoRico } from 'helpers/palette';
 
 const StyledLoadingAnimation = styled(LoadingAnimation)`margin-top: 100px;`;
 
@@ -68,13 +42,12 @@ export default class BlogContent extends React.Component {
 	};
 
 	render() {
-		animateScroll.scrollToTop({ duration: 300 });
+		// animateScroll.scrollToTop({ duration: 300 });
 
 		return (
-			<ContentContainer>
-				<BackgroundGradient />
-				<Content>{this.renderContent()}</Content>
-			</ContentContainer>
+			<BackgroundGradient backgroundColor={frostedMint}>
+				{this.renderContent()}
+			</BackgroundGradient>
 		);
 	}
 }

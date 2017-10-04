@@ -8,6 +8,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import BackgroundGradient from 'components/BackgroundGradient';
 import BrowserDrawer from 'components/BrowserDrawer';
 
 import { bittersweet, romantic } from 'helpers/palette';
@@ -31,6 +32,7 @@ export default class Kinesis extends React.Component {
 						<div>Hello world!</div>;
 					}}
 				</BrowserDrawer>
+				<BackgroundGradient backgroundColor={romantic} />
 			</KinesisContainer>
 		);
 	}

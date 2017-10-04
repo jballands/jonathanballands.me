@@ -9,14 +9,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+import BackgroundGradient from 'components/BackgroundGradient';
 import Particles from 'components/Particles';
 import LinkWrapper from 'components/LinkWrapper';
 
-import { fuchsiaBlue, shark } from 'helpers/palette';
+import { fuchsiaBlue, moonRaker, shark } from 'helpers/palette';
 
 const AboutContainer = styled.div`width: 100%;`;
 
-const AboutHeroUnitContainer = styled.div`background: white;`;
+const AboutHeroUnitContainer = styled.div`width: 100%;`;
 
 const AboutHeroUnit = styled.div`
 	display: flex;
@@ -56,22 +57,24 @@ export default class About extends React.Component {
 	render() {
 		return (
 			<AboutContainer className={this.props.className}>
-				<AboutHeroUnitContainer>
-					<Particles>
-						<AboutHeroUnit>
-							<AboutHeroUnitTitle>
-								Howdy, I'm Pretty Rad
-							</AboutHeroUnitTitle>
-							<AboutHeroUnitSubtitle>
-								But you can call me Jon.
-							</AboutHeroUnitSubtitle>
-							<LinkWrapper link="" external>
-								View My Résumé
-							</LinkWrapper>
-						</AboutHeroUnit>
-					</Particles>
-				</AboutHeroUnitContainer>
-				<AboutMe />
+				<BackgroundGradient backgroundColor={moonRaker}>
+					<AboutHeroUnitContainer>
+						<Particles>
+							<AboutHeroUnit>
+								<AboutHeroUnitTitle>
+									Howdy, I'm Pretty Rad
+								</AboutHeroUnitTitle>
+								<AboutHeroUnitSubtitle>
+									But you can call me Jon.
+								</AboutHeroUnitSubtitle>
+								<LinkWrapper link="" external>
+									View My Résumé
+								</LinkWrapper>
+							</AboutHeroUnit>
+						</Particles>
+					</AboutHeroUnitContainer>
+					<AboutMe />
+				</BackgroundGradient>
 			</AboutContainer>
 		);
 	}

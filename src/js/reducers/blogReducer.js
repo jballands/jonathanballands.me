@@ -7,7 +7,7 @@
 
 import Immutable from 'immutable';
 import moment from 'moment';
-import _lowerCase from 'lodash.lowercase';
+import _toLower from 'lodash.tolower';
 
 import {
 	BLOG_SEARCH_POSTS,
@@ -41,7 +41,7 @@ function sortBlogEntries(sortOrder, entries) {
 }
 
 function filterBlogEntries(terms, entries) {
-	const lowerCaseTerms = _lowerCase(terms);
+	const lowerCaseTerms = _toLower(terms);
 
 	if (terms === '') {
 		return entries;
@@ -49,8 +49,8 @@ function filterBlogEntries(terms, entries) {
 
 	return entries.filter(post => {
 		return (
-			_lowerCase(post.name).indexOf(lowerCaseTerms) > -1 ||
-			_lowerCase(post.hashtags.join(' ')).indexOf(lowerCaseTerms) > -1
+			_toLower(post.name).indexOf(lowerCaseTerms) > -1 ||
+			_toLower(post.hashtags.join(' ')).indexOf(lowerCaseTerms) > -1
 		);
 	});
 }
