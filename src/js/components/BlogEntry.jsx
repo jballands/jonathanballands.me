@@ -11,6 +11,8 @@ import Markdown from 'react-markdown';
 import styled from 'styled-components';
 import moment from 'moment';
 
+import { puertoRico, shark, white } from 'helpers/palette';
+
 const BlogEntryContainer = styled.div`
 	margin: 70px auto;
 	width: 75%;
@@ -19,19 +21,22 @@ const BlogEntryContainer = styled.div`
 
 const BlogTitle = styled.div`
 	font-size: 42px;
-	color: white;
+	font-weight: 700;
+	color: ${puertoRico};
+	font-family: 'Raleway', sans-serif;
+	text-transform: uppercase;
 `;
 
 const BlogSubtitle = styled.div`
 	display: flex;
 	flex-flow: column nowrap;
-	color: ${props => props.color};
+	color: ${shark};
 	margin-top: 5px;
 `;
 
 const BlogBody = styled(Markdown)`
 	margin-top: 50px;
-	color: white;
+	color: ${shark};
 	line-height: 1.5em;
 	display: flex;
 	flex-flow: column;
@@ -71,7 +76,7 @@ const BlogBody = styled(Markdown)`
 	}
 
 	a {
-		color: ${props => props.accentColor};
+		color: ${puertoRico};
 		position: relative;
 
 		&:hover:after {
@@ -86,7 +91,7 @@ const BlogBody = styled(Markdown)`
 			height: 1px;
 			bottom: 0;
 			left: 0;
-			background-color: ${props => props.accentColor};
+			background-color: ${puertoRico};
 			visibility: hidden;
 			transform: scaleX(0);
 			transition: all 0.2s ease-out 0s;
@@ -94,7 +99,7 @@ const BlogBody = styled(Markdown)`
 	}
 
 	blockquote {
-		border-left: 1px solid ${props => props.accentColor};
+		border-left: 1px solid ${puertoRico};
 		padding: 1px 15px;
 		margin: 20px 0;
 		font-family: 'Droid Serif', 'serif';
@@ -102,22 +107,21 @@ const BlogBody = styled(Markdown)`
 
 	hr {
 		border-top: 0px;
-		border-bottom: 1px solid ${props => props.accentColor};
+		border-bottom: 1px solid ${puertoRico};
 		margin: 30px 0;
 	}
 
 	code {
 		padding: 2px 4px;
-		background: #00b78c;
+		background: ${shark};
 		border-radius: 3px;
-		color: ${props => props.accentColor};
+		color: ${white};
 	}
 
 	pre {
 		padding: 10px 15px;
-		background: #00b78c;
-		border-radius: 3px;
-		color: ${props => props.accentColor};
+		background: ${shark};
+		border-radius: 5px;
 
 		code {
 			padding: 0;
@@ -130,19 +134,18 @@ export default class BlogEntry extends React.Component {
 	static displayName = 'BlogEntry';
 
 	static propTypes = {
-		accentColor: PropTypes.string,
 		content: PropTypes.string,
 		selectedEntry: PropTypes.object.isRequired,
 	};
 
 	render() {
-		const { accentColor, content, selectedEntry } = this.props;
+		const { content, selectedEntry } = this.props;
 
 		return (
 			<BlogEntryContainer>
 				<BlogTitle>{selectedEntry.name}</BlogTitle>
 
-				<BlogSubtitle color={accentColor}>
+				<BlogSubtitle>
 					<div>
 						{moment(selectedEntry.date).format('MMMM Do, YYYY')}
 					</div>
@@ -150,7 +153,7 @@ export default class BlogEntry extends React.Component {
 						{selectedEntry.hashtags.map(h => `#${h}`).join(', ')}
 					</div>
 				</BlogSubtitle>
-				<BlogBody source={content} accentColor={accentColor} />
+				<BlogBody source={content} />
 			</BlogEntryContainer>
 		);
 	}

@@ -46,7 +46,7 @@ export default class NavigationBar extends React.Component {
 				</Link>
 
 				<NavigationBarList>
-					<NavigationBarItem link="/">About</NavigationBarItem>
+					<NavigationBarItem link="/">Hello</NavigationBarItem>
 					<NavigationBarItem link="/kinesis">
 						Kinesis
 					</NavigationBarItem>

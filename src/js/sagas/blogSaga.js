@@ -6,6 +6,7 @@
 //
 
 import axios from 'axios';
+import { delay } from 'redux-saga';
 import { all, call, put, takeLatest } from 'redux-saga/effects';
 
 import {
@@ -26,6 +27,8 @@ function* loadBlogEntry(action) {
 	const endpoint = blogEntries.get(action.id).endpoint;
 	try {
 		const { data, status } = yield call(fetchBlogEntry, endpoint);
+
+		yield delay(2500);
 
 		if (status === 200) {
 			return yield put({ type: BLOG_CHOOSE_ENTRY_LOADING_SUCCESS, data });

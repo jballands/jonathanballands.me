@@ -9,6 +9,8 @@ import React from 'react';
 import styled from 'styled-components';
 import Particles from 'react-particles-js';
 
+import { gigas } from 'helpers/palette';
+
 const ParticlesContainer = styled.div`
 	width: 100%;
 	height: 500px;
@@ -48,7 +50,7 @@ export default class NavigationBar extends React.Component {
 				line_linked: {
 					enable: true,
 					distance: 110,
-					color: '#fff',
+					color: gigas,
 					opacity: 0.7,
 					width: 1,
 				},

@@ -11,6 +11,8 @@ import styled from 'styled-components';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
 
+import { mercury, puertoRico, shark } from 'helpers/palette';
+
 import EyeSvg from 'svg/EyeSvg';
 
 const BlogBrowserSearchResultContainer = styled(Link)`
@@ -20,7 +22,7 @@ const BlogBrowserSearchResultContainer = styled(Link)`
 	padding: 10px 20px;
 
 	&:hover {
-		background: #00af87;
+		background: ${mercury};
 		cursor: pointer;
 	}
 
@@ -46,13 +48,13 @@ const Content = styled.div`
 
 const Title = styled.div`
 	font-size: 16px;
-	color: ${props => props.color};
+	color: ${shark};
 	display: flex;
 	flex-flow: row;
 `;
 
 const Subtitle = styled.div`
-	color: ${props => props.color};
+	color: ${shark};
 	font-size: 12px;
 `;
 
@@ -68,9 +70,7 @@ export default class BlogBrowserSearchResult extends React.Component {
 	static displayName = 'BlogBrowserSearchResult';
 
 	static propTypes = {
-		accentColor: PropTypes.string,
 		active: PropTypes.bool,
-		color: PropTypes.string,
 		date: PropTypes.object,
 		endpoint: PropTypes.string,
 		hashtags: PropTypes.array,
@@ -90,30 +90,18 @@ export default class BlogBrowserSearchResult extends React.Component {
 	};
 
 	render() {
-		const {
-			accentColor,
-			active,
-			color,
-			date,
-			id,
-			match,
-			title,
-		} = this.props;
+		const { active, date, id, match, title } = this.props;
 		return (
 			<BlogBrowserSearchResultContainer
 				to={`${match.url}/${id}`}
 				onClick={this.handleOnClick}>
 				<ActiveIcon>
-					{active && <EyeSvg color={accentColor} width="100%" />}
+					{active && <EyeSvg color={puertoRico} width="100%" />}
 				</ActiveIcon>
 				<Content>
-					<Title color={color}>{title}</Title>
-					<Subtitle color={accentColor}>
-						{moment(date).format('MMMM Do, YYYY')}
-					</Subtitle>
-					<Subtitle color={accentColor}>
-						{this.renderHashtags()}
-					</Subtitle>
+					<Title color={shark}>{title}</Title>
+					<Subtitle>{moment(date).format('MMMM Do, YYYY')}</Subtitle>
+					<Subtitle>{this.renderHashtags()}</Subtitle>
 				</Content>
 			</BlogBrowserSearchResultContainer>
 		);

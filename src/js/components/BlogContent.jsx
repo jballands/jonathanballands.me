@@ -13,12 +13,12 @@ import styled from 'styled-components';
 import BlogEntry from 'components/BlogEntry';
 import LoadingAnimation from 'components/LoadingAnimation';
 
-const ACCENT_COLOR = '#247261';
+import { frostedMint, puertoRico, white } from 'helpers/palette';
 
 const ContentContainer = styled.div`
 	width: 100%;
 	height: 100%;
-	background: #00d2a0;
+	background: white;
 	position: relative;
 `;
 
@@ -28,10 +28,10 @@ const BackgroundGradient = styled.div`
 	left: 0;
 	width: 100%;
 	height: 500px;
-	background: -webkit-linear-gradient(top, #00e9b2, #00d2a0);
-	background: -o-linear-gradient(top, #00e9b2, #00d2a0);
-	background: -moz-linear-gradient(top, #00e9b2, #00d2a0);
-	background: linear-gradient(to bottom, #00e9b2, #00d2a0);
+	background: -webkit-linear-gradient(top, ${frostedMint}, ${white});
+	background: -o-linear-gradient(top, ${frostedMint}, ${white});
+	background: -moz-linear-gradient(top, ${frostedMint}, ${white});
+	background: linear-gradient(to bottom, ${frostedMint}, ${white});
 `;
 
 const Content = styled.div`
@@ -57,15 +57,9 @@ export default class BlogContent extends React.Component {
 		const { content, contentLoading, selectedEntry } = this.props;
 
 		if (contentLoading) {
-			return <StyledLoadingAnimation color={ACCENT_COLOR} />;
+			return <StyledLoadingAnimation color={puertoRico} />;
 		}
-		return (
-			<BlogEntry
-				accentColor={ACCENT_COLOR}
-				content={content}
-				selectedEntry={selectedEntry}
-			/>
-		);
+		return <BlogEntry content={content} selectedEntry={selectedEntry} />;
 	};
 
 	render() {

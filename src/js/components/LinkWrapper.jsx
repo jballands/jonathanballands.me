@@ -6,14 +6,17 @@
 //
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 import LinkSvg from 'svg/LinkSvg';
 
+import { shark } from 'helpers/palette';
+
 const LinkWrapperContainer = styled.a`
 	font-family: 'Droid Serif', 'serif';
-	color: #fff;
+	color: ${shark};
 	font-size: 17px;
 	letter-spacing: 1px;
 	margin-top: 50px;
@@ -26,6 +29,7 @@ const LinkWrapperContainer = styled.a`
 	}
 
 	& > span {
+		color: ${shark};
 		position: relative;
 	}
 
@@ -36,7 +40,7 @@ const LinkWrapperContainer = styled.a`
 		height: 1px;
 		bottom: 0;
 		left: 0;
-		background-color: white;
+		background-color: ${shark};
 		visibility: hidden;
 		-webkit-transform: scaleX(0);
 		transform: scaleX(0);
@@ -54,22 +58,31 @@ const LinkWrapperContainer = styled.a`
 const LinkWrapperContainerRouterLink = LinkWrapperContainer.withComponent(Link);
 
 export default class LinkWrapper extends React.Component {
+	static propTypes = {
+		className: PropTypes.string,
+		children: PropTypes.node,
+		external: PropTypes.bool,
+		link: PropTypes.string,
+	};
+
 	static defaultProps = {
 		external: false,
 	};
 
 	render() {
-		if (this.props.external === true) {
+		const { className, children, external, link } = this.props;
+
+		if (external === true) {
 			return (
-				<LinkWrapperContainer href={this.props.link}>
-					<span>{this.props.children}</span>
-					<LinkSvg />
+				<LinkWrapperContainer className={className} href={link}>
+					<span>{children}</span>
+					<LinkSvg color={shark} />
 				</LinkWrapperContainer>
 			);
 		}
 		return (
-			<LinkWrapperContainerRouterLink to={this.props.link}>
-				<span>{this.props.children}</span>
+			<LinkWrapperContainerRouterLink className={className} to={link}>
+				<span>{children}</span>
 			</LinkWrapperContainerRouterLink>
 		);
 	}

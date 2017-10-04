@@ -17,20 +17,22 @@ import RadioItem from '@jballands/vespyr/lib/RadioItem';
 
 import BlogBrowserSearchResult from 'components/BlogBrowserSearchResult';
 
+import { alto, frostedMint, puertoRico, shark, white } from 'helpers/palette';
+
 import LeftArrowSvg from 'svg/LeftArrowSvg';
 import MagnifyingGlassSvg from 'svg/MagnifyingGlassSvg';
 import OpenDrawerSvg from 'svg/OpenDrawerSvg';
 
 const DRAWER_OPEN_WIDTH = 425;
 const DRAWER_CLOSED_WIDTH = 70;
-const ACCENT_COLOR = '#005b46';
-const COLOR = 'white';
 
 const BlogBrowserContainer = styled.div`
 	height: 100%;
-	background: #00c195;
+	background: ${props => (props.open ? white : frostedMint)};
 	overflow: hidden;
 	position: relative;
+	border-right: 1px solid ${props => (props.open ? alto : 'transparent')};
+	transition: background 750ms ease, border 750ms ease;
 `;
 
 const StyledStickyContainer = styled(StickyContainer)`
@@ -58,11 +60,11 @@ const TitleContainer = styled.div`
 
 const Title = styled.span`
 	font-weight: 700;
-	font-size: 20px;
+	font-size: 22px;
 	text-transform: uppercase;
 	color: white;
 	margin-left: 10px;
-	color: ${ACCENT_COLOR};
+	color: ${puertoRico};
 `;
 
 const StyledTextInput = styled(TextInput)`
@@ -101,7 +103,7 @@ const NoSearchResultsTitle = styled.div`
 `;
 
 const NoSearchResultsDetails = styled.div`
-	color: ${ACCENT_COLOR};
+	color: ${puertoRico};
 	font-size: 14px;
 	margin-top: 5px;
 `;
@@ -110,7 +112,7 @@ const SearchResultsContainer = styled.div`
 	margin-top: 20px;
 	overflow-y: scroll;
 	flex: 1 0;
-	border-top: 1px solid #247261;
+	border-top: 1px solid ${alto};
 `;
 
 export default class BlogBrowser extends React.Component {
@@ -183,8 +185,6 @@ export default class BlogBrowser extends React.Component {
 				{filteredEntries.entrySeq().map(result => {
 					return (
 						<BlogBrowserSearchResult
-							accentColor={ACCENT_COLOR}
-							color={COLOR}
 							title={result[1].name}
 							date={result[1].date}
 							hashtags={result[1].hashtags}
@@ -193,11 +193,9 @@ export default class BlogBrowser extends React.Component {
 							id={result[0]}
 							match={match}
 							active={
-								selectedEntry ? (
-									selectedEntry.id === result[0]
-								) : (
-									false
-								)
+								selectedEntry
+									? selectedEntry.id === result[0]
+									: false
 							}
 						/>
 					);
@@ -209,7 +207,7 @@ export default class BlogBrowser extends React.Component {
 	renderClosedDrawer = () => {
 		return (
 			<OpenDrawerButton onClick={this.openDrawer}>
-				<OpenDrawerSvg color={ACCENT_COLOR} height={27} />
+				<OpenDrawerSvg color={puertoRico} height={27} />
 			</OpenDrawerButton>
 		);
 	};
@@ -238,18 +236,17 @@ export default class BlogBrowser extends React.Component {
 						<LeftArrowSvg
 							width={21}
 							height={21}
-							color={ACCENT_COLOR}
+							color={puertoRico}
 						/>
 						<Title>Posts</Title>
 					</TitleContainer>
 
 					<StyledTextInput
-						color={COLOR}
-						hintColor="#187f68"
-						accentColor={ACCENT_COLOR}
+						color={shark}
+						accentColor={puertoRico}
 						title="Search"
 						hint="Search for topics, hashtags, and more"
-						icon={<MagnifyingGlassSvg color={COLOR} />}
+						icon={<MagnifyingGlassSvg color={shark} />}
 						value={searchTerms}
 						onUpdate={this.handleSearchChange}
 					/>
@@ -257,8 +254,8 @@ export default class BlogBrowser extends React.Component {
 					<StyledRadioGroup
 						defaultSelection={sortOrder}
 						title="Sort Order"
-						color={COLOR}
-						accentColor={ACCENT_COLOR}
+						color={shark}
+						accentColor={puertoRico}
 						onOptionClick={this.handleSetSortOrder}>
 						<RadioItem id="later">Later Posts First</RadioItem>
 						<RadioItem id="earlier">Earlier Posts First</RadioItem>
@@ -273,27 +270,24 @@ export default class BlogBrowser extends React.Component {
 	renderStickyDrawer = (distanceFromTop, distanceFromBottom, style) => {
 		const { drawerIsOpen } = this.state;
 
-		console.log(drawerIsOpen);
-
 		return (
 			<div style={style}>
-				{drawerIsOpen ? (
-					this.renderOpenDrawer(distanceFromTop, distanceFromBottom)
-				) : (
-					this.renderClosedDrawer()
-				)}
+				{drawerIsOpen
+					? this.renderOpenDrawer(distanceFromTop, distanceFromBottom)
+					: this.renderClosedDrawer()}
 			</div>
 		);
 	};
 
 	render() {
-		const { width } = this.state;
+		const { drawerIsOpen, width } = this.state;
 
 		return (
 			<Motion style={{ width }}>
 				{interpolated => (
 					<BlogBrowserContainer
-						style={{ flex: `0 0 ${interpolated.width}px` }}>
+						style={{ flex: `0 0 ${interpolated.width}px` }}
+						open={drawerIsOpen}>
 						<StyledStickyContainer>
 							<Sticky>
 								{({
