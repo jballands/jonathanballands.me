@@ -86,7 +86,7 @@ export default class BlogBrowserSearchResult extends React.Component {
 
 	renderHashtags = () => {
 		const { hashtags } = this.props;
-		return hashtags.map(h => `#${h}`).join(', ');
+		return hashtags.map(h => `#${h.displayName}`).join(', ');
 	};
 
 	render() {

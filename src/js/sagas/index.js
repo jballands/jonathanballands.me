@@ -1,6 +1,6 @@
 //
 //	jballands/jonathanballands.me
-//	index.jsx (Root Saga)
+//	index.js (Root Saga)
 //
 //	© 2017 Jonathan Ballands
 //

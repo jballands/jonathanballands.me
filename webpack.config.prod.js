@@ -53,6 +53,7 @@ module.exports = {
 			actions: path.resolve(__dirname, './src/js/actions'),
 			components: path.resolve(__dirname, './src/js/components'),
 			containers: path.resolve(__dirname, './src/js/containers'),
+			experiments: path.resolve(__dirname, './experiments'),
 			helpers: path.resolve(__dirname, './src/js/helpers'),
 			reducers: path.resolve(__dirname, './src/js/reducers'),
 			routes: path.resolve(__dirname, './src/js/routes'),

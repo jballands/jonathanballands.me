@@ -150,7 +150,9 @@ export default class BlogEntry extends React.Component {
 						{moment(selectedEntry.date).format('MMMM Do, YYYY')}
 					</div>
 					<div>
-						{selectedEntry.hashtags.map(h => `#${h}`).join(', ')}
+						{selectedEntry.hashtags
+							.map(h => `#${h.displayName}`)
+							.join(', ')}
 					</div>
 				</BlogSubtitle>
 				<BlogBody source={content} />

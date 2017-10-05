@@ -50,7 +50,6 @@ export default class NavigationBar extends React.Component {
 					<NavigationBarItem link="/kinesis">
 						Kinesis
 					</NavigationBarItem>
-					<NavigationBarItem link="/blog">Blog</NavigationBarItem>
 					<NavigationBarItem
 						link="https://github.com/jballands/vespyr"
 						external>

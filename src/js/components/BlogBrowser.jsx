@@ -70,7 +70,7 @@ export default class BlogBrowser extends React.Component {
 					color={shark}
 					accentColor={puertoRico}
 					title="Search"
-					hint="Search for topics, hashtags, and more"
+					hint="Search for topics, hashtags, & more"
 					icon={<MagnifyingGlassSvg color={shark} />}
 					value={searchTerms}
 					onUpdate={this.handleSearchChange}

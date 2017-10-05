@@ -33,8 +33,12 @@ class BlogContentContainer extends React.Component {
 	static displayName = 'BlogContentContainer';
 
 	static propTypes = {
+		chooseEntry: PropTypes.func,
 		content: PropTypes.string,
+		contentLoading: PropTypes.bool,
 		filteredEntries: PropTypes.instanceOf(Immutable.OrderedMap),
+		history: PropTypes.object,
+		match: PropTypes.object,
 		selectedEntry: PropTypes.object,
 	};
 

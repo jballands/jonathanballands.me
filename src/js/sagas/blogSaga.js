@@ -1,6 +1,6 @@
 //
 //	jballands/jonathanballands.me
-//	blogSaga.jsx
+//	blogSaga.js
 //
 //	© 2017 Jonathan Ballands
 //
@@ -15,7 +15,7 @@ import {
 	BLOG_CHOOSE_ENTRY_LOADING_SUCCESS,
 	BLOG_CHOOSE_ENTRY_LOADING_FAILURE,
 } from 'actions/BlogActions';
-import blogEntries from 'helpers/blogEntries';
+import { entries } from 'helpers/blogSpec';
 
 function fetchBlogEntry(endpoint) {
 	return axios.get(endpoint);
@@ -24,7 +24,7 @@ function fetchBlogEntry(endpoint) {
 function* loadBlogEntry(action) {
 	yield put({ type: BLOG_CHOOSE_ENTRY_START_LOADING });
 
-	const endpoint = blogEntries.get(action.id).endpoint;
+	const endpoint = entries.get(action.id).endpoint;
 	try {
 		const { data, status } = yield call(fetchBlogEntry, endpoint);
 

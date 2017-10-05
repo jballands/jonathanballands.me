@@ -18,9 +18,10 @@ import {
 	BLOG_CHOOSE_ENTRY_LOADING_FAILURE,
 } from 'actions/BlogActions';
 
-import blogEntries from 'helpers/blogEntries';
+import { entries } from 'helpers/blogSpec';
 
-let sortedEntries = sortBlogEntries('later', blogEntries);
+let sortedEntries = sortBlogEntries('later', entries);
+
 const InitialStateRecord = Immutable.Record({
 	searchTerms: '',
 	sortOrder: 'later',
@@ -55,8 +56,6 @@ function filterBlogEntries(terms, entries) {
 	});
 }
 
-export const entries = sortBlogEntries;
-
 export default function(state = new InitialStateRecord(), action) {
 	switch (action.type) {
 		case BLOG_SEARCH_POSTS:
@@ -67,7 +66,7 @@ export default function(state = new InitialStateRecord(), action) {
 					filterBlogEntries(action.terms, sortedEntries),
 				);
 		case BLOG_SET_SORT_ORDER:
-			sortedEntries = sortBlogEntries(action.sortOrder, blogEntries);
+			sortedEntries = sortBlogEntries(action.sortOrder, entries);
 
 			return state
 				.set('sortOrder', action.sortOrder)
@@ -76,7 +75,7 @@ export default function(state = new InitialStateRecord(), action) {
 					filterBlogEntries(state.searchTerms, sortedEntries),
 				);
 		case BLOG_CHOOSE_ENTRY:
-			return state.set('selectedEntry', blogEntries.get(action.id));
+			return state.set('selectedEntry', entries.get(action.id));
 		case BLOG_CHOOSE_ENTRY_START_LOADING:
 			return state.set('contentLoading', true).set('error', null);
 		case BLOG_CHOOSE_ENTRY_LOADING_SUCCESS:
