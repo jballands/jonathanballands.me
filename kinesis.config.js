@@ -74,7 +74,7 @@ export const kinesisPosts = [
 		date: new Date(2017, 8, 20),
 		hashtags: [KinesisHashtags.dev],
 		type: Type.experiment,
-		resource: import('~/experiments/Demo'),
+		resource: () => import('~/experiments/Demo'),
 		primaryColor: '#ff6b6b',
 		secondaryColor: '#ffcfb1',
 	}),

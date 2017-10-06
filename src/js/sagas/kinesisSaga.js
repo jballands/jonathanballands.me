@@ -23,9 +23,9 @@ function fetchKinesisArticleEntry(endpoint) {
 	return axios.get(endpoint);
 }
 
-function fetchKinesisExperimentEntry(promise) {
+function fetchKinesisExperimentEntry(resource) {
 	// The resource is already a promise, so we just return it
-	return promise;
+	return resource();
 }
 
 function* loadKinesisArticleEntry(entry) {
