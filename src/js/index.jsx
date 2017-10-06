@@ -24,13 +24,19 @@ import 'styles/fonts.scss';
 
 class JonathanBallandsMe extends React.Component {
 	render() {
+		const middleware = [];
 		const sagaMiddleware = createSagaMiddleware();
-		const composeEnhancers =
-			window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+		middleware.push(sagaMiddleware);
 
-		const store = createStore(
+		console.log(process.env.NODE_ENV);
+		if (process.env.NODE_ENV === 'development') {
+			console.log('rawr');
+			const { logger } = require('redux-logger');
+			middleware.push(logger);
+		}
+
+		const store = compose(applyMiddleware(...middleware))(createStore)(
 			rootReducer,
-			composeEnhancers(applyMiddleware(sagaMiddleware))
 		);
 
 		sagaMiddleware.run(rootSaga);

@@ -6,6 +6,7 @@
 //
 
 const path = require('path');
+const webpack = require('webpack');
 
 // -----------------------------------------------------------------------------
 
@@ -14,6 +15,13 @@ module.exports = {
 	entry: {
 		index: './src/js/index.jsx',
 	},
+	plugins: [
+		new webpack.DefinePlugin({
+			'process.env': {
+				NODE_ENV: JSON.stringify('development'),
+			},
+		}),
+	],
 	output: {
 		path: path.resolve(__dirname, './public/assets'),
 		publicPath: '/assets/',
