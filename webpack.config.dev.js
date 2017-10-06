@@ -12,12 +12,13 @@ const path = require('path');
 module.exports = {
 	context: path.resolve(__dirname),
 	entry: {
-		bundle: './src/js/index.jsx',
+		index: './src/js/index.jsx',
 	},
 	output: {
 		path: path.resolve(__dirname, './public/assets'),
-		publicPath: path.resolve(__dirname, './public/assets'),
-		filename: '[name].js',
+		publicPath: '/assets/',
+		filename: '[name].bundle.js',
+		chunkFilename: '[name].bundle.js',
 	},
 	module: {
 		rules: [
@@ -59,6 +60,7 @@ module.exports = {
 			actions: path.resolve(__dirname, './src/js/actions'),
 			components: path.resolve(__dirname, './src/js/components'),
 			containers: path.resolve(__dirname, './src/js/containers'),
+			experiments: path.resolve(__dirname, './experiments'),
 			helpers: path.resolve(__dirname, './src/js/helpers'),
 			reducers: path.resolve(__dirname, './src/js/reducers'),
 			routes: path.resolve(__dirname, './src/js/routes'),

@@ -12,11 +12,14 @@ const webpack = require('webpack');
 
 module.exports = {
 	entry: {
-		bundle: './src/js/index',
+		index: './src/js/index',
 	},
+	plugins: [new webpack.optimize.UglifyJsPlugin()],
 	output: {
-		path: path.resolve(__dirname, 'public/assets'),
-		filename: '[name].js',
+		path: path.resolve(__dirname, './public/assets'),
+		publicPath: '/assets/',
+		filename: '[name].bundle.js',
+		chunkFilename: '[name].bundle.js',
 	},
 	module: {
 		rules: [
@@ -53,6 +56,7 @@ module.exports = {
 			actions: path.resolve(__dirname, './src/js/actions'),
 			components: path.resolve(__dirname, './src/js/components'),
 			containers: path.resolve(__dirname, './src/js/containers'),
+			experiments: path.resolve(__dirname, './experiments'),
 			helpers: path.resolve(__dirname, './src/js/helpers'),
 			reducers: path.resolve(__dirname, './src/js/reducers'),
 			routes: path.resolve(__dirname, './src/js/routes'),
@@ -62,5 +66,4 @@ module.exports = {
 			'~': path.resolve(__dirname, '.'),
 		},
 	},
-	plugins: [new webpack.optimize.UglifyJsPlugin()],
 };

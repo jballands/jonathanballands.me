@@ -1,6 +1,6 @@
 //
 //	jballands/jonathanballands.me
-//	BlogBrowser.jsx
+//	KinesisBrowser.jsx
 //
 //	© 2017 Jonathan Ballands
 //
@@ -14,13 +14,13 @@ import RadioGroup from '@jballands/vespyr/lib/RadioGroup';
 import RadioItem from '@jballands/vespyr/lib/RadioItem';
 
 import BrowserDrawer from 'components/BrowserDrawer';
-import BlogBrowserSearchResults from 'components/BlogBrowserSearchResults';
+import KinesisBrowserSearchResults from 'components/KinesisBrowserSearchResults';
 
-import { frostedMint, puertoRico, shark } from 'helpers/palette';
+import { fuchsiaBlue, moonRaker, shark } from 'helpers/palette';
 
 import MagnifyingGlassSvg from 'svg/MagnifyingGlassSvg';
 
-const BlogBrowserContainer = styled.div`
+const KinesisBrowserContainer = styled.div`
 	width: 100%;
 	height: 100%;
 	display: flex;
@@ -39,14 +39,14 @@ const FiltersContainer = styled.div`
 	width: calc(100% - 40px);
 `;
 
-export default class BlogBrowser extends React.Component {
-	static displayName = 'BlogBrowser';
+export default class KinesisBrowser extends React.Component {
+	static displayName = 'KinesisBrowser';
 
 	static propTypes = {
 		chooseEntry: PropTypes.func,
 		filteredEntries: PropTypes.instanceOf(Immutable.Map),
 		match: PropTypes.object,
-		searchBlogPosts: PropTypes.func,
+		searchKinesisPosts: PropTypes.func,
 		searchTerms: PropTypes.string,
 		selectedEntry: PropTypes.object,
 		setSortOrder: PropTypes.func,
@@ -54,7 +54,7 @@ export default class BlogBrowser extends React.Component {
 	};
 
 	handleSearchChange = terms => {
-		this.props.searchBlogPosts(terms);
+		this.props.searchKinesisPosts(terms);
 	};
 
 	handleSetSortOrder = sortOrder => {
@@ -62,15 +62,15 @@ export default class BlogBrowser extends React.Component {
 	};
 
 	renderControls = () => {
-		const { searchTerms, sortOrder } = this.props;
+		const { searchTerms, selectedEntry, sortOrder } = this.props;
 
 		return (
 			<FiltersContainer>
 				<StyledTextInput
 					color={shark}
-					accentColor={puertoRico}
+					accentColor={selectedEntry.primaryColor}
 					title="Search"
-					hint="Search for topics, hashtags, and more"
+					hint="Search for topics, hashtags, & more"
 					icon={<MagnifyingGlassSvg color={shark} />}
 					value={searchTerms}
 					onUpdate={this.handleSearchChange}
@@ -80,7 +80,7 @@ export default class BlogBrowser extends React.Component {
 					defaultSelection={sortOrder}
 					title="Sort Order"
 					color={shark}
-					accentColor={puertoRico}
+					accentColor={selectedEntry.primaryColor}
 					onOptionClick={this.handleSetSortOrder}>
 					<RadioItem id="later">Later Posts First</RadioItem>
 					<RadioItem id="earlier">Earlier Posts First</RadioItem>
@@ -99,20 +99,20 @@ export default class BlogBrowser extends React.Component {
 
 		return (
 			<BrowserDrawer
-				backgroundColor={frostedMint}
-				color={puertoRico}
+				backgroundColor={selectedEntry.secondaryColor}
+				color={selectedEntry.primaryColor}
 				title="Posts">
 				{close => (
-					<BlogBrowserContainer>
+					<KinesisBrowserContainer>
 						{this.renderControls()}
-						<BlogBrowserSearchResults
+						<KinesisBrowserSearchResults
 							chooseEntry={chooseEntry}
 							closeDrawer={close}
 							filteredEntries={filteredEntries}
 							match={match}
 							selectedEntry={selectedEntry}
 						/>
-					</BlogBrowserContainer>
+					</KinesisBrowserContainer>
 				)}
 			</BrowserDrawer>
 		);

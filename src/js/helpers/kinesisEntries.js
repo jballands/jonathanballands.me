@@ -1,20 +1,20 @@
 //
 //	jballands/jonathanballands.me
-//	blogEntries.js
+//	kinesisSpec.js
 //
 //	© 2017 Jonathan Ballands
 //
 
 import Immutable from 'immutable';
 
-import blogEntries from '~/blog.config.js';
+import { kinesisPosts } from '~/kinesis.config.js';
 import encodeToUri from 'helpers/encodeToUri';
 
 export default Immutable.Map(
-	blogEntries.reduce((map, post) => {
+	kinesisPosts.reduce((map, post) => {
 		const id = encodeToUri(post.name);
-		map[id] = post;
-		map[id].id = id;
+		const postWithId = post.set('id', id);
+		map[id] = postWithId;
 		return map;
 	}, {}),
 );

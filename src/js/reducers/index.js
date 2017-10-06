@@ -7,10 +7,10 @@
 
 import { combineReducers } from 'redux';
 
-import blogReducer from 'reducers/blogReducer';
+import kinesisReducer from 'reducers/kinesisReducer';
 
 const rootReducer = combineReducers({
-	blog: blogReducer,
+	kinesis: kinesisReducer,
 });
 
 export default rootReducer;

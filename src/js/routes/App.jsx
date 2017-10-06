@@ -12,7 +12,6 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 import About from 'routes/About';
 import Kinesis from 'routes/Kinesis';
-import Blog from 'routes/Blog';
 
 import NavigationBar from 'components/NavigationBar';
 import RouteWithFooter from 'components/RouteWithFooter';
@@ -64,9 +63,6 @@ export default class App extends React.Component {
 								</RouteWithFooter>
 								<RouteWithFooter path="/kinesis">
 									{props => <Kinesis {...props} />}
-								</RouteWithFooter>
-								<RouteWithFooter path="/blog">
-									{props => <Blog {...props} />}
 								</RouteWithFooter>
 								<RouteWithFooter>
 									{props => <div>R'uh oh</div>}

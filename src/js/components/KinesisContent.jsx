@@ -1,28 +1,27 @@
 //
 //	jballands/jonathanballands.me
-//	BlogContent.jsx
+//	KinesisContent.jsx
 //
 //	© 2017 Jonathan Ballands
 //
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { animateScroll } from 'react-scroll';
 import styled from 'styled-components';
 
 import BackgroundGradient from 'components/BackgroundGradient';
-import BlogEntry from 'components/BlogEntry';
+import KinesisArticle from 'components/KinesisArticle';
 import LoadingAnimation from 'components/LoadingAnimation';
 
-import { frostedMint, puertoRico } from 'helpers/palette';
+import { Type } from '~/kinesis.config.js';
 
 const StyledLoadingAnimation = styled(LoadingAnimation)`margin-top: 100px;`;
 
-export default class BlogContent extends React.Component {
-	static displayName = 'BlogContent';
+export default class KinesisContent extends React.Component {
+	static displayName = 'KinesisContent';
 
 	static propTypes = {
-		content: PropTypes.string,
+		content: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
 		contentLoading: PropTypes.bool,
 		selectedEntry: PropTypes.object.isRequired,
 	};
@@ -33,19 +32,30 @@ export default class BlogContent extends React.Component {
 		if (contentLoading) {
 			return (
 				<StyledLoadingAnimation
-					color={puertoRico}
+					color={selectedEntry.primaryColor}
 					text={selectedEntry.name}
 				/>
 			);
 		}
-		return <BlogEntry content={content} selectedEntry={selectedEntry} />;
+
+		if (selectedEntry.type === Type.article) {
+			return (
+				<KinesisArticle
+					content={content}
+					selectedEntry={selectedEntry}
+				/>
+			);
+		} else if (selectedEntry.type === Type.experiment) {
+			return React.createElement(content);
+		}
+		return <div>Ruh oh!</div>;
 	};
 
 	render() {
-		// animateScroll.scrollToTop({ duration: 300 });
+		const { selectedEntry } = this.props;
 
 		return (
-			<BackgroundGradient backgroundColor={frostedMint}>
+			<BackgroundGradient backgroundColor={selectedEntry.secondaryColor}>
 				{this.renderContent()}
 			</BackgroundGradient>
 		);

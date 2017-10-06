@@ -1,6 +1,6 @@
 //
 //	jballands/jonathanballands.me
-//	BlogContentContainer.jsx
+//	KinesisContentContainer.jsx
 //
 //	© 2017 Jonathan Ballands
 //
@@ -10,16 +10,16 @@ import PropTypes from 'prop-types';
 import Immutable from 'immutable';
 import { connect } from 'react-redux';
 
-import { chooseEntry } from 'actions/BlogActions';
+import { chooseEntry } from 'actions/KinesisActions';
 
-import BlogContent from 'components/BlogContent';
+import KinesisContent from 'components/KinesisContent';
 
 function mapStateToProps(state) {
 	return {
-		content: state.blog.content,
-		contentLoading: state.blog.contentLoading,
-		filteredEntries: state.blog.filteredEntries,
-		selectedEntry: state.blog.selectedEntry,
+		content: state.kinesis.content,
+		contentLoading: state.kinesis.contentLoading,
+		filteredEntries: state.kinesis.filteredEntries,
+		selectedEntry: state.kinesis.selectedEntry,
 	};
 }
 
@@ -29,12 +29,16 @@ function mapDispatchToProps(dispatch) {
 	};
 }
 
-class BlogContentContainer extends React.Component {
-	static displayName = 'BlogContentContainer';
+class KinesisContentContainer extends React.Component {
+	static displayName = 'KinesisContentContainer';
 
 	static propTypes = {
-		content: PropTypes.string,
+		chooseEntry: PropTypes.func,
+		content: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+		contentLoading: PropTypes.bool,
 		filteredEntries: PropTypes.instanceOf(Immutable.OrderedMap),
+		history: PropTypes.object,
+		match: PropTypes.object,
 		selectedEntry: PropTypes.object,
 	};
 
@@ -42,26 +46,26 @@ class BlogContentContainer extends React.Component {
 		const { filteredEntries, history, match, selectedEntry } = this.props;
 
 		// When the component mounts, we need to initialize the state to have
-		// a selected blog entry by default
+		// a selected Kinesis entry by default
 
-		// blogId is an optional param here in the route. This if-block
-		// is executed when you open up a route that already has a blogId
+		// kinesisId is an optional param here in the route. This if-block
+		// is executed when you open up a route that already has a kinesisId
 		// associated with it, in which case we just choose it
-		const blogId = match.params.blogId;
-		if (blogId && blogId !== '') {
-			return this.props.chooseEntry(blogId);
+		const kinesisId = match.params.kinesisId;
+		if (kinesisId && kinesisId !== '') {
+			return this.props.chooseEntry(kinesisId);
 		}
 
 		// An entry may already be chosen implicitly in the Redux state. This
-		// if-block is executed when you leave the blog page but stay on my
-		// website and then click back to the blog tab
+		// if-block is executed when you leave the Kinesis page but stay on my
+		// website and then click back to the Kinesis tab
 		if (selectedEntry !== null) {
 			history.push(`${match.url}/${selectedEntry.id}`);
 			return this.props.chooseEntry(selectedEntry.id);
 		}
 
-		// This if-block gets executed when you open the blog page up for the
-		// first time, which case we just pick the latest available blog and
+		// This if-block gets executed when you open the Kinesis page up for the
+		// first time, which case we just pick the latest available Kinesis and
 		// move on
 		const firstEntry =
 			filteredEntries.keySeq().size > 0
@@ -81,7 +85,7 @@ class BlogContentContainer extends React.Component {
 			return null;
 		}
 		return (
-			<BlogContent
+			<KinesisContent
 				selectedEntry={selectedEntry}
 				content={content}
 				contentLoading={contentLoading}
@@ -91,5 +95,5 @@ class BlogContentContainer extends React.Component {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(
-	BlogContentContainer,
+	KinesisContentContainer,
 );

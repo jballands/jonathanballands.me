@@ -6,12 +6,12 @@
 //
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { Route } from 'react-router-dom';
 
-import BackgroundGradient from 'components/BackgroundGradient';
-import BrowserDrawer from 'components/BrowserDrawer';
-
-import { bittersweet, romantic } from 'helpers/palette';
+import KinesisBrowserContainer from 'containers/KinesisBrowserContainer';
+import KinesisContentContainer from 'containers/KinesisContentContainer';
 
 const KinesisContainer = styled.div`
 	width: 100%;
@@ -21,18 +21,21 @@ const KinesisContainer = styled.div`
 `;
 
 export default class Kinesis extends React.Component {
+	static propTypes = {
+		history: PropTypes.object,
+		match: PropTypes.object,
+	};
+
 	render() {
+		const { history, match } = this.props;
+
 		return (
 			<KinesisContainer>
-				<BrowserDrawer
-					color={bittersweet}
-					backgroundColor={romantic}
-					title="Experiments">
-					{close => {
-						<div>Hello world!</div>;
-					}}
-				</BrowserDrawer>
-				<BackgroundGradient backgroundColor={romantic} />
+				<KinesisBrowserContainer history={history} match={match} />
+				<Route
+					path={`${match.url}/:kinesisId?`}
+					component={KinesisContentContainer}
+				/>
 			</KinesisContainer>
 		);
 	}

@@ -1,6 +1,6 @@
 //
 //	jballands/jonathanballands.me
-//	BlogBrowserContainer.jsx
+//	KinesisBrowserContainer.jsx
 //
 //	© 2017 Jonathan Ballands
 //
@@ -10,40 +10,40 @@ import PropTypes from 'prop-types';
 import Immutable from 'immutable';
 import { connect } from 'react-redux';
 
-import BlogBrowser from 'components/BlogBrowser';
+import KinesisBrowser from 'components/KinesisBrowser';
 
 import {
-	searchBlogPosts,
+	searchKinesisPosts,
 	setSortOrder,
 	chooseEntry,
-} from 'actions/BlogActions';
+} from 'actions/KinesisActions';
 
 function mapStateToProps(state) {
 	return {
-		filteredEntries: state.blog.filteredEntries,
-		searchTerms: state.blog.searchTerms,
-		selectedEntry: state.blog.selectedEntry,
-		sortOrder: state.blog.sortOrder,
+		filteredEntries: state.kinesis.filteredEntries,
+		searchTerms: state.kinesis.searchTerms,
+		selectedEntry: state.kinesis.selectedEntry,
+		sortOrder: state.kinesis.sortOrder,
 	};
 }
 
 function mapDispatchToProps(dispatch) {
 	return {
 		chooseEntry: uri => dispatch(chooseEntry(uri)),
-		searchBlogPosts: terms => dispatch(searchBlogPosts(terms)),
+		searchKinesisPosts: terms => dispatch(searchKinesisPosts(terms)),
 		setSortOrder: sortOrder => dispatch(setSortOrder(sortOrder)),
 	};
 }
 
-class BlogBrowserContainer extends React.Component {
-	static displayName = 'BlogBrowserContainer';
+class KinesisBrowserContainer extends React.Component {
+	static displayName = 'KinesisBrowserContainer';
 
 	static propTypes = {
 		chooseEntry: PropTypes.func,
 		filteredEntries: PropTypes.instanceOf(Immutable.Map),
 		history: PropTypes.object,
 		match: PropTypes.object,
-		searchBlogPosts: PropTypes.func,
+		searchKinesisPosts: PropTypes.func,
 		searchTerms: PropTypes.string,
 		selectedEntry: PropTypes.object,
 		setSortOrder: PropTypes.func,
@@ -57,7 +57,7 @@ class BlogBrowserContainer extends React.Component {
 
 	render() {
 		const {
-			searchBlogPosts,
+			searchKinesisPosts,
 			filteredEntries,
 			match,
 			searchTerms,
@@ -66,10 +66,14 @@ class BlogBrowserContainer extends React.Component {
 			sortOrder,
 		} = this.props;
 
+		if (!selectedEntry) {
+			return null;
+		}
+
 		return (
-			<BlogBrowser
+			<KinesisBrowser
 				chooseEntry={this.handleChooseEntry}
-				searchBlogPosts={searchBlogPosts}
+				searchKinesisPosts={searchKinesisPosts}
 				filteredEntries={filteredEntries}
 				searchTerms={searchTerms}
 				selectedEntry={selectedEntry}
@@ -82,5 +86,5 @@ class BlogBrowserContainer extends React.Component {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(
-	BlogBrowserContainer,
+	KinesisBrowserContainer,
 );

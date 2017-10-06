@@ -1,6 +1,6 @@
 //
 //	jballands/jonathanballands.me
-//	BlogBrowserSearchResults.jsx
+//	KinesisBrowserSearchResults.jsx
 //
 //	© 2017 Jonathan Ballands
 //
@@ -10,11 +10,11 @@ import PropTypes from 'prop-types';
 import Immutable from 'immutable';
 import styled from 'styled-components';
 
-import BlogBrowserSearchResult from 'components/BlogBrowserSearchResult';
+import KinesisBrowserSearchResult from 'components/KinesisBrowserSearchResult';
 
-import { alto, puertoRico, shark } from 'helpers/palette';
+import { alto, shark } from 'helpers/palette';
 
-const BlogBrowserSearchResultsContainer = styled.div`
+const KinesisBrowserSearchResultsContainer = styled.div`
 	margin-top: 25px;
 	overflow-y: scroll;
 	flex: 1 0;
@@ -31,7 +31,7 @@ const NoSearchResultsContainer = styled.div`
 
 const NoSearchResultsTitle = styled.div`
 	margin-top: 25px;
-	color: ${puertoRico};
+	color: ${props => props.color};
 	font-size: 20px;
 	text-transform: uppercase;
 `;
@@ -42,18 +42,18 @@ const NoSearchResultsDetails = styled.div`
 	margin-top: 5px;
 `;
 
-export default class BlogBrowserSearchResults extends React.Component {
-	static displayName = 'BlogBrowserSearchResults';
+export default class KinesisBrowserSearchResults extends React.Component {
+	static displayName = 'KinesisBrowserSearchResults';
 
 	static propTypes = {
 		chooseEntry: PropTypes.func,
 		closeDrawer: PropTypes.func,
-		filteredEntries: PropTypes.instanceOf(Immutable.Map),
+		filteredEntries: PropTypes.instanceOf(Immutable.OrderedMap),
 		match: PropTypes.object,
 		selectedEntry: PropTypes.object,
 	};
 
-	handleChooseBlogEntry = id => {
+	handleChooseKinesisEntry = id => {
 		const { closeDrawer, chooseEntry } = this.props;
 
 		closeDrawer();
@@ -66,7 +66,9 @@ export default class BlogBrowserSearchResults extends React.Component {
 		if (filteredEntries.size <= 0) {
 			return (
 				<NoSearchResultsContainer>
-					<NoSearchResultsTitle>No Results :(</NoSearchResultsTitle>
+					<NoSearchResultsTitle color={selectedEntry.primaryColor}>
+						No Results :(
+					</NoSearchResultsTitle>
 					<NoSearchResultsDetails>
 						Try a different search, or type something more broad
 					</NoSearchResultsDetails>
@@ -75,16 +77,14 @@ export default class BlogBrowserSearchResults extends React.Component {
 		}
 
 		return (
-			<BlogBrowserSearchResultsContainer>
+			<KinesisBrowserSearchResultsContainer>
 				{filteredEntries.entrySeq().map(result => {
 					return (
-						<BlogBrowserSearchResult
-							title={result[1].name}
-							date={result[1].date}
-							hashtags={result[1].hashtags}
+						<KinesisBrowserSearchResult
 							key={result[0]}
-							onClick={this.handleChooseBlogEntry}
 							id={result[0]}
+							result={result[1]}
+							onClick={this.handleChooseKinesisEntry}
 							match={match}
 							active={
 								selectedEntry
@@ -94,7 +94,7 @@ export default class BlogBrowserSearchResults extends React.Component {
 						/>
 					);
 				})}
-			</BlogBrowserSearchResultsContainer>
+			</KinesisBrowserSearchResultsContainer>
 		);
 	}
 }
