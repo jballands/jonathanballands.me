@@ -1,21 +1,22 @@
 //
 //	jballands/jonathanballands.me
-//	BlogBrowserSearchResult.jsx
+//	KinesisBrowserSearchResult.jsx
 //
 //	© 2017 Jonathan Ballands
 //
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import Immutable from 'immutable';
 import styled from 'styled-components';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
 
-import { mercury, puertoRico, shark } from 'helpers/palette';
+import { mercury, shark } from 'helpers/palette';
 
 import EyeSvg from 'svg/EyeSvg';
 
-const BlogBrowserSearchResultContainer = styled(Link)`
+const KinesisBrowserSearchResultContainer = styled(Link)`
 	display: flex;
 	flex-flow: row nowrap;
 	font-size: 20px;
@@ -66,18 +67,15 @@ const ActiveIcon = styled.div`
 	margin-right: 15px;
 `;
 
-export default class BlogBrowserSearchResult extends React.Component {
-	static displayName = 'BlogBrowserSearchResult';
+export default class KinesisBrowserSearchResult extends React.Component {
+	static displayName = 'KinesisBrowserSearchResult';
 
 	static propTypes = {
 		active: PropTypes.bool,
-		date: PropTypes.object,
-		endpoint: PropTypes.string,
-		hashtags: PropTypes.array,
 		id: PropTypes.string,
 		match: PropTypes.object,
-		title: PropTypes.string,
 		onClick: PropTypes.func,
+		result: PropTypes.instanceOf(Immutable.Record),
 	};
 
 	handleOnClick = () => {
@@ -85,25 +83,29 @@ export default class BlogBrowserSearchResult extends React.Component {
 	};
 
 	renderHashtags = () => {
-		const { hashtags } = this.props;
-		return hashtags.map(h => `#${h.displayName}`).join(', ');
+		const { result } = this.props;
+		return result.getReadableHashtags();
 	};
 
 	render() {
-		const { active, date, id, match, title } = this.props;
+		const { active, id, match, result } = this.props;
 		return (
-			<BlogBrowserSearchResultContainer
+			<KinesisBrowserSearchResultContainer
 				to={`${match.url}/${id}`}
 				onClick={this.handleOnClick}>
 				<ActiveIcon>
-					{active && <EyeSvg color={puertoRico} width="100%" />}
+					{active && (
+						<EyeSvg color={result.primaryColor} width="100%" />
+					)}
 				</ActiveIcon>
 				<Content>
-					<Title color={shark}>{title}</Title>
-					<Subtitle>{moment(date).format('MMMM Do, YYYY')}</Subtitle>
+					<Title color={shark}>{result.name}</Title>
+					<Subtitle>
+						{moment(result.date).format('MMMM Do, YYYY')}
+					</Subtitle>
 					<Subtitle>{this.renderHashtags()}</Subtitle>
 				</Content>
-			</BlogBrowserSearchResultContainer>
+			</KinesisBrowserSearchResultContainer>
 		);
 	}
 }

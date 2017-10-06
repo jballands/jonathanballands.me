@@ -10,10 +10,10 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Route } from 'react-router-dom';
 
-import BlogBrowserContainer from 'containers/BlogBrowserContainer';
-import BlogContentContainer from 'containers/BlogContentContainer';
+import KinesisBrowserContainer from 'containers/KinesisBrowserContainer';
+import KinesisContentContainer from 'containers/KinesisContentContainer';
 
-const BlogContainer = styled.div`
+const KinesisContainer = styled.div`
 	width: 100%;
 	background: #fff;
 	display: flex;
@@ -30,13 +30,13 @@ export default class Kinesis extends React.Component {
 		const { history, match } = this.props;
 
 		return (
-			<BlogContainer>
-				<BlogBrowserContainer history={history} match={match} />
+			<KinesisContainer>
+				<KinesisBrowserContainer history={history} match={match} />
 				<Route
-					path={`${match.url}/:blogId?`}
-					component={BlogContentContainer}
+					path={`${match.url}/:kinesisId?`}
+					component={KinesisContentContainer}
 				/>
-			</BlogContainer>
+			</KinesisContainer>
 		);
 	}
 }

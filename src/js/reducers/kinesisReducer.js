@@ -1,6 +1,6 @@
 //
 //	jballands/jonathanballands.me
-//	blogReducer.js
+//	kinesisReducer.js
 //
 //	© 2017 Jonathan Ballands
 //
@@ -10,17 +10,17 @@ import moment from 'moment';
 import _toLower from 'lodash.tolower';
 
 import {
-	BLOG_SEARCH_POSTS,
-	BLOG_SET_SORT_ORDER,
-	BLOG_CHOOSE_ENTRY,
-	BLOG_CHOOSE_ENTRY_START_LOADING,
-	BLOG_CHOOSE_ENTRY_LOADING_SUCCESS,
-	BLOG_CHOOSE_ENTRY_LOADING_FAILURE,
-} from 'actions/BlogActions';
+	KINESIS_SEARCH_POSTS,
+	KINESIS_SET_SORT_ORDER,
+	KINESIS_CHOOSE_ENTRY,
+	KINESIS_CHOOSE_ENTRY_START_LOADING,
+	KINESIS_CHOOSE_ENTRY_LOADING_SUCCESS,
+	KINESIS_CHOOSE_ENTRY_LOADING_FAILURE,
+} from 'actions/KinesisActions';
 
-import { entries } from 'helpers/blogSpec';
+import entries from 'helpers/kinesisEntries';
 
-let sortedEntries = sortBlogEntries('later', entries);
+let sortedEntries = sortKinesisEntries('later', entries);
 
 const InitialStateRecord = Immutable.Record({
 	searchTerms: '',
@@ -32,7 +32,7 @@ const InitialStateRecord = Immutable.Record({
 	error: null,
 });
 
-function sortBlogEntries(sortOrder, entries) {
+function sortKinesisEntries(sortOrder, entries) {
 	return entries.toOrderedMap().sort((a, b) => {
 		if (sortOrder === 'later') {
 			return moment(a.date).isBefore(b.date);
@@ -41,7 +41,7 @@ function sortBlogEntries(sortOrder, entries) {
 	});
 }
 
-function filterBlogEntries(terms, entries) {
+function filterKinesisEntries(terms, entries) {
 	const lowerCaseTerms = _toLower(terms);
 
 	if (terms === '') {
@@ -58,31 +58,31 @@ function filterBlogEntries(terms, entries) {
 
 export default function(state = new InitialStateRecord(), action) {
 	switch (action.type) {
-		case BLOG_SEARCH_POSTS:
+		case KINESIS_SEARCH_POSTS:
 			return state
 				.set('searchTerms', action.terms)
 				.set(
 					'filteredEntries',
-					filterBlogEntries(action.terms, sortedEntries),
+					filterKinesisEntries(action.terms, sortedEntries),
 				);
-		case BLOG_SET_SORT_ORDER:
-			sortedEntries = sortBlogEntries(action.sortOrder, entries);
+		case KINESIS_SET_SORT_ORDER:
+			sortedEntries = sortKinesisEntries(action.sortOrder, entries);
 
 			return state
 				.set('sortOrder', action.sortOrder)
 				.set(
 					'filteredEntries',
-					filterBlogEntries(state.searchTerms, sortedEntries),
+					filterKinesisEntries(state.searchTerms, sortedEntries),
 				);
-		case BLOG_CHOOSE_ENTRY:
+		case KINESIS_CHOOSE_ENTRY:
 			return state.set('selectedEntry', entries.get(action.id));
-		case BLOG_CHOOSE_ENTRY_START_LOADING:
+		case KINESIS_CHOOSE_ENTRY_START_LOADING:
 			return state.set('contentLoading', true).set('error', null);
-		case BLOG_CHOOSE_ENTRY_LOADING_SUCCESS:
+		case KINESIS_CHOOSE_ENTRY_LOADING_SUCCESS:
 			return state
 				.set('content', action.data)
 				.set('contentLoading', false);
-		case BLOG_CHOOSE_ENTRY_LOADING_FAILURE:
+		case KINESIS_CHOOSE_ENTRY_LOADING_FAILURE:
 			return state
 				.set('error', action.error)
 				.set('contentLoading', false);

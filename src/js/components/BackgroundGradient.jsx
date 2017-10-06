@@ -24,10 +24,8 @@ const Gradient = styled.div`
 	left: 0;
 	width: 100%;
 	height: 500px;
-	background: -webkit-linear-gradient(top, ${props => props.color}, ${white});
-	background: -o-linear-gradient(top, ${props => props.color}, ${white});
-	background: -moz-linear-gradient(top, ${props => props.color}, ${white});
 	background: linear-gradient(to bottom, ${props => props.color}, ${white});
+	transition: background 750ms ease;
 `;
 
 const Content = styled.div`

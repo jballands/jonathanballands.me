@@ -1,40 +1,41 @@
 //
 //	jballands/jonathanballands.me
-//	BlogEntry.jsx
+//	KinesisEntry.jsx
 //
 //	© 2017 Jonathan Ballands
 //
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import Immutable from 'immutable';
 import Markdown from 'react-markdown';
 import styled from 'styled-components';
 import moment from 'moment';
 
-import { puertoRico, shark, white } from 'helpers/palette';
+import { shark, white } from 'helpers/palette';
 
-const BlogEntryContainer = styled.div`
+const KinesisEntryContainer = styled.div`
 	margin: 70px auto;
 	width: 75%;
 	max-width: 800px;
 `;
 
-const BlogTitle = styled.div`
+const KinesisTitle = styled.div`
 	font-size: 42px;
 	font-weight: 700;
-	color: ${puertoRico};
+	color: ${props => props.color};
 	font-family: 'Raleway', sans-serif;
 	text-transform: uppercase;
 `;
 
-const BlogSubtitle = styled.div`
+const KinesisSubtitle = styled.div`
 	display: flex;
 	flex-flow: column nowrap;
 	color: ${shark};
 	margin-top: 5px;
 `;
 
-const BlogBody = styled(Markdown)`
+const KinesisBody = styled(Markdown)`
 	margin-top: 50px;
 	color: ${shark};
 	line-height: 1.5em;
@@ -76,7 +77,7 @@ const BlogBody = styled(Markdown)`
 	}
 
 	a {
-		color: ${puertoRico};
+		color: ${props => props.color};
 		position: relative;
 
 		&:hover:after {
@@ -91,7 +92,7 @@ const BlogBody = styled(Markdown)`
 			height: 1px;
 			bottom: 0;
 			left: 0;
-			background-color: ${puertoRico};
+			background-color: ${props => props.color};
 			visibility: hidden;
 			transform: scaleX(0);
 			transition: all 0.2s ease-out 0s;
@@ -99,7 +100,7 @@ const BlogBody = styled(Markdown)`
 	}
 
 	blockquote {
-		border-left: 1px solid ${puertoRico};
+		border-left: 1px solid ${props => props.color};
 		padding: 1px 15px;
 		margin: 20px 0;
 		font-family: 'Droid Serif', 'serif';
@@ -107,7 +108,7 @@ const BlogBody = styled(Markdown)`
 
 	hr {
 		border-top: 0px;
-		border-bottom: 1px solid ${puertoRico};
+		border-bottom: 1px solid ${props => props.color};
 		margin: 30px 0;
 	}
 
@@ -130,33 +131,34 @@ const BlogBody = styled(Markdown)`
 	}
 `;
 
-export default class BlogEntry extends React.Component {
-	static displayName = 'BlogEntry';
+export default class KinesisEntry extends React.Component {
+	static displayName = 'KinesisEntry';
 
 	static propTypes = {
 		content: PropTypes.string,
-		selectedEntry: PropTypes.object.isRequired,
+		selectedEntry: PropTypes.instanceOf(Immutable.Record),
 	};
 
 	render() {
 		const { content, selectedEntry } = this.props;
 
 		return (
-			<BlogEntryContainer>
-				<BlogTitle>{selectedEntry.name}</BlogTitle>
+			<KinesisEntryContainer>
+				<KinesisTitle color={selectedEntry.primaryColor}>
+					{selectedEntry.name}
+				</KinesisTitle>
 
-				<BlogSubtitle>
+				<KinesisSubtitle>
 					<div>
 						{moment(selectedEntry.date).format('MMMM Do, YYYY')}
 					</div>
-					<div>
-						{selectedEntry.hashtags
-							.map(h => `#${h.displayName}`)
-							.join(', ')}
-					</div>
-				</BlogSubtitle>
-				<BlogBody source={content} />
-			</BlogEntryContainer>
+					<div>{selectedEntry.getReadableHashtags()}</div>
+				</KinesisSubtitle>
+				<KinesisBody
+					source={content}
+					color={selectedEntry.primaryColor}
+				/>
+			</KinesisEntryContainer>
 		);
 	}
 }
