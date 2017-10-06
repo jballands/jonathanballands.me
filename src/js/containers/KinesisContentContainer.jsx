@@ -34,7 +34,7 @@ class KinesisContentContainer extends React.Component {
 
 	static propTypes = {
 		chooseEntry: PropTypes.func,
-		content: PropTypes.string,
+		content: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
 		contentLoading: PropTypes.bool,
 		filteredEntries: PropTypes.instanceOf(Immutable.OrderedMap),
 		history: PropTypes.object,

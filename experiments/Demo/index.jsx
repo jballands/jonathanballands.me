@@ -6,6 +6,6 @@ export default class KinesisDemo extends React.Component {
 	static propTypes = {};
 
 	render() {
-		return <div>Hello world! I am a Kinesis Demo!</div>;
+		return <div>Hello world! I am a Kinesis Demo! Hear me roar!</div>;
 	}
 }

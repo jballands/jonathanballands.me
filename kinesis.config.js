@@ -73,9 +73,8 @@ export const kinesisPosts = [
 		name: 'Another post',
 		date: new Date(2017, 8, 20),
 		hashtags: [KinesisHashtags.dev],
-		type: Type.article,
-		resource:
-			'https://gist.githubusercontent.com/jballands/302708e124fae3c9bcc1df526eddcfaa/raw/80fcd6387f43574bdb2005561ea82f48b35c9b6a/jb.me%25203.0',
+		type: Type.experiment,
+		resource: import('~/experiments/Demo'),
 		primaryColor: '#ff6b6b',
 		secondaryColor: '#ffcfb1',
 	}),

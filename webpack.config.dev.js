@@ -12,12 +12,13 @@ const path = require('path');
 module.exports = {
 	context: path.resolve(__dirname),
 	entry: {
-		bundle: './src/js/index.jsx',
+		index: './src/js/index.jsx',
 	},
 	output: {
 		path: path.resolve(__dirname, './public/assets'),
-		publicPath: path.resolve(__dirname, './public/assets'),
-		filename: '[name].js',
+		publicPath: '/assets/',
+		filename: '[name].bundle.js',
+		chunkFilename: '[name].bundle.js',
 	},
 	module: {
 		rules: [

@@ -14,6 +14,7 @@ import styled from 'styled-components';
 import { alto, white } from 'helpers/palette';
 
 import LeftArrowSvg from 'svg/LeftArrowSvg';
+import HelpSvg from 'svg/HelpSvg';
 import OpenDrawerSvg from 'svg/OpenDrawerSvg';
 
 const DRAWER_OPEN_WIDTH = 425;
@@ -52,7 +53,14 @@ const TitleContainer = styled.div`
 	display: flex;
 	flex-flow: row nowrap;
 	align-items: center;
-	margin: 20px 0 20px 20px;
+	justify-content: space-between;
+	margin: 20px;
+`;
+
+const TitleButton = styled.div`
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: center;
 
 	&:hover {
 		cursor: pointer;
@@ -130,9 +138,12 @@ export default class BrowserDrawer extends React.Component {
 
 		return (
 			<BrowserDrawerControlsContainer style={compensatedStyle}>
-				<TitleContainer onClick={this.closeDrawer}>
-					<LeftArrowSvg width={21} height={21} color={color} />
-					<Title color={color}>{title}</Title>
+				<TitleContainer>
+					<TitleButton onClick={this.closeDrawer}>
+						<LeftArrowSvg width={21} height={21} color={color} />
+						<Title color={color}>{title}</Title>
+					</TitleButton>
+					<HelpSvg color={color} width={20} height={20} />
 				</TitleContainer>
 
 				{children(this.closeDrawer, drawerOpen)}
