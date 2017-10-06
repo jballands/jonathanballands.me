@@ -150,7 +150,8 @@ export default class KinesisEntry extends React.Component {
 
 				<KinesisSubtitle>
 					<div>
-						{moment(selectedEntry.date).format('MMMM Do, YYYY')}
+						{selectedEntry.date &&
+							moment(selectedEntry.date).format('MMMM Do, YYYY')}
 					</div>
 					<div>{selectedEntry.getReadableHashtags()}</div>
 				</KinesisSubtitle>

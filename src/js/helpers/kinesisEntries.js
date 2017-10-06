@@ -10,7 +10,7 @@ import Immutable from 'immutable';
 import { kinesisPosts } from '~/kinesis.config.js';
 import encodeToUri from 'helpers/encodeToUri';
 
-export default Immutable.Map(
+const entries = Immutable.Map(
 	kinesisPosts.reduce((map, post) => {
 		const id = encodeToUri(post.name);
 		const postWithId = post.set('id', id);
@@ -18,3 +18,9 @@ export default Immutable.Map(
 		return map;
 	}, {}),
 );
+export const helpEntry = entries
+	.filter(entry => entry.help)
+	.toList()
+	.get(0);
+
+export default entries;

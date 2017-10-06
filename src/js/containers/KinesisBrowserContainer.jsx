@@ -50,15 +50,16 @@ class KinesisBrowserContainer extends React.Component {
 		sortOrder: PropTypes.string,
 	};
 
-	handleChooseEntry = uri => {
+	handleChooseEntry = id => {
 		const { chooseEntry } = this.props;
-		chooseEntry(uri);
+		chooseEntry(id);
 	};
 
 	render() {
 		const {
 			searchKinesisPosts,
 			filteredEntries,
+			history,
 			match,
 			searchTerms,
 			selectedEntry,
@@ -80,6 +81,7 @@ class KinesisBrowserContainer extends React.Component {
 				setSortOrder={setSortOrder}
 				sortOrder={sortOrder}
 				match={match}
+				history={history}
 			/>
 		);
 	}

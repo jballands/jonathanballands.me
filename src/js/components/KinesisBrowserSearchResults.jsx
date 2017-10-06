@@ -79,6 +79,10 @@ export default class KinesisBrowserSearchResults extends React.Component {
 		return (
 			<KinesisBrowserSearchResultsContainer>
 				{filteredEntries.entrySeq().map(result => {
+					if (result[1].hidden) {
+						return null;
+					}
+
 					return (
 						<KinesisBrowserSearchResult
 							key={result[0]}

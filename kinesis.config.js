@@ -24,6 +24,8 @@ export class Post extends Immutable.Record({
 	resource: null,
 	primaryColor: '#4ecdc4',
 	secondaryColor: '#dbfffc',
+	hidden: false,
+	help: false,
 	id: null,
 }) {
 	getReadableHashtags() {
@@ -64,8 +66,7 @@ export const kinesisPosts = [
 		date: new Date(2017, 9, 3),
 		hashtags: [KinesisHashtags.dev],
 		type: Type.article,
-		resource:
-			'https://gist.githubusercontent.com/jballands/302708e124fae3c9bcc1df526eddcfaa/raw/80fcd6387f43574bdb2005561ea82f48b35c9b6a/jb.me%25203.0',
+		resource: '/markdown/helloJBMe.md',
 		primaryColor: '#4ecdc4',
 		secondaryColor: '#dbfffc',
 	}),
@@ -77,6 +78,16 @@ export const kinesisPosts = [
 		resource: () => import('~/experiments/Demo'),
 		primaryColor: '#ff6b6b',
 		secondaryColor: '#ffcfb1',
+	}),
+	new Post({
+		name: 'What Is Kinesis?',
+		date: null,
+		type: Type.article,
+		resource: '/markdown/kinesis.md',
+		primaryColor: '#7953c1',
+		secondaryColor: '#d0bff2',
+		hidden: true,
+		help: true,
 	}),
 ];
 

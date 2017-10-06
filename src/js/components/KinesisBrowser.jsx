@@ -15,8 +15,10 @@ import RadioItem from '@jballands/vespyr/lib/RadioItem';
 
 import BrowserDrawer from 'components/BrowserDrawer';
 import KinesisBrowserSearchResults from 'components/KinesisBrowserSearchResults';
+import KinesisHelpIcon from 'components/KinesisHelpIcon';
 
-import { fuchsiaBlue, moonRaker, shark } from 'helpers/palette';
+import { helpEntry } from 'helpers/kinesisEntries';
+import { shark } from 'helpers/palette';
 
 import MagnifyingGlassSvg from 'svg/MagnifyingGlassSvg';
 
@@ -45,6 +47,7 @@ export default class KinesisBrowser extends React.Component {
 	static propTypes = {
 		chooseEntry: PropTypes.func,
 		filteredEntries: PropTypes.instanceOf(Immutable.Map),
+		history: PropTypes.object,
 		match: PropTypes.object,
 		searchKinesisPosts: PropTypes.func,
 		searchTerms: PropTypes.string,
@@ -59,6 +62,22 @@ export default class KinesisBrowser extends React.Component {
 
 	handleSetSortOrder = sortOrder => {
 		this.props.setSortOrder(sortOrder);
+	};
+
+	handleKinesisHelp = () => {
+		this.props.chooseEntry(helpEntry.id);
+	};
+
+	renderHelp = close => {
+		const { match } = this.props;
+		return (
+			<KinesisHelpIcon
+				closeDrawer={close}
+				color={this.props.selectedEntry.primaryColor}
+				linkTo={`${match.url}/${helpEntry.id}`}
+				onClick={this.handleKinesisHelp}
+			/>
+		);
 	};
 
 	renderControls = () => {
@@ -101,6 +120,7 @@ export default class KinesisBrowser extends React.Component {
 			<BrowserDrawer
 				backgroundColor={selectedEntry.secondaryColor}
 				color={selectedEntry.primaryColor}
+				renderAux={this.renderHelp}
 				title="Posts">
 				{close => (
 					<KinesisBrowserContainer>

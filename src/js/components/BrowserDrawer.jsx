@@ -14,7 +14,6 @@ import styled from 'styled-components';
 import { alto, white } from 'helpers/palette';
 
 import LeftArrowSvg from 'svg/LeftArrowSvg';
-import HelpSvg from 'svg/HelpSvg';
 import OpenDrawerSvg from 'svg/OpenDrawerSvg';
 
 const DRAWER_OPEN_WIDTH = 425;
@@ -83,6 +82,7 @@ export default class BrowserDrawer extends React.Component {
 		children: PropTypes.func,
 		color: PropTypes.string,
 		drawerOpen: PropTypes.bool,
+		renderAux: PropTypes.func,
 		title: PropTypes.string,
 	};
 
@@ -133,7 +133,7 @@ export default class BrowserDrawer extends React.Component {
 			height: `calc(100vh - ${compensation}px)`,
 		};
 
-		const { children, color, title } = this.props;
+		const { children, color, renderAux, title } = this.props;
 		const { drawerOpen } = this.state;
 
 		return (
@@ -143,7 +143,7 @@ export default class BrowserDrawer extends React.Component {
 						<LeftArrowSvg width={21} height={21} color={color} />
 						<Title color={color}>{title}</Title>
 					</TitleButton>
-					<HelpSvg color={color} width={20} height={20} />
+					{renderAux && renderAux(this.closeDrawer)}
 				</TitleContainer>
 
 				{children(this.closeDrawer, drawerOpen)}

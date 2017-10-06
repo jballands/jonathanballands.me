@@ -36,9 +36,7 @@ export default class KinesisContent extends React.Component {
 					text={selectedEntry.name}
 				/>
 			);
-		}
-
-		if (selectedEntry.type === Type.article) {
+		} else if (selectedEntry.type === Type.article) {
 			return (
 				<KinesisArticle
 					content={content}
