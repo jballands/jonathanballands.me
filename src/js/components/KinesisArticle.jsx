@@ -51,6 +51,7 @@ const KinesisBody = styled(Markdown)`
 	h3,
 	h4 {
 		font-weight: 400;
+		color: ${props => props.color};
 	}
 
 	h1 {
