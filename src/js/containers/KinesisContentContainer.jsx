@@ -14,6 +14,8 @@ import { chooseEntry } from 'actions/KinesisActions';
 
 import KinesisContent from 'components/KinesisContent';
 
+import entries from 'helpers/kinesisEntries';
+
 function mapStateToProps(state) {
 	return {
 		content: state.kinesis.content,
@@ -43,9 +45,15 @@ class KinesisContentContainer extends React.Component {
 	};
 
 	componentDidMount() {
-		const { filteredEntries, history, match, selectedEntry } = this.props;
+		const {
+			chooseEntry,
+			filteredEntries,
+			history,
+			match,
+			selectedEntry,
+		} = this.props;
 
-		// When the component mounts, we need to initialize the state to have
+		// When the component renders, we need to initialize the state to have
 		// a selected Kinesis entry by default
 
 		// kinesisId is an optional param here in the route. This if-block
@@ -53,17 +61,15 @@ class KinesisContentContainer extends React.Component {
 		// associated with it, in which case we just choose it
 		const kinesisId = match.params.kinesisId;
 		if (kinesisId && kinesisId !== '') {
-			return this.props.chooseEntry(kinesisId);
+			return chooseEntry(kinesisId);
 		}
-
 		// An entry may already be chosen implicitly in the Redux state. This
 		// if-block is executed when you leave the Kinesis page but stay on my
 		// website and then click back to the Kinesis tab
 		if (selectedEntry !== null) {
 			history.push(`${match.url}/${selectedEntry.id}`);
-			return this.props.chooseEntry(selectedEntry.id);
+			return chooseEntry(selectedEntry.id);
 		}
-
 		// This if-block gets executed when you open the Kinesis page up for the
 		// first time, which case we just pick the latest available Kinesis and
 		// move on
@@ -71,10 +77,22 @@ class KinesisContentContainer extends React.Component {
 			filteredEntries.keySeq().size > 0
 				? filteredEntries.get(filteredEntries.keySeq().get(0))
 				: null;
-
 		if (firstEntry !== null) {
 			history.push(`${match.url}/${firstEntry.id}`);
-			this.props.chooseEntry(firstEntry.id);
+			chooseEntry(firstEntry.id);
+		}
+	}
+
+	componentWillReceiveProps(newProps) {
+		const oldKinesisId = this.props.match.params.kinesisId;
+		const newKinesisId = newProps.match.params.kinesisId;
+
+		//	This if-block gets executed if this route and the previous
+		//	route mismatch. This usually happens when the back button
+		//	was pressed. We then get the id of the entry that we need
+		//	to be at and choose it
+		if (oldKinesisId !== newKinesisId) {
+			return this.props.chooseEntry(entries.get(newKinesisId).id);
 		}
 	}
 

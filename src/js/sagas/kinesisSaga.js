@@ -34,7 +34,7 @@ function* loadKinesisArticleEntry(entry) {
 	try {
 		const { data, status } = yield call(fetchKinesisArticleEntry, resource);
 
-		yield delay(2500);
+		yield delay(1000);
 
 		if (status === 200) {
 			return yield put({

@@ -28,9 +28,7 @@ class JonathanBallandsMe extends React.Component {
 		const sagaMiddleware = createSagaMiddleware();
 		middleware.push(sagaMiddleware);
 
-		console.log(process.env.NODE_ENV);
 		if (process.env.NODE_ENV === 'development') {
-			console.log('rawr');
 			const { logger } = require('redux-logger');
 			middleware.push(logger);
 		}

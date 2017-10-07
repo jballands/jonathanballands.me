@@ -72,12 +72,14 @@ const Title = styled.span`
 	text-transform: uppercase;
 	margin-left: 10px;
 	color: ${props => props.color};
+	transition: color 500ms ease;
 `;
 
 export default class BrowserDrawer extends React.Component {
 	static displayName = 'BrowserDrawer';
 
 	static propTypes = {
+		autocollapseOnSticky: PropTypes.bool,
 		backgroundColor: PropTypes.string,
 		children: PropTypes.func,
 		color: PropTypes.string,
@@ -87,18 +89,21 @@ export default class BrowserDrawer extends React.Component {
 	};
 
 	static defaultProps = {
+		autocollapseOnSticky: true,
 		drawerOpen: true,
 	};
 
 	state = {
 		drawerOpen: this.props.drawerOpen,
 		width: this.props.drawerOpen ? DRAWER_OPEN_WIDTH : DRAWER_CLOSED_WIDTH,
+		overrideAutoCollapse: !this.props.autocollapseOnSticky,
 	};
 
 	closeDrawer = () => {
 		this.setState({
 			drawerOpen: false,
 			width: spring(DRAWER_CLOSED_WIDTH),
+			overrideAutoCollapse: true,
 		});
 	};
 
@@ -151,8 +156,17 @@ export default class BrowserDrawer extends React.Component {
 		);
 	};
 
-	renderStickyDrawer = (distanceFromTop, distanceFromBottom, style) => {
-		const { drawerOpen } = this.state;
+	renderStickyDrawer = (
+		distanceFromTop,
+		distanceFromBottom,
+		isSticky,
+		style,
+	) => {
+		const { drawerOpen, overrideAutoCollapse } = this.state;
+
+		if (isSticky && !overrideAutoCollapse) {
+			this.closeDrawer();
+		}
 
 		return (
 			<div style={style}>
@@ -179,11 +193,13 @@ export default class BrowserDrawer extends React.Component {
 								{({
 									distanceFromTop,
 									distanceFromBottom,
+									isSticky,
 									style,
 								}) =>
 									this.renderStickyDrawer(
 										distanceFromTop,
 										distanceFromBottom,
+										isSticky,
 										style,
 									)}
 							</Sticky>
