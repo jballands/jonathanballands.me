@@ -14,9 +14,11 @@ export default class Axis extends React.Component {
 	static displayName = 'Axis';
 
 	static propTypes = {
+		className: PropTypes.string,
 		orientation: PropTypes.oneOf(['top', 'bottom', 'left', 'right'])
 			.isRequired,
 		scale: PropTypes.func.isRequired,
+		style: PropTypes.object,
 		tickSize: PropTypes.number,
 		tickPadding: PropTypes.number,
 		ticks: PropTypes.number,
@@ -62,6 +64,12 @@ export default class Axis extends React.Component {
 	};
 
 	render() {
-		return <g ref="axis" />;
+		return (
+			<g
+				ref="axis"
+				className={this.props.className}
+				style={this.props.style}
+			/>
+		);
 	}
 }

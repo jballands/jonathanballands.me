@@ -19,7 +19,11 @@ import Axis from 'experiments/common/Axis';
 import tuition7817 from './tuition7817.json';
 import medical7817 from './medical7817.json';
 import furniture7817 from './furniture7817.json';
-import all7817 from './all7817.json';
+import foodAway7817 from './foodAway7817.json';
+import foodHome7817 from './foodHome7817.json';
+import cars7817 from './cars7817.json';
+import apparel7817 from './apparel7817.json';
+import housing7817 from './housing7817.json';
 
 const VIEWBOX = {
 	width: 500,
@@ -39,6 +43,7 @@ const DIMENSIONS = {
 };
 
 const Svg = styled.svg`
+	width: 100%;
 	* {
 		font-family: 'Roboto', sans-serif;
 	}
@@ -47,6 +52,17 @@ const Svg = styled.svg`
 const GraphContainer = styled.g`
 	transform: translate(${MARGINS.left}px, ${DIMENSIONS.height}px);
 	width: ${VIEWBOX.width - MARGINS.right}px;
+`;
+
+const StyledAxis = styled(Axis)`
+	path,
+	line {
+		stroke: ${props => props.color};
+	}
+
+	text {
+		fill: ${props => props.color};
+	}
 `;
 
 export default class CPIOverTime extends React.Component {
@@ -70,14 +86,34 @@ export default class CPIOverTime extends React.Component {
 				color: '#f4df42',
 			},
 			{
-				id: 'all',
-				data: all7817,
+				id: 'foodHome',
+				data: foodHome7817,
 				color: '#4ee891',
+			},
+			{
+				id: 'foodAway',
+				data: foodAway7817,
+				color: '#41f4c1',
+			},
+			{
+				id: 'cars',
+				data: cars7817,
+				color: '#002777',
 			},
 			{
 				id: 'furniture',
 				data: furniture7817,
 				color: '#f237d9',
+			},
+			{
+				id: 'apparel',
+				data: apparel7817,
+				color: '#730077',
+			},
+			{
+				id: 'housing',
+				data: housing7817,
+				color: '#e06d9b',
 			},
 		];
 		const allData = _concat(...sectorData.map(d => d.data));
@@ -101,8 +137,16 @@ export default class CPIOverTime extends React.Component {
 		return (
 			<Svg viewBox={`0 0 ${VIEWBOX.width} ${VIEWBOX.height}`}>
 				<GraphContainer>
-					<Axis scale={x} orientation="bottom" />
-					<Axis scale={y} orientation="left" />
+					<StyledAxis
+						color={this.props.primaryColor}
+						scale={x}
+						orientation="bottom"
+					/>
+					<StyledAxis
+						color={this.props.primaryColor}
+						scale={y}
+						orientation="left"
+					/>
 					{sectorData.map(sector => (
 						<path
 							d={sector.d}
