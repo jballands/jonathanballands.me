@@ -15,7 +15,16 @@ import LoadingAnimation from 'components/LoadingAnimation';
 
 import { Type } from '~/kinesis.config.js';
 
-const StyledLoadingAnimation = styled(LoadingAnimation)`margin-top: 100px;`;
+const StyledLoadingAnimation = styled(LoadingAnimation)`
+	width: 100%;
+	margin-top: 100px;
+`;
+
+const KinesisContainer = styled.div`
+	margin: 70px auto;
+	width: 75%;
+	max-width: 800px;
+`;
 
 export default class KinesisContent extends React.Component {
 	static displayName = 'KinesisContent';
@@ -44,7 +53,10 @@ export default class KinesisContent extends React.Component {
 				/>
 			);
 		} else if (selectedEntry.type === Type.experiment) {
-			return React.createElement(content);
+			return React.createElement(content, {
+				primaryColor: selectedEntry.primaryColor,
+				secondaryColor: selectedEntry.secondaryColor,
+			});
 		}
 		return <div>Ruh oh!</div>;
 	};
@@ -54,7 +66,7 @@ export default class KinesisContent extends React.Component {
 
 		return (
 			<BackgroundGradient backgroundColor={selectedEntry.secondaryColor}>
-				{this.renderContent()}
+				<KinesisContainer>{this.renderContent()}</KinesisContainer>
 			</BackgroundGradient>
 		);
 	}

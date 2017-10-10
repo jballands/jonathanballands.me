@@ -7,6 +7,13 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+
+const Svg = styled.svg`
+	* {
+		transition: fill 300ms ease;
+	}
+`;
 
 export default class OpenDrawerSvg extends React.Component {
 	static displayName = 'OpenDrawerSvg';
@@ -27,7 +34,7 @@ export default class OpenDrawerSvg extends React.Component {
 
 	render() {
 		return (
-			<svg
+			<Svg
 				width="26px"
 				height="23px"
 				viewBox="0 0 26 23"
@@ -53,7 +60,7 @@ export default class OpenDrawerSvg extends React.Component {
 						points="6.54708284 0.00532741547 5.25623908 1.28755648 8.05646776 4.08778517 0.641483974 4.08778517 0.641483974 5.89777754 8.05646776 5.89777754 5.25623908 8.69800622 6.54708284 9.98023529 11.5232017 4.99278135"
 					/>
 				</g>
-			</svg>
+			</Svg>
 		);
 	}
 }

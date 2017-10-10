@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
 
 import HelpSvg from 'svg/HelpSvg';
 
-const StyledLink = styled(Link)``;
+const StyledLink = styled(Link)`display: inline-block;`;
 
 export default class KinesisHelpIcon extends React.Component {
 	static displayName = 'KinesisHelpIcon';
@@ -33,7 +33,7 @@ export default class KinesisHelpIcon extends React.Component {
 	render() {
 		return (
 			<StyledLink to={this.props.linkTo} onClick={this.handleOnClick}>
-				<HelpSvg width={20} height={20} color={this.props.color} />
+				<HelpSvg width={22} height={22} color={this.props.color} />
 			</StyledLink>
 		);
 	}

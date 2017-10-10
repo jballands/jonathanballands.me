@@ -6,7 +6,6 @@
 //
 
 import axios from 'axios';
-import { delay } from 'redux-saga';
 import { all, call, put, takeLatest } from 'redux-saga/effects';
 
 import {
@@ -34,8 +33,6 @@ function* loadKinesisArticleEntry(entry) {
 	try {
 		const { data, status } = yield call(fetchKinesisArticleEntry, resource);
 
-		yield delay(1000);
-
 		if (status === 200) {
 			return yield put({
 				type: KINESIS_CHOOSE_ENTRY_LOADING_SUCCESS,
@@ -59,8 +56,6 @@ function* loadKinesisExperimentEntry(entry) {
 
 	try {
 		const response = yield call(fetchKinesisExperimentEntry, resource);
-
-		yield delay(2500);
 
 		if (response.default) {
 			return yield put({
