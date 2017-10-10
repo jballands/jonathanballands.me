@@ -9,14 +9,17 @@
 
 import React from 'react';
 import styled from 'styled-components';
-import { extent, max, min } from 'd3-array';
-import { axisBottom, axisLeft } from 'd3-axis';
+import { extent } from 'd3-array';
 import { curveBasis, line } from 'd3-shape';
 import { scaleLinear, scaleTime } from 'd3-scale';
 import _concat from 'lodash.concat';
 
 import Axis from 'experiments/common/Axis';
+
 import tuition7817 from './tuition7817.json';
+import medical7817 from './medical7817.json';
+import furniture7817 from './furniture7817.json';
+import all7817 from './all7817.json';
 
 const VIEWBOX = {
 	width: 500,
@@ -51,11 +54,33 @@ export default class CPIOverTime extends React.Component {
 
 	stringToDate = str => {
 		const s = str.split(' ');
-		return Date.parse(`${s[0]} 1, ${s[1]}`);
+		return Date.parse(`${s[1]} 1, ${s[0]}`);
 	};
 
 	render() {
-		const allData = _concat(tuition7817);
+		const sectorData = [
+			{
+				id: 'tuition',
+				data: tuition7817,
+				color: '#4286f4',
+			},
+			{
+				id: 'medical',
+				data: medical7817,
+				color: '#f4df42',
+			},
+			{
+				id: 'all',
+				data: all7817,
+				color: '#4ee891',
+			},
+			{
+				id: 'furniture',
+				data: furniture7817,
+				color: '#f237d9',
+			},
+		];
+		const allData = _concat(...sectorData.map(d => d.data));
 
 		const x = scaleTime().range([0, DIMENSIONS.width]);
 		const y = scaleLinear().range([0, -DIMENSIONS.height + MARGINS.top]);
@@ -65,17 +90,28 @@ export default class CPIOverTime extends React.Component {
 			.x(d => x(this.stringToDate(d.Label)))
 			.y(d => y(d.Value));
 
-		x.domain(extent(allData, d => this.stringToDate(d.Label)));
-		y.domain(extent(allData, d => +d.Value));
+		x.domain(extent(allData, d => this.stringToDate(d.Label))).nice();
+		y.domain(extent(allData, d => +d.Value)).nice();
 
-		const d = lineFn(allData);
+		sectorData.map(sector => {
+			sector.d = lineFn(sector.data);
+			return sector;
+		});
 
 		return (
 			<Svg viewBox={`0 0 ${VIEWBOX.width} ${VIEWBOX.height}`}>
 				<GraphContainer>
-					<Axis scale={x.nice()} orientation="bottom" />
-					<Axis scale={y.nice()} orientation="left" />
-					<path d={d} stroke="black" fill="transparent" />
+					<Axis scale={x} orientation="bottom" />
+					<Axis scale={y} orientation="left" />
+					{sectorData.map(sector => (
+						<path
+							d={sector.d}
+							stroke={sector.color}
+							fill="transparent"
+							strokeWidth={1}
+							key={sector.id}
+						/>
+					))}
 				</GraphContainer>
 			</Svg>
 		);
