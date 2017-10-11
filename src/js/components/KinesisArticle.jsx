@@ -27,7 +27,7 @@ const KinesisTitle = styled.div`
 const KinesisSubtitle = styled.div`
 	display: flex;
 	flex-flow: column nowrap;
-	color: ${shark};
+	color: ${props => props.color};
 	margin-top: 5px;
 `;
 
@@ -50,7 +50,7 @@ export default class KinesisEntry extends React.Component {
 					{selectedEntry.name}
 				</KinesisTitle>
 
-				<KinesisSubtitle>
+				<KinesisSubtitle color={selectedEntry.primaryColor}>
 					<div>
 						{selectedEntry.date &&
 							moment(selectedEntry.date).format('MMMM Do, YYYY')}

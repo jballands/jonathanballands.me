@@ -8,6 +8,7 @@
 /* eslint-disable react/jsx-no-bind */
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { extent } from 'd3-array';
 import { curveBasis, line } from 'd3-shape';
@@ -15,6 +16,7 @@ import { scaleLinear, scaleTime } from 'd3-scale';
 import _concat from 'lodash.concat';
 
 import Axis from 'experiments/common/Axis';
+import AxisLabel from 'experiments/common/AxisLabel';
 
 import tuition7817 from './tuition7817.json';
 import medical7817 from './medical7817.json';
@@ -32,9 +34,9 @@ const VIEWBOX = {
 
 const MARGINS = {
 	top: 20,
-	left: 45,
+	left: 40,
 	right: 20,
-	bottom: 10,
+	bottom: 20,
 };
 
 const DIMENSIONS = {
@@ -65,8 +67,17 @@ const StyledAxis = styled(Axis)`
 	}
 `;
 
+const AxisText = styled.text`
+	text-anchor: center;
+	font-size: 10px;
+`;
+
 export default class CPIOverTime extends React.Component {
 	static displayName = 'CPIOverTime';
+
+	static propTypes = {
+		primaryColor: PropTypes.string,
+	};
 
 	stringToDate = str => {
 		const s = str.split(' ');
@@ -141,12 +152,15 @@ export default class CPIOverTime extends React.Component {
 						color={this.props.primaryColor}
 						scale={x}
 						orientation="bottom"
+						numberOfTicks={6}
 					/>
 					<StyledAxis
 						color={this.props.primaryColor}
 						scale={y}
 						orientation="left"
+						numberOfTicks={9}
 					/>
+
 					{sectorData.map(sector => (
 						<path
 							d={sector.d}
@@ -156,6 +170,14 @@ export default class CPIOverTime extends React.Component {
 							key={sector.id}
 						/>
 					))}
+
+					<AxisLabel
+						scale={x}
+						orientation="bottom"
+						viewport={{ width: 0, height: 0 }}
+						height={-10}>
+						<AxisText textAnchor="center">CPI</AxisText>
+					</AxisLabel>
 				</GraphContainer>
 			</Svg>
 		);

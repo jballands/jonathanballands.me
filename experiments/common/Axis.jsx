@@ -17,8 +17,11 @@ export default class Axis extends React.Component {
 		className: PropTypes.string,
 		orientation: PropTypes.oneOf(['top', 'bottom', 'left', 'right'])
 			.isRequired,
+		numberOfTicks: PropTypes.number,
+		rotateTicks: PropTypes.number,
 		scale: PropTypes.func.isRequired,
 		style: PropTypes.object,
+		tickFormatter: PropTypes.func,
 		tickSize: PropTypes.number,
 		tickPadding: PropTypes.number,
 		ticks: PropTypes.number,
@@ -27,7 +30,6 @@ export default class Axis extends React.Component {
 	static defaultProps = {
 		tickSize: 6,
 		tickPadding: 3,
-		ticks: undefined,
 	};
 
 	componentDidMount() {
@@ -54,11 +56,20 @@ export default class Axis extends React.Component {
 	};
 
 	renderAxis = () => {
+		const {
+			scale,
+			tickSize,
+			tickPadding,
+			ticks,
+			numberOfTicks,
+		} = this.props;
+
 		const axis = this.determineOrientation()
-			.scale(this.props.scale)
-			.tickSize([this.props.tickSize])
-			.tickPadding([this.props.tickPadding])
-			.ticks(this.props.ticks);
+			.scale(scale)
+			.tickSize([tickSize])
+			.tickPadding([tickPadding])
+			.ticks(ticks)
+			.tickArguments([numberOfTicks]);
 
 		select(this.refs.axis).call(axis);
 	};

@@ -17,7 +17,7 @@ I learned along the way. That sounds fun, right?
 
 At least, I think it is.
 
-Offal next level VHS ramps subway tile yuccie tumeric mixtape tote bag prism disrupt beard.
+Offal _next level VHS_ tile yuccie tumeric mixtape tote bag prism disrupt beard.
 Pabst tousled neutra intelligentsia kogi. Coloring book hexagon dreamcatcher, pork belly cray next level 
 knausgaard meggings.
 

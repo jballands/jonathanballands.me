@@ -9,18 +9,21 @@ import { shark } from 'helpers/palette';
 import CPIOverTime from './CPIOverTime';
 
 const Title = styled.div`
-	font-size: 56px;
+	font-size: 58px;
 	font-weight: 700;
 	color: ${props => props.color};
 	font-family: 'Raleway', sans-serif;
 	text-transform: uppercase;
+	text-align: center;
 `;
 
 const Subtitle = styled.div`
 	font-size: 22px;
-	font-weight: 700;
 	color: ${props => props.color};
 	margin-top: 10px;
+	font-style: italic;
+	width: 100%;
+	text-align: center;
 `;
 
 const StyledKinesisPost = styled(KinesisPost)`margin-top: 40px;`;
