@@ -16,8 +16,6 @@ import { scaleLinear, scaleTime } from 'd3-scale';
 import _concat from 'lodash.concat';
 
 import Axis from 'experiments/common/Axis';
-import AxisLabelX from 'experiments/common/AxisLabelX';
-import AxisLabelY from 'experiments/common/AxisLabelY';
 
 import tuition7817 from './tuition7817.json';
 import medical7817 from './medical7817.json';
@@ -35,9 +33,9 @@ const VIEWBOX = {
 
 const MARGINS = {
 	top: 0,
-	left: 30,
+	left: 52,
 	right: 13,
-	bottom: 20,
+	bottom: 35,
 };
 
 const DIMENSIONS = {
@@ -71,13 +69,10 @@ const StyledAxis = styled(Axis)`
 	text {
 		fill: ${props => props.color};
 	}
-`;
 
-const AxisLabel = styled.span`
-	font-style: italic;
-	color: ${props => props.color};
-	display: flex;
-	flex-flow: row nowrap;
+	.axis-label {
+		fill: ${props => props.color};
+	}
 `;
 
 export default class CPIOverTime extends React.Component {
@@ -155,49 +150,34 @@ export default class CPIOverTime extends React.Component {
 
 		return (
 			<CPIOverTimeContainer>
-				<AxisLabelY
-					margins={MARGINS}
-					label={
-						<AxisLabel color={this.props.primaryColor}>
-							Consumer Price Index
-						</AxisLabel>
-					}
-					orientation="left">
-					<AxisLabelX
-						margins={MARGINS}
-						label={
-							<AxisLabel color={this.props.primaryColor}>
-								Time
-							</AxisLabel>
-						}>
-						<Svg viewBox={`0 0 ${VIEWBOX.width} ${VIEWBOX.height}`}>
-							<GraphContainer>
-								<StyledAxis
-									color={this.props.primaryColor}
-									scale={x}
-									orientation="bottom"
-									numberOfTicks={6}
-								/>
-								<StyledAxis
-									color={this.props.primaryColor}
-									scale={y}
-									orientation="left"
-									numberOfTicks={9}
-								/>
+				<Svg viewBox={`0 0 ${VIEWBOX.width} ${VIEWBOX.height}`}>
+					<GraphContainer>
+						<StyledAxis
+							color={this.props.primaryColor}
+							scale={x}
+							orientation="bottom"
+							numberOfTicks={6}
+							label="← Time →"
+						/>
+						<StyledAxis
+							color={this.props.primaryColor}
+							scale={y}
+							orientation="left"
+							numberOfTicks={6}
+							label="← CPI →"
+						/>
 
-								{sectorData.map(sector => (
-									<path
-										d={sector.d}
-										stroke={sector.color}
-										fill="transparent"
-										strokeWidth={1}
-										key={sector.id}
-									/>
-								))}
-							</GraphContainer>
-						</Svg>
-					</AxisLabelX>
-				</AxisLabelY>
+						{sectorData.map(sector => (
+							<path
+								d={sector.d}
+								stroke={sector.color}
+								fill="transparent"
+								strokeWidth={1}
+								key={sector.id}
+							/>
+						))}
+					</GraphContainer>
+				</Svg>
 			</CPIOverTimeContainer>
 		);
 	}
