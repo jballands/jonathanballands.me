@@ -15,6 +15,7 @@ export default class Axis extends React.Component {
 
 	static propTypes = {
 		className: PropTypes.string,
+		label: PropTypes.string,
 		orientation: PropTypes.oneOf(['top', 'bottom', 'left', 'right'])
 			.isRequired,
 		numberOfTicks: PropTypes.number,

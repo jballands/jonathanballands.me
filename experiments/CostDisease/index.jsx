@@ -51,6 +51,7 @@ export default class CostDiseaseExperiment extends React.Component {
 						Before you blow up on me, hear me out for just a second.
 					</p>
 				</StyledKinesisPost>
+
 				<CPIOverTime primaryColor={this.props.primaryColor} />
 			</div>
 		);

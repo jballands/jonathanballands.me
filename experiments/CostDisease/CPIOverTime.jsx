@@ -16,7 +16,8 @@ import { scaleLinear, scaleTime } from 'd3-scale';
 import _concat from 'lodash.concat';
 
 import Axis from 'experiments/common/Axis';
-import AxisLabel from 'experiments/common/AxisLabel';
+import AxisLabelX from 'experiments/common/AxisLabelX';
+import AxisLabelY from 'experiments/common/AxisLabelY';
 
 import tuition7817 from './tuition7817.json';
 import medical7817 from './medical7817.json';
@@ -33,9 +34,9 @@ const VIEWBOX = {
 };
 
 const MARGINS = {
-	top: 20,
-	left: 40,
-	right: 20,
+	top: 0,
+	left: 30,
+	right: 13,
 	bottom: 20,
 };
 
@@ -43,6 +44,11 @@ const DIMENSIONS = {
 	width: VIEWBOX.width - MARGINS.left - MARGINS.right,
 	height: VIEWBOX.height - MARGINS.top - MARGINS.bottom,
 };
+
+const CPIOverTimeContainer = styled.div`
+	position: relative;
+	width: 100%;
+`;
 
 const Svg = styled.svg`
 	width: 100%;
@@ -67,9 +73,11 @@ const StyledAxis = styled(Axis)`
 	}
 `;
 
-const AxisText = styled.text`
-	text-anchor: center;
-	font-size: 10px;
+const AxisLabel = styled.span`
+	font-style: italic;
+	color: ${props => props.color};
+	display: flex;
+	flex-flow: row nowrap;
 `;
 
 export default class CPIOverTime extends React.Component {
@@ -146,40 +154,51 @@ export default class CPIOverTime extends React.Component {
 		});
 
 		return (
-			<Svg viewBox={`0 0 ${VIEWBOX.width} ${VIEWBOX.height}`}>
-				<GraphContainer>
-					<StyledAxis
-						color={this.props.primaryColor}
-						scale={x}
-						orientation="bottom"
-						numberOfTicks={6}
-					/>
-					<StyledAxis
-						color={this.props.primaryColor}
-						scale={y}
-						orientation="left"
-						numberOfTicks={9}
-					/>
+			<CPIOverTimeContainer>
+				<AxisLabelY
+					margins={MARGINS}
+					label={
+						<AxisLabel color={this.props.primaryColor}>
+							Consumer Price Index
+						</AxisLabel>
+					}
+					orientation="left">
+					<AxisLabelX
+						margins={MARGINS}
+						label={
+							<AxisLabel color={this.props.primaryColor}>
+								Time
+							</AxisLabel>
+						}>
+						<Svg viewBox={`0 0 ${VIEWBOX.width} ${VIEWBOX.height}`}>
+							<GraphContainer>
+								<StyledAxis
+									color={this.props.primaryColor}
+									scale={x}
+									orientation="bottom"
+									numberOfTicks={6}
+								/>
+								<StyledAxis
+									color={this.props.primaryColor}
+									scale={y}
+									orientation="left"
+									numberOfTicks={9}
+								/>
 
-					{sectorData.map(sector => (
-						<path
-							d={sector.d}
-							stroke={sector.color}
-							fill="transparent"
-							strokeWidth={1}
-							key={sector.id}
-						/>
-					))}
-
-					<AxisLabel
-						scale={x}
-						orientation="bottom"
-						viewport={{ width: 0, height: 0 }}
-						height={-10}>
-						<AxisText textAnchor="center">CPI</AxisText>
-					</AxisLabel>
-				</GraphContainer>
-			</Svg>
+								{sectorData.map(sector => (
+									<path
+										d={sector.d}
+										stroke={sector.color}
+										fill="transparent"
+										strokeWidth={1}
+										key={sector.id}
+									/>
+								))}
+							</GraphContainer>
+						</Svg>
+					</AxisLabelX>
+				</AxisLabelY>
+			</CPIOverTimeContainer>
 		);
 	}
 }
