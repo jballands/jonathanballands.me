@@ -41,8 +41,7 @@ export default class LinkSvg extends React.Component {
 				x="0px"
 				y="0px"
 				viewBox="0 0 91 91"
-				width={this.props.width}
-				height={this.props.height}>
+				{...this.props}>
 				<polyline
 					style={style}
 					points="88.5,67.8 88.5,88.5 2.5,88.5 2.5,2.5 24.2,2.5 "

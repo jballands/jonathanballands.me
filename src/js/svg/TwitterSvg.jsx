@@ -23,10 +23,7 @@ export default class TwitterSvg extends React.Component {
 
 	render() {
 		return (
-			<svg
-				viewBox="0 0 37 31"
-				width={this.props.width}
-				height={this.props.height}>
+			<svg viewBox="0 0 37 31" {...this.props}>
 				<g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
 					<g fill={this.props.color}>
 						<g>

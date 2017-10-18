@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import KinesisPost from 'components/KinesisPost';
+import ExplainationPanel from 'experiments/common/ExplainationPanel';
 
 import { shark } from 'helpers/palette';
 
@@ -18,15 +19,35 @@ const Title = styled.div`
 `;
 
 const Subtitle = styled.div`
-	font-size: 22px;
+	font-size: 21px;
 	color: ${props => props.color};
 	margin-top: 10px;
-	font-style: italic;
 	width: 100%;
 	text-align: center;
 `;
 
+const Visualization = styled.div`margin: 40px 0;`;
+
+const GraphTitle = styled.div`
+	font-size: 28px;
+	margin-bottom: 5px;
+	color: ${props => props.color};
+`;
+
+const GraphSubtitle = styled.div`
+	font-size: 16px;
+	color: ${props => props.color};
+`;
+
 const StyledKinesisPost = styled(KinesisPost)`margin-top: 40px;`;
+
+const CPIOverTimeExplainationContainer = styled.div`
+	color: ${shark};
+	font-size: 15px;
+	font-style: italic;
+	padding: 10px;
+	background: white;
+`;
 
 export default class CostDiseaseExperiment extends React.Component {
 	static displayName = 'CostDiseaseExperiment';
@@ -35,6 +56,12 @@ export default class CostDiseaseExperiment extends React.Component {
 		primaryColor: PropTypes.string,
 		secondaryColor: PropTypes.string,
 	};
+
+	renderCPIOverTimeExplaination = () => (
+		<CPIOverTimeExplainationContainer>
+			<p>Hello world!</p>
+		</CPIOverTimeExplainationContainer>
+	);
 
 	render() {
 		return (
@@ -52,7 +79,19 @@ export default class CostDiseaseExperiment extends React.Component {
 					</p>
 				</StyledKinesisPost>
 
-				<CPIOverTime primaryColor={this.props.primaryColor} />
+				<Visualization>
+					<ExplainationPanel
+						color={this.props.primaryColor}
+						renderExplaination={this.renderCPIOverTimeExplaination}>
+						<GraphTitle color={this.props.primaryColor}>
+							Consumer Price Index (CPI) of Various Sectors
+						</GraphTitle>
+						<GraphSubtitle color={this.props.primaryColor}>
+							From 1978 to 2017
+						</GraphSubtitle>
+					</ExplainationPanel>
+					<CPIOverTime primaryColor={this.props.primaryColor} />
+				</Visualization>
 			</div>
 		);
 	}

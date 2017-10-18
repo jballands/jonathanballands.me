@@ -39,9 +39,7 @@ export default class OpenDrawerSvg extends React.Component {
 				height="23px"
 				viewBox="0 0 26 23"
 				version="1.1"
-				xmlns="http://www.w3.org/2000/svg"
-				width={this.props.width}
-				height={this.props.height}>
+				{...this.props}>
 				<rect
 					stroke={this.props.color}
 					strokeWidth={this.props.strokeWidth}
