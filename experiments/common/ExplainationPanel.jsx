@@ -11,7 +11,9 @@ import { spring, Motion } from 'react-motion';
 import styled from 'styled-components';
 
 import HelpSvg from 'svg/HelpSvg';
-import UpArrowSvg from 'svg/UpArrowSvg';
+import CollapseSvg from 'svg/CollapseSvg';
+
+import { shark } from 'helpers/palette';
 
 const ExplainationPanelContainer = styled.div`
 	display: flex;
@@ -32,7 +34,7 @@ const StyledHelpSvg = styled(HelpSvg)`
 	}
 `;
 
-const StyledUpArrowSvg = styled(UpArrowSvg)`
+const StyledCollapseSvg = styled(CollapseSvg)`
 	&:hover {
 		cursor: pointer;
 	}
@@ -44,7 +46,6 @@ const ExplainationPanelContent = styled.div.attrs({
 	}),
 })`
 	overflow: hidden;
-	margin: 15px 0;
 
 	p {
 		margin: 0;
@@ -89,7 +90,7 @@ export default class ExplainationPanel extends React.Component {
 	renderIcon = () => {
 		if (this.state.open) {
 			return (
-				<StyledUpArrowSvg
+				<StyledCollapseSvg
 					width={22}
 					height={22}
 					color={this.props.color}

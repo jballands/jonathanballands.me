@@ -42,11 +42,8 @@ const GraphSubtitle = styled.div`
 const StyledKinesisPost = styled(KinesisPost)`margin-top: 40px;`;
 
 const CPIOverTimeExplainationContainer = styled.div`
-	color: ${shark};
 	font-size: 15px;
 	font-style: italic;
-	padding: 10px;
-	background: white;
 `;
 
 export default class CostDiseaseExperiment extends React.Component {
