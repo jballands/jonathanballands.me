@@ -13,13 +13,15 @@ import styled from 'styled-components';
 import HelpSvg from 'svg/HelpSvg';
 import CollapseSvg from 'svg/CollapseSvg';
 
-import { shark } from 'helpers/palette';
-
 const ExplainationPanelContainer = styled.div`
 	display: flex;
 	flex-flow: column nowrap;
-	margin: 15px 0;
-	transition: all 250ms ease;
+
+	margin: 20px 0;
+	transition: all 500ms ease;
+	border-bottom: 1px solid
+		${props => (props.open ? props.color : 'transparent')};
+	border-radius: 2px;
 `;
 
 const ExplainationPanelHeader = styled.div`
@@ -73,14 +75,11 @@ export default class ExplainationPanel extends React.Component {
 
 	contentHeight = 0;
 
-	componentDidMount() {
-		this.contentHeight = this.content.offsetHeight;
-	}
-
 	handleOnClick = () => {
 		this.setState({
 			open: !this.state.open,
 		});
+		this.contentHeight = this.content.offsetHeight;
 	};
 
 	bindContent = node => {
@@ -106,7 +105,7 @@ export default class ExplainationPanel extends React.Component {
 		const { open } = this.state;
 
 		return (
-			<ExplainationPanelContainer open={open}>
+			<ExplainationPanelContainer open={open} color={this.props.color}>
 				<ExplainationPanelHeader>
 					<LeftSide open={open}>{this.props.children}</LeftSide>
 					<RightSide onClick={this.handleOnClick}>

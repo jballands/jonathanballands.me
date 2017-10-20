@@ -67,7 +67,7 @@ export const kinesisPosts = [
 		secondaryColor: '#dbfffc',
 	}),
 	new Post({
-		name: 'Curing the Cost Disease',
+		name: 'Cost Disease Explained',
 		date: new Date(2017, 9, 7),
 		hashtags: [KinesisHashtags.economics, KinesisHashtags.visualization],
 		type: Type.experiment,

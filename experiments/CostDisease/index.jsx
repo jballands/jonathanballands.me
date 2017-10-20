@@ -5,8 +5,6 @@ import styled from 'styled-components';
 import KinesisPost from 'components/KinesisPost';
 import ExplainationPanel from 'experiments/common/ExplainationPanel';
 
-import { shark } from 'helpers/palette';
-
 import CPIOverTime from './CPIOverTime';
 
 const Title = styled.div`
@@ -26,25 +24,27 @@ const Subtitle = styled.div`
 	text-align: center;
 `;
 
-const Visualization = styled.div`margin: 40px 0;`;
+const Visualization = styled.div`margin: 15px 0;`;
 
-const GraphTitle = styled.div`
+const VisualizationTitle = styled.div`
 	font-size: 28px;
 	margin-bottom: 5px;
 	color: ${props => props.color};
 `;
 
-const GraphSubtitle = styled.div`
+const VisualizationSubtitle = styled.div`
 	font-size: 16px;
+	color: ${props => props.color};
+`;
+
+const VisualizationCredit = styled.div`
+	font-size: 13px;
 	color: ${props => props.color};
 `;
 
 const StyledKinesisPost = styled(KinesisPost)`margin-top: 40px;`;
 
-const CPIOverTimeExplainationContainer = styled.div`
-	font-size: 15px;
-	font-style: italic;
-`;
+const CPIOverTimeExplainationContainer = styled(KinesisPost)`font-size: 14px;`;
 
 export default class CostDiseaseExperiment extends React.Component {
 	static displayName = 'CostDiseaseExperiment';
@@ -55,8 +55,21 @@ export default class CostDiseaseExperiment extends React.Component {
 	};
 
 	renderCPIOverTimeExplaination = () => (
-		<CPIOverTimeExplainationContainer>
-			<p>Hello world!</p>
+		<CPIOverTimeExplainationContainer color={this.props.primaryColor}>
+			<p>
+				The{' '}
+				<a href="https://en.wikipedia.org/wiki/Consumer_price_index">
+					Consumer Price Index
+				</a>, or CPI, is a number that represents the relative price of
+				a good or service, adjusted for inflation.
+			</p>
+			<p>
+				For example, suppose the price of lemonade in 1980 was $1. Let's
+				arbitrarily set the CPI of lemonade in 1980 to 100. In 2017, the
+				price of lemonade is $2. So, the CPI of lemonade in 2017 is 200,
+				since it costs 2x more to buy lemonade in 2017 than it did in
+				1980.
+			</p>
 		</CPIOverTimeExplainationContainer>
 	);
 
@@ -64,15 +77,27 @@ export default class CostDiseaseExperiment extends React.Component {
 		return (
 			<div>
 				<Title color={this.props.primaryColor}>
-					Curing the Cost Disease
+					Cost Disease Explained
 				</Title>
 				<Subtitle color={this.props.primaryColor}>
-					A case on why more expensive healthcare and education isn't
-					a bad thing.
+					And how it explains rising healthcare and education costs.
 				</Subtitle>
+
 				<StyledKinesisPost color={this.props.primaryColor}>
 					<p>
-						Before you blow up on me, hear me out for just a second.
+						Ever wonder why in our high-tech, relatively progressive
+						world, why the price of things like education and
+						healthcare are constantly getting more expensive, while
+						things like clothing and furniture are relatively
+						stagnant, or even getting cheaper?
+					</p>
+					<p>
+						Your thoughts can be substantiated in data. The cost of
+						college tuition has increased more than 7 times in the
+						past 27 years, while the cost of healthcare has
+						increased more than 5 times. Meanwhile, the cost of
+						goods like clothing and furniture has pretty much stayed
+						the same.
 					</p>
 				</StyledKinesisPost>
 
@@ -80,15 +105,63 @@ export default class CostDiseaseExperiment extends React.Component {
 					<ExplainationPanel
 						color={this.props.primaryColor}
 						renderExplaination={this.renderCPIOverTimeExplaination}>
-						<GraphTitle color={this.props.primaryColor}>
+						<VisualizationTitle color={this.props.primaryColor}>
 							Consumer Price Index (CPI) of Various Sectors
-						</GraphTitle>
-						<GraphSubtitle color={this.props.primaryColor}>
+						</VisualizationTitle>
+						<VisualizationSubtitle color={this.props.primaryColor}>
 							From 1978 to 2017
-						</GraphSubtitle>
+						</VisualizationSubtitle>
+						<VisualizationCredit color={this.props.primaryColor}>
+							Source: The United States Department of Labor
+						</VisualizationCredit>
 					</ExplainationPanel>
 					<CPIOverTime primaryColor={this.props.primaryColor} />
 				</Visualization>
+
+				<StyledKinesisPost color={this.props.primaryColor}>
+					<p>
+						Back in the 1960s, an economist named{' '}
+						<a href="https://en.wikipedia.org/wiki/William_Baumol">
+							William Baumol
+						</a>{' '}
+						noticed this phenomenon in the arts, in particular
+						musicians. To play a quartet in the 1960s requires the
+						same amount of <em>productivity</em> as it did in the
+						1800s, yet musicians were earning a lot more in the 60s
+						than in the 1800s.
+					</p>
+					<p>
+						Welcome to{' '}
+						<a href="https://en.wikipedia.org/wiki/Baumol%27s_cost_disease">
+							Baumol's Cost Disease
+						</a>. It's an economic theory that potentially explains
+						why the cost of services, like education, has
+						skyrocketed proportionally to goods, like clothing. But
+						to understand how this theory could make sense, we need
+						to understand some basic concepts in economics.
+					</p>
+
+					<h2>Productivity, Economically Speaking</h2>
+
+					<p>
+						<a href="http://www.investopedia.com/terms/p/productivity.asp">
+							Productivity
+						</a>, in economics, tells us how much stuff we can
+						produce if we have a certain amount of things to help
+						us. The amount of things we have is called the input,
+						and the amount of stuff we make is the output.
+					</p>
+
+					<p>
+						If there is a lot of output with little input, we are
+						being super productive! But if there is a lot of input
+						creating little output... well, we aren't really being
+						that productive at all.
+					</p>
+					<blockquote>
+						<p>Productivity is the radio of inputs to outputs.</p>
+					</blockquote>
+				</StyledKinesisPost>
 			</div>
 		);
 	}

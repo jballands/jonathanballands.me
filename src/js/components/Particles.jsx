@@ -37,11 +37,11 @@ export default class NavigationBar extends React.Component {
 		const params = {
 			particles: {
 				number: {
-					value: 75,
+					value: 36,
 				},
 				move: {
 					enable: true,
-					speed: 2,
+					speed: 3,
 					direction: 'none',
 					random: true,
 					out_mode: 'bounce',
@@ -49,7 +49,7 @@ export default class NavigationBar extends React.Component {
 				},
 				line_linked: {
 					enable: true,
-					distance: 110,
+					distance: 250,
 					color: gigas,
 					opacity: 0.7,
 					width: 1,
