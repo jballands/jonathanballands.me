@@ -6,6 +6,7 @@ import KinesisPost from 'components/KinesisPost';
 import ExplainationPanel from 'experiments/common/ExplainationPanel';
 
 import CPIOverTime from './CPIOverTime';
+import Productivity from './Productivity';
 
 const Title = styled.div`
 	font-size: 58px;
@@ -44,7 +45,7 @@ const VisualizationCredit = styled.div`
 
 const StyledKinesisPost = styled(KinesisPost)`margin-top: 40px;`;
 
-const CPIOverTimeExplainationContainer = styled(KinesisPost)`font-size: 14px;`;
+const ExplainationContainer = styled(KinesisPost)`font-size: 14px;`;
 
 export default class CostDiseaseExperiment extends React.Component {
 	static displayName = 'CostDiseaseExperiment';
@@ -55,7 +56,7 @@ export default class CostDiseaseExperiment extends React.Component {
 	};
 
 	renderCPIOverTimeExplaination = () => (
-		<CPIOverTimeExplainationContainer color={this.props.primaryColor}>
+		<ExplainationContainer color={this.props.primaryColor}>
 			<p>
 				The{' '}
 				<a href="https://en.wikipedia.org/wiki/Consumer_price_index">
@@ -70,7 +71,26 @@ export default class CostDiseaseExperiment extends React.Component {
 				since it costs 2x more to buy lemonade in 2017 than it did in
 				1980.
 			</p>
-		</CPIOverTimeExplainationContainer>
+		</ExplainationContainer>
+	);
+
+	renderProductivityExplaination = () => (
+		<ExplainationContainer color={this.props.primaryColor}>
+			<p>
+				The{' '}
+				<a href="https://en.wikipedia.org/wiki/Consumer_price_index">
+					Consumer Price Index
+				</a>, or CPI, is a number that represents the relative price of
+				a good or service, adjusted for inflation.
+			</p>
+			<p>
+				For example, suppose the price of lemonade in 1980 was $1. Let's
+				arbitrarily set the CPI of lemonade in 1980 to 100. In 2017, the
+				price of lemonade is $2. So, the CPI of lemonade in 2017 is 200,
+				since it costs 2x more to buy lemonade in 2017 than it did in
+				1980.
+			</p>
+		</ExplainationContainer>
 	);
 
 	render() {
@@ -141,7 +161,7 @@ export default class CostDiseaseExperiment extends React.Component {
 						to understand some basic concepts in economics.
 					</p>
 
-					<h2>Productivity, Economically Speaking</h2>
+					<h1>Productivity, Economically Speaking</h1>
 
 					<p>
 						<a href="http://www.investopedia.com/terms/p/productivity.asp">
@@ -162,6 +182,19 @@ export default class CostDiseaseExperiment extends React.Component {
 						<p>Productivity is the radio of inputs to outputs.</p>
 					</blockquote>
 				</StyledKinesisPost>
+
+				<Visualization>
+					<ExplainationPanel
+						color={this.props.primaryColor}
+						renderExplaination={
+							this.renderProductivityExplaination
+						}>
+						<VisualizationTitle color={this.props.primaryColor}>
+							How Input/Output Ratio Affects Productivity
+						</VisualizationTitle>
+					</ExplainationPanel>
+					<Productivity primaryColor={this.props.primaryColor} />
+				</Visualization>
 			</div>
 		);
 	}
