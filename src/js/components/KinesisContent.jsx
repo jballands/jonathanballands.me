@@ -7,6 +7,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import { animateScroll } from 'react-scroll';
 import styled from 'styled-components';
 
 import BackgroundGradient from 'components/BackgroundGradient';
@@ -21,7 +22,7 @@ const StyledLoadingAnimation = styled(LoadingAnimation)`
 `;
 
 const KinesisContainer = styled.div`
-	margin: 70px auto;
+	margin: 70px 0;
 	width: 75%;
 	max-width: 800px;
 `;
@@ -45,7 +46,11 @@ export default class KinesisContent extends React.Component {
 					text={selectedEntry.name}
 				/>
 			);
-		} else if (selectedEntry.type === Type.article) {
+		}
+
+		animateScroll.scrollToTop();
+
+		if (selectedEntry.type === Type.article) {
 			return (
 				<KinesisArticle
 					content={content}

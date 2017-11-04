@@ -7,6 +7,7 @@ import ExplainationPanel from 'experiments/common/ExplainationPanel';
 
 import CPIOverTime from './CPIOverTime';
 import Productivity from './Productivity';
+import Revenue from './Revenue';
 
 const Title = styled.div`
 	font-size: 58px;
@@ -25,7 +26,7 @@ const Subtitle = styled.div`
 	text-align: center;
 `;
 
-const Visualization = styled.div`margin: 15px 0;`;
+const Visualization = styled.div`margin: 30px 0;`;
 
 const VisualizationTitle = styled.div`
 	font-size: 28px;
@@ -62,7 +63,7 @@ export default class CostDiseaseExperiment extends React.Component {
 				<a href="https://en.wikipedia.org/wiki/Consumer_price_index">
 					Consumer Price Index
 				</a>, or CPI, is a number that represents the relative price of
-				a good or service, adjusted for inflation.
+				a good or service at a point in time.
 			</p>
 			<p>
 				For example, suppose the price of lemonade in 1980 was $1. Let's
@@ -74,21 +75,23 @@ export default class CostDiseaseExperiment extends React.Component {
 		</ExplainationContainer>
 	);
 
-	renderProductivityExplaination = () => (
+	renderRevenueExplaination = () => (
 		<ExplainationContainer color={this.props.primaryColor}>
 			<p>
-				The{' '}
-				<a href="https://en.wikipedia.org/wiki/Consumer_price_index">
-					Consumer Price Index
-				</a>, or CPI, is a number that represents the relative price of
-				a good or service, adjusted for inflation.
+				This visualization represents the supply chain of a company. You
+				can affect input, productivity, and price. Depending on what you
+				change, different areas of the supply chain will be affected,
+				and thus the amount of money that can be made will also change.
 			</p>
 			<p>
-				For example, suppose the price of lemonade in 1980 was $1. Let's
-				arbitrarily set the CPI of lemonade in 1980 to 100. In 2017, the
-				price of lemonade is $2. So, the CPI of lemonade in 2017 is 200,
-				since it costs 2x more to buy lemonade in 2017 than it did in
-				1980.
+				To make this more realistic, think of input as the amount of raw
+				material being bought to make a product, and productivity as the
+				amount of man-hours available.
+			</p>
+			<p>
+				Note that this visualization assumes that the cost of raw
+				material and the amount of hours workers work remains constant.
+				It also assumes that all product is bought when it is produced.
 			</p>
 		</ExplainationContainer>
 	);
@@ -126,7 +129,7 @@ export default class CostDiseaseExperiment extends React.Component {
 						color={this.props.primaryColor}
 						renderExplaination={this.renderCPIOverTimeExplaination}>
 						<VisualizationTitle color={this.props.primaryColor}>
-							Consumer Price Index (CPI) of Various Sectors
+							Consumer Price Index of Various Sectors
 						</VisualizationTitle>
 						<VisualizationSubtitle color={this.props.primaryColor}>
 							From 1978 to 2017
@@ -160,40 +163,83 @@ export default class CostDiseaseExperiment extends React.Component {
 						to understand how this theory could make sense, we need
 						to understand some basic concepts in economics.
 					</p>
-
 					<h1>Productivity, Economically Speaking</h1>
-
 					<p>
+						In economics,{' '}
 						<a href="http://www.investopedia.com/terms/p/productivity.asp">
-							Productivity
-						</a>, in economics, tells us how much stuff we can
-						produce if we have a certain amount of things to help
-						us. The amount of things we have is called the input,
-						and the amount of stuff we make is the output.
-					</p>
-
+							productivity
+						</a>{' '}
+						is the relationship between how much of something we
+						need to make some amount of something. It's one of the
+						fundamental ideas of economic theory, and it explains
+						why living in 2017 is generally considered "better" than
+						living in 1900.
+					</p>{' '}
 					<p>
-						If there is a lot of output with little input, we are
-						being super productive! But if there is a lot of input
-						creating little output... well, we aren't really being
-						that productive at all.
+						In general, more productivity is seen as a good thing.
 					</p>
 					<blockquote>
-						<p>Productivity is the radio of inputs to outputs.</p>
+						<p>
+							Productivity is the ratio of inputs (the amount of
+							something we need) to outputs (the amount of
+							something we produce).
+						</p>
 					</blockquote>
+					<p>
+						To understand the relationship between inputs and
+						outputs, use the sliders below to try and achieve
+						maximum productivity (as represented by the red bar).
+					</p>
+				</StyledKinesisPost>
+
+				<Visualization>
+					<Productivity primaryColor={this.props.primaryColor} />
+				</Visualization>
+
+				<StyledKinesisPost>
+					<p>
+						It shouldn't take you too long to realize that to
+						achieve higher productivity, you simulataneously need to
+						do two things:
+					</p>
+
+					<ol>
+						<li>Decrease your input</li>
+						<li>Increase your output</li>
+					</ol>
+
+					<p>
+						Ok cool. So, why'd you want to increase your
+						productivity?
+					</p>
+
+					<p>
+						The fun thing about productivity is that productivity
+						growth generally increases the living standards of not
+						only the highest members of an organization, but the
+						living standards of all of its members. This is because
+						selling more output doesn't always entail buying more
+						input; sometimes increasing production is enough.
+					</p>
+					<p>
+						And of course, the more stuff you sell and the less
+						stuff you buy, the more money that goes into your bank
+						account.
+					</p>
 				</StyledKinesisPost>
 
 				<Visualization>
 					<ExplainationPanel
 						color={this.props.primaryColor}
-						renderExplaination={
-							this.renderProductivityExplaination
-						}>
+						renderExplaination={this.renderRevenueExplaination}>
 						<VisualizationTitle color={this.props.primaryColor}>
-							How Input/Output Ratio Affects Productivity
+							Sphere of Influence
 						</VisualizationTitle>
+						<VisualizationSubtitle color={this.props.primaryColor}>
+							How Factors You Can Change Influence Revenue
+						</VisualizationSubtitle>
 					</ExplainationPanel>
-					<Productivity primaryColor={this.props.primaryColor} />
+					<Revenue primaryColor={this.props.primaryColor} />
 				</Visualization>
 			</div>
 		);

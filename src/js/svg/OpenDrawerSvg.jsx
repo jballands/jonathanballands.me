@@ -9,11 +9,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-const Svg = styled.svg`
-	* {
-		transition: fill 300ms ease;
-	}
-`;
+import Svg from './Svg';
 
 export default class OpenDrawerSvg extends React.Component {
 	static displayName = 'OpenDrawerSvg';

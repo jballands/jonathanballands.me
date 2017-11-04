@@ -8,6 +8,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import Svg from './Svg';
+
 export default class LinkSvg extends React.Component {
 	static displayName = 'LinkSvg';
 
@@ -34,7 +36,7 @@ export default class LinkSvg extends React.Component {
 		};
 
 		return (
-			<svg
+			<Svg
 				version="1.1"
 				id="Layer_1"
 				xmlns="http://www.w3.org/2000/svg"
@@ -48,7 +50,7 @@ export default class LinkSvg extends React.Component {
 				/>
 				<polyline style={style} points="45.5,2.5 88.5,2.5 88.5,45.5 " />
 				<line style={style} x1="88.5" y1="2.5" x2="45.5" y2="45.5" />
-			</svg>
+			</Svg>
 		);
 	}
 }

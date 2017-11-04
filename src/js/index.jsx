@@ -19,8 +19,7 @@ import App from 'routes/App';
 import rootReducer from 'reducers/index';
 import rootSaga from 'sagas/index';
 
-import 'styles/normalize.scss';
-import 'styles/fonts.scss';
+import 'normalize.css';
 
 class JonathanBallandsMe extends React.Component {
 	render() {

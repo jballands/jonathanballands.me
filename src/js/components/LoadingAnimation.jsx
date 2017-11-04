@@ -120,7 +120,7 @@ export default class LoadingAnimation extends React.Component {
 
 	static defaultProps = {
 		color: 'black',
-		duration: 1.7,
+		duration: 1.5,
 		text: 'Gimme a sec',
 	};
 

@@ -31,12 +31,8 @@ module.exports = {
 	module: {
 		rules: [
 			{
-				test: /\.scss$/,
-				use: [
-					{ loader: 'style-loader' },
-					{ loader: 'css-loader' },
-					{ loader: 'sass-loader' },
-				],
+				test: /\.css$/,
+				use: [{ loader: 'style-loader' }, { loader: 'css-loader' }],
 			},
 			{
 				test: /\.jsx?$/,
@@ -55,8 +51,7 @@ module.exports = {
 				exclude: /(node_modules|bower_components)/,
 				use: [
 					{
-						loader:
-							'babel-loader?presets[]=stage-0,presets[]=react,presets[]=es2015,plugins[]=transform-class-properties',
+						loader: 'babel-loader',
 					},
 				],
 			},
@@ -70,6 +65,8 @@ module.exports = {
 			containers: path.resolve(__dirname, './src/js/containers'),
 			experiments: path.resolve(__dirname, './experiments'),
 			helpers: path.resolve(__dirname, './src/js/helpers'),
+			react: path.resolve(__dirname, './node_modules/react'),
+
 			reducers: path.resolve(__dirname, './src/js/reducers'),
 			routes: path.resolve(__dirname, './src/js/routes'),
 			sagas: path.resolve(__dirname, './src/js/sagas'),

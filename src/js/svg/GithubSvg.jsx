@@ -8,6 +8,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import Svg from './Svg';
+
 export default class GithubSvg extends React.Component {
 	static propTypes = {
 		color: PropTypes.string,
@@ -23,7 +25,7 @@ export default class GithubSvg extends React.Component {
 
 	render() {
 		return (
-			<svg viewBox="0 0 37 31" {...this.props}>
+			<Svg viewBox="0 0 37 31" {...this.props}>
 				<g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
 					<path
 						fill={this.props.color}
@@ -38,7 +40,7 @@ export default class GithubSvg extends React.Component {
 	c7.258-2.42,12.489-9.27,12.489-17.343C36.556,8.185,28.373,0,18.278,0z"
 					/>
 				</g>
-			</svg>
+			</Svg>
 		);
 	}
 }
