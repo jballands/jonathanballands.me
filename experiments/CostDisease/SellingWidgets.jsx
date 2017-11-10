@@ -78,7 +78,7 @@ const DollarSign = styled.span`font-size: 28px;`;
 
 const RevenueValue = styled.div`
 	font-size: 28px;
-	color: #b042f4;
+	color: #5cdb71;
 	margin-top: 10px;
 `;
 
@@ -107,9 +107,11 @@ const RevenueBarOutline = styled.div`
 const RevenueBar = styled.div`
 	width: ${props => props.width}%;
 	height: 10px;
-	background: #b042f4;
+	background: #5cdb71;
 	transition: width 500ms ease;
 `;
+
+const INPUT_PRICE = 200;
 
 export default class Revenue extends React.Component {
 	static displayName = 'Revenue';
@@ -152,10 +154,20 @@ export default class Revenue extends React.Component {
 		let valid = pricePattern.test(val);
 		let error = !valid ? 'Enter a valid price.' : null;
 
+		if (!valid) {
+			return this.setState({
+				price: val,
+				invalidPrice: !valid,
+				priceError: error,
+			});
+		}
+
 		// Is this price too high?
-		const validPriceRange = parseInt(val, 10) < 100;
+		const validPriceRange = parseFloat(val, 10) < 100;
 		valid = valid && validPriceRange;
-		error = !validPriceRange ? 'Enter a price less than $100.' : error;
+		error = !validPriceRange
+			? "You can't sell widgets for $100 or more!"
+			: error;
 
 		valid
 			? this.setState({
@@ -180,19 +192,20 @@ export default class Revenue extends React.Component {
 
 	formatProductivity = val => {
 		if (val === 1) {
-			return '1 person';
+			return '1 unit';
 		}
-		return `${val} people`;
+		return `${val} units`;
 	};
 
 	render() {
 		const p = scaleLinear()
-			.domain([0, 9999])
+			.domain([1000, 7000])
 			.range([1, 100])
 			.clamp(true);
 
 		const output = this.state.input * this.state.productivity;
-		const revenue = output * this.state.validPrice;
+		const revenue =
+			output * this.state.validPrice - this.state.input * INPUT_PRICE;
 
 		return (
 			<RevenueContainer>
@@ -200,8 +213,8 @@ export default class Revenue extends React.Component {
 					<Slider
 						accentColor="#5cdb71"
 						min={1}
-						max={10}
-						title="Input"
+						max={20}
+						title={`Input ($${INPUT_PRICE}/material)`}
 						formatter={this.formatInput}
 						value={this.state.input}
 						onChange={this.onInputSliderChange}
@@ -211,7 +224,7 @@ export default class Revenue extends React.Component {
 					<Slider
 						accentColor={this.props.primaryColor}
 						min={1}
-						max={10}
+						max={20}
 						title="Productivity"
 						formatter={this.formatProductivity}
 						value={this.state.productivity}
@@ -228,7 +241,9 @@ export default class Revenue extends React.Component {
 				/>
 
 				<AnonTitle>Output</AnonTitle>
-				<OutputValue>{output} units</OutputValue>
+				<OutputValue>
+					{output} {output > 1 ? 'widgets' : 'widget'}
+				</OutputValue>
 
 				<DownArrow
 					rotate={90}
@@ -238,9 +253,9 @@ export default class Revenue extends React.Component {
 				/>
 
 				<Price
-					accentColor="#00e2b4"
+					accentColor="#5cdb71"
 					type="number"
-					title="Price"
+					title="Price per unit"
 					invalid={this.state.invalidPrice}
 					value={this.state.price}
 					onUpdate={this.onUpdatePrice}
@@ -256,9 +271,10 @@ export default class Revenue extends React.Component {
 					key={revenue}
 				/>
 
-				<AnonTitle>Possible Revenue</AnonTitle>
+				<AnonTitle>Revenue</AnonTitle>
 
 				<RevenueBarContainer>
+					<span>$</span>
 					<RevenueBarOutline>
 						<RevenueBar width={p(revenue)} />
 					</RevenueBarOutline>

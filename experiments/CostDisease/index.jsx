@@ -7,7 +7,7 @@ import ExplainationPanel from 'experiments/common/ExplainationPanel';
 
 import CPIOverTime from './CPIOverTime';
 import Productivity from './Productivity';
-import Revenue from './Revenue';
+import SellingWidgets from './SellingWidgets';
 
 const Title = styled.div`
 	font-size: 58px;
@@ -78,20 +78,20 @@ export default class CostDiseaseExperiment extends React.Component {
 	renderRevenueExplaination = () => (
 		<ExplainationContainer color={this.props.primaryColor}>
 			<p>
-				This visualization represents the supply chain of a company. You
-				can affect input, productivity, and price. Depending on what you
-				change, different areas of the supply chain will be affected,
-				and thus the amount of money that can be made will also change.
+				This visualization represents the supply chain of a company that
+				makes <a href="https://en.wikipedia.org/wiki/Widget">
+					widgets
+				</a>.
 			</p>
 			<p>
-				To make this more realistic, think of input as the amount of raw
-				material being bought to make a product, and productivity as the
-				amount of man-hours available.
+				You've negotiatied a deal with the manufactuer of raw materials
+				for widgets where the price of raw materials is $200/unit. This
+				cannot be changed. You've also done some market research and
+				found that nobody will buy widgets that cost $100 or more.
 			</p>
 			<p>
-				Note that this visualization assumes that the cost of raw
-				material and the amount of hours workers work remains constant.
-				It also assumes that all product is bought when it is produced.
+				Play with the input and productivty sliders, and determine which
+				slider has a greater affect on output (and therefore revenue).
 			</p>
 		</ExplainationContainer>
 	);
@@ -169,15 +169,13 @@ export default class CostDiseaseExperiment extends React.Component {
 						<a href="http://www.investopedia.com/terms/p/productivity.asp">
 							productivity
 						</a>{' '}
-						is the relationship between how much of something we
-						need to make some amount of something. It's one of the
-						fundamental ideas of economic theory, and it explains
-						why living in 2017 is generally considered "better" than
-						living in 1900.
-					</p>{' '}
-					<p>
-						In general, more productivity is seen as a good thing.
+						is the relationship between how much <b>input</b> we
+						need to make some amount of <b>output</b>. Generally
+						speaking, more productivity is seen as a good thing
+						because it increases everyone's living standards by
+						being able to pay people more money.
 					</p>
+
 					<blockquote>
 						<p>
 							Productivity is the ratio of inputs (the amount of
@@ -185,10 +183,32 @@ export default class CostDiseaseExperiment extends React.Component {
 							something we produce).
 						</p>
 					</blockquote>
+
 					<p>
-						To understand the relationship between inputs and
-						outputs, use the sliders below to try and achieve
-						maximum productivity (as represented by the red bar).
+						An <b>input</b> is anything that is required in order to
+						start production on an <b>output</b>. For example,
+						inputs for manufacturing cars include raw materials (to
+						actually make the cars), workers to put the raw
+						materials together, and assets (like tools and robots)
+						to help the workers build the cars.
+					</p>
+					<p>
+						Generally speaking, input usually requires{' '}
+						<a href="https://www.investopedia.com/terms/c/capital.asp">
+							captial
+						</a>{' '}
+						to attain, while output is simply the product of input.
+						And the amount of input required to make some amount of
+						output is called productivity.
+					</p>
+
+					<h2>A Simple Look at Productivity</h2>
+
+					<p>
+						Below is a program that visualizes the input/output
+						ratio as productivity. Play around with the sliders and
+						take a mental note of what happens to productivity as
+						you do.
 					</p>
 				</StyledKinesisPost>
 
@@ -196,36 +216,50 @@ export default class CostDiseaseExperiment extends React.Component {
 					<Productivity primaryColor={this.props.primaryColor} />
 				</Visualization>
 
-				<StyledKinesisPost>
+				<StyledKinesisPost color={this.props.primaryColor}>
 					<p>
-						It shouldn't take you too long to realize that to
-						achieve higher productivity, you simulataneously need to
-						do two things:
-					</p>
-
-					<ol>
-						<li>Decrease your input</li>
-						<li>Increase your output</li>
-					</ol>
-
-					<p>
-						Ok cool. So, why'd you want to increase your
+						As you play around with the visualization and notice the
+						productivity bar bouncing up and down, consider this:
+						what exactly do you have to do in order to maximize
 						productivity?
 					</p>
+					<p>
+						The simple answer is that you have to decrease the
+						amount of input you need while also increasing the
+						amount of output you produce. You have make more with
+						less; it almost looks as if you need to be able to make
+						more product out of thin air!This sounds impossible,
+						until you consider the role <b>technology</b> plays in
+						producing goods and services.
+					</p>
+					<p>
+						If you only consider input to be the indicator of how
+						much output you can make, that means the only possible
+						way for you to make more stuff would be to buy more raw
+						materials, hire more workers, or acquire more assets.
+					</p>
+					<p>
+						However: if we had another "lever" for you to pull, a
+						technology lever, then not only can you increase output
+						by having more input, but you can also increase output
+						by having better technology.
+					</p>
+					<p>
+						And having better technology corresponds to an increase
+						in productivity.
+					</p>
 
-					<p>
-						The fun thing about productivity is that productivity
-						growth generally increases the living standards of not
-						only the highest members of an organization, but the
-						living standards of all of its members. This is because
-						selling more output doesn't always entail buying more
-						input; sometimes increasing production is enough.
-					</p>
-					<p>
-						And of course, the more stuff you sell and the less
-						stuff you buy, the more money that goes into your bank
-						account.
-					</p>
+					<blockquote>
+						<p>
+							If there were only inputs and outputs, you could
+							only increase output with more raw materials,
+							workers, etc. But if you're able to have better
+							technology, you can make more output without
+							increasing input.
+						</p>
+					</blockquote>
+
+					<h2>A More Realistic Example</h2>
 				</StyledKinesisPost>
 
 				<Visualization>
@@ -233,14 +267,22 @@ export default class CostDiseaseExperiment extends React.Component {
 						color={this.props.primaryColor}
 						renderExplaination={this.renderRevenueExplaination}>
 						<VisualizationTitle color={this.props.primaryColor}>
-							Sphere of Influence
+							Selling Widgets on the Market
 						</VisualizationTitle>
 						<VisualizationSubtitle color={this.props.primaryColor}>
 							How Factors You Can Change Influence Revenue
 						</VisualizationSubtitle>
 					</ExplainationPanel>
-					<Revenue primaryColor={this.props.primaryColor} />
+					<SellingWidgets primaryColor={this.props.primaryColor} />
 				</Visualization>
+
+				<StyledKinesisPost color={this.props.primaryColor}>
+					<p>The big take away here is that, as </p>
+
+					<h1>The Productivity Paradox</h1>
+
+					<p />
+				</StyledKinesisPost>
 			</div>
 		);
 	}
