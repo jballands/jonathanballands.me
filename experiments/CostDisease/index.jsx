@@ -134,7 +134,7 @@ export default class CostDiseaseExperiment extends React.Component {
 				<Visualization>
 					<ExplainationPanel
 						color={this.props.primaryColor}
-						id="cpi-graph"
+						link="cpi-graph"
 						renderExplaination={this.renderCPIOverTimeExplaination}>
 						<VisualizationTitle
 							color={this.props.primaryColor}
@@ -277,8 +277,11 @@ export default class CostDiseaseExperiment extends React.Component {
 				<Visualization>
 					<ExplainationPanel
 						color={this.props.primaryColor}
+						link="selling-widgets"
 						renderExplaination={this.renderRevenueExplaination}>
-						<VisualizationTitle color={this.props.primaryColor}>
+						<VisualizationTitle
+							id="selling-widgets"
+							color={this.props.primaryColor}>
 							Selling Widgets on the Market
 						</VisualizationTitle>
 						<VisualizationSubtitle color={this.props.primaryColor}>

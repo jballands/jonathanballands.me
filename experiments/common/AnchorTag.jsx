@@ -12,7 +12,7 @@ export default class AnchorTag extends React.Component {
 	static propTypes = {
 		className: PropTypes.string,
 		color: PropTypes.string,
-		id: PropTypes.string,
+		link: PropTypes.string,
 		style: PropTypes.object,
 	};
 
@@ -21,7 +21,7 @@ export default class AnchorTag extends React.Component {
 			<AnchorTagContainer
 				className={this.props.className}
 				style={this.props.style}>
-				<a href={`#${this.props.id}`}>
+				<a href={`#${this.props.link}`}>
 					<LinkSvg color={this.props.color} />
 				</a>
 			</AnchorTagContainer>

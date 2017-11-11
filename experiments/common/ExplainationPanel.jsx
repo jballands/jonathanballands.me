@@ -74,7 +74,7 @@ export default class ExplainationPanel extends React.Component {
 	static propTypes = {
 		children: PropTypes.node,
 		color: PropTypes.string,
-		id: PropTypes.string,
+		link: PropTypes.string,
 		renderExplaination: PropTypes.func.isRequired,
 	};
 
@@ -113,13 +113,13 @@ export default class ExplainationPanel extends React.Component {
 
 	render() {
 		const { open } = this.state;
-		const { color, id } = this.props;
+		const { color, link } = this.props;
 
 		return (
 			<ExplainationPanelContainer open={open} color={color}>
 				<ExplainationPanelHeader>
 					<LeftSide open={open}>
-						{id && <StyledAnchorTag color={color} id="cpi-graph" />}
+						{link && <StyledAnchorTag color={color} link={link} />}
 						<div>{this.props.children}</div>
 					</LeftSide>
 					<RightSide onClick={this.handleOnClick}>
