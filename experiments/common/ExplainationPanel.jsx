@@ -13,11 +13,13 @@ import styled from 'styled-components';
 import HelpSvg from 'svg/HelpSvg';
 import CollapseSvg from 'svg/CollapseSvg';
 
+import AnchorTag from 'experiments/common/AnchorTag';
+
 const ExplainationPanelContainer = styled.div`
 	display: flex;
 	flex-flow: column nowrap;
 
-	margin: 20px 0;
+	margin-bottom: 50px;
 	transition: all 500ms ease;
 	border-bottom: 1px solid
 		${props => (props.open ? props.color : 'transparent')};
@@ -55,7 +57,14 @@ const ExplainationPanelContent = styled.div.attrs({
 	}
 `;
 
-const LeftSide = styled.div`flex: 1 0;`;
+const LeftSide = styled.div`
+	flex: 1 0;
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: center;
+`;
+
+const StyledAnchorTag = styled(AnchorTag)`margin-right: 15px;`;
 
 const RightSide = styled.div`flex: 0 1;`;
 
@@ -65,6 +74,7 @@ export default class ExplainationPanel extends React.Component {
 	static propTypes = {
 		children: PropTypes.node,
 		color: PropTypes.string,
+		id: PropTypes.string,
 		renderExplaination: PropTypes.func.isRequired,
 	};
 
@@ -103,11 +113,15 @@ export default class ExplainationPanel extends React.Component {
 
 	render() {
 		const { open } = this.state;
+		const { color, id } = this.props;
 
 		return (
-			<ExplainationPanelContainer open={open} color={this.props.color}>
+			<ExplainationPanelContainer open={open} color={color}>
 				<ExplainationPanelHeader>
-					<LeftSide open={open}>{this.props.children}</LeftSide>
+					<LeftSide open={open}>
+						{id && <StyledAnchorTag color={color} id="cpi-graph" />}
+						<div>{this.props.children}</div>
+					</LeftSide>
 					<RightSide onClick={this.handleOnClick}>
 						{this.renderIcon()}
 					</RightSide>

@@ -28,7 +28,7 @@ import housing7817 from './housing7817.json';
 
 const VIEWBOX = {
 	width: 500,
-	height: 470,
+	height: 400,
 };
 
 const MARGINS = {

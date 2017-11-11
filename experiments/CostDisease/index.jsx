@@ -21,12 +21,16 @@ const Title = styled.div`
 const Subtitle = styled.div`
 	font-size: 21px;
 	color: ${props => props.color};
-	margin-top: 10px;
+	margin: 10px 0 75px 0;
 	width: 100%;
 	text-align: center;
 `;
 
-const Visualization = styled.div`margin: 30px 0;`;
+const Visualization = styled.div`
+	margin: 75px 0;
+	display: flex;
+	flex-flow: column;
+`;
 
 const VisualizationTitle = styled.div`
 	font-size: 28px;
@@ -40,8 +44,11 @@ const VisualizationSubtitle = styled.div`
 `;
 
 const VisualizationCredit = styled.div`
-	font-size: 13px;
+	margin: 15px 0;
+	font-size: 14px;
 	color: ${props => props.color};
+	font-style: italic;
+	align-self: flex-end;
 `;
 
 const StyledKinesisPost = styled(KinesisPost)`margin-top: 40px;`;
@@ -127,18 +134,21 @@ export default class CostDiseaseExperiment extends React.Component {
 				<Visualization>
 					<ExplainationPanel
 						color={this.props.primaryColor}
+						id="cpi-graph"
 						renderExplaination={this.renderCPIOverTimeExplaination}>
-						<VisualizationTitle color={this.props.primaryColor}>
+						<VisualizationTitle
+							color={this.props.primaryColor}
+							id="cpi-graph">
 							Consumer Price Index of Various Sectors
 						</VisualizationTitle>
 						<VisualizationSubtitle color={this.props.primaryColor}>
 							From 1978 to 2017
 						</VisualizationSubtitle>
-						<VisualizationCredit color={this.props.primaryColor}>
-							Source: The United States Department of Labor
-						</VisualizationCredit>
 					</ExplainationPanel>
 					<CPIOverTime primaryColor={this.props.primaryColor} />
+					<VisualizationCredit color={this.props.primaryColor}>
+						Source: The United States Department of Labor
+					</VisualizationCredit>
 				</Visualization>
 
 				<StyledKinesisPost color={this.props.primaryColor}>
@@ -260,6 +270,8 @@ export default class CostDiseaseExperiment extends React.Component {
 					</blockquote>
 
 					<h2>A More Realistic Example</h2>
+
+					<p />
 				</StyledKinesisPost>
 
 				<Visualization>

@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-import LinkSvg from 'svg/LinkSvg';
+import LinkInTabSvg from 'svg/LinkInTabSvg';
 
 import { shark } from 'helpers/palette';
 
@@ -76,7 +76,7 @@ export default class LinkWrapper extends React.Component {
 			return (
 				<LinkWrapperContainer className={className} href={link}>
 					<span>{children}</span>
-					<LinkSvg color={shark} />
+					<LinkInTabSvg color={shark} />
 				</LinkWrapperContainer>
 			);
 		}
