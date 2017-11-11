@@ -39,6 +39,7 @@ class KinesisContentContainer extends React.Component {
 		content: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
 		contentLoading: PropTypes.bool,
 		filteredEntries: PropTypes.instanceOf(Immutable.OrderedMap),
+		location: PropTypes.object,
 		history: PropTypes.object,
 		match: PropTypes.object,
 		selectedEntry: PropTypes.object,
@@ -48,6 +49,7 @@ class KinesisContentContainer extends React.Component {
 		const {
 			chooseEntry,
 			filteredEntries,
+			location,
 			history,
 			match,
 			selectedEntry,
@@ -97,7 +99,7 @@ class KinesisContentContainer extends React.Component {
 	}
 
 	render() {
-		const { content, contentLoading, selectedEntry } = this.props;
+		const { content, contentLoading, location, selectedEntry } = this.props;
 
 		if (!selectedEntry) {
 			return null;
@@ -107,6 +109,7 @@ class KinesisContentContainer extends React.Component {
 				selectedEntry={selectedEntry}
 				content={content}
 				contentLoading={contentLoading}
+				location={location}
 			/>
 		);
 	}

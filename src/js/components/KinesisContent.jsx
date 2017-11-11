@@ -7,7 +7,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { animateScroll } from 'react-scroll';
+import scrollToElement from 'scroll-to-element';
 import styled from 'styled-components';
 
 import BackgroundGradient from 'components/BackgroundGradient';
@@ -33,11 +33,12 @@ export default class KinesisContent extends React.Component {
 	static propTypes = {
 		content: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
 		contentLoading: PropTypes.bool,
+		location: PropTypes.object,
 		selectedEntry: PropTypes.object.isRequired,
 	};
 
 	renderContent = () => {
-		const { content, contentLoading, selectedEntry } = this.props;
+		const { content, contentLoading, location, selectedEntry } = this.props;
 
 		if (contentLoading) {
 			return (
@@ -48,7 +49,10 @@ export default class KinesisContent extends React.Component {
 			);
 		}
 
-		animateScroll.scrollToTop();
+		// This is not the world's best soluton...
+		if (location.hash !== '') {
+			setTimeout(() => scrollToElement(location.hash), 500);
+		}
 
 		if (selectedEntry.type === Type.article) {
 			return (
