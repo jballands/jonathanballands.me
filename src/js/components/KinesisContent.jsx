@@ -7,10 +7,10 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import scrollToElement from 'scroll-to-element';
 import styled from 'styled-components';
 
 import BackgroundGradient from 'components/BackgroundGradient';
+import ContentScroller from 'components/ContentScroller';
 import KinesisArticle from 'components/KinesisArticle';
 import LoadingAnimation from 'components/LoadingAnimation';
 
@@ -33,26 +33,13 @@ export default class KinesisContent extends React.Component {
 	static propTypes = {
 		content: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
 		contentLoading: PropTypes.bool,
+		history: PropTypes.object,
 		location: PropTypes.object,
 		selectedEntry: PropTypes.object.isRequired,
 	};
 
 	renderContent = () => {
-		const { content, contentLoading, location, selectedEntry } = this.props;
-
-		if (contentLoading) {
-			return (
-				<StyledLoadingAnimation
-					color={selectedEntry.primaryColor}
-					text={selectedEntry.name}
-				/>
-			);
-		}
-
-		// This is not the world's best soluton...
-		if (location.hash !== '') {
-			setTimeout(() => scrollToElement(location.hash), 500);
-		}
+		const { content, selectedEntry } = this.props;
 
 		if (selectedEntry.type === Type.article) {
 			return (
@@ -70,12 +57,32 @@ export default class KinesisContent extends React.Component {
 		return <div>Ruh oh!</div>;
 	};
 
+	renderLoadingOrContent = () => {
+		const { contentLoading, history, location, selectedEntry } = this.props;
+
+		if (contentLoading) {
+			return (
+				<StyledLoadingAnimation
+					color={selectedEntry.primaryColor}
+					text={selectedEntry.name}
+				/>
+			);
+		}
+		return (
+			<ContentScroller history={history} location={location}>
+				{this.renderContent()}
+			</ContentScroller>
+		);
+	};
+
 	render() {
 		const { selectedEntry } = this.props;
 
 		return (
 			<BackgroundGradient backgroundColor={selectedEntry.secondaryColor}>
-				<KinesisContainer>{this.renderContent()}</KinesisContainer>
+				<KinesisContainer>
+					{this.renderLoadingOrContent()}
+				</KinesisContainer>
 			</BackgroundGradient>
 		);
 	}
