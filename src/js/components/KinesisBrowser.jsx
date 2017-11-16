@@ -16,9 +16,13 @@ import RadioItem from '@jballands/vespyr/lib/RadioItem';
 import BrowserDrawer from 'components/BrowserDrawer';
 import KinesisBrowserSearchResults from 'components/KinesisBrowserSearchResults';
 import KinesisHelpIcon from 'components/KinesisHelpIcon';
+import {
+	StickyDrawerContainer,
+	StickyDrawer,
+} from 'components/Drawer/StickyDrawer';
 
 import { helpEntry } from 'helpers/kinesisEntries';
-import { shark } from 'helpers/palette';
+import { shark, white } from 'helpers/palette';
 
 import MagnifyingGlassSvg from 'svg/MagnifyingGlassSvg';
 
@@ -54,6 +58,22 @@ export default class KinesisBrowser extends React.Component {
 		selectedEntry: PropTypes.object,
 		setSortOrder: PropTypes.func,
 		sortOrder: PropTypes.string,
+	};
+
+	state = {
+		drawerOpen: true,
+	};
+
+	handleOpenDrawer = () => {
+		this.setState({
+			drawerOpen: true,
+		});
+	};
+
+	handleCloseDrawer = () => {
+		this.setState({
+			drawerOpen: false,
+		});
 	};
 
 	handleSearchChange = terms => {
@@ -117,24 +137,36 @@ export default class KinesisBrowser extends React.Component {
 		} = this.props;
 
 		return (
-			<BrowserDrawer
-				backgroundColor={selectedEntry.secondaryColor}
-				color={selectedEntry.primaryColor}
-				renderAux={this.renderHelp}
-				title="Posts">
-				{close => (
-					<KinesisBrowserContainer>
-						{this.renderControls()}
-						<KinesisBrowserSearchResults
-							chooseEntry={chooseEntry}
-							closeDrawer={close}
-							filteredEntries={filteredEntries}
-							match={match}
-							selectedEntry={selectedEntry}
-						/>
-					</KinesisBrowserContainer>
-				)}
-			</BrowserDrawer>
+			// <BrowserDrawer
+			// 	backgroundColor={selectedEntry.secondaryColor}
+			// 	color={selectedEntry.primaryColor}
+			// 	renderAux={this.renderHelp}
+			// 	title="Posts">
+			// 	{close => (
+			// 		<KinesisBrowserContainer>
+			// 			{this.renderControls()}
+			// 			<KinesisBrowserSearchResults
+			// 				chooseEntry={chooseEntry}
+			// 				closeDrawer={close}
+			// 				filteredEntries={filteredEntries}
+			// 				match={match}
+			// 				selectedEntry={selectedEntry}
+			// 			/>
+			// 		</KinesisBrowserContainer>
+			// 	)}
+			// </BrowserDrawer>
+			<StickyDrawerContainer>
+				<StickyDrawer
+					closedBackgroundColor={selectedEntry.secondaryColor}
+					closeDrawer={this.handleCloseDrawer}
+					closeOnSticky
+					color={selectedEntry.primaryColor}
+					open={this.state.drawerOpen}
+					openBackgroundColor={white}
+					openDrawer={this.handleOpenDrawer}>
+					<span onClick={this.handleCloseDrawer}>Rawr</span>
+				</StickyDrawer>
+			</StickyDrawerContainer>
 		);
 	}
 }
