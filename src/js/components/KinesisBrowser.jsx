@@ -16,10 +16,7 @@ import RadioItem from '@jballands/vespyr/lib/RadioItem';
 import BrowserDrawer from 'components/BrowserDrawer';
 import KinesisBrowserSearchResults from 'components/KinesisBrowserSearchResults';
 import KinesisHelpIcon from 'components/KinesisHelpIcon';
-import {
-	StickyDrawerContainer,
-	StickyDrawer,
-} from 'components/Drawer/StickyDrawer';
+import StickyDrawer from 'components/Drawer/StickyDrawer';
 
 import { helpEntry } from 'helpers/kinesisEntries';
 import { shark, white } from 'helpers/palette';
@@ -155,18 +152,16 @@ export default class KinesisBrowser extends React.Component {
 			// 		</KinesisBrowserContainer>
 			// 	)}
 			// </BrowserDrawer>
-			<StickyDrawerContainer>
-				<StickyDrawer
-					closedBackgroundColor={selectedEntry.secondaryColor}
-					closeDrawer={this.handleCloseDrawer}
-					closeOnSticky
-					color={selectedEntry.primaryColor}
-					open={this.state.drawerOpen}
-					openBackgroundColor={white}
-					openDrawer={this.handleOpenDrawer}>
-					<span onClick={this.handleCloseDrawer}>Rawr</span>
-				</StickyDrawer>
-			</StickyDrawerContainer>
+			<StickyDrawer
+				closedBackgroundColor={selectedEntry.secondaryColor}
+				closeDrawer={this.handleCloseDrawer}
+				closeOnSticky
+				color={selectedEntry.primaryColor}
+				open={this.state.drawerOpen}
+				openBackgroundColor={white}
+				openDrawer={this.handleOpenDrawer}>
+				<span onClick={this.handleCloseDrawer}>Rawr</span>
+			</StickyDrawer>
 		);
 	}
 }
