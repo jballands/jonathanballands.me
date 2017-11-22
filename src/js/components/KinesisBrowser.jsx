@@ -13,15 +13,16 @@ import TextInput from '@jballands/vespyr/lib/TextInput';
 import RadioGroup from '@jballands/vespyr/lib/RadioGroup';
 import RadioItem from '@jballands/vespyr/lib/RadioItem';
 
-import BrowserDrawer from 'components/BrowserDrawer';
+import StickyDrawer from 'components/StickyDrawer';
 import KinesisBrowserSearchResults from 'components/KinesisBrowserSearchResults';
 import KinesisHelpIcon from 'components/KinesisHelpIcon';
-import StickyDrawer from 'components/Drawer/StickyDrawer';
 
 import { helpEntry } from 'helpers/kinesisEntries';
-import { shark, white } from 'helpers/palette';
+import { shark } from 'helpers/palette';
 
+import LeftArrowSvg from 'svg/LeftArrowSvg';
 import MagnifyingGlassSvg from 'svg/MagnifyingGlassSvg';
+import OpenDrawerSvg from 'svg/OpenDrawerSvg';
 
 const KinesisBrowserContainer = styled.div`
 	width: 100%;
@@ -59,6 +60,7 @@ export default class KinesisBrowser extends React.Component {
 
 	state = {
 		drawerOpen: true,
+		overrideAutoCollapse: false,
 	};
 
 	handleOpenDrawer = () => {
@@ -125,6 +127,8 @@ export default class KinesisBrowser extends React.Component {
 		);
 	};
 
+	renderDrawerContents = () => {};
+
 	render() {
 		const {
 			chooseEntry,
@@ -152,16 +156,7 @@ export default class KinesisBrowser extends React.Component {
 			// 		</KinesisBrowserContainer>
 			// 	)}
 			// </BrowserDrawer>
-			<StickyDrawer
-				closedBackgroundColor={selectedEntry.secondaryColor}
-				closeDrawer={this.handleCloseDrawer}
-				closeOnSticky
-				color={selectedEntry.primaryColor}
-				open={this.state.drawerOpen}
-				openBackgroundColor={white}
-				openDrawer={this.handleOpenDrawer}>
-				<span onClick={this.handleCloseDrawer}>Rawr</span>
-			</StickyDrawer>
+			<StickyDrawer>{this.renderDrawerContents()}</StickyDrawer>
 		);
 	}
 }

@@ -7,7 +7,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { StickyContainer, Sticky } from 'react-sticky';
+import { StickyContainer, Sticky } from '@jballands/react-sticky';
 import { spring, Motion } from 'react-motion';
 import styled from 'styled-components';
 
@@ -99,6 +99,14 @@ export default class BrowserDrawer extends React.Component {
 		overrideAutoCollapse: !this.props.autocollapseOnSticky,
 	};
 
+	handleOnScroll = ({ wasSticky, isSticky }) => {
+		const { overrideAutoCollapse } = this.state;
+
+		if (!wasSticky && isSticky && !overrideAutoCollapse) {
+			this.closeDrawer();
+		}
+	};
+
 	closeDrawer = () => {
 		this.setState({
 			drawerOpen: false,
@@ -156,17 +164,8 @@ export default class BrowserDrawer extends React.Component {
 		);
 	};
 
-	renderStickyDrawer = (
-		distanceFromTop,
-		distanceFromBottom,
-		isSticky,
-		style,
-	) => {
-		const { drawerOpen, overrideAutoCollapse } = this.state;
-
-		if (isSticky && !overrideAutoCollapse) {
-			this.closeDrawer();
-		}
+	renderStickyDrawer = (distanceFromTop, distanceFromBottom, style) => {
+		const { drawerOpen } = this.state;
 
 		return (
 			<div style={style}>
@@ -189,17 +188,15 @@ export default class BrowserDrawer extends React.Component {
 						open={drawerOpen}
 						backgroundColor={backgroundColor}>
 						<StyledStickyContainer>
-							<Sticky>
+							<Sticky onScroll={this.handleOnScroll}>
 								{({
 									distanceFromTop,
 									distanceFromBottom,
-									isSticky,
 									style,
 								}) =>
 									this.renderStickyDrawer(
 										distanceFromTop,
 										distanceFromBottom,
-										isSticky,
 										style,
 									)}
 							</Sticky>
