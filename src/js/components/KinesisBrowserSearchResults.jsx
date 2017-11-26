@@ -16,7 +16,7 @@ import { alto, shark } from 'helpers/palette';
 
 const KinesisBrowserSearchResultsContainer = styled.div`
 	margin-top: 25px;
-	overflow-y: scroll;
+	overflow-y: auto;
 	flex: 1 0;
 	border-top: 1px solid ${alto};
 `;

@@ -24,13 +24,6 @@ import LeftArrowSvg from 'svg/LeftArrowSvg';
 import MagnifyingGlassSvg from 'svg/MagnifyingGlassSvg';
 import OpenDrawerSvg from 'svg/OpenDrawerSvg';
 
-const KinesisBrowserContainer = styled.div`
-	width: 100%;
-	height: 100%;
-	display: flex;
-	flex-flow: column nowrap;
-`;
-
 const StyledTextInput = styled(TextInput)`
 	width: 100%;
 `;
@@ -56,6 +49,7 @@ const OpenBrowserDrawerContainer = styled.div`
 	width: 100%;
 	display: flex;
 	flex-flow: column nowrap;
+	height: 100%;
 `;
 
 const TitleContainer = styled.div`
