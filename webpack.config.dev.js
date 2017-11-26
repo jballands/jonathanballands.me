@@ -58,7 +58,7 @@ module.exports = {
 		],
 	},
 	resolve: {
-		extensions: ['.js', '.jsx'],
+		extensions: ['.js', '.jsx', '.md'],
 		alias: {
 			actions: path.resolve(__dirname, './src/js/actions'),
 			components: path.resolve(__dirname, './src/js/components'),
@@ -79,6 +79,7 @@ module.exports = {
 		publicPath: '/assets/',
 		contentBase: './public',
 		historyApiFallback: true,
+		watchContentBase: true,
 		port: 3001,
 	},
 };
