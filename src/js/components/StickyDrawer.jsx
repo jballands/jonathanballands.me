@@ -39,13 +39,10 @@ export default class StickyDrawer extends React.Component {
 		closedWidth: PropTypes.number,
 		children: PropTypes.node,
 		color: PropTypes.string,
-		drawerOpen: PropTypes.bool,
 		onScroll: PropTypes.func,
 		open: PropTypes.bool,
-		openBackgroundColor: PropTypes.func,
+		openBackgroundColor: PropTypes.string,
 		openWidth: PropTypes.number,
-		renderAux: PropTypes.func,
-		title: PropTypes.string,
 	};
 
 	static defaultProps = {
@@ -55,7 +52,12 @@ export default class StickyDrawer extends React.Component {
 		openWidth: 425,
 	};
 
-	renderStickyDrawer = (distanceFromTop, distanceFromBottom, style) => {
+	renderStickyDrawer = (
+		distanceFromTop,
+		distanceFromBottom,
+		style,
+		width,
+	) => {
 		let compensation = 0;
 		let padding = 0;
 		if (distanceFromTop > 0) {
@@ -68,6 +70,7 @@ export default class StickyDrawer extends React.Component {
 		const compensatedStyle = {
 			paddingTop: `${padding}px`,
 			height: `calc(100vh - ${compensation}px)`,
+			width: `${width}px`,
 		};
 
 		const { children } = this.props;
@@ -89,10 +92,12 @@ export default class StickyDrawer extends React.Component {
 			openWidth,
 		} = this.props;
 
+		const width = open ? openWidth : closedWidth;
+
 		return (
 			<Motion
 				style={{
-					width: open ? spring(openWidth) : spring(closedWidth),
+					width: spring(width),
 				}}>
 				{interpolated => (
 					<BrowserDrawerContainer
@@ -111,7 +116,9 @@ export default class StickyDrawer extends React.Component {
 										distanceFromTop,
 										distanceFromBottom,
 										style,
-									)}
+										width,
+									)
+								}
 							</Sticky>
 						</StyledStickyContainer>
 					</BrowserDrawerContainer>

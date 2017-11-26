@@ -47,16 +47,13 @@ export default class KinesisBrowserSearchResults extends React.Component {
 
 	static propTypes = {
 		chooseEntry: PropTypes.func,
-		closeDrawer: PropTypes.func,
 		filteredEntries: PropTypes.instanceOf(Immutable.OrderedMap),
 		match: PropTypes.object,
 		selectedEntry: PropTypes.object,
 	};
 
 	handleChooseKinesisEntry = id => {
-		const { closeDrawer, chooseEntry } = this.props;
-
-		closeDrawer();
+		const { chooseEntry } = this.props;
 		chooseEntry(id);
 	};
 

@@ -18,7 +18,7 @@ import KinesisBrowserSearchResults from 'components/KinesisBrowserSearchResults'
 import KinesisHelpIcon from 'components/KinesisHelpIcon';
 
 import { helpEntry } from 'helpers/kinesisEntries';
-import { shark } from 'helpers/palette';
+import { shark, white } from 'helpers/palette';
 
 import LeftArrowSvg from 'svg/LeftArrowSvg';
 import MagnifyingGlassSvg from 'svg/MagnifyingGlassSvg';
@@ -31,7 +31,9 @@ const KinesisBrowserContainer = styled.div`
 	flex-flow: column nowrap;
 `;
 
-const StyledTextInput = styled(TextInput)`width: 100%;`;
+const StyledTextInput = styled(TextInput)`
+	width: 100%;
+`;
 
 const StyledRadioGroup = styled(RadioGroup)`
 	width: 100%;
@@ -41,6 +43,46 @@ const StyledRadioGroup = styled(RadioGroup)`
 const FiltersContainer = styled.div`
 	margin-left: 20px;
 	width: calc(100% - 40px);
+`;
+
+const OpenDrawerButton = styled.div`
+	padding: 20px;
+	&:hover {
+		cursor: pointer;
+	}
+`;
+
+const OpenBrowserDrawerContainer = styled.div`
+	width: 100%;
+	display: flex;
+	flex-flow: column nowrap;
+`;
+
+const TitleContainer = styled.div`
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: center;
+	justify-content: space-between;
+	margin: 20px;
+`;
+
+const TitleButton = styled.div`
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: center;
+
+	&:hover {
+		cursor: pointer;
+	}
+`;
+
+const Title = styled.span`
+	font-weight: 700;
+	font-size: 22px;
+	text-transform: uppercase;
+	margin-left: 10px;
+	color: ${props => props.color};
+	transition: color 500ms ease;
 `;
 
 export default class KinesisBrowser extends React.Component {
@@ -63,9 +105,18 @@ export default class KinesisBrowser extends React.Component {
 		overrideAutoCollapse: false,
 	};
 
+	handleOnScroll = ({ isSticky, wasSticky }) => {
+		const { overrideAutoCollapse } = this.state;
+
+		if (!wasSticky && isSticky && !overrideAutoCollapse) {
+			this.handleCloseDrawer();
+		}
+	};
+
 	handleOpenDrawer = () => {
 		this.setState({
 			drawerOpen: true,
+			overrideAutoCollapse: true,
 		});
 	};
 
@@ -73,6 +124,11 @@ export default class KinesisBrowser extends React.Component {
 		this.setState({
 			drawerOpen: false,
 		});
+	};
+
+	handleChooseEntry = id => {
+		this.props.chooseEntry(id);
+		this.handleCloseDrawer();
 	};
 
 	handleSearchChange = terms => {
@@ -85,78 +141,97 @@ export default class KinesisBrowser extends React.Component {
 
 	handleKinesisHelp = () => {
 		this.props.chooseEntry(helpEntry.id);
+		this.handleCloseDrawer();
 	};
 
-	renderHelp = close => {
-		const { match } = this.props;
+	renderClosedDrawer = () => {
+		const { selectedEntry } = this.props;
+
 		return (
-			<KinesisHelpIcon
-				closeDrawer={close}
-				color={this.props.selectedEntry.primaryColor}
-				linkTo={`${match.url}/${helpEntry.id}`}
-				onClick={this.handleKinesisHelp}
-			/>
+			<OpenDrawerButton onClick={this.handleOpenDrawer}>
+				<OpenDrawerSvg color={selectedEntry.primaryColor} height={27} />
+			</OpenDrawerButton>
 		);
 	};
 
-	renderControls = () => {
-		const { searchTerms, selectedEntry, sortOrder } = this.props;
-
-		return (
-			<FiltersContainer>
-				<StyledTextInput
-					color={shark}
-					accentColor={selectedEntry.primaryColor}
-					title="Search"
-					hint="Search for topics, hashtags, & more"
-					icon={<MagnifyingGlassSvg color={shark} />}
-					value={searchTerms}
-					onUpdate={this.handleSearchChange}
-				/>
-
-				<StyledRadioGroup
-					defaultSelection={sortOrder}
-					title="Sort Order"
-					color={shark}
-					accentColor={selectedEntry.primaryColor}
-					onOptionClick={this.handleSetSortOrder}>
-					<RadioItem id="later">Later Posts First</RadioItem>
-					<RadioItem id="earlier">Earlier Posts First</RadioItem>
-				</StyledRadioGroup>
-			</FiltersContainer>
-		);
-	};
-
-	renderDrawerContents = () => {};
-
-	render() {
+	renderOpenDrawer = () => {
 		const {
-			chooseEntry,
 			filteredEntries,
 			match,
+			searchTerms,
 			selectedEntry,
+			sortOrder,
 		} = this.props;
 
 		return (
-			// <BrowserDrawer
-			// 	backgroundColor={selectedEntry.secondaryColor}
-			// 	color={selectedEntry.primaryColor}
-			// 	renderAux={this.renderHelp}
-			// 	title="Posts">
-			// 	{close => (
-			// 		<KinesisBrowserContainer>
-			// 			{this.renderControls()}
-			// 			<KinesisBrowserSearchResults
-			// 				chooseEntry={chooseEntry}
-			// 				closeDrawer={close}
-			// 				filteredEntries={filteredEntries}
-			// 				match={match}
-			// 				selectedEntry={selectedEntry}
-			// 			/>
-			// 		</KinesisBrowserContainer>
-			// 	)}
-			// </BrowserDrawer>
-			<StickyDrawer>{this.renderDrawerContents()}</StickyDrawer>
+			<OpenBrowserDrawerContainer>
+				<TitleContainer>
+					<TitleButton onClick={this.handleCloseDrawer}>
+						<LeftArrowSvg
+							width={21}
+							height={21}
+							color={selectedEntry.primaryColor}
+						/>
+						<Title color={selectedEntry.primaryColor}>Posts</Title>
+					</TitleButton>
+					<KinesisHelpIcon
+						color={this.props.selectedEntry.primaryColor}
+						linkTo={`${match.url}/${helpEntry.id}`}
+						onClick={this.handleKinesisHelp}
+					/>
+				</TitleContainer>
+
+				<FiltersContainer>
+					<StyledTextInput
+						color={shark}
+						accentColor={selectedEntry.primaryColor}
+						title="Search"
+						hint="Search for topics, hashtags, & more"
+						icon={<MagnifyingGlassSvg color={shark} />}
+						value={searchTerms}
+						onUpdate={this.handleSearchChange}
+					/>
+
+					<StyledRadioGroup
+						defaultSelection={sortOrder}
+						title="Sort Order"
+						color={shark}
+						accentColor={selectedEntry.primaryColor}
+						onOptionClick={this.handleSetSortOrder}>
+						<RadioItem id="later">Later Posts First</RadioItem>
+						<RadioItem id="earlier">Earlier Posts First</RadioItem>
+					</StyledRadioGroup>
+				</FiltersContainer>
+
+				<KinesisBrowserSearchResults
+					chooseEntry={this.handleChooseEntry}
+					filteredEntries={filteredEntries}
+					match={match}
+					selectedEntry={selectedEntry}
+				/>
+			</OpenBrowserDrawerContainer>
+		);
+	};
+
+	renderDrawerContents = () => {
+		const { drawerOpen } = this.state;
+		return drawerOpen ? this.renderOpenDrawer() : this.renderClosedDrawer();
+	};
+
+	render() {
+		const { selectedEntry } = this.props;
+		const { drawerOpen, overrideAutoCollapse } = this.state;
+
+		return (
+			<StickyDrawer
+				autocollapseOnSticky={overrideAutoCollapse}
+				closedBackgroundColor={selectedEntry.secondaryColor}
+				color={selectedEntry.primaryColor}
+				onScroll={this.handleOnScroll}
+				open={drawerOpen}
+				openBackgroundColor={white}>
+				{this.renderDrawerContents()}
+			</StickyDrawer>
 		);
 	}
 }
