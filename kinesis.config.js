@@ -38,6 +38,10 @@ export class Post extends Immutable.Record({
 //
 
 export const KinesisHashtags = {
+	design: {
+		id: 'design',
+		displayName: 'design',
+	},
 	dev: {
 		id: 'dev',
 		displayName: 'dev',
@@ -60,7 +64,7 @@ export const kinesisPosts = [
 	new Post({
 		name: 'Hello jb.me 3',
 		date: new Date(2017, 9, 7),
-		hashtags: [KinesisHashtags.dev],
+		hashtags: [KinesisHashtags.dev, KinesisHashtags.design],
 		type: Type.article,
 		resource: '/markdown/helloJBMe.md',
 		primaryColor: '#4ecdc4',

@@ -14,8 +14,6 @@ import moment from 'moment';
 
 import KinesisPost from 'components/KinesisPost';
 
-import { shark } from 'helpers/palette';
-
 const KinesisTitle = styled.div`
 	font-size: 42px;
 	font-weight: 700;
@@ -31,7 +29,9 @@ const KinesisSubtitle = styled.div`
 	margin-top: 5px;
 `;
 
-const StyledKinesisPost = styled(KinesisPost)`margin-top: 40px;`;
+const StyledKinesisPost = styled(KinesisPost)`
+	margin-top: 40px;
+`;
 
 export default class KinesisEntry extends React.Component {
 	static displayName = 'KinesisEntry';

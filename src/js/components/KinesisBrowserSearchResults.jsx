@@ -12,7 +12,7 @@ import styled from 'styled-components';
 
 import KinesisBrowserSearchResult from 'components/KinesisBrowserSearchResult';
 
-import { alto, shark } from 'helpers/palette';
+import { alto, silver } from 'helpers/palette';
 
 const KinesisBrowserSearchResultsContainer = styled.div`
 	margin-top: 25px;
@@ -32,14 +32,15 @@ const NoSearchResultsContainer = styled.div`
 const NoSearchResultsTitle = styled.div`
 	margin-top: 25px;
 	color: ${props => props.color};
-	font-size: 20px;
+	font-size: 21px;
 	text-transform: uppercase;
+	font-weight: 700;
 `;
 
 const NoSearchResultsDetails = styled.div`
-	color: ${shark};
-	font-size: 14px;
-	margin-top: 5px;
+	color: ${silver};
+	font-size: 13px;
+	margin-top: 12px;
 `;
 
 export default class KinesisBrowserSearchResults extends React.Component {
@@ -64,7 +65,7 @@ export default class KinesisBrowserSearchResults extends React.Component {
 			return (
 				<NoSearchResultsContainer>
 					<NoSearchResultsTitle color={selectedEntry.primaryColor}>
-						No Results :(
+						No Results 😢
 					</NoSearchResultsTitle>
 					<NoSearchResultsDetails>
 						Try a different search, or type something more broad

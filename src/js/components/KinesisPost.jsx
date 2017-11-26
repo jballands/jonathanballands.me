@@ -18,7 +18,7 @@ const KinesisStyle = styled.div`
 	flex-flow: column;
 
 	p {
-		margin: 10px 0;
+		margin: 20px 0;
 	}
 
 	h1,
