@@ -12,7 +12,7 @@ export const white = '#fff';
 export const mercury = '#e8e8e8';
 export const alto = '#d1d1d1';
 export const silver = '#a3a3a3';
-export const shark = '#24292e';
+export const shark = '#282c34';
 export const black = '#000';
 
 //

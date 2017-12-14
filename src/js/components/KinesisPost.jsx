@@ -9,7 +9,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { shark, white } from 'helpers/palette';
+import { black, mercury, shark } from 'helpers/palette';
 
 const KinesisStyle = styled.div`
 	color: ${shark};
@@ -91,10 +91,8 @@ const KinesisStyle = styled.div`
 	}
 
 	code {
-		padding: 2px 4px;
-		background: ${shark};
-		border-radius: 3px;
-		color: ${white};
+		color: ${black};
+		font-weight: 700;
 	}
 
 	pre {
@@ -105,6 +103,7 @@ const KinesisStyle = styled.div`
 		code {
 			padding: 0;
 			background: transparent;
+			color: ${shark};
 		}
 	}
 `;

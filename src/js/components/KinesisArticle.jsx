@@ -13,6 +13,7 @@ import styled from 'styled-components';
 import moment from 'moment';
 
 import KinesisPost from 'components/KinesisPost';
+import KinesisPostCodeBlock from 'components/KinesisPostCodeBlock';
 
 const KinesisTitle = styled.div`
 	font-size: 42px;
@@ -58,7 +59,10 @@ export default class KinesisEntry extends React.Component {
 					<div>{selectedEntry.getReadableHashtags()}</div>
 				</KinesisSubtitle>
 				<StyledKinesisPost color={selectedEntry.primaryColor}>
-					<Markdown source={content} />
+					<Markdown
+						renderers={{ CodeBlock: KinesisPostCodeBlock }}
+						source={content}
+					/>
 				</StyledKinesisPost>
 			</div>
 		);
