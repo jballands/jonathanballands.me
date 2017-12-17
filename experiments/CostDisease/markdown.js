@@ -1,16 +1,15 @@
 export const introMd = `
 Ever wonder why in our high-tech, relatively progressive
-world, why the price of things like education and
-healthcare are constantly getting more expensive, while
-things like clothing and furniture are relatively
-stagnant, or even getting cheaper?
+world why the price of things like education and
+healthcare are constantly getting more expensive? If we're
+so advanced, it should cost less to get the care you
+would receive 10 years ago, right?
 
-Your thoughts can be substantiated in data. The cost of
-college tuition has increased more than 7 times in the
+The cost of college tuition has increased more than 7 times in the
 past 27 years, while the cost of healthcare has
 increased more than 5 times. Meanwhile, the cost of
 goods like clothing and furniture has pretty much stayed
-the same.
+the same, and in recent years been getting cheaper.
 `;
 
 export const baumolMd = `
@@ -97,6 +96,29 @@ in productivity.
 > increasing input.
 
 ## A More Realistic Example
+
+It's all well and good to talk abstractly about productivity,
+but sometimes a more concrete example can help solidify the
+forces at play.
+
+The following program allows you to control the amount of
+*input* and *productivity* in a factory that produces *output*
+for a certain *price*. Now imagine you're the owner of this
+factory. You want to earn as much money as possible. This is
+represented by the [revenue](https://www.investopedia.com/terms/r/revenue.asp).
+
+One way to make more money is to increase the price of the widgets
+you're making. However, due to the laws of [supply and demand](https://www.investopedia.com/university/economics/economics3.asp)
+this isn't really the best idea, so you need to find another way to
+increase revenue without increasing the price.
+
+Really, you can do one of two things:
+
+* Increase the amount of input
+* Increase the amount of productivity
+
+Play with the program below to see which slider increases
+revenue *more quickly*: increasing revenue, or increase productivity?
 `;
 
 // --------------------------------------------------------------------

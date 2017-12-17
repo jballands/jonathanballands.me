@@ -29,13 +29,13 @@ const Title = styled.div`
 const Subtitle = styled.div`
 	font-size: 21px;
 	color: ${props => props.color};
-	margin: 10px 0 75px 0;
+	margin: 10px 0 50px 0;
 	width: 100%;
 	text-align: center;
 `;
 
 const Visualization = styled.div`
-	margin: 75px 0;
+	margin: 50px 0;
 	display: flex;
 	flex-flow: column;
 `;
