@@ -8,10 +8,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import moment from 'moment';
 
 import BackgroundGradient from 'components/BackgroundGradient';
 import ContentScroller from 'components/ContentScroller';
-import KinesisArticle from 'components/KinesisArticle';
+import KinesisMarkdown from 'components/KinesisMarkdown';
 import LoadingAnimation from 'components/LoadingAnimation';
 
 import { Type } from '~/kinesis.config.js';
@@ -25,6 +26,25 @@ const KinesisContainer = styled.div`
 	margin: 70px 0;
 	width: 75%;
 	max-width: 800px;
+`;
+
+const KinesisArticleTitle = styled.div`
+	font-size: 42px;
+	font-weight: 700;
+	color: ${props => props.color};
+	font-family: 'Raleway', sans-serif;
+	text-transform: uppercase;
+`;
+
+const KinesisArticleSubtitle = styled.div`
+	display: flex;
+	flex-flow: column nowrap;
+	color: ${props => props.color};
+	margin-top: 5px;
+`;
+
+const KinesisArticleMarkdown = styled(KinesisMarkdown)`
+	margin-top: 35px;
 `;
 
 export default class KinesisContent extends React.Component {
@@ -43,10 +63,25 @@ export default class KinesisContent extends React.Component {
 
 		if (selectedEntry.type === Type.article) {
 			return (
-				<KinesisArticle
-					content={content}
-					selectedEntry={selectedEntry}
-				/>
+				<div>
+					<KinesisArticleTitle color={selectedEntry.primaryColor}>
+						{selectedEntry.name}
+					</KinesisArticleTitle>
+
+					<KinesisArticleSubtitle color={selectedEntry.primaryColor}>
+						<div>
+							{selectedEntry.date &&
+								moment(selectedEntry.date).format(
+									'MMMM Do, YYYY',
+								)}
+						</div>
+						<div>{selectedEntry.getReadableHashtags()}</div>
+					</KinesisArticleSubtitle>
+					<KinesisArticleMarkdown
+						color={selectedEntry.primaryColor}
+						content={content}
+					/>
+				</div>
 			);
 		} else if (selectedEntry.type === Type.experiment) {
 			return React.createElement(content, {

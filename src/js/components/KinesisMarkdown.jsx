@@ -1,15 +1,18 @@
 //
 //	jballands/jonathanballands.me
-//	KinesisPost.jsx
+//	KinesisMarkdown.jsx
 //
 //	© 2017 Jonathan Ballands
 //
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import Markdown from 'react-markdown';
 import styled from 'styled-components';
 
-import { black, mercury, shark } from 'helpers/palette';
+import KinesisPostCodeBlock from 'components/KinesisPostCodeBlock';
+
+import { black, shark } from 'helpers/palette';
 
 const KinesisStyle = styled.div`
 	color: ${shark};
@@ -108,23 +111,25 @@ const KinesisStyle = styled.div`
 	}
 `;
 
-export default class KinesisPost extends React.Component {
-	static displayName = 'KinesisPost';
+export default class KinesisMarkdown extends React.Component {
+	static displayName = 'KinesisMarkdown';
 
 	static propTypes = {
 		className: PropTypes.string,
-		children: PropTypes.node,
 		color: PropTypes.string,
+		content: PropTypes.string,
 		style: PropTypes.object,
 	};
 
 	render() {
+		const { className, color, content, style } = this.props;
+
 		return (
-			<KinesisStyle
-				className={this.props.className}
-				color={this.props.color}
-				style={this.props.style}>
-				{this.props.children}
+			<KinesisStyle className={className} color={color} style={style}>
+				<Markdown
+					renderers={{ CodeBlock: KinesisPostCodeBlock }}
+					source={content}
+				/>
 			</KinesisStyle>
 		);
 	}
