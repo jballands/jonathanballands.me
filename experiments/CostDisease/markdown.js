@@ -26,6 +26,8 @@ like education, has skyrocketed compared to goods, like clothing.
 
 Before we get to the meat of this, we need to understand a few things about
 an economic concept known as **productivity**.
+
+(If you want to skip the productivity lecture, just click [here](#the-productivity-paradox)).
 `;
 
 export const productivityMd = `
@@ -112,6 +114,10 @@ In the visualization, we assume that acquiring more productivty
 doesn't cost anything. This wouldn't be true if more productivity was
 acquired by hiring more workers, for example, since workers require
 increased payroll.
+`;
+
+export const paradoxMd = `
+# The Productivity Paradox
 `;
 
 // --------------------------------------------------------------------

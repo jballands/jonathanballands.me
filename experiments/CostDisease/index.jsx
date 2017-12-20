@@ -16,6 +16,7 @@ import {
 	cpiVizExplainationMd,
 	revenueExplainationMd,
 	realisticExampleTheoryMd,
+	paradoxMd,
 } from './markdown';
 
 const Title = styled.div`
@@ -160,6 +161,11 @@ export default class CostDiseaseExperiment extends React.Component {
 				<KinesisMarkdown
 					color={this.props.primaryColor}
 					content={realisticExampleTheoryMd}
+				/>
+
+				<KinesisMarkdown
+					color={this.props.primaryColor}
+					content={paradoxMd}
 				/>
 			</div>
 		);

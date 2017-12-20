@@ -10,7 +10,8 @@ import PropTypes from 'prop-types';
 import Markdown from 'react-markdown';
 import styled from 'styled-components';
 
-import KinesisPostCodeBlock from 'components/KinesisPostCodeBlock';
+import KinesisMarkdownCodeBlock from 'components/KinesisMarkdownCodeBlock';
+import KinesisMarkdownHeading from 'components/KinesisMarkdownHeading';
 
 import { black, shark } from 'helpers/palette';
 
@@ -127,7 +128,10 @@ export default class KinesisMarkdown extends React.Component {
 		return (
 			<KinesisStyle className={className} color={color} style={style}>
 				<Markdown
-					renderers={{ CodeBlock: KinesisPostCodeBlock }}
+					renderers={{
+						CodeBlock: KinesisMarkdownCodeBlock,
+						Heading: KinesisMarkdownHeading,
+					}}
 					source={content}
 				/>
 			</KinesisStyle>

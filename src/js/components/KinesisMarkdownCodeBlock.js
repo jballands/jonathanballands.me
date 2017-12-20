@@ -1,6 +1,6 @@
 //
 //	jballands/jonathanballands.me
-//	KinesisPostCodeBlock.js
+//	KinesisMarkdownCodeBlock.js
 //
 //	© 2017 Jonathan Ballands
 //
@@ -92,8 +92,8 @@ const StyledLowlight = styled(Lowlight)`
 
 Lowlight.registerLanguage('js', js);
 
-export default class KinesisPostCodeBlock extends React.PureComponent {
-	static displayName = 'KinesisPostCodeBlock';
+export default class KinesisMarkdownCodeBlock extends React.PureComponent {
+	static displayName = 'KinesisMarkdownCodeBlock';
 
 	static propTypes = {
 		language: PropTypes.string,
