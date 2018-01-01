@@ -27,7 +27,7 @@ like education, has skyrocketed compared to goods, like clothing.
 Before we get to the meat of this, we need to understand a few things about
 an economic concept known as **productivity**.
 
-(If you want to skip the productivity lecture, just click [here](#the-productivity-paradox)).
+(If you want to skip the productivity discussion, just click [here](#the-productivity-paradox)).
 `;
 
 export const productivityMd = `
@@ -44,7 +44,7 @@ We'll learn why that is later.
 > something we need).
 
 Input usually requires [captial](https://www.investopedia.com/terms/c/capital.asp)
-to attain, while output is simply the product of input. Basically, the amount of input
+to attain, while output is simply the product of input. The amount of input
 required to make some amount of output is productivity.
 
 ## A Simple Look at Productivity
@@ -81,8 +81,7 @@ increase teacher productivity.
 ## A More Realistic Example
 
 It's all well and good to talk abstractly about productivity,
-but sometimes a more concrete example can help solidify the
-forces at play.
+but sometimes a more concrete example can help solidify concepts.
 
 The following visualization allows you to control the amount of
 **input** and **productivity** in a factory that produces **output**
@@ -95,7 +94,7 @@ you're making. However, due to the laws of [supply and demand](https://www.inves
 this isn't really the best idea, so you need to find another way to
 increase revenue without increasing the price.
 
-Really, you can only do one of two things:
+You can either:
 
 * Increase the amount of input
 * Increase the amount of productivity
@@ -110,6 +109,9 @@ You probably found that increasing productivity increases revenue at a
 while productivity doesn't cost anything over time, depending on how you
 acquired it.
 
+> Increasing productivity is a cost effective way of increasing revenue (in
+> most situtations).
+
 In the visualization, we assume that acquiring more productivty
 doesn't cost anything. This wouldn't be true if more productivity was
 acquired by hiring more workers, for example, since workers require
@@ -117,7 +119,50 @@ increased payroll.
 `;
 
 export const paradoxMd = `
-# The Productivity Paradox
+# Productivity and Cost Disease
+
+Let's imagine a situation in which we have two workers: Sally and Barbra.
+Sally and Barbra graduated from the same university with four year degrees.
+The difference is Sally decided to work at the local car factory manufacturing
+luxury SUVs, while Barbra followed her dream of becoming a performer at the
+local theater. When Sally and Barbra started working out of college, they earned 
+the same amount.
+
+As time moved on and computers got faster and smaller, a new technological innovation
+became available that changed the car manufacturing industry forever: robots.
+Cars can be manufactured faster while also increasing precision and accuracy, resulting
+in less faulty units that waste time and money.
+
+As a result, Sally's **productivity** increased. Robots made her job easier and quicker,
+so she was able to produce more cars more effectively. Because of this, her employer made
+more money, which resulted in higher pay, or cheaper cars, which thereby give people like
+Sally and Barbra more [spending power](https://www.investopedia.com/terms/p/purchasingpower.asp).
+
+(As a side node, you can argue whether or not 
+[trickle-down economics](https://en.wikipedia.org/wiki/Trickle-down_economics) is real.
+However, one cannot argue that productivity has increased since 1980 in many sectors. In general,
+the amount of revenue a company generates is directly proportional to the amount of productivity 
+a company generates over time. Where that money goes is debatable, but [increased revenue is real](#selling-widgets).)
+
+Barbra, on the other hand, has had no opportunity for her productivity to increase. She produces the same amount
+of output now as she did before. In other words, it takes the same amount of time and effort to produce a stage show
+now as it did at any time before and in the foreseeable future. Barbra sees her friend Sally making more
+than her, and considers if being a performer is really all that worth it and thinks about changing jobs.
+
+Of course, we still have musicians and stage performers and similar professions today. How come? Regardless of
+whether you believe art is essential to society, business owners in these fields want to remain open
+for business. In order to do so, and to prevent their employees from switching to jobs that are expereincing
+real productivity gains, they must increase the amount of money they pay their workers, even if nothing has
+changed.
+
+Sectors that have to do this, sectors that experience little to no productivity increases over time, 
+are known as **low-productivity sectors**.
+
+> In order to prevent their workers from leaving, business owners in low productivity sectors, like
+> the arts or medicine, must increase their employees' salaries, even if nothing has changed to
+> warrant it.
+
+## Low-Productivity Sectors and Cost
 `;
 
 // --------------------------------------------------------------------
@@ -142,6 +187,7 @@ for widgets where the price of raw materials is $200/unit. This
 cannot be changed. You've also done some market research and
 found that nobody will buy widgets that cost $100 or more.
 
-Play with the input and productivty sliders, and determine which
-slider has a greater affect on output (and therefore revenue).
+Try fixing the productivity slider at a position and only manipulating
+the input slider, then do the same but fix the input slider and only
+change the productivity slider. Which has a greater affect on revenue?
 `;
