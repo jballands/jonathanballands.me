@@ -20,6 +20,8 @@ import {
 	paradoxSallyMd,
 	newCarCpiVizExplainationMd,
 	paradoxBarbraMd,
+	recreationCpiVizExplainationMd,
+	paradoxExplanationMd,
 } from './markdown';
 
 import carsTrucks9817 from './carsTrucks9817.json';
@@ -97,6 +99,13 @@ export default class CostDiseaseExperiment extends React.Component {
 		<MarkdownForExplainations
 			color={this.props.primaryColor}
 			content={newCarCpiVizExplainationMd}
+		/>
+	);
+
+	renderRecreationCpiVizExplainationMd = () => (
+		<MarkdownForExplainations
+			color={this.props.primaryColor}
+			content={recreationCpiVizExplainationMd}
 		/>
 	);
 
@@ -217,12 +226,12 @@ export default class CostDiseaseExperiment extends React.Component {
 						color={this.props.primaryColor}
 						link="new-car-cpi"
 						renderExplaination={
-							this.renderNewCarCPIOverTimeExplaination
+							this.renderRecreationCpiVizExplainationMd
 						}>
 						<VisualizationTitle
 							color={this.props.primaryColor}
 							id="new-car-cpi">
-							Other Recreation CPI
+							Recreational Services CPI
 						</VisualizationTitle>
 						<VisualizationSubtitle color={this.props.primaryColor}>
 							From 1998 to 2017
@@ -237,6 +246,11 @@ export default class CostDiseaseExperiment extends React.Component {
 						Source: The United States Department of Labor
 					</VisualizationCredit>
 				</Visualization>
+
+				<KinesisMarkdown
+					color={this.props.primaryColor}
+					content={paradoxExplanationMd}
+				/>
 			</div>
 		);
 	}

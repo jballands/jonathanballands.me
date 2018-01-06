@@ -132,7 +132,7 @@ became available that changed the car manufacturing industry forever: robots.
 Cars can be manufactured faster while also increasing precision and accuracy, resulting
 in less faulty units that waste time and money.
 
-As a result, Sally's **productivity** increased. Robots made her job easier and quicker,
+As a result, Sally's **productivity** increased. Robots made her job easier,
 so she was able to produce more cars more effectively. Because of this, her employer made
 more money, which resulted in higher pay (or cheaper cars), which thereby give people like
 Sally more [spending power](https://www.investopedia.com/terms/p/purchasingpower.asp).
@@ -163,7 +163,7 @@ are known as **low-productivity sectors**.
 
 > In order to prevent their workers from leaving, business owners in low productivity sectors, like
 > the arts or medicine, must increase their employees' salaries, even if nothing has changed to
-> warrant it.
+> warrant it. The results in highers prices in the sector.
 
 ## Low-Productivity Sectors and Cost
 `;
@@ -204,4 +204,16 @@ manufacturing processes have helped keep the cost down.
 In other words, productivity gains in the automotive industry have helped
 car manufacturers pay their employees well as well as keep the relative
 cost of automobiles from rising so people can continue to afford them.
+`;
+
+export const recreationCpiVizExplainationMd = `
+Low-productivity recreational services (including admission to performances) cost
+around 1.65 times as much in 2017 as they did in 1998. It appears as if this rise
+in cost is on an upward trend.
+
+Employees require higher pay in order to make a living in a sector. Sectors that
+fail to keep up with payroll requirements risk losing employees. Since recreational
+services do not benefit from productivity growth like other sectors
+of the economy, the only way to pay employees more is to increase the price of
+these services.
 `;
