@@ -8,6 +8,7 @@ import ExplainationPanel from 'experiments/common/ExplainationPanel';
 import CPIOverTime from './CPIOverTime';
 import Productivity from './Productivity';
 import SellingWidgets from './SellingWidgets';
+import CarCPIOverTime from './CarCPIOverTime';
 import {
 	introMd,
 	baumolMd,
@@ -16,7 +17,9 @@ import {
 	cpiVizExplainationMd,
 	revenueExplainationMd,
 	realisticExampleTheoryMd,
-	paradoxMd,
+	paradoxSallyMd,
+	newCarCpiVizExplainationMd,
+	paradoxBarbraMd,
 } from './markdown';
 
 const Title = styled.div`
@@ -61,7 +64,7 @@ const VisualizationCredit = styled.div`
 	align-self: flex-end;
 `;
 
-const MarkdownForExplaiantions = styled(KinesisMarkdown)`
+const MarkdownForExplainations = styled(KinesisMarkdown)`
 	font-size: 11pt;
 `;
 
@@ -74,16 +77,23 @@ export default class CostDiseaseExperiment extends React.Component {
 	};
 
 	renderCPIOverTimeExplaination = () => (
-		<MarkdownForExplaiantions
+		<MarkdownForExplainations
 			color={this.props.primaryColor}
 			content={cpiVizExplainationMd}
 		/>
 	);
 
 	renderRevenueExplaination = () => (
-		<MarkdownForExplaiantions
+		<MarkdownForExplainations
 			color={this.props.primaryColor}
 			content={revenueExplainationMd}
+		/>
+	);
+
+	renderNewCarCPIOverTimeExplaination = () => (
+		<MarkdownForExplainations
+			color={this.props.primaryColor}
+			content={newCarCpiVizExplainationMd}
 		/>
 	);
 
@@ -165,7 +175,34 @@ export default class CostDiseaseExperiment extends React.Component {
 
 				<KinesisMarkdown
 					color={this.props.primaryColor}
-					content={paradoxMd}
+					content={paradoxSallyMd}
+				/>
+
+				<Visualization>
+					<ExplainationPanel
+						color={this.props.primaryColor}
+						link="cpi-graph"
+						renderExplaination={
+							this.renderNewCarCPIOverTimeExplaination
+						}>
+						<VisualizationTitle
+							color={this.props.primaryColor}
+							id="cpi-graph">
+							New Car CPI
+						</VisualizationTitle>
+						<VisualizationSubtitle color={this.props.primaryColor}>
+							From 1978 to 2017
+						</VisualizationSubtitle>
+					</ExplainationPanel>
+					<CarCPIOverTime primaryColor={this.props.primaryColor} />
+					<VisualizationCredit color={this.props.primaryColor}>
+						Source: The United States Department of Labor
+					</VisualizationCredit>
+				</Visualization>
+
+				<KinesisMarkdown
+					color={this.props.primaryColor}
+					content={paradoxBarbraMd}
 				/>
 			</div>
 		);

@@ -45,12 +45,12 @@ We'll learn why that is later.
 
 Input usually requires [captial](https://www.investopedia.com/terms/c/capital.asp)
 to attain, while output is simply the product of input. The amount of input
-required to make some amount of output is productivity.
+required to make some amount of output is called **productivity**.
 
 ## A Simple Look at Productivity
 
-Below is a visualization that shows the input/output
-ratio as productivity. Play around with the sliders and
+Below is a visualization that shows productivity as a function of
+input and output. Play around with the sliders and
 take a mental note of what happens to productivity as
 you do.
 `;
@@ -87,7 +87,7 @@ The following visualization allows you to control the amount of
 **input** and **productivity** in a factory that produces **output**
 for a certain price. Now imagine you're the owner of this
 factory. You want to earn as much money as possible. This is
-represented by the [revenue](https://www.investopedia.com/terms/r/revenue.asp).
+represented as [revenue](https://www.investopedia.com/terms/r/revenue.asp).
 
 One way to make more money is to increase the price of the widgets
 you're making. However, due to the laws of [supply and demand](https://www.investopedia.com/university/economics/economics3.asp),
@@ -105,9 +105,8 @@ revenue more quickly: increasing revenue, or increasing productivity?
 
 export const realisticExampleTheoryMd = `
 You probably found that increasing productivity increases revenue at a
-**faster rate** that increasing input. Why? Because input costs money over time,
-while productivity doesn't cost anything over time, depending on how you
-acquired it.
+**faster rate** than increasing input. Why? Because more input **costs money over time**,
+while productivity requires an upfront cost, but nothing more.
 
 > Increasing productivity is a cost effective way of increasing revenue (in
 > most situtations).
@@ -118,7 +117,7 @@ acquired by hiring more workers, for example, since workers require
 increased payroll.
 `;
 
-export const paradoxMd = `
+export const paradoxSallyMd = `
 # Productivity and Cost Disease
 
 Let's imagine a situation in which we have two workers: Sally and Barbra.
@@ -137,7 +136,9 @@ As a result, Sally's **productivity** increased. Robots made her job easier and 
 so she was able to produce more cars more effectively. Because of this, her employer made
 more money, which resulted in higher pay (or cheaper cars), which thereby give people like
 Sally more [spending power](https://www.investopedia.com/terms/p/purchasingpower.asp).
+`;
 
+export const paradoxBarbraMd = `
 (As a side node, you can argue whether or not 
 [trickle-down economics](https://en.wikipedia.org/wiki/Trickle-down_economics) is real.
 However, one cannot argue that productivity has increased since 1980 in many sectors. In general,
@@ -154,7 +155,9 @@ whether you believe art is essential to society, business owners in these fields
 for business. In order to do so, and to prevent their employees from switching to jobs that are expereincing
 real productivity gains, they must increase the amount of money they pay their workers, even if nothing has
 changed.
+`;
 
+export const paradoxExplanationMd = `
 Sectors that have to do this, sectors that experience little to no productivity increases over time, 
 are known as **low-productivity sectors**.
 
@@ -190,4 +193,15 @@ found that nobody will buy widgets that cost $100 or more.
 Try fixing the productivity slider at a position and only manipulating
 the input slider, then do the same but fix the input slider and only
 change the productivity slider. Which has a greater affect on revenue?
+`;
+
+export const newCarCpiVizExplainationMd = `
+Notice how the graph is relatively flat. This indicates that the relative
+price of new cars over the past 40 years hasn't changed that much. While cars
+are more sophisicated and complex than ever before, robots and bleeding-edge
+manufacturing processes have helped keep the cost down.
+
+In other words, productivity gains in the automotive industry have helped
+car manufacturers pay their employees well as well as keep the relative
+cost of automobiles from rising so people can continue to afford them.
 `;
