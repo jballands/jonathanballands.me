@@ -8,7 +8,7 @@ import ExplainationPanel from 'experiments/common/ExplainationPanel';
 import CPIOverTime from './CPIOverTime';
 import Productivity from './Productivity';
 import SellingWidgets from './SellingWidgets';
-import CarCPIOverTime from './CarCPIOverTime';
+import SingleCPIOverTime from './SingleCPIOverTime';
 import {
 	introMd,
 	baumolMd,
@@ -21,6 +21,9 @@ import {
 	newCarCpiVizExplainationMd,
 	paradoxBarbraMd,
 } from './markdown';
+
+import carsTrucks9817 from './carsTrucks9817.json';
+import recreation9817 from './recreation9817.json';
 
 const Title = styled.div`
 	font-size: 58px;
@@ -181,20 +184,24 @@ export default class CostDiseaseExperiment extends React.Component {
 				<Visualization>
 					<ExplainationPanel
 						color={this.props.primaryColor}
-						link="cpi-graph"
+						link="new-car-cpi"
 						renderExplaination={
 							this.renderNewCarCPIOverTimeExplaination
 						}>
 						<VisualizationTitle
 							color={this.props.primaryColor}
-							id="cpi-graph">
-							New Car CPI
+							id="new-car-cpi">
+							New Cars & Trucks CPI
 						</VisualizationTitle>
 						<VisualizationSubtitle color={this.props.primaryColor}>
-							From 1978 to 2017
+							From 1998 to 2017
 						</VisualizationSubtitle>
 					</ExplainationPanel>
-					<CarCPIOverTime primaryColor={this.props.primaryColor} />
+					<SingleCPIOverTime
+						data={carsTrucks9817}
+						primaryColor={this.props.primaryColor}
+						range={[90, 190]}
+					/>
 					<VisualizationCredit color={this.props.primaryColor}>
 						Source: The United States Department of Labor
 					</VisualizationCredit>
@@ -204,6 +211,32 @@ export default class CostDiseaseExperiment extends React.Component {
 					color={this.props.primaryColor}
 					content={paradoxBarbraMd}
 				/>
+
+				<Visualization>
+					<ExplainationPanel
+						color={this.props.primaryColor}
+						link="new-car-cpi"
+						renderExplaination={
+							this.renderNewCarCPIOverTimeExplaination
+						}>
+						<VisualizationTitle
+							color={this.props.primaryColor}
+							id="new-car-cpi">
+							Other Recreation CPI
+						</VisualizationTitle>
+						<VisualizationSubtitle color={this.props.primaryColor}>
+							From 1998 to 2017
+						</VisualizationSubtitle>
+					</ExplainationPanel>
+					<SingleCPIOverTime
+						data={recreation9817}
+						primaryColor={this.props.primaryColor}
+						range={[90, 190]}
+					/>
+					<VisualizationCredit color={this.props.primaryColor}>
+						Source: The United States Department of Labor
+					</VisualizationCredit>
+				</Visualization>
 			</div>
 		);
 	}

@@ -13,7 +13,7 @@ export default class KinesisMarkdownHeading extends React.PureComponent {
 
 	static propTypes = {
 		children: PropTypes.node,
-		level: PropTypes.string,
+		level: PropTypes.number,
 	};
 
 	render() {

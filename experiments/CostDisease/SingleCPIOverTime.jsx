@@ -1,6 +1,6 @@
 //
 //	jballands/jonathanballands.me
-//	CarCPIOverTime.jsx
+//	SingleCPIOverTime.jsx
 //
 //	© 2017 Jonathan Ballands
 //
@@ -15,8 +15,6 @@ import { curveBasis, line } from 'd3-shape';
 import { scaleLinear, scaleTime } from 'd3-scale';
 
 import Axis from 'experiments/common/Axis';
-
-import cars7817 from './cars7817.json';
 
 const VIEWBOX = {
 	width: 500,
@@ -67,26 +65,13 @@ const StyledAxis = styled(Axis)`
 	}
 `;
 
-const LineLabel = styled.text`
-	font-size: 9px;
-	font-style: italic;
-	fill: ${props => props.color};
-	transform: translate(5px, 2px);
-
-	&.foodHome {
-		transform: translate(5px, 5px);
-	}
-
-	&.furniture {
-		transform: translate(5px, 4px);
-	}
-`;
-
-export default class CPIOverTime extends React.Component {
-	static displayName = 'CPIOverTime';
+export default class SingleCPIOverTime extends React.Component {
+	static displayName = 'SingleCPIOverTime';
 
 	static propTypes = {
+		data: PropTypes.array,
 		primaryColor: PropTypes.string,
+		range: PropTypes.array,
 	};
 
 	last = array => {
@@ -102,6 +87,8 @@ export default class CPIOverTime extends React.Component {
 	};
 
 	render() {
+		const { data, primaryColor, range } = this.props;
+
 		const x = scaleTime().range([0, DIMENSIONS.width]);
 		const y = scaleLinear().range([0, -DIMENSIONS.height + MARGINS.top]);
 
@@ -110,22 +97,22 @@ export default class CPIOverTime extends React.Component {
 			.x(d => x(this.stringToDate(d.Label)))
 			.y(d => y(d.Value));
 
-		x.domain(extent(cars7817, d => this.stringToDate(d.Label))).nice();
-		y.domain([0, 750]);
+		x.domain(extent(data, d => this.stringToDate(d.Label))).nice();
+		y.domain(range);
 
 		return (
 			<CPIOverTimeContainer>
 				<Svg viewBox={`0 0 ${VIEWBOX.width} ${VIEWBOX.height}`}>
 					<GraphContainer>
 						<StyledAxis
-							color={this.props.primaryColor}
+							color={primaryColor}
 							scale={x}
 							orientation="bottom"
 							numberOfTicks={6}
 							label="← Time →"
 						/>
 						<StyledAxis
-							color={this.props.primaryColor}
+							color={primaryColor}
 							scale={y}
 							orientation="left"
 							numberOfTicks={6}
@@ -133,8 +120,8 @@ export default class CPIOverTime extends React.Component {
 						/>
 
 						<path
-							d={lineFn(cars7817)}
-							stroke={this.props.primaryColor}
+							d={lineFn(data)}
+							stroke={primaryColor}
 							fill="transparent"
 							strokeWidth={1}
 						/>
