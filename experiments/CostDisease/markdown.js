@@ -27,7 +27,7 @@ like education, has skyrocketed compared to goods, like clothing.
 Before we get to the meat of this, we need to understand a few things about
 an economic concept known as **productivity**.
 
-(If you want to skip the productivity discussion, just click [here](#the-productivity-paradox)).
+(If you want to skip the productivity discussion, just click [here](#productivity-and-cost-disease)).
 `;
 
 export const productivityMd = `
@@ -122,7 +122,7 @@ export const paradoxMd = `
 # Productivity and Cost Disease
 
 Let's imagine a situation in which we have two workers: Sally and Barbra.
-Sally and Barbra graduated from the same university with four year degrees.
+Sally and Barbra graduated from the same university with four-year degrees.
 The difference is Sally decided to work at the local car factory manufacturing
 luxury SUVs, while Barbra followed her dream of becoming a performer at the
 local theater. When Sally and Barbra started working out of college, they earned 
@@ -135,8 +135,8 @@ in less faulty units that waste time and money.
 
 As a result, Sally's **productivity** increased. Robots made her job easier and quicker,
 so she was able to produce more cars more effectively. Because of this, her employer made
-more money, which resulted in higher pay, or cheaper cars, which thereby give people like
-Sally and Barbra more [spending power](https://www.investopedia.com/terms/p/purchasingpower.asp).
+more money, which resulted in higher pay (or cheaper cars), which thereby give people like
+Sally more [spending power](https://www.investopedia.com/terms/p/purchasingpower.asp).
 
 (As a side node, you can argue whether or not 
 [trickle-down economics](https://en.wikipedia.org/wiki/Trickle-down_economics) is real.

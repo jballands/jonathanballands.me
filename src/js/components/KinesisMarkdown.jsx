@@ -12,6 +12,7 @@ import styled from 'styled-components';
 
 import KinesisMarkdownCodeBlock from 'components/KinesisMarkdownCodeBlock';
 import KinesisMarkdownHeading from 'components/KinesisMarkdownHeading';
+import KinesisMarkdownLink from 'components/KinesisMarkdownLink';
 
 import { black, shark } from 'helpers/palette';
 
@@ -131,6 +132,7 @@ export default class KinesisMarkdown extends React.Component {
 					renderers={{
 						CodeBlock: KinesisMarkdownCodeBlock,
 						Heading: KinesisMarkdownHeading,
+						Link: KinesisMarkdownLink,
 					}}
 					source={content}
 				/>

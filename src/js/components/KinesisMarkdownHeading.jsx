@@ -23,8 +23,6 @@ export default class KinesisMarkdownHeading extends React.PureComponent {
 			.toLowerCase()
 			.replace(/\W/g, '-');
 
-		console.log('rawr');
-
 		return React.createElement(
 			`h${this.props.level}`,
 			{ id: anchor },
