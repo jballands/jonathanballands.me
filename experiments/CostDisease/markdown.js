@@ -164,13 +164,42 @@ are known as **low-productivity sectors**.
 > In order to prevent their workers from leaving, business owners in low productivity sectors, like
 > the arts or medicine, must increase their employees' salaries, even if nothing has changed to
 > warrant it. The results in highers prices in the sector.
+`;
 
-## Low-Productivity Sectors and Cost
+//
+//	Point #1:
+//	Since the cost of high-productivity sectors is decreasing, people shift their spending
+//	focus to low-productivity sectors... things that aren't getting any cheaper.
+//	[Show how more people are focusing on service sectors, decreasing innovation]
+//	[Service sectors -> future]
+//	[More innovation -> less productivity]
+//
+//	Point #2:
+//
+//
+export const implicationsMd = `
+# The Great American Paradox
+
+In this post I've shown that, theoretically, innovation in technology leads to higher productivity
+gains, which results in higher incomes and lower prices for consumers. I say theoretically because
+while this makes sense on paper, this isn't what occurs in practice.
+
+People need to work in order to make an income. Since computers are a hot topic right now, most
+productivity gains we've seen in high-productivity industries are in the form of robots and algorithms.
+Unfortunately, this doesn't leave to much room for humans, so employees in these sectors have to look
+elsewhere for work.
+
+One area of the economy which is hard to automate are the low-productivity sectors, the sectors where
+the value of the output is dependent on a human-being being present: **service sector** jobs.
+`;
+
+export const costDiseaseAndLowProductivityMd = `
+Blah blah blah
 `;
 
 // --------------------------------------------------------------------
 
-export const cpiVizExplainationMd = `
+export const cpiVizExplanationMd = `
 The [Consumer Price Index](https://en.wikipedia.org/wiki/Consumer_price_index),
 or CPI, is a number that represents the relative price of a good or service at
 a point in time.
@@ -181,7 +210,7 @@ price of lemonade is $2. So, the CPI of lemonade in 2017 is 200,
 since it costs 2x more to buy lemonade in 2017 than it did in 1980.
 `;
 
-export const revenueExplainationMd = `
+export const revenueExplanationMd = `
 This visualization represents the supply chain of a company that
 makes [widgets](https://en.wikipedia.org/wiki/Widget).
 
@@ -195,7 +224,7 @@ the input slider, then do the same but fix the input slider and only
 change the productivity slider. Which has a greater affect on revenue?
 `;
 
-export const newCarCpiVizExplainationMd = `
+export const newCarCpiVizExplanationMd = `
 Notice how the graph is relatively flat. This indicates that the relative
 price of new cars over the past 40 years hasn't changed that much. While cars
 are more sophisicated and complex than ever before, robots and bleeding-edge
@@ -206,10 +235,9 @@ car manufacturers pay their employees well as well as keep the relative
 cost of automobiles from rising so people can continue to afford them.
 `;
 
-export const recreationCpiVizExplainationMd = `
+export const recreationCpiVizExplanationMd = `
 Low-productivity recreational services (including admission to performances) cost
-around 1.65 times as much in 2017 as they did in 1998. It appears as if this rise
-in cost is on an upward trend.
+around 1.65 times as much in 2017 as they did in 1998.
 
 Employees require higher pay in order to make a living in a sector. Sectors that
 fail to keep up with payroll requirements risk losing employees. Since recreational

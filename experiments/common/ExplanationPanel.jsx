@@ -15,7 +15,7 @@ import CollapseSvg from 'svg/CollapseSvg';
 
 import AnchorTag from 'experiments/common/AnchorTag';
 
-const ExplainationPanelContainer = styled.div`
+const ExplanationPanelContainer = styled.div`
 	display: flex;
 	flex-flow: column nowrap;
 
@@ -26,7 +26,7 @@ const ExplainationPanelContainer = styled.div`
 	border-radius: 2px;
 `;
 
-const ExplainationPanelHeader = styled.div`
+const ExplanationPanelHeader = styled.div`
 	display: flex;
 	flex-flow: row nowrap;
 	align-items: center;
@@ -44,7 +44,7 @@ const StyledCollapseSvg = styled(CollapseSvg)`
 	}
 `;
 
-const ExplainationPanelContent = styled.div.attrs({
+const ExplanationPanelContent = styled.div.attrs({
 	style: props => ({
 		height: `${props.height}px`,
 	}),
@@ -64,18 +64,22 @@ const LeftSide = styled.div`
 	align-items: center;
 `;
 
-const StyledAnchorTag = styled(AnchorTag)`margin-right: 15px;`;
+const StyledAnchorTag = styled(AnchorTag)`
+	margin-right: 15px;
+`;
 
-const RightSide = styled.div`flex: 0 1;`;
+const RightSide = styled.div`
+	flex: 0 1;
+`;
 
-export default class ExplainationPanel extends React.Component {
-	static displayName = 'ExplainationPanel';
+export default class ExplanationPanel extends React.Component {
+	static displayName = 'ExplanationPanel';
 
 	static propTypes = {
 		children: PropTypes.node,
 		color: PropTypes.string,
 		link: PropTypes.string,
-		renderExplaination: PropTypes.func.isRequired,
+		renderExplanation: PropTypes.func.isRequired,
 	};
 
 	state = {
@@ -116,27 +120,28 @@ export default class ExplainationPanel extends React.Component {
 		const { color, link } = this.props;
 
 		return (
-			<ExplainationPanelContainer open={open} color={color}>
-				<ExplainationPanelHeader>
+			<ExplanationPanelContainer open={open} color={color}>
+				<ExplanationPanelHeader>
 					<LeftSide open={open}>
 						{link && <StyledAnchorTag color={color} link={link} />}
 						<div>{this.props.children}</div>
 					</LeftSide>
 					<RightSide onClick={this.handleOnClick}>
-						{this.renderIcon()}
+						{this.props.renderExplanation && this.renderIcon()}
 					</RightSide>
-				</ExplainationPanelHeader>
+				</ExplanationPanelHeader>
 				<Motion
 					style={{ height: spring(open ? this.contentHeight : 0) }}>
 					{interpolated => (
-						<ExplainationPanelContent height={interpolated.height}>
+						<ExplanationPanelContent height={interpolated.height}>
 							<div ref={this.bindContent}>
-								{this.props.renderExplaination()}
+								{this.props.renderExplanation &&
+									this.props.renderExplanation()}
 							</div>
-						</ExplainationPanelContent>
+						</ExplanationPanelContent>
 					)}
 				</Motion>
-			</ExplainationPanelContainer>
+			</ExplanationPanelContainer>
 		);
 	}
 }

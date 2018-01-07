@@ -3,25 +3,29 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import KinesisMarkdown from 'components/KinesisMarkdown';
-import ExplainationPanel from 'experiments/common/ExplainationPanel';
+import ExplanationPanel from 'experiments/common/ExplanationPanel';
 
 import CPIOverTime from './CPIOverTime';
 import Productivity from './Productivity';
 import SellingWidgets from './SellingWidgets';
 import SingleCPIOverTime from './SingleCPIOverTime';
+import EmploymentSectors from './EmploymentSectors';
 import {
 	introMd,
 	baumolMd,
 	productivityMd,
 	realisticExampleMd,
-	cpiVizExplainationMd,
-	revenueExplainationMd,
+	cpiVizExplanationMd,
+	revenueExplanationMd,
 	realisticExampleTheoryMd,
 	paradoxSallyMd,
-	newCarCpiVizExplainationMd,
+	newCarCpiVizExplanationMd,
 	paradoxBarbraMd,
-	recreationCpiVizExplainationMd,
+	recreationCpiVizExplanationMd,
 	paradoxExplanationMd,
+	implicationsMd,
+	employmentVizExplanationMd,
+	costDiseaseAndLowProductivityMd,
 } from './markdown';
 
 import carsTrucks9817 from './carsTrucks9817.json';
@@ -81,31 +85,38 @@ export default class CostDiseaseExperiment extends React.Component {
 		secondaryColor: PropTypes.string,
 	};
 
-	renderCPIOverTimeExplaination = () => (
+	renderCPIOverTimeExplanation = () => (
 		<MarkdownForExplainations
 			color={this.props.primaryColor}
-			content={cpiVizExplainationMd}
+			content={cpiVizExplanationMd}
 		/>
 	);
 
-	renderRevenueExplaination = () => (
+	renderRevenueExplanation = () => (
 		<MarkdownForExplainations
 			color={this.props.primaryColor}
-			content={revenueExplainationMd}
+			content={revenueExplanationMd}
 		/>
 	);
 
-	renderNewCarCPIOverTimeExplaination = () => (
+	renderNewCarCPIOverTimeExplanation = () => (
 		<MarkdownForExplainations
 			color={this.props.primaryColor}
-			content={newCarCpiVizExplainationMd}
+			content={newCarCpiVizExplanationMd}
 		/>
 	);
 
-	renderRecreationCpiVizExplainationMd = () => (
+	renderRecreationCpiVizExplanationMd = () => (
 		<MarkdownForExplainations
 			color={this.props.primaryColor}
-			content={recreationCpiVizExplainationMd}
+			content={recreationCpiVizExplanationMd}
+		/>
+	);
+
+	renderEmploymentVizExplanationMd = () => (
+		<MarkdownForExplainations
+			color={this.props.primaryColor}
+			content={employmentVizExplanationMd}
 		/>
 	);
 
@@ -125,10 +136,10 @@ export default class CostDiseaseExperiment extends React.Component {
 				/>
 
 				<Visualization>
-					<ExplainationPanel
+					<ExplanationPanel
 						color={this.props.primaryColor}
 						link="cpi-graph"
-						renderExplaination={this.renderCPIOverTimeExplaination}>
+						renderExplanation={this.renderCPIOverTimeExplanation}>
 						<VisualizationTitle
 							color={this.props.primaryColor}
 							id="cpi-graph">
@@ -137,10 +148,10 @@ export default class CostDiseaseExperiment extends React.Component {
 						<VisualizationSubtitle color={this.props.primaryColor}>
 							From 1978 to 2017
 						</VisualizationSubtitle>
-					</ExplainationPanel>
+					</ExplanationPanel>
 					<CPIOverTime primaryColor={this.props.primaryColor} />
 					<VisualizationCredit color={this.props.primaryColor}>
-						Source: The United States Department of Labor
+						Source: The US Bureau of Labor Statistics
 					</VisualizationCredit>
 				</Visualization>
 
@@ -164,10 +175,10 @@ export default class CostDiseaseExperiment extends React.Component {
 				/>
 
 				<Visualization>
-					<ExplainationPanel
+					<ExplanationPanel
 						color={this.props.primaryColor}
 						link="selling-widgets"
-						renderExplaination={this.renderRevenueExplaination}>
+						renderExplanation={this.renderRevenueExplanation}>
 						<VisualizationTitle
 							id="selling-widgets"
 							color={this.props.primaryColor}>
@@ -176,7 +187,7 @@ export default class CostDiseaseExperiment extends React.Component {
 						<VisualizationSubtitle color={this.props.primaryColor}>
 							How Factors You Can Change Influence Revenue
 						</VisualizationSubtitle>
-					</ExplainationPanel>
+					</ExplanationPanel>
 					<SellingWidgets primaryColor={this.props.primaryColor} />
 				</Visualization>
 
@@ -191,28 +202,26 @@ export default class CostDiseaseExperiment extends React.Component {
 				/>
 
 				<Visualization>
-					<ExplainationPanel
+					<ExplanationPanel
 						color={this.props.primaryColor}
 						link="new-car-cpi"
-						renderExplaination={
-							this.renderNewCarCPIOverTimeExplaination
+						renderExplanation={
+							this.renderNewCarCPIOverTimeExplanation
 						}>
-						<VisualizationTitle
-							color={this.props.primaryColor}
-							id="new-car-cpi">
-							New Cars & Trucks CPI
+						<VisualizationTitle color={this.props.primaryColor}>
+							CPI for New Cars & Trucks
 						</VisualizationTitle>
 						<VisualizationSubtitle color={this.props.primaryColor}>
 							From 1998 to 2017
 						</VisualizationSubtitle>
-					</ExplainationPanel>
+					</ExplanationPanel>
 					<SingleCPIOverTime
 						data={carsTrucks9817}
 						primaryColor={this.props.primaryColor}
 						range={[90, 190]}
 					/>
 					<VisualizationCredit color={this.props.primaryColor}>
-						Source: The United States Department of Labor
+						Source: The US Bureau of Labor Statistics
 					</VisualizationCredit>
 				</Visualization>
 
@@ -222,34 +231,63 @@ export default class CostDiseaseExperiment extends React.Component {
 				/>
 
 				<Visualization>
-					<ExplainationPanel
+					<ExplanationPanel
 						color={this.props.primaryColor}
-						link="new-car-cpi"
-						renderExplaination={
-							this.renderRecreationCpiVizExplainationMd
+						link="recreational-cpi"
+						renderExplanation={
+							this.renderRecreationCpiVizExplanationMd
 						}>
 						<VisualizationTitle
 							color={this.props.primaryColor}
-							id="new-car-cpi">
-							Recreational Services CPI
+							id="recreational-cpi">
+							CPI for Recreational Services
 						</VisualizationTitle>
 						<VisualizationSubtitle color={this.props.primaryColor}>
 							From 1998 to 2017
 						</VisualizationSubtitle>
-					</ExplainationPanel>
+					</ExplanationPanel>
 					<SingleCPIOverTime
 						data={recreation9817}
 						primaryColor={this.props.primaryColor}
 						range={[90, 190]}
 					/>
 					<VisualizationCredit color={this.props.primaryColor}>
-						Source: The United States Department of Labor
+						Source: The US Bureau of Labor Statistics
 					</VisualizationCredit>
 				</Visualization>
 
 				<KinesisMarkdown
 					color={this.props.primaryColor}
 					content={paradoxExplanationMd}
+				/>
+
+				<KinesisMarkdown
+					color={this.props.primaryColor}
+					content={implicationsMd}
+				/>
+
+				<Visualization>
+					<ExplanationPanel
+						color={this.props.primaryColor}
+						link="employment">
+						<VisualizationTitle
+							color={this.props.primaryColor}
+							id="employment">
+							Employment in Manufacturing vs Services
+						</VisualizationTitle>
+						<VisualizationSubtitle color={this.props.primaryColor}>
+							From 1940 to 2017
+						</VisualizationSubtitle>
+					</ExplanationPanel>
+					<EmploymentSectors primaryColor={this.props.primaryColor} />
+					<VisualizationCredit color={this.props.primaryColor}>
+						Source: The US Bureau of Labor Statistics
+					</VisualizationCredit>
+				</Visualization>
+
+				<KinesisMarkdown
+					color={this.props.primaryColor}
+					content={costDiseaseAndLowProductivityMd}
 				/>
 			</div>
 		);
