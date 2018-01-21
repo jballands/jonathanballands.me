@@ -79,7 +79,7 @@ export default class ExplanationPanel extends React.Component {
 		children: PropTypes.node,
 		color: PropTypes.string,
 		link: PropTypes.string,
-		renderExplanation: PropTypes.func.isRequired,
+		renderExplanation: PropTypes.func,
 	};
 
 	state = {

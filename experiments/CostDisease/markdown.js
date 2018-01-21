@@ -36,8 +36,7 @@ export const productivityMd = `
 In economics, [productivity](http://www.investopedia.com/terms/p/productivity.asp)
 is the relationship between how much **input** we
 need to make some amount of **output**. Generally
-speaking, more productivity is seen as a good thing.
-We'll learn why that is later.
+speaking, more productivity is seen as [a good thing](https://en.wikipedia.org/wiki/Productivity#Benefits_of_productivity_growth).
 
 > Productivity is the ratio of outputs (the amount of
 > something we produce) to inputs (the amount of
@@ -177,24 +176,62 @@ are known as **low-productivity sectors**.
 //	Point #2:
 //
 //
+
+// People need to work in order to make an income. Since computers are a hot topic right now, most
+// productivity gains we've seen in high-productivity industries are in the form of robots and algorithms.
+// Unfortunately, this doesn't leave too much room for humans.
+
+// In order to make an income, people
+// have to work in a sector which is hard to automate. Sectors that are hard to automate are typically low-productivity
+// sectors, the sectors where the value of the output is dependent on a human interaction. These are (you guessed it)
+// service sector jobs.
 export const implicationsMd = `
 # The Great American Paradox
 
 In this post I've shown that, theoretically, innovation in technology leads to higher productivity
 gains, which results in higher incomes and lower prices for consumers. I say theoretically because
-while this makes sense on paper, this isn't what occurs in practice.
+while this makes sense on paper, this isn't what occurs in practice. My reasoning is this theory doesn't
+take into account a job type where the intrinsic value of a thing it produces is *because*
+it is low productivity: **service sector** jobs... let me explain.
 
-People need to work in order to make an income. Since computers are a hot topic right now, most
-productivity gains we've seen in high-productivity industries are in the form of robots and algorithms.
-Unfortunately, this doesn't leave to much room for humans, so employees in these sectors have to look
-elsewhere for work.
+As high productivity sectors inovate, they are able to make things cheaper and cheaper over time. For example,
+a big flat-screen television today costs less than it did in the early 2000s. Since flat-screen
+televisions are cheap today, everyone has one for the most part. It's not necessarily something we
+aspire to own anymore, so we aspire to things that aren't getting cheaper.
 
-One area of the economy which is hard to automate are the low-productivity sectors, the sectors where
-the value of the output is dependent on a human-being being present: **service sector** jobs.
+What's a type of product that probably won't get much cheaper in the near future? Eating out, custom textiles,
+vacations, concerts, art, even education and healthcare. As a result, we spend a lot more of our money in these areas
+and we need to employ a lot more people there to keep up with the demand. Manufacturing televisions, cars, and clothing?
+Not so much.
 `;
 
 export const costDiseaseAndLowProductivityMd = `
-Blah blah blah
+You may be wondering what this has to do with the price increase in service sector products.
+Again, these low-productivity sectors aren't getting cheaper any time soon. They are hard to automate because automating
+anything here would lower any intrisic value.
+
+For example, an education from an online school is
+considered "less valuable" than an education from a community college, and an education from a community college is
+considered "less valuable" than an education from a four-year university. The online education is more accessible, but instead of
+increasing the number of positions available to a candidate, it's somehow seen as the worse version of a traditional university
+education.
+
+As we put more value into labor intensive (low productivity) services, we see the price increase more over time. The paradox here
+is that it appears as though **the more we innovate, the less productive we get**. This isn't necessarily the case.
+
+A better way to think about this would be that some products are seen as better than others because they are "handcrafted", "artesian",
+"craft", "intimate", or any buzzword that gets thrown around to mean that it isn't mass produced. Therefore, as high productivity
+sectors produce cheaper products and more money comes back into the economy, labor intensive products will only get more expensive, because
+there are usually only a limited number of these products available. It's simple supply and demand.
+
+This applies to handmade wallets and craft beers from a microbrewery, and it also applies to education and healthcare.
+
+## Shifting Our Mindset
+
+
+
+> The only way to solve the productivity paradox for education and healthcare is to shift the way we think about how those
+> services are provided.
 `;
 
 // --------------------------------------------------------------------

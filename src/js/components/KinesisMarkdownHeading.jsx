@@ -21,7 +21,8 @@ export default class KinesisMarkdownHeading extends React.PureComponent {
 		const anchor = children
 			.reduce((acc, curr) => (acc += curr), '')
 			.toLowerCase()
-			.replace(/\W/g, '-');
+			.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()\?]/g, '')
+			.replace(/\s/g, '-');
 
 		return React.createElement(
 			`h${this.props.level}`,

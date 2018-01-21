@@ -24,7 +24,9 @@ const FooterContainer = styled.div`
 	width: calc(100% - 40px);
 `;
 
-const FooterCopyright = styled.span`color: white;`;
+const FooterCopyright = styled.span`
+	color: white;
+`;
 
 const FooterSocialMediaContainer = styled.div`
 	display: flex;
@@ -46,7 +48,7 @@ export default class Footer extends React.Component {
 		return (
 			<FooterContainer>
 				<FooterCopyright title="Made with <3 in Austin, TX">
-					© 2017 Jonathan Ballands
+					© 2018 Jonathan Ballands
 				</FooterCopyright>
 				<FooterSocialMediaContainer>
 					<a href="https://twitter.com/jballands" target="_blank">
