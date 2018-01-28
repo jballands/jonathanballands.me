@@ -8,16 +8,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import BoldButton from '@jballands/vespyr/lib/BoldButton';
 
 import BackgroundGradient from 'components/BackgroundGradient';
 import Particles from 'components/Particles';
-import LinkWrapper from 'components/LinkWrapper';
+import LinkInTabSvg from 'svg/LinkInTabSvg';
 
 import { fuchsiaBlue, moonRaker, shark } from 'helpers/palette';
 
-const AboutContainer = styled.div`width: 100%;`;
+const AboutContainer = styled.div`
+	width: 100%;
+`;
 
-const AboutHeroUnitContainer = styled.div`width: 100%;`;
+const AboutHeroUnitContainer = styled.div`
+	width: 100%;
+`;
 
 const AboutHeroUnit = styled.div`
 	display: flex;
@@ -49,6 +54,19 @@ const AboutMe = styled.div`
 	height: 600px;
 `;
 
+const ViewResumeContainer = styled.a`
+	margin-top: 30px;
+`;
+
+const ViewResume = styled(BoldButton)`
+	font-size: 16px;
+	text-transform: capitalize;
+`;
+
+const StyledLinkInTabSvg = styled(LinkInTabSvg)`
+	margin-left: 10px;
+`;
+
 export default class About extends React.Component {
 	static propTypes = {
 		className: PropTypes.string,
@@ -67,9 +85,13 @@ export default class About extends React.Component {
 								<AboutHeroUnitSubtitle>
 									But you can call me Jon.
 								</AboutHeroUnitSubtitle>
-								<LinkWrapper link="" external>
-									View My Résumé
-								</LinkWrapper>
+								<ViewResumeContainer
+									href="/resume"
+									target="_blank">
+									<ViewResume accentColor={fuchsiaBlue}>
+										View My Résumé <StyledLinkInTabSvg />
+									</ViewResume>
+								</ViewResumeContainer>
 							</AboutHeroUnit>
 						</Particles>
 					</AboutHeroUnitContainer>

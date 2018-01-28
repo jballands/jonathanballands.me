@@ -13,6 +13,7 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 import About from 'routes/About';
 import Kinesis from 'routes/Kinesis';
+import PageNotFound from 'routes/404';
 
 import ContentScroller from 'components/ContentScroller';
 import NavigationBar from 'components/NavigationBar';
@@ -73,7 +74,7 @@ export default class App extends React.Component {
 										{props => <Kinesis {...props} />}
 									</RouteWithFooter>
 									<RouteWithFooter>
-										{props => <div>R'uh oh</div>}
+										{props => <PageNotFound {...props} />}
 									</RouteWithFooter>
 								</Switch>
 							</CSSTransition>

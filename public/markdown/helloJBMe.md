@@ -22,11 +22,11 @@ This was a #DumbIdea™.
 Sure, I could have written custom endpoints to do fancy things with the UI on the site. Of course I never did any of that,
 and it cost me $7.99/month on Heroku just to keep it running with reasonable response time.
 
-A personal website doesn't need fancy custom endpoints. It just needs to show pretty HTML pages shine me in a good light on a 
-static web server. That's like, $1/month on S3. (And if math isn't your thing, thats about $7/month cheaper than the last version.)
+A personal website doesn't need fancy custom endpoints. It just needs to show pretty HTML pages that shine me in a good light on a 
+static web server. That's like, $1/month on S3 (about $7/month cheaper).
 
 This version *does* run on a static S3 bucket. But I still want to do fancy things, like a custom blog system with async page loading.
-That leads me to the next question:
+That leads me to...
 
 # How's It Good?
 
@@ -35,7 +35,7 @@ version of my website to date.
 
 ### React Is Amazing
 
-I like [React](https://reactjs.org/). In fact, this is the first non-work related app I've written in React. I've been writing
+I like [React](https://reactjs.org/). In fact, this is the first non-work-related app I've written in React. I've been writing
 single-page web apps for years, mainly in [Angular 1.x](https://angular.io/), but I'm not sure I got as excited about Angular as
 I have with React.
 
