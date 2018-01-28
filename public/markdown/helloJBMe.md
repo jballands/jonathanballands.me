@@ -76,7 +76,7 @@ Most of the time I'll do the latter.
 
 ### It's Pretty
 
-So, the last version of my website was nice too, but it relied extremely heavily on graphics. I know my way around Photoshop and Illustrator enough
+So, the last version of my website was nice too, but it relied heavily on graphics. I know my way around Photoshop and Illustrator enough
 to be dangerous, but I don't really want to be spending my time mocking up iPhones and iMacs everytime I want to make a new project page:
 
 ![The last version of the website relied heavily on graphics.](https://i.imgur.com/YJEnLEX.png)

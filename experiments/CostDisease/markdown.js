@@ -226,12 +226,25 @@ there are usually only a limited number of these products available. It's simple
 
 This applies to handmade wallets and craft beers from a microbrewery, and it also applies to education and healthcare.
 
-## Shifting Our Mindset
+----
 
+No one wants to pay more for healthcare or education. After all, it has been shown that not attending college today can result
+in [poor life outcomes](http://www.pewsocialtrends.org/2014/02/11/the-rising-cost-of-not-going-to-college/).
 
+One way to solve the productivity paradox for education and healthcare is to shift the way we think about how those
+services are provided. We can either restrict how education and healthcare are administered and keep it a sort of luxury,
+or we can allow these areas to become more productive and not be scared that we are receiving a "lesser service".
 
-> The only way to solve the productivity paradox for education and healthcare is to shift the way we think about how those
-> services are provided.
+Or we can just accept that services are the future of our society. Perhaps services like education, law, healthcare, etc. require a human touch
+to make them worthwhile. Some would argue that while a robot could, for example, explain how a kind of cancer is infecting your body and what
+treatments are available, the human element of a doctor sympathizing with their patient and helping through the process is necessary to
+good healthcare.
+
+Perhaps humans are more adept at providing services that require exclisivity, while robots are more adept at providing things
+that can be mass produced. Perhaps this whole cost disease thing will fix itself after the [education bubble](https://en.wikipedia.org/wiki/Higher_education_bubble_in_the_United_States)
+pops. One thing is for certain, though: the cost of things like healthcare and education have risen over the past
+50 years or so, and it looks as if that trend will continue for a while, and we have William Baumol to thank for his explaination 
+on why this could be our future for years to come.
 `;
 
 // --------------------------------------------------------------------
