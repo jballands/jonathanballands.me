@@ -18,22 +18,23 @@ import LinkInTabSvg from 'svg/LinkInTabSvg';
 import { fuchsiaBlue, eastSide, moonRaker, shark } from 'helpers/palette';
 
 const aboutSpiel = `
-I'm a frontend web developer with an eye for design. This means I use tools like React, Redux, Webpack, 
-and the like to architect, build, and maintain beautiful web apps. Note how I said web apps
+I'm a frontend web developer with an eye for design. This means I use tools like React, D3, Webpack 
+and the like to architect, build, and maintain beautiful web applications. Note how I said web apps
 and not websites.
 
 I graduated in 2014 from Virginia Tech with a BS in Computer Science. I went on to join IBM
 for two years, building iOS apps in Objective-C and Swift thinking that's what I'd like to.
 While that can be enjoyable, I found myself enjoying web development much more. So I started
-doing more web development and in 2016, jumped ship to go work on the analytics solution at
+doing more of that and in 2016, jumped ship to go work on the analytics solution at
 [Spredfast](https://www.spredfast.com/).
 
 I believe that apps should inspire creativity and work with the user. This involves a balance of 
 strict engineering and design disipline combined with user empathy and a little imagination. Too
-strict and your app is soulless, not enough and your app is spaghetti, in form and function.
+rigid in practice and your app is soulless, not enough and your app is spaghetti, both in form
+and function.
 
-I designed and built this website from the ground up. Feel free to take a look around.
-Hopefully you'll find something you like.
+I designed and built this website from the ground up. Feel free to take a look around;
+hopefully you'll find something you like.
 `;
 
 const AboutContainer = styled.div`
@@ -94,7 +95,8 @@ const SummaryContainer = styled.div`
 	display: flex;
 	flex-flow: column nowrap;
 	align-items: center;
-	margin: 25px 0 50px 0;
+	margin: 50px 0 50px 0;
+	font-size: 15px;
 `;
 
 // const SummaryHeader = styled.div`
