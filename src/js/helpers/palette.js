@@ -19,6 +19,7 @@ export const black = '#000';
 //	Colors
 //
 export const moonRaker = '#d0bff2';
+export const eastSide = '#9d84ce';
 export const fuchsiaBlue = '#7953c1';
 export const gigas = '#593c8f';
 
@@ -78,4 +79,8 @@ export function shadeBlend(p, c0, c1) {
 				.slice(1)
 		);
 	}
+}
+
+export function linkShade(c) {
+	return shadeBlend(-0.3, c);
 }

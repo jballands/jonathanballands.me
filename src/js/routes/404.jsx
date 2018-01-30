@@ -71,10 +71,10 @@ export default class PageNotFound extends React.Component {
 			<NotFoundContainer className={this.props.className}>
 				<BackgroundGradient backgroundColor={alto}>
 					<Charlie src="assets/charlie.png" />
-					<NotFoundTitle>Page Not Found</NotFoundTitle>
+					<NotFoundTitle>Unexpected Route</NotFoundTitle>
 					<NotFoundExplanation>
 						The page you requested was either moved or does not
-						exist anymore. Sorry about that!
+						exist anymore.
 					</NotFoundExplanation>
 					<GoHomeContainer to="/">
 						<GoHome accentColor={silver}>Back to Safety</GoHome>

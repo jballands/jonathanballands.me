@@ -17,7 +17,7 @@ import StickyDrawer from 'components/StickyDrawer';
 import KinesisBrowserSearchResults from 'components/KinesisBrowserSearchResults';
 
 import { helpEntry } from 'helpers/kinesisEntries';
-import { shark, white } from 'helpers/palette';
+import { shark, white, linkShade } from 'helpers/palette';
 
 import LeftArrowSvg from 'svg/LeftArrowSvg';
 import MagnifyingGlassSvg from 'svg/MagnifyingGlassSvg';
@@ -32,6 +32,15 @@ const StyledRadioGroup = styled(RadioGroup)`
 	margin-top: 25px;
 `;
 
+const StyledOpenDrawerSvg = styled(OpenDrawerSvg)`
+	fill: ${props => props.color};
+
+	&:hover {
+		cursor: pointer;
+		fill: ${props => linkShade(props.color)};
+	}
+`;
+
 const FiltersContainer = styled.div`
 	margin-left: 20px;
 	width: calc(100% - 40px);
@@ -39,9 +48,6 @@ const FiltersContainer = styled.div`
 
 const OpenDrawerButton = styled.div`
 	padding: 20px;
-	&:hover {
-		cursor: pointer;
-	}
 `;
 
 const OpenBrowserDrawerContainer = styled.div`
@@ -63,9 +69,13 @@ const TitleButton = styled.div`
 	display: flex;
 	flex-flow: row nowrap;
 	align-items: center;
+	color: ${props => props.color};
+	fill: ${props => props.color};
 
 	&:hover {
 		cursor: pointer;
+		color: ${props => linkShade(props.color)};
+		fill: ${props => linkShade(props.color)};
 	}
 `;
 
@@ -75,7 +85,6 @@ const Title = styled.span`
 	text-transform: uppercase;
 	margin-left: 10px;
 	color: ${props => props.color};
-	transition: color 500ms ease;
 `;
 
 export default class KinesisBrowser extends React.Component {
@@ -142,7 +151,10 @@ export default class KinesisBrowser extends React.Component {
 
 		return (
 			<OpenDrawerButton onClick={this.handleOpenDrawer}>
-				<OpenDrawerSvg color={selectedEntry.primaryColor} height={27} />
+				<StyledOpenDrawerSvg
+					color={selectedEntry.primaryColor}
+					height={28}
+				/>
 			</OpenDrawerButton>
 		);
 	};
@@ -159,13 +171,11 @@ export default class KinesisBrowser extends React.Component {
 		return (
 			<OpenBrowserDrawerContainer>
 				<TitleContainer>
-					<TitleButton onClick={this.handleCloseDrawer}>
-						<LeftArrowSvg
-							width={21}
-							height={21}
-							color={selectedEntry.primaryColor}
-						/>
-						<Title color={selectedEntry.primaryColor}>Posts</Title>
+					<TitleButton
+						color={selectedEntry.primaryColor}
+						onClick={this.handleCloseDrawer}>
+						<LeftArrowSvg width={21} height={21} />
+						<Title>Posts</Title>
 					</TitleButton>
 				</TitleContainer>
 

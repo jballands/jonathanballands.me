@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 import { spring, Motion } from 'react-motion';
 import styled from 'styled-components';
 
-import { shadeBlend } from 'helpers/palette';
+import { linkShade } from 'helpers/palette';
 
 import HelpSvg from 'svg/HelpSvg';
 import CollapseSvg from 'svg/CollapseSvg';
@@ -35,7 +35,10 @@ const ExplanationPanelHeader = styled.div`
 `;
 
 const StyledHelpSvg = styled(HelpSvg)`
+	fill: ${props => props.color};
+
 	&:hover {
+		fill: ${props => linkShade(props.color)};
 		cursor: pointer;
 	}
 `;
@@ -44,7 +47,7 @@ const StyledCollapseSvg = styled(CollapseSvg)`
 	fill: ${props => props.color};
 
 	&:hover {
-		fill: ${props => shadeBlend(-0.2, props.color)};
+		fill: ${props => linkShade(props.color)};
 		cursor: pointer;
 	}
 `;

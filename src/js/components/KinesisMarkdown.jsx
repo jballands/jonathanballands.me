@@ -14,7 +14,7 @@ import KinesisMarkdownCodeBlock from 'components/KinesisMarkdownCodeBlock';
 import KinesisMarkdownHeading from 'components/KinesisMarkdownHeading';
 import KinesisMarkdownLink from 'components/KinesisMarkdownLink';
 
-import { black, shark } from 'helpers/palette';
+import { black, shark, linkShade } from 'helpers/palette';
 
 const KinesisStyle = styled.div`
 	color: ${shark};
@@ -75,10 +75,14 @@ const KinesisStyle = styled.div`
 			height: 1px;
 			bottom: 0;
 			left: 0;
-			background-color: ${props => props.color};
+			background-color: ${props => linkShade(props.color)};
 			visibility: hidden;
 			transform: scaleX(0);
 			transition: all 0.2s ease-out 0s;
+		}
+
+		&:hover {
+			color: ${props => linkShade(props.color)};
 		}
 	}
 

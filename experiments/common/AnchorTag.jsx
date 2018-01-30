@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { shadeBlend } from 'helpers/palette';
+import { linkShade } from 'helpers/palette';
 
 import LinkSvg from 'svg/LinkSvg';
 
@@ -12,7 +12,7 @@ const StyledLinkSvg = styled(LinkSvg)`
 	fill: ${props => props.color};
 
 	&:hover {
-		fill: ${props => shadeBlend(-0.3, props.color)};
+		fill: ${props => linkShade(props.color)};
 	}
 `;
 

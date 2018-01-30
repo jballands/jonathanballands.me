@@ -6,14 +6,15 @@
 //
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import Particles from 'react-particles-js';
+import ReactParticles from 'react-particles-js';
 
 import { gigas } from 'helpers/palette';
 
 const ParticlesContainer = styled.div`
 	width: 100%;
-	height: 500px;
+	height: 475px;
 	position: relative;
 `;
 
@@ -32,7 +33,13 @@ const ParticlesContentContainer = styled.div`
 	align-items: center;
 `;
 
-export default class NavigationBar extends React.Component {
+export default class Particles extends React.Component {
+	static displayName = 'Particles';
+
+	static propTypes = {
+		children: PropTypes.node,
+	};
+
 	render() {
 		const params = {
 			particles: {
@@ -60,7 +67,7 @@ export default class NavigationBar extends React.Component {
 
 		return (
 			<ParticlesContainer>
-				<Particles width="100%" height="500px" params={params} />
+				<ReactParticles width="100%" height="475px" params={params} />
 
 				<ParticlesContentPositioning>
 					<ParticlesContentContainer>

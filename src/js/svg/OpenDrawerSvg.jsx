@@ -7,7 +7,6 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 
 import Svg from './Svg';
 
@@ -30,28 +29,15 @@ export default class OpenDrawerSvg extends React.Component {
 
 	render() {
 		return (
-			<Svg
-				width="26px"
-				height="23px"
-				viewBox="0 0 26 23"
-				version="1.1"
-				{...this.props}>
-				<rect
-					stroke={this.props.color}
-					strokeWidth={this.props.strokeWidth}
-					fill="transparent"
-					x="1.55371094"
-					y="1.3203125"
-					width="9"
-					height="20"
-				/>
-				<g
-					transform="translate(13.553711, 6.320312)"
-					fillRule="nonzero"
-					fill={this.props.color}>
+			<Svg viewBox="0 0 25 22" version="1.1" {...this.props}>
+				<g fillRule="evenodd">
+					<path
+						d="M10.0537109,0.8203125 L10.0537109,21.8203125 L0.05371094,21.8203125 L0.05371094,0.8203125 L10.0537109,0.8203125 Z M1.7179362,2.47998047 L1.7179362,20.1373698 L8.36295573,20.1373698 L8.36295573,2.47998047 L1.7179362,2.47998047 Z"
+						fillRule="nonzero"
+					/>
 					<polygon
-						id="Shape"
-						points="6.54708284 0.00532741547 5.25623908 1.28755648 8.05646776 4.08778517 0.641483974 4.08778517 0.641483974 5.89777754 8.05646776 5.89777754 5.25623908 8.69800622 6.54708284 9.98023529 11.5232017 4.99278135"
+						fillRule="nonzero"
+						points="19.1007938 6.32563942 17.8099501 7.60786848 20.6101788 10.4080972 13.195195 10.4080972 13.195195 12.2180895 20.6101788 12.2180895 17.8099501 15.0183182 19.1007938 16.3005473 24.0769127 11.3130934"
 					/>
 				</g>
 			</Svg>
