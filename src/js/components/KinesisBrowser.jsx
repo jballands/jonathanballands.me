@@ -15,7 +15,6 @@ import RadioItem from '@jballands/vespyr/lib/RadioItem';
 
 import StickyDrawer from 'components/StickyDrawer';
 import KinesisBrowserSearchResults from 'components/KinesisBrowserSearchResults';
-import KinesisHelpIcon from 'components/KinesisHelpIcon';
 
 import { helpEntry } from 'helpers/kinesisEntries';
 import { shark, white } from 'helpers/palette';
@@ -168,11 +167,6 @@ export default class KinesisBrowser extends React.Component {
 						/>
 						<Title color={selectedEntry.primaryColor}>Posts</Title>
 					</TitleButton>
-					<KinesisHelpIcon
-						color={this.props.selectedEntry.primaryColor}
-						linkTo={`${match.url}/${helpEntry.id}`}
-						onClick={this.handleKinesisHelp}
-					/>
 				</TitleContainer>
 
 				<FiltersContainer>

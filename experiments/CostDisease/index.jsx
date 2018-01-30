@@ -123,9 +123,7 @@ export default class CostDiseaseExperiment extends React.Component {
 	render() {
 		return (
 			<div>
-				<Title color={this.props.primaryColor}>
-					Cost Disease Explained
-				</Title>
+				<Title color={this.props.primaryColor}>Cost Disease</Title>
 				<Subtitle color={this.props.primaryColor}>
 					And how it explains rising healthcare and education costs.
 				</Subtitle>

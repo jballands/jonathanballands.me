@@ -9,7 +9,6 @@ import styled from 'styled-components';
 
 const Svg = styled.svg`
 	* {
-		transition: fill 300ms ease;
 	}
 `;
 

@@ -77,9 +77,7 @@ export default class PageNotFound extends React.Component {
 						exist anymore. Sorry about that!
 					</NotFoundExplanation>
 					<GoHomeContainer to="/">
-						<GoHome accentColor={silver}>
-							Let's Blow This Popsicle Stand
-						</GoHome>
+						<GoHome accentColor={silver}>Back to Safety</GoHome>
 					</GoHomeContainer>
 				</BackgroundGradient>
 			</NotFoundContainer>
