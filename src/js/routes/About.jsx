@@ -13,6 +13,7 @@ import BoldButton from '@jballands/vespyr/lib/BoldButton';
 import BackgroundGradient from 'components/BackgroundGradient';
 import Particles from 'components/Particles';
 import KinesisMarkdown from 'components/KinesisMarkdown';
+import InstagramViewer from 'components/InstagramViewer';
 import LinkInTabSvg from 'svg/LinkInTabSvg';
 
 import { fuchsiaBlue, eastSide, moonRaker, shark } from 'helpers/palette';
@@ -89,38 +90,18 @@ const StyledLinkInTabSvg = styled(LinkInTabSvg)`
 	margin-left: 10px;
 `;
 
+const InstagramContainer = styled.div`
+	margin: 100px 0 50px 0;
+`;
+
 const SummaryContainer = styled.div`
 	width: 75%;
 	max-width: 800px;
 	display: flex;
 	flex-flow: column nowrap;
 	align-items: center;
-	margin: 50px 0 50px 0;
+	margin: 50px 0 100px 0;
 	font-size: 15px;
-`;
-
-// const SummaryHeader = styled.div`
-// 	flex: 1 0 50%;
-// 	font-family: 'Raleway', sans-serif;
-// 	font-weight: 700;
-// 	text-transform: uppercase;
-// 	font-size: 48px;
-// 	letter-spacing: 1px;
-// 	color: ${fuchsiaBlue};
-// `;
-
-const SummaryParagraph = styled.div`
-	flex: 1 0 50%;
-	font-family: 'Roboto', 'serif';
-	color: ${shark};
-	font-size: 16px;
-	letter-spacing: 1px;
-	margin-top: 10px;
-	line-height: 1.5em;
-
-	p {
-		margin: 20px 0;
-	}
 `;
 
 export default class About extends React.Component {
@@ -151,6 +132,10 @@ export default class About extends React.Component {
 							</AboutHeroUnit>
 						</Particles>
 					</AboutHeroUnitContainer>
+
+					<InstagramContainer>
+						<InstagramViewer />
+					</InstagramContainer>
 
 					<SummaryContainer>
 						<KinesisMarkdown
