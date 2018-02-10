@@ -11,6 +11,7 @@ import styled from 'styled-components';
 import TwitterSvg from 'svg/TwitterSvg';
 import LinkedInSvg from 'svg/LinkedInSvg';
 import GithubSvg from 'svg/GithubSvg';
+import InstagramSvg from 'svg/InstagramSvg';
 
 const FooterContainer = styled.div`
 	display: flex;
@@ -59,6 +60,14 @@ export default class Footer extends React.Component {
 					</a>
 					<a href="https://linkedin.com/in/jballands" target="_blank">
 						<LinkedInSvg
+							width={this.socialMediaDim}
+							height={this.socialMediaDim}
+						/>
+					</a>
+					<a
+						href="https://www.instagram.com/jballands/"
+						target="_blank">
+						<InstagramSvg
 							width={this.socialMediaDim}
 							height={this.socialMediaDim}
 						/>
