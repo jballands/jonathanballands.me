@@ -8,9 +8,11 @@
 import { combineReducers } from 'redux';
 
 import kinesisReducer from 'reducers/kinesisReducer';
+import instagramViewerReducer from 'reducers/instagramViewerReducer';
 
 const rootReducer = combineReducers({
 	kinesis: kinesisReducer,
+	instagramViewer: instagramViewerReducer,
 });
 
 export default rootReducer;
