@@ -45,7 +45,7 @@ const NotFoundExplanation = styled.div`
 `;
 
 const Charlie = styled.img`
-	max-width: 500px;
+	max-width: 400px;
 	width: 100%;
 	margin-top: 50px;
 `;
@@ -53,6 +53,7 @@ const Charlie = styled.img`
 const GoHome = styled(BoldButton)`
 	font-size: 16px;
 	text-transform: capitalize;
+	margin-bottom: 100px;
 `;
 
 const GoHomeContainer = styled(Link)`
@@ -71,13 +72,15 @@ export default class PageNotFound extends React.Component {
 			<NotFoundContainer className={this.props.className}>
 				<BackgroundGradient backgroundColor={alto}>
 					<Charlie src="assets/charlie.png" />
-					<NotFoundTitle>Unexpected Route</NotFoundTitle>
+					<NotFoundTitle>Page Not Found</NotFoundTitle>
 					<NotFoundExplanation>
 						The page you requested was either moved or does not
 						exist anymore.
 					</NotFoundExplanation>
 					<GoHomeContainer to="/">
-						<GoHome accentColor={silver}>Back to Safety</GoHome>
+						<GoHome accentColor={silver}>
+							Back to About Page &#x270C;
+						</GoHome>
 					</GoHomeContainer>
 				</BackgroundGradient>
 			</NotFoundContainer>

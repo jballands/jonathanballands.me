@@ -14,7 +14,7 @@ import { gigas } from 'helpers/palette';
 
 const ParticlesContainer = styled.div`
 	width: 100%;
-	height: 475px;
+	height: ${props => props.height};
 	position: relative;
 `;
 
@@ -38,6 +38,7 @@ export default class Particles extends React.Component {
 
 	static propTypes = {
 		children: PropTypes.node,
+		height: PropTypes.number,
 	};
 
 	render() {
@@ -65,9 +66,11 @@ export default class Particles extends React.Component {
 			retina_detect: true,
 		};
 
+		const { height } = this.props;
+
 		return (
-			<ParticlesContainer>
-				<ReactParticles width="100%" height="475px" params={params} />
+			<ParticlesContainer height={height}>
+				<ReactParticles width="100%" height={height} params={params} />
 
 				<ParticlesContentPositioning>
 					<ParticlesContentContainer>

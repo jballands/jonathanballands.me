@@ -10,12 +10,12 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import BoldButton from '@jballands/vespyr/lib/BoldButton';
 
-import InstagramViewerContainer from 'containers/InstagramViewerContainer';
+// import InstagramViewerContainer from 'containers/InstagramViewerContainer';
 import BackgroundGradient from 'components/BackgroundGradient';
 import Particles from 'components/Particles';
 import KinesisMarkdown from 'components/KinesisMarkdown';
 import LinkInTabSvg from 'svg/LinkInTabSvg';
-import InstagramSvg from 'svg/InstagramSvg';
+// import InstagramSvg from 'svg/InstagramSvg';
 
 import { fuchsiaBlue, eastSide, moonRaker, shark } from 'helpers/palette';
 
@@ -73,6 +73,16 @@ const AboutHeroUnitSubtitle = styled.div`
 	margin-top: 10px;
 `;
 
+const AboutHeroUnitBullets = styled.div`
+	font-family: 'Roboto', 'serif';
+	font-weight: 300;
+	color: ${shark};
+	font-size: 16px;
+	letter-spacing: 1px;
+	line-height: 1.5em;
+	margin-top: 10px;
+`;
+
 const ViewResumeContainer = styled.a`
 	margin-top: 30px;
 `;
@@ -86,26 +96,26 @@ const StyledLinkInTabSvg = styled(LinkInTabSvg)`
 	margin-left: 10px;
 `;
 
-const InstagramContainer = styled.div`
-	width: 100%;
-	margin: 100px 0 50px 0;
-`;
+// const InstagramContainer = styled.div`
+// 	width: 100%;
+// 	margin: 100px 0 50px 0;
+// `;
 
-const InstagramTitle = styled.div`
-	display: flex;
-	flex-flow: row nowrap;
-	justify-content: flex-start;
-	align-items: center;
-	font-size: 28px;
-	letter-spacing: 1px;
-	color: ${fuchsiaBlue};
-	border-bottom: 1px solid ${fuchsiaBlue};
-	padding-bottom: 10px;
-`;
+// const InstagramTitle = styled.div`
+// 	display: flex;
+// 	flex-flow: row nowrap;
+// 	justify-content: flex-start;
+// 	align-items: center;
+// 	font-size: 28px;
+// 	letter-spacing: 1px;
+// 	color: ${fuchsiaBlue};
+// 	border-bottom: 1px solid ${fuchsiaBlue};
+// 	padding-bottom: 10px;
+// `;
 
-const InstagramUsername = styled.div`
-	margin-left: 10px;
-`;
+// const InstagramUsername = styled.div`
+// 	margin-left: 10px;
+// `;
 
 const AboutMe = styled.div`
 	width: 75%;
@@ -127,7 +137,7 @@ export default class About extends React.Component {
 			<AboutContainer className={this.props.className}>
 				<BackgroundGradient backgroundColor={moonRaker}>
 					<AboutHeroUnitContainer>
-						<Particles>
+						<Particles height="calc(100vh - 70px)">
 							<AboutHeroUnit>
 								<AboutHeroUnitTitle>
 									Howdy, I'm Jon
@@ -135,6 +145,13 @@ export default class About extends React.Component {
 								<AboutHeroUnitSubtitle>
 									Web developer. Wannabe designer.
 								</AboutHeroUnitSubtitle>
+								<AboutHeroUnitBullets>
+									<ul>
+										<li>Frontend web development</li>
+										<li>Web design and UX</li>
+										<li>Loud but great at parties</li>
+									</ul>
+								</AboutHeroUnitBullets>
 								<ViewResumeContainer
 									href="/resume"
 									target="_blank">
@@ -147,18 +164,6 @@ export default class About extends React.Component {
 					</AboutHeroUnitContainer>
 
 					<AboutMe>
-						<InstagramContainer>
-							<InstagramTitle>
-								<InstagramSvg
-									width={30}
-									height={30}
-									color={fuchsiaBlue}
-								/>
-								<InstagramUsername>jballands</InstagramUsername>
-							</InstagramTitle>
-							<InstagramViewerContainer />
-						</InstagramContainer>
-
 						<KinesisMarkdown
 							color={eastSide}
 							content={aboutSpiel}
