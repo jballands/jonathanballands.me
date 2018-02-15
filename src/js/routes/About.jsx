@@ -26,18 +26,17 @@ and the like to architect, build, and maintain beautiful web applications. Note 
 and not websites.
 
 I graduated in 2014 from Virginia Tech with a BS in Computer Science. I went on to join IBM
-for two years, building iOS apps in Objective-C and Swift thinking that's what I'd like to.
-While that can be enjoyable, I found myself enjoying web development much more. So I started
+for two years, building iOS apps in Objective-C and Swift thinking that's what I'd like to do.
+While that stuff can be enjoyable, I found myself enjoying web development much more. So I started
 doing more of that and in 2016, jumped ship to go work on the analytics solution at
 [Spredfast](https://www.spredfast.com/).
 
-I believe that apps should inspire creativity and work with the user. This involves a balance of 
+I believe that apps should both inspire creativity and be efficent for the end user. This involves a balance of 
 strict engineering and design disipline combined with user empathy and a little imagination. Too
-rigid in practice and your app is soulless, not enough and your app is spaghetti, both in form
-and function.
+rigid in practice and your app is soulless, not enough and your app is spaghetti.
 
-I designed and built this website from the ground up. Feel free to take a look around;
-hopefully you'll find something you like.
+I designed and built this website from the ground up. It should give you an idea of my attention to detail.
+Feel free to take a look around; hopefully you'll find something you like.
 `;
 
 const AboutContainer = styled.div`
