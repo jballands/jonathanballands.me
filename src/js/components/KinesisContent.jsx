@@ -20,6 +20,7 @@ import { Type } from '~/kinesis.config.js';
 const StyledLoadingAnimation = styled(LoadingAnimation)`
 	width: 100%;
 	margin-top: 100px;
+	height: calc(100vh - 240px);
 `;
 
 const KinesisContainer = styled.div`

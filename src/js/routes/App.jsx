@@ -42,7 +42,7 @@ const RouteWrapper = styled.div`
 	}
 	.fade-enter.fade-enter-active {
 		opacity: 1;
-		transition: opacity 300ms ease;
+		transition: opacity 350ms ease;
 	}
 `;
 
@@ -62,6 +62,8 @@ export default class App extends React.Component {
 				<RouteWrapper>
 					<ContentScroller history={history} location={location}>
 						<TransitionGroup>
+							{/* Timeout is higher here to make up for any inconsistencies between the CSS timer
+							and this timer */}
 							<CSSTransition
 								key={topLevelPath}
 								classNames="fade"

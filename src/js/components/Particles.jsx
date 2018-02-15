@@ -38,7 +38,7 @@ export default class Particles extends React.Component {
 
 	static propTypes = {
 		children: PropTypes.node,
-		height: PropTypes.number,
+		height: PropTypes.string,
 	};
 
 	render() {

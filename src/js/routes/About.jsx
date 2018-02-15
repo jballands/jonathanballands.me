@@ -16,6 +16,7 @@ import Particles from 'components/Particles';
 import KinesisMarkdown from 'components/KinesisMarkdown';
 import LinkInTabSvg from 'svg/LinkInTabSvg';
 // import InstagramSvg from 'svg/InstagramSvg';
+import DownArrowSvg from 'svg/DownArrowSvg';
 
 import { fuchsiaBlue, eastSide, moonRaker, shark } from 'helpers/palette';
 
@@ -52,6 +53,7 @@ const AboutHeroUnit = styled.div`
 	flex-flow: column;
 	align-items: center;
 	width: 80%;
+	padding-bottom: 70px;
 `;
 
 const AboutHeroUnitTitle = styled.div`
@@ -73,14 +75,46 @@ const AboutHeroUnitSubtitle = styled.div`
 	margin-top: 10px;
 `;
 
-const AboutHeroUnitBullets = styled.div`
-	font-family: 'Roboto', 'serif';
-	font-weight: 300;
-	color: ${shark};
-	font-size: 16px;
-	letter-spacing: 1px;
-	line-height: 1.5em;
-	margin-top: 10px;
+const ScrollToSeeMore = styled.div`
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: center;
+	position: relative;
+	bottom: 0;
+	height: 80px;
+	margin-top: 30px;
+`;
+
+const ScrollToSeeMoreText = styled.div`
+	color: ${eastSide};
+	font-size: 15px;
+`;
+
+const ScrollToSeeMoreArrow = styled(DownArrowSvg)`
+	@keyframes bounce {
+		30% {
+			bottom: 35px;
+		}
+		34% {
+			bottom: 25px;
+		}
+		38% {
+			bottom: 35px;
+		}
+		42% {
+			bottom: 25px;
+		}
+		46% {
+			bottom: 35px;
+		}
+	}
+
+	animation-name: bounce;
+	animation-duration: 8s;
+	animation-iteration-count: infinite;
+	animation-timing-function: ease-in-out;
+	bottom: 35px;
+	position: absolute;
 `;
 
 const ViewResumeContainer = styled.a`
@@ -123,8 +157,8 @@ const AboutMe = styled.div`
 	display: flex;
 	flex-flow: column nowrap;
 	align-items: center;
-	margin: 50px 0 100px 0;
-	font-size: 15px;
+	margin: 50px 0 125px 0;
+	font-size: 16px;
 `;
 
 export default class About extends React.Component {
@@ -145,13 +179,6 @@ export default class About extends React.Component {
 								<AboutHeroUnitSubtitle>
 									Web developer. Wannabe designer.
 								</AboutHeroUnitSubtitle>
-								<AboutHeroUnitBullets>
-									<ul>
-										<li>Frontend web development</li>
-										<li>Web design and UX</li>
-										<li>Loud but great at parties</li>
-									</ul>
-								</AboutHeroUnitBullets>
 								<ViewResumeContainer
 									href="/resume"
 									target="_blank">
@@ -159,6 +186,17 @@ export default class About extends React.Component {
 										View My Résumé <StyledLinkInTabSvg />
 									</ViewResume>
 								</ViewResumeContainer>
+
+								<ScrollToSeeMore>
+									<ScrollToSeeMoreText>
+										Scroll down to learn more
+									</ScrollToSeeMoreText>
+									<ScrollToSeeMoreArrow
+										width={20}
+										height={20}
+										fill={eastSide}
+									/>
+								</ScrollToSeeMore>
 							</AboutHeroUnit>
 						</Particles>
 					</AboutHeroUnitContainer>

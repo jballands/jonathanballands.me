@@ -11,7 +11,7 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { compose, createStore, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Router, Route } from 'react-router-dom';
 import createHistory from 'history/createBrowserHistory';
 
 import App from 'routes/App';

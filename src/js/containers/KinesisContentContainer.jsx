@@ -50,7 +50,6 @@ class KinesisContentContainer extends React.Component {
 			chooseEntry,
 			filteredEntries,
 			history,
-			location,
 			match,
 			selectedEntry,
 		} = this.props;
@@ -93,7 +92,7 @@ class KinesisContentContainer extends React.Component {
 		//	route mismatch. This usually happens when the back button
 		//	was pressed. We then get the id of the entry that we need
 		//	to be at and choose it
-		if (oldKinesisId !== newKinesisId) {
+		if (newKinesisId && oldKinesisId !== newKinesisId) {
 			return this.props.chooseEntry(entries.get(newKinesisId).id);
 		}
 	}
