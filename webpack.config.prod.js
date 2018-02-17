@@ -14,7 +14,12 @@ module.exports = {
 	entry: {
 		index: './src/js/index',
 	},
-	plugins: [new webpack.optimize.UglifyJsPlugin()],
+	plugins: [
+		new webpack.optimize.UglifyJsPlugin(),
+		new webpack.DefinePlugin({
+			'process.env.NODE_ENV': 'production',
+		}),
+	],
 	output: {
 		path: path.resolve(__dirname, './public/assets'),
 		publicPath: '/assets/',
