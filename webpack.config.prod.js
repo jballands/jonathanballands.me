@@ -45,7 +45,7 @@ module.exports = {
 				use: [
 					{
 						loader:
-							'babel-loader?presets[]=stage-0,presets[]=react,presets[]=es2015,plugins[]=transform-class-properties',
+							'babel-loader?presets[]=stage-0,presets[]=react,plugins[]=transform-class-properties',
 					},
 				],
 			},
