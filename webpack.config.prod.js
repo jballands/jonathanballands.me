@@ -24,12 +24,8 @@ module.exports = {
 	module: {
 		rules: [
 			{
-				test: /\.scss$/,
-				use: [
-					{ loader: 'style-loader' },
-					{ loader: 'css-loader' },
-					{ loader: 'sass-loader' },
-				],
+				test: /\.css$/,
+				use: [{ loader: 'style-loader' }, { loader: 'css-loader' }],
 			},
 			{
 				test: /\.(jpe?g|png|gif|svg)$/i,
