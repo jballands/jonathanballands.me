@@ -24,11 +24,12 @@
     raf "^3.3.0"
 
 "@jballands/vespyr@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@jballands/vespyr/-/vespyr-1.0.0.tgz#b51831525751d38c9b1e970d0bb466d4cc64dd65"
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@jballands/vespyr/-/vespyr-1.0.1.tgz#dc2e994eaa916451a96b32a7b4708532846cdfde"
   dependencies:
     classnames "^2.2.5"
     color "^2.0.0"
+    create-react-class "^15.6.3"
     prop-types "^15.5.10"
     react-motion "^0.5.0"
     react-slider "^0.9.0"
@@ -1817,6 +1818,14 @@ create-hmac@^1.1.0, create-hmac@^1.1.2, create-hmac@^1.1.4:
     ripemd160 "^2.0.0"
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
+
+create-react-class@^15.6.3:
+  version "15.6.3"
+  resolved "https://registry.yarnpkg.com/create-react-class/-/create-react-class-15.6.3.tgz#2d73237fb3f970ae6ebe011a9e66f46dbca80036"
+  dependencies:
+    fbjs "^0.8.9"
+    loose-envify "^1.3.1"
+    object-assign "^4.1.1"
 
 cross-spawn@^3.0.0:
   version "3.0.1"
