@@ -20,6 +20,7 @@
     "homepage": "http://jonathanballands.me",
     "dependencies": {
         "@jballands/react-sticky": "^1.1.0",
+        "@jballands/vespyr": "^1.0.0",
         "axios": "^0.16.2",
         "d3-array": "^1.2.1",
         "d3-axis": "^1.0.8",
