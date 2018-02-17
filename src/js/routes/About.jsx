@@ -179,7 +179,7 @@ export default class About extends React.Component {
 									Web developer. Wannabe designer.
 								</AboutHeroUnitSubtitle>
 								<ViewResumeContainer
-									href="/resume"
+									href="/assets/jonathan_ballands_resume_18.pdf"
 									target="_blank">
 									<ViewResume accentColor={fuchsiaBlue}>
 										View My Résumé <StyledLinkInTabSvg />

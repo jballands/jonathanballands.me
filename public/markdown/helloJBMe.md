@@ -8,7 +8,7 @@ write a blog post for this thing.
 
 Why? Because I chose good and cheap in the infamous triangle:
 
-![The infamous triangle.](https://i.imgur.com/CsQYXyq.png)
+![The infamous triangle.](/assets/infamous_triangle.png)
 
 # How's It Cheap?
 
