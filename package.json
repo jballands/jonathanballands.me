@@ -9,7 +9,7 @@
 		"build":
 			"yarn fresh && ./node_modules/.bin/webpack --config webpack.config.prod.js",
 		"fresh": "find ./public -name \"*.js\" -type f -delete",
-		"s3:upload": "aws s3 cp ./public s3://jonathanballands.me --recursive"
+		"s3:upload": "aws s3 cp ./public s3://www.jonathanballands.me --recursive"
 	},
 	"repository": {
 		"type": "git",
