@@ -34,10 +34,10 @@ export default class ContentScroller extends React.Component {
 		const animateOptions = { duration: 1000, smooth: 'easeOutQuint' };
 
 		if (location.hash) {
-			const offset =
-				document
-					.getElementById(location.hash.slice(1))
-					.getBoundingClientRect().top - 25;
+			const element = document.getElementById(location.hash.slice(1));
+			const offset = element
+				? element.getBoundingClientRect().top - 25
+				: 0;
 			animateScroll.scrollMore(offset, animateOptions);
 		} else {
 			animateScroll.scrollToTop(animateOptions);
