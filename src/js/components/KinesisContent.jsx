@@ -24,9 +24,10 @@ const StyledLoadingAnimation = styled(LoadingAnimation)`
 `;
 
 const KinesisContainer = styled.div`
-	margin: 70px 0;
+	margin: 70px auto;
+	padding: 0 20px;
 	width: 75%;
-	max-width: 800px;
+	max-width: 860px;
 	min-width: 400px;
 `;
 

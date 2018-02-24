@@ -16,7 +16,7 @@ const BackgroundGradientContainer = styled.div`
 	height: 100%;
 	background: white;
 	position: relative;
-	overflow: scroll;
+	overflow: hidden;
 `;
 
 const Gradient = styled.div`
@@ -33,9 +33,8 @@ const Content = styled.div`
 	flex: 1 0;
 	display: flex;
 	flex-flow: column nowrap;
-	align-items: center;
-	justify-content: center;
 	position: relative;
+	overflow: scroll;
 `;
 
 export default class BackgroundGradient extends React.Component {
