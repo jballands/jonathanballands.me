@@ -27,6 +27,7 @@ const KinesisContainer = styled.div`
 	margin: 70px 0;
 	width: 75%;
 	max-width: 800px;
+	min-width: 400px;
 `;
 
 const KinesisArticleTitle = styled.div`

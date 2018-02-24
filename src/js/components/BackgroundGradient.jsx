@@ -12,10 +12,11 @@ import styled from 'styled-components';
 import { white } from 'helpers/palette';
 
 const BackgroundGradientContainer = styled.div`
-	width: 100%;
+	flex: 1 0;
 	height: 100%;
 	background: white;
 	position: relative;
+	overflow: scroll;
 `;
 
 const Gradient = styled.div`
