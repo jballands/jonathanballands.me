@@ -156,7 +156,7 @@ const AboutMe = styled.div`
 	display: flex;
 	flex-flow: column nowrap;
 	align-items: center;
-	margin: 50px 0 125px 0;
+	margin: 50px auto 125px auto;
 	font-size: 16px;
 `;
 
