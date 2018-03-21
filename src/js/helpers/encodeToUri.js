@@ -12,6 +12,10 @@ export default function(str) {
 		_toLower(str)
 			.replace(/ /g, '-')
 			.replace(/\./g, '-')
-			.replace(/\?/g, ''),
+			.replace(/\?/g, '')
+			.replace(/!/g, '')
+			.replace(/"/g, '')
+			.replace(/'/g, '')
+			.replace(/,/g, ''),
 	);
 }

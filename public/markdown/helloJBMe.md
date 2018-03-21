@@ -23,7 +23,7 @@ Sure, I could have written custom endpoints to do fancy things with the UI on th
 and it cost me $7.99/month on Heroku just to keep it running with reasonable response time.
 
 A personal website doesn't need fancy custom endpoints. It just needs to show pretty HTML pages that shine me in a good light on a 
-static web server. That's like, $1/month on S3 (about $7/month cheaper).
+static web server. That's like, $1/month on S3.
 
 This version *does* run on a static S3 bucket. But I still want to do fancy things, like a custom blog system with async page loading.
 That leads me to...

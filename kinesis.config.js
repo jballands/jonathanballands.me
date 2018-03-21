@@ -46,9 +46,17 @@ export const KinesisHashtags = {
 		id: 'dev',
 		displayName: 'dev',
 	},
+	diy: {
+		id: 'diy',
+		displayName: 'diy',
+	},
 	economics: {
 		id: 'economics',
 		displayName: 'economics',
+	},
+	home_automation: {
+		id: 'home_automation',
+		displayName: 'home-automation',
 	},
 	visualization: {
 		id: 'visualization',
@@ -78,5 +86,18 @@ export const kinesisPosts = [
 		resource: () => import('~/experiments/CostDisease'),
 		primaryColor: '#ff6b6b',
 		secondaryColor: '#ffcfb1',
+	}),
+	new Post({
+		name: 'HomeKit All the Things!',
+		date: new Date(2018, 2, 20),
+		hashtags: [
+			KinesisHashtags.home_automation,
+			KinesisHashtags.diy,
+			KinesisHashtags.dev,
+		],
+		type: Type.article,
+		resource: '/markdown/homekitAllTheThings.md',
+		primaryColor: '#549ff7',
+		secondaryColor: '#b3d5fc',
 	}),
 ];
