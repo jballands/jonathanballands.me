@@ -88,7 +88,7 @@ export const kinesisPosts = [
 		secondaryColor: '#ffcfb1',
 	}),
 	new Post({
-		name: 'HomeKit All the Things!',
+		name: 'HomeKit All the Things',
 		date: new Date(2018, 2, 20),
 		hashtags: [
 			KinesisHashtags.home_automation,

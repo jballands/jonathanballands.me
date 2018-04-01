@@ -9,6 +9,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Lowlight from 'react-lowlight';
 import js from 'highlight.js/lib/languages/javascript';
+import bash from 'highlight.js/lib/languages/bash';
 import styled from 'styled-components';
 
 const StyledLowlight = styled(Lowlight)`
@@ -91,6 +92,7 @@ const StyledLowlight = styled(Lowlight)`
 `;
 
 Lowlight.registerLanguage('js', js);
+Lowlight.registerLanguage('bash', bash);
 
 export default class KinesisMarkdownCodeBlock extends React.PureComponent {
 	static displayName = 'KinesisMarkdownCodeBlock';

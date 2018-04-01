@@ -57,6 +57,7 @@ const KinesisStyle = styled.div`
 
 	img {
 		max-width: 100%;
+		margin: 20px 0;
 	}
 
 	a {
