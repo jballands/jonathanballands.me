@@ -100,4 +100,13 @@ export const kinesisPosts = [
 		primaryColor: '#549ff7',
 		secondaryColor: '#b3d5fc',
 	}),
+	new Post({
+		name: 'Loan Burndown',
+		date: new Date(2018, 3, 10),
+		hashtags: [KinesisHashtags.visualization],
+		type: Type.experiment,
+		resource: () => import('~/experiments/LoanBurndown'),
+		primaryColor: '#68bf4c',
+		secondaryColor: '#c1ffad',
+	}),
 ];

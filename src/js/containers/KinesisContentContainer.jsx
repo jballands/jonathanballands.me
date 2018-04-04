@@ -84,9 +84,9 @@ class KinesisContentContainer extends React.Component {
 		}
 	}
 
-	componentWillReceiveProps(newProps) {
-		const oldKinesisId = this.props.match.params.kinesisId;
-		const newKinesisId = newProps.match.params.kinesisId;
+	componentDidUpdate(oldProps) {
+		const oldKinesisId = oldProps.match.params.kinesisId;
+		const newKinesisId = this.props.match.params.kinesisId;
 
 		//	This if-block gets executed if this route and the previous
 		//	route mismatch. This usually happens when the back button
