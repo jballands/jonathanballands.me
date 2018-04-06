@@ -1,13 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+// import { connect } from 'react-redux';
 import styled from 'styled-components';
 import ReactSVG from 'react-svg';
 import BoldButton from '@jballands/vespyr/lib/BoldButton';
+
+import * as data from './data';
 
 const BurndownAppContainer = styled.div`
 	display: flex;
 	flex-flow: column nowrap;
 	align-items: center;
+	justify-content: center;
+	height: 100%;
 `;
 
 const BurndownLogo = styled(ReactSVG)`
@@ -34,25 +39,6 @@ const BurndownDescription = styled.div`
 
 const UploadCSV = styled(BoldButton)`
 	font-size: 16px;
-`;
-
-const PrivacyContainer = styled.div`
-	color: #cccccc;
-	font-style: italic;
-	font-size: 14px;
-	display: flex;
-	flex-flow: row nowrap;
-	align-items: center;
-	justify-content: center;
-	width: 550px;
-	margin-top: 30px;
-	line-height: 1.5em;
-`;
-
-const PrivacyLogo = styled(ReactSVG)`
-	width: 45px;
-	fill: #cccccc;
-	margin-right: 20px;
 `;
 
 export default class LoanBurndown extends React.Component {
@@ -86,17 +72,6 @@ export default class LoanBurndown extends React.Component {
 				<UploadCSV accentColor={primaryColor}>
 					Choose .CSV file
 				</UploadCSV>
-
-				<PrivacyContainer>
-					<PrivacyLogo path="/assets/privacy.svg" />
-					<div>
-						This Kinesis experiment does not store, send, or record
-						any data you submit. It does not store any cookies on
-						your computer so I can track you later. In fact, this
-						experiment can be completely disconnected from the
-						Internet.
-					</div>
-				</PrivacyContainer>
 			</BurndownAppContainer>
 		);
 	}

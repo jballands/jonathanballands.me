@@ -5,14 +5,11 @@
 //	© 2017 Jonathan Ballands
 //
 
-import { combineReducers } from 'redux';
-
 import kinesisReducer from 'reducers/kinesisReducer';
-import instagramViewerReducer from 'reducers/instagramViewerReducer';
+// import instagramViewerReducer from 'reducers/instagramViewerReducer';
 
-const rootReducer = combineReducers({
+const rootReducer = {
 	kinesis: kinesisReducer,
-	instagramViewer: instagramViewerReducer,
-});
+};
 
 export default rootReducer;

@@ -56,7 +56,10 @@ function filterKinesisEntries(terms, entries) {
 	});
 }
 
-export default function(state = new InitialStateRecord(), action) {
+export default function kinesisReducer(
+	state = new InitialStateRecord(),
+	action,
+) {
 	switch (action.type) {
 		case KINESIS_SEARCH_POSTS:
 			return state

@@ -16,8 +16,8 @@ import createHistory from 'history/createBrowserHistory';
 
 import App from 'routes/App';
 
-import rootReducer from 'reducers/index';
 import rootSaga from 'sagas/index';
+import reducerRegistry from 'reducers/reducerRegistry';
 
 import 'normalize.css';
 
@@ -33,8 +33,11 @@ class JonathanBallandsMe extends React.Component {
 		}
 
 		const store = compose(applyMiddleware(...middleware))(createStore)(
-			rootReducer,
+			reducerRegistry.combine(),
 		);
+		reducerRegistry.changeListener = () => {
+			store.replaceReducer(reducerRegistry.combine());
+		};
 
 		sagaMiddleware.run(rootSaga);
 
