@@ -22,7 +22,11 @@ import reducerRegistry from 'reducers/reducerRegistry';
 import 'normalize.css';
 
 class JonathanBallandsMe extends React.Component {
-	render() {
+	store = null;
+
+	constructor() {
+		super();
+
 		const middleware = [];
 		const sagaMiddleware = createSagaMiddleware();
 		middleware.push(sagaMiddleware);
@@ -32,17 +36,19 @@ class JonathanBallandsMe extends React.Component {
 			middleware.push(logger);
 		}
 
-		const store = compose(applyMiddleware(...middleware))(createStore)(
+		this.store = compose(applyMiddleware(...middleware))(createStore)(
 			reducerRegistry.combine(),
 		);
 		reducerRegistry.changeListener = () => {
-			store.replaceReducer(reducerRegistry.combine());
+			this.store.replaceReducer(reducerRegistry.combine());
 		};
 
 		sagaMiddleware.run(rootSaga);
+	}
 
+	render() {
 		return (
-			<Provider store={store}>
+			<Provider store={this.store}>
 				<Router history={createHistory()}>
 					<Route path="/" component={App} />
 				</Router>

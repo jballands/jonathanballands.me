@@ -6,11 +6,13 @@
 //
 
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import NavigationBarItem from './NavigationBarItem';
+import NavigationBarItem from 'components/NavigationBarItem';
 
-const NavigationBarContainer = styled.div`
+const NavigationBarContainerContainer = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -35,28 +37,49 @@ const NavigationBarList = styled.div`
 	justify-content: flex-start;
 `;
 
-export default class NavigationBar extends React.Component {
-	static displayName = 'NavigationBar';
+function mapStateToProps({ kinesis }) {
+	const selectedEntryId = kinesis.getIn(['selectedEntry', 'id']);
+	return {
+		currentKinesisEntryId: selectedEntryId,
+	};
+}
+
+class NavigationBarContainer extends React.Component {
+	static displayName = 'NavigationBarContainer';
+
+	static propTypes = {
+		currentKinesisEntryId: PropTypes.string,
+		location: PropTypes.object,
+	};
 
 	render() {
+		const { currentKinesisEntryId, location } = this.props;
+
 		return (
-			<NavigationBarContainer>
+			<NavigationBarContainerContainer>
 				<Link to="/">
 					<NavigationBarTitle>Jonathan Ballands</NavigationBarTitle>
 				</Link>
 
 				<NavigationBarList>
-					<NavigationBarItem link="/">Hello</NavigationBarItem>
-					<NavigationBarItem link="/kinesis">
+					<NavigationBarItem link="/" location={location}>
+						Hello
+					</NavigationBarItem>
+					<NavigationBarItem
+						link={`/kinesis/${currentKinesisEntryId}`}
+						location={location}>
 						Kinesis
 					</NavigationBarItem>
 					<NavigationBarItem
 						link="https://github.com/jballands/vespyr"
+						location={location}
 						external>
 						Vespyr
 					</NavigationBarItem>
 				</NavigationBarList>
-			</NavigationBarContainer>
+			</NavigationBarContainerContainer>
 		);
 	}
 }
+
+export default connect(mapStateToProps)(NavigationBarContainer);

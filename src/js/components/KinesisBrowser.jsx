@@ -16,7 +16,6 @@ import RadioItem from '@jballands/vespyr/lib/RadioItem';
 import StickyDrawer from 'components/StickyDrawer';
 import KinesisBrowserSearchResults from 'components/KinesisBrowserSearchResults';
 
-import { helpEntry } from 'helpers/kinesisEntries';
 import { shark, white, linkShade } from 'helpers/palette';
 
 import LeftArrowSvg from 'svg/LeftArrowSvg';
@@ -128,8 +127,7 @@ export default class KinesisBrowser extends React.Component {
 		});
 	};
 
-	handleChooseEntry = id => {
-		this.props.chooseEntry(id);
+	handleChooseEntry = () => {
 		this.handleCloseDrawer();
 	};
 
@@ -139,11 +137,6 @@ export default class KinesisBrowser extends React.Component {
 
 	handleSetSortOrder = sortOrder => {
 		this.props.setSortOrder(sortOrder);
-	};
-
-	handleKinesisHelp = () => {
-		this.props.chooseEntry(helpEntry.id);
-		this.handleCloseDrawer();
 	};
 
 	renderClosedDrawer = () => {

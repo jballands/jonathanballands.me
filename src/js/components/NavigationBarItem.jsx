@@ -43,11 +43,19 @@ const StyledLink = styled(Link)`
 
 const StyledExternalink = StyledLink.withComponent('a');
 
-const Children = styled.span`position: relative;`;
+const Children = styled.span`
+	position: relative;
+`;
 
 export default class NavigationBarItem extends React.Component {
 	static contextTypes = {
 		router: PropTypes.object,
+	};
+
+	static propTypes = {
+		children: PropTypes.node,
+		external: PropTypes.bool,
+		link: PropTypes.string,
 	};
 
 	render() {
@@ -71,7 +79,7 @@ export default class NavigationBarItem extends React.Component {
 		if (link === '/') {
 			isCurrentRoute = route === '/';
 		} else {
-			isCurrentRoute = route.startsWith(this.props.link);
+			isCurrentRoute = route.startsWith(link);
 		}
 
 		const curr = isCurrentRoute ? ' navigation-bar-current-route' : '';

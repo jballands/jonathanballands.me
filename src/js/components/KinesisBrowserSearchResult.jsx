@@ -79,7 +79,11 @@ export default class KinesisBrowserSearchResult extends React.Component {
 	};
 
 	handleOnClick = () => {
-		this.props.onClick(this.props.id);
+		// We don't need to do send the id of the thing that was
+		// clicked because we are using react-router as our source
+		// of truth; we only need to report that a click happened
+		// so we can close the drawer
+		this.props.onClick();
 	};
 
 	renderHashtags = () => {
