@@ -49,6 +49,20 @@ export default class LoanBurndown extends React.Component {
 		secondaryColor: PropTypes.string,
 	};
 
+	uploadCSVRef = null;
+
+	bindUploadCSVRef = node => (this.uploadCSVRef = node);
+
+	onUploadCSVClick = () => {
+		if (this.uploadCSVRef) {
+			this.uploadCSVRef.click();
+		}
+	};
+
+	onCSVChosen = e => {
+		console.log(e.target.files[0]);
+	};
+
 	render() {
 		const { primaryColor } = this.props;
 
@@ -69,7 +83,16 @@ export default class LoanBurndown extends React.Component {
 					magic number.
 				</BurndownDescription>
 
-				<UploadCSV accentColor={primaryColor}>
+				<input
+					type="file"
+					accept=".csv"
+					onChange={this.onCSVChosen}
+					ref={this.bindUploadCSVRef}
+					style={{ visibility: 'hidden' }}
+				/>
+				<UploadCSV
+					accentColor={primaryColor}
+					onClick={this.onUploadCSVClick}>
 					Choose .CSV file
 				</UploadCSV>
 			</BurndownAppContainer>

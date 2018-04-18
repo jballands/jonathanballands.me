@@ -27,9 +27,7 @@ function fetchKinesisExperimentEntry(resource) {
 	return resource();
 }
 
-function* loadKinesisArticleEntry(entry) {
-	const { resource } = entry;
-
+function* loadKinesisArticleEntry({ resource }) {
 	try {
 		const { data, status } = yield call(fetchKinesisArticleEntry, resource);
 
@@ -51,9 +49,7 @@ function* loadKinesisArticleEntry(entry) {
 	}
 }
 
-function* loadKinesisExperimentEntry(entry) {
-	const { resource } = entry;
-
+function* loadKinesisExperimentEntry({ resource }) {
 	try {
 		const response = yield call(fetchKinesisExperimentEntry, resource);
 
@@ -76,10 +72,10 @@ function* loadKinesisExperimentEntry(entry) {
 	}
 }
 
-function* loadKinesisEntry(action) {
+function* loadKinesisEntry({ id }) {
 	yield put({ type: KINESIS_CHOOSE_ENTRY_START_LOADING });
 
-	const entry = entries.get(action.id);
+	const entry = entries.get(id);
 	switch (entry.type) {
 		case Type.article:
 			yield call(loadKinesisArticleEntry, entry);
