@@ -1,11 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 import ReactSVG from 'react-svg';
 import BoldButton from '@jballands/vespyr/lib/BoldButton';
 
-import * as data from './data';
+import { loadCSV } from './actions';
+import * as reducers from './reducers';
+import * as sagas from './sagas';
 
 const BurndownAppContainer = styled.div`
 	display: flex;
@@ -41,10 +43,17 @@ const UploadCSV = styled(BoldButton)`
 	font-size: 16px;
 `;
 
-export default class LoanBurndown extends React.Component {
+const mapStateToProps = null;
+
+const mapDispatchToProps = dispatch => ({
+	loadCSV: file => dispatch(loadCSV(file)),
+});
+
+class LoanBurndown extends React.Component {
 	static displayName = 'LoanBurndown';
 
 	static propTypes = {
+		loadCSV: PropTypes.func,
 		primaryColor: PropTypes.string,
 		secondaryColor: PropTypes.string,
 	};
@@ -60,7 +69,7 @@ export default class LoanBurndown extends React.Component {
 	};
 
 	onCSVChosen = e => {
-		console.log(e.target.files[0]);
+		this.props.loadCSV(e.target.files[0]);
 	};
 
 	render() {
@@ -99,3 +108,5 @@ export default class LoanBurndown extends React.Component {
 		);
 	}
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoanBurndown);
