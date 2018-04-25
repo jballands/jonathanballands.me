@@ -37,12 +37,9 @@ const NavigationBarList = styled.div`
 	justify-content: flex-start;
 `;
 
-function mapStateToProps({ kinesis }) {
-	const selectedEntryId = kinesis.getIn(['selectedEntry', 'id']);
-	return {
-		currentKinesisEntryId: selectedEntryId,
-	};
-}
+const mapStateToProps = ({ kinesis }) => ({
+	currentKinesisEntryId: kinesis.getIn(['selectedEntry', 'id']),
+});
 
 class NavigationBarContainer extends React.Component {
 	static displayName = 'NavigationBarContainer';

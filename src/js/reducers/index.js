@@ -6,7 +6,6 @@
 //
 
 import kinesisReducer from 'reducers/kinesisReducer';
-// import instagramViewerReducer from 'reducers/instagramViewerReducer';
 
 const rootReducer = {
 	kinesis: kinesisReducer,

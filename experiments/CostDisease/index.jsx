@@ -1,3 +1,10 @@
+//
+//	jballands/jonathanballands.me
+//	CostDisease/index.jsx
+//
+//	© 2017 Jonathan Ballands
+//
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';

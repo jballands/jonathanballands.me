@@ -15,7 +15,12 @@ import {
 
 const InitialStateRecord = Immutable.Record({
 	loadingFile: false,
-	csv: null,
+	data: null,
+	columns: null,
+	validColumns: null,
+	domain: null,
+	range: null,
+	ready: false,
 })();
 
 function loanBurndownReducer(state = InitialStateRecord, { type, ...payload }) {
@@ -23,9 +28,14 @@ function loanBurndownReducer(state = InitialStateRecord, { type, ...payload }) {
 		case LOAN_BURNDOWN_LOAD_CSV:
 			return state.set('loadingFile', true);
 		case LOAN_BURNDOWN_LOAD_CSV_SUCCESS:
-			return state.set('loadingFile', false).set('csv', payload.data);
+			return state
+				.set('loadingFile', false)
+				.set('data', Immutable.fromJS(payload.data))
+				.set('columns', Immutable.fromJS(payload.columns))
+				.set('validColumns', Immutable.fromJS(payload.validColumns))
+				.set('ready', true);
 		case LOAN_BURNDOWN_LOAD_CSV_FAILED:
-			return state.set('loadingFile', false);
+			return state.set('loadingFile', false).set('ready', false);
 		default:
 			return state;
 	}

@@ -16,20 +16,16 @@ import KinesisContent from 'components/KinesisContent';
 
 import entries from 'helpers/kinesisEntries';
 
-function mapStateToProps(state) {
-	return {
-		content: state.kinesis.content,
-		contentLoading: state.kinesis.contentLoading,
-		filteredEntries: state.kinesis.filteredEntries,
-		selectedEntry: state.kinesis.selectedEntry,
-	};
-}
+const mapStateToProps = ({ kinesis }) => ({
+	content: kinesis.get('content'),
+	contentLoading: kinesis.get('contentLoading'),
+	filteredEntries: kinesis.get('filteredEntries'),
+	selectedEntry: kinesis.get('selectedEntry'),
+});
 
-function mapDispatchToProps(dispatch) {
-	return {
-		chooseEntry: id => dispatch(chooseEntry(id)),
-	};
-}
+const mapDispatchToProps = dispatch => ({
+	chooseEntry: id => dispatch(chooseEntry(id)),
+});
 
 class KinesisContentContainer extends React.Component {
 	static displayName = 'KinesisContentContainer';

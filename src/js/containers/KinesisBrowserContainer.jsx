@@ -18,22 +18,18 @@ import {
 	chooseEntry,
 } from 'actions/KinesisActions';
 
-function mapStateToProps(state) {
-	return {
-		filteredEntries: state.kinesis.filteredEntries,
-		searchTerms: state.kinesis.searchTerms,
-		selectedEntry: state.kinesis.selectedEntry,
-		sortOrder: state.kinesis.sortOrder,
-	};
-}
+const mapStateToProps = ({ kinesis }) => ({
+	filteredEntries: kinesis.get('filteredEntries'),
+	searchTerms: kinesis.get('searchTerms'),
+	selectedEntry: kinesis.get('selectedEntry'),
+	sortOrder: kinesis.get('sortOrder'),
+});
 
-function mapDispatchToProps(dispatch) {
-	return {
-		chooseEntry: uri => dispatch(chooseEntry(uri)),
-		searchKinesisPosts: terms => dispatch(searchKinesisPosts(terms)),
-		setSortOrder: sortOrder => dispatch(setSortOrder(sortOrder)),
-	};
-}
+const mapDispatchToProps = dispatch => ({
+	chooseEntry: uri => dispatch(chooseEntry(uri)),
+	searchKinesisPosts: terms => dispatch(searchKinesisPosts(terms)),
+	setSortOrder: sortOrder => dispatch(setSortOrder(sortOrder)),
+});
 
 class KinesisBrowserContainer extends React.Component {
 	static displayName = 'KinesisBrowserContainer';
