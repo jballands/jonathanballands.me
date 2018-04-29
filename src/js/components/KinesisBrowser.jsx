@@ -86,6 +86,10 @@ const Title = styled.span`
 	color: ${props => props.color};
 `;
 
+const StyledMagnifyingGlassSvg = styled(MagnifyingGlassSvg)`
+	width: 23px;
+`;
+
 export default class KinesisBrowser extends React.Component {
 	static displayName = 'KinesisBrowser';
 
@@ -178,7 +182,7 @@ export default class KinesisBrowser extends React.Component {
 						accentColor={selectedEntry.primaryColor}
 						title="Search"
 						hint="Search for topics, hashtags, & more"
-						icon={<MagnifyingGlassSvg color={shark} />}
+						icon={<StyledMagnifyingGlassSvg color={shark} />}
 						value={searchTerms}
 						onUpdate={this.handleSearchChange}
 					/>

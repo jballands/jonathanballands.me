@@ -9,14 +9,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
+import ReactSVG from 'react-svg';
 import DropdownMenu from '@jballands/vespyr/lib/DropdownMenu';
 import MenuItem from '@jballands/vespyr/lib/MenuItem';
 
 import { chooseInputColumn, chooseOutputColumn } from './actions';
 
 const Dropdowns = styled.div`
-	& > * + & > * {
-		margin-left: 15px;
+	display: flex;
+	flex-flow: row;
+	align-items: center;
+
+	> div + div {
+		margin-left: 25px;
 	}
 `;
 
@@ -29,11 +34,24 @@ const NothingSelected = styled.div`
 	font-style: italic;
 `;
 
+const WarningIcon = styled(ReactSVG)`
+	fill: red;
+	width: 25px;
+	height: 25px;
+`;
+
+const Icon = styled(ReactSVG)`
+	width: 25px;
+	height: 25px;
+`;
+
 const mapStateToProps = ({ loanBurndown }) => ({
 	columns: loanBurndown.get('columns'),
 	data: loanBurndown.get('data'),
 	inputColumn: loanBurndown.get('inputColumn'),
+	inputColumnValid: loanBurndown.get('inputColumnValid'),
 	outputColumn: loanBurndown.get('outputColumn'),
+	outputColumnValid: loanBurndown.get('outputColumnValid'),
 	validColumns: loanBurndown.get('validColumns'),
 });
 
@@ -64,7 +82,9 @@ class Controls extends React.Component {
 		const {
 			columns,
 			inputColumn,
+			inputColumnValid,
 			outputColumn,
+			outputColumnValid,
 			onInputClick,
 			onOutputClick,
 			primaryColor,
@@ -79,9 +99,17 @@ class Controls extends React.Component {
 							columns.getIn([inputColumn, 'displayName']) ||
 							this.renderNothingSelectedDropdown()
 						}
-						title="Input"
+						title="Category"
 						accentColor={primaryColor}
-						key="input">
+						key="input"
+						icon={
+							inputColumnValid ? (
+								<Icon path="/assets/domain.svg" />
+							) : (
+								<WarningIcon path="/assets/warning-filled.svg" />
+							)
+						}
+						invalid={!inputColumnValid}>
 						{columns
 							.map(column => (
 								<MenuItem
@@ -99,16 +127,25 @@ class Controls extends React.Component {
 							columns.getIn([outputColumn, 'displayName']) ||
 							this.renderNothingSelectedDropdown()
 						}
-						title="Output"
+						title="Value"
 						accentColor={primaryColor}
-						key="output">
+						key="output"
+						icon={
+							outputColumnValid ? (
+								<Icon path="/assets/range.svg" />
+							) : (
+								<WarningIcon path="/assets/warning-filled.svg" />
+							)
+						}
+						invalid={!outputColumnValid}>
 						{columns
 							.map(column => (
 								<MenuItem
 									disabled={!validColumns.includes(column)}
 									id={column.get('id')}
 									key={column.get('id')}
-									onClick={onOutputClick}>
+									onClick={onOutputClick}
+									color={primaryColor}>
 									{column.get('displayName')}
 								</MenuItem>
 							))

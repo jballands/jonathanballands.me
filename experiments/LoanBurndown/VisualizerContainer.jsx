@@ -8,7 +8,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Controls from './Controls';
-import Graph from './Graph';
+import Visualization from './Visualization';
 
 const VisualizerContainerContainer = styled.div`
 	width: 100%;
@@ -21,6 +21,7 @@ const VisualizerControlsContainer = styled.div`
 	align-items: center;
 	justify-content: flex-start;
 	width: 100%;
+	margin-bottom: 100px;
 `;
 
 export default class VisualizerContainer extends React.Component {
@@ -32,6 +33,7 @@ export default class VisualizerContainer extends React.Component {
 				<VisualizerControlsContainer>
 					<Controls {...this.props} />
 				</VisualizerControlsContainer>
+				<Visualization {...this.props} />
 			</VisualizerContainerContainer>
 		);
 	}

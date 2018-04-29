@@ -16,6 +16,48 @@ import {
 	CHOOSE_OUTPUT_COLUMN,
 } from './actions';
 
+const validateState = state => {
+	state = state.set('problems', Immutable.List());
+
+	// Validate an input is selected
+	if (state.get('inputColumn') === null) {
+		state = state
+			.set('inputColumnValid', false)
+			.update('problems', problems =>
+				problems.push(
+					'Choose a category column using the category menu.',
+				),
+			);
+	} else {
+		state = state.set('inputColumnValid', true);
+	}
+
+	// Validate an output is selected
+	if (state.get('outputColumn') === null) {
+		state = state
+			.set('outputColumnValid', false)
+			.update('problems', problems =>
+				problems.push('Choose a value column using the value menu.'),
+			);
+	} else {
+		state = state.set('outputColumnValid', true);
+	}
+
+	// Validate that input and output are different
+	if (state.get('inputColumn') === state.get('outputColumn')) {
+		state = state
+			.set('inputColumnValid', false)
+			.set('outputColumnValid', false)
+			.update('problems', problems =>
+				problems.push(
+					"Category and value can't be the same column. Ensure that category and value are operating on seperate columns.",
+				),
+			);
+	}
+
+	return state;
+};
+
 const hydrateColumns = columns =>
 	columns.reduce(
 		(m, column) =>
@@ -38,9 +80,14 @@ const InitialStateRecord = Immutable.Record({
 	columns: null,
 	validColumns: null,
 	inputColumn: null,
+	inputColumnValid: false,
 	outputColumn: null,
+	outputColumnValid: false,
+	problems: Immutable.List(),
 	ready: false,
 })();
+
+// -----------------------------------------------------------------------------
 
 function loanBurndownReducer(state = InitialStateRecord, { type, ...payload }) {
 	switch (type) {
@@ -70,4 +117,6 @@ function loanBurndownReducer(state = InitialStateRecord, { type, ...payload }) {
 	}
 }
 
-storeConfiguration.registerReducer('loanBurndown', loanBurndownReducer);
+storeConfiguration.registerReducer('loanBurndown', (state, action) =>
+	validateState(loanBurndownReducer(state, action)),
+);
