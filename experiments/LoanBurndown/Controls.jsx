@@ -52,7 +52,8 @@ const mapStateToProps = ({ loanBurndown }) => ({
 	inputColumnValid: loanBurndown.get('inputColumnValid'),
 	outputColumn: loanBurndown.get('outputColumn'),
 	outputColumnValid: loanBurndown.get('outputColumnValid'),
-	validColumns: loanBurndown.get('validColumns'),
+	validInputColumns: loanBurndown.get('validInputColumns'),
+	validOutputColumns: loanBurndown.get('validOutputColumns'),
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -71,7 +72,8 @@ class Controls extends React.Component {
 		onOutputClick: PropTypes.func,
 		outputColumn: PropTypes.string,
 		primaryColor: PropTypes.string,
-		validColumns: PropTypes.object,
+		validInputColumns: PropTypes.object,
+		validOutputColumns: PropTypes.object,
 	};
 
 	renderNothingSelectedDropdown = () => (
@@ -88,7 +90,8 @@ class Controls extends React.Component {
 			onInputClick,
 			onOutputClick,
 			primaryColor,
-			validColumns,
+			validInputColumns,
+			validOutputColumns,
 		} = this.props;
 
 		return (
@@ -99,7 +102,7 @@ class Controls extends React.Component {
 							columns.getIn([inputColumn, 'displayName']) ||
 							this.renderNothingSelectedDropdown()
 						}
-						title="Category"
+						title="Date"
 						accentColor={primaryColor}
 						key="input"
 						icon={
@@ -113,7 +116,9 @@ class Controls extends React.Component {
 						{columns
 							.map(column => (
 								<MenuItem
-									disabled={!validColumns.includes(column)}
+									disabled={
+										!validInputColumns.includes(column)
+									}
 									id={column.get('id')}
 									key={column.get('id')}
 									onClick={onInputClick}>
@@ -141,7 +146,9 @@ class Controls extends React.Component {
 						{columns
 							.map(column => (
 								<MenuItem
-									disabled={!validColumns.includes(column)}
+									disabled={
+										!validOutputColumns.includes(column)
+									}
 									id={column.get('id')}
 									key={column.get('id')}
 									onClick={onOutputClick}
