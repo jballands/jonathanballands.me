@@ -12,16 +12,21 @@ import styled from 'styled-components';
 import ReactSVG from 'react-svg';
 import DropdownMenu from '@jballands/vespyr/lib/DropdownMenu';
 import MenuItem from '@jballands/vespyr/lib/MenuItem';
+import CheckboxItem from '@jballands/vespyr/lib/CheckboxItem';
 
-import { chooseInputColumn, chooseOutputColumn } from './actions';
+import { chooseInputColumn, chooseOutputColumn, extrapolate } from './actions';
 
-const Dropdowns = styled.div`
+const Options = styled.div`
 	display: flex;
 	flex-flow: row;
 	align-items: center;
 
 	> div + div {
 		margin-left: 25px;
+	}
+
+	& + & {
+		margin-top: 25px;
 	}
 `;
 
@@ -55,11 +60,22 @@ const mapStateToProps = ({ loanBurndown }) => ({
 	validInputColumns: loanBurndown.get('validInputColumns'),
 	validOutputColumns: loanBurndown.get('validOutputColumns'),
 	unloadable: loanBurndown.get('unloadable'),
+	extrapolate: loanBurndown.get('extrapolate'),
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch, ownProps) => ({
 	onInputClick: columnId => dispatch(chooseInputColumn(columnId)),
 	onOutputClick: columnId => dispatch(chooseOutputColumn(columnId)),
+	dispatch,
+});
+
+const mergeProps = (stateProps, dispatchProps, ownProps) => ({
+	...stateProps,
+	...dispatchProps,
+	...ownProps,
+	onExtrapolateClick: () => {
+		return dispatchProps.dispatch(extrapolate(!stateProps.extrapolate));
+	},
 });
 
 class Controls extends React.Component {
@@ -68,8 +84,10 @@ class Controls extends React.Component {
 	static propTypes = {
 		columns: PropTypes.object,
 		data: PropTypes.object,
+		extrapolate: PropTypes.bool,
 		inputColumn: PropTypes.string,
 		inputColumnValid: PropTypes.bool,
+		onExtrapolateClick: PropTypes.func,
 		onInputClick: PropTypes.func,
 		onOutputClick: PropTypes.func,
 		outputColumn: PropTypes.string,
@@ -87,10 +105,12 @@ class Controls extends React.Component {
 	render() {
 		const {
 			columns,
+			extrapolate,
 			inputColumn,
 			inputColumnValid,
 			outputColumn,
 			outputColumnValid,
+			onExtrapolateClick,
 			onInputClick,
 			onOutputClick,
 			primaryColor,
@@ -101,7 +121,7 @@ class Controls extends React.Component {
 
 		return (
 			<div>
-				<Dropdowns>
+				<Options>
 					<StyledDropdown
 						value={
 							columns.getIn([inputColumn, 'displayName']) ||
@@ -173,10 +193,21 @@ class Controls extends React.Component {
 							))
 							.toArray()}
 					</StyledDropdown>
-				</Dropdowns>
+				</Options>
+				<Options>
+					<CheckboxItem
+						accentColor={primaryColor}
+						id="project"
+						onClick={onExtrapolateClick}
+						selected={extrapolate}>
+						Show extrapolated graph
+					</CheckboxItem>
+				</Options>
 			</div>
 		);
 	}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Controls);
+export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(
+	Controls,
+);

@@ -35,7 +35,7 @@ const HEIGHT = 600;
 const MARGINS = {
 	top: 6,
 	right: 6,
-	bottom: 50,
+	bottom: 25,
 	left: 60,
 };
 

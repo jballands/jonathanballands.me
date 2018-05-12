@@ -11,8 +11,9 @@ import {
 	LOAN_BURNDOWN_LOAD_CSV,
 	LOAN_BURNDOWN_LOAD_CSV_FAILED,
 	LOAN_BURNDOWN_LOAD_CSV_SUCCESS,
-	CHOOSE_INPUT_COLUMN,
-	CHOOSE_OUTPUT_COLUMN,
+	LOAN_BURNDOWN_CHOOSE_INPUT_COLUMN,
+	LOAN_BURNDOWN_CHOOSE_OUTPUT_COLUMN,
+	LOAN_BURNDOWN_EXTRAPOLATE,
 } from './actions';
 import { validateState } from './utils';
 
@@ -29,6 +30,7 @@ const InitialStateRecord = Immutable.Record({
 	problems: Immutable.List(),
 	ready: false,
 	unloadable: false,
+	extrapolate: false,
 })();
 
 // -----------------------------------------------------------------------------
@@ -52,10 +54,12 @@ function loanBurndownReducer(state = InitialStateRecord, { type, ...payload }) {
 				);
 		case LOAN_BURNDOWN_LOAD_CSV_FAILED:
 			return state.set('loadingFile', false).set('ready', false);
-		case CHOOSE_INPUT_COLUMN:
+		case LOAN_BURNDOWN_CHOOSE_INPUT_COLUMN:
 			return state.set('inputColumn', payload.columnId);
-		case CHOOSE_OUTPUT_COLUMN:
+		case LOAN_BURNDOWN_CHOOSE_OUTPUT_COLUMN:
 			return state.set('outputColumn', payload.columnId);
+		case LOAN_BURNDOWN_EXTRAPOLATE:
+			return state.set('extrapolate', payload.value);
 		default:
 			return state;
 	}
