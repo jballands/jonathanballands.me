@@ -54,6 +54,7 @@ const mapStateToProps = ({ loanBurndown }) => ({
 	outputColumnValid: loanBurndown.get('outputColumnValid'),
 	validInputColumns: loanBurndown.get('validInputColumns'),
 	validOutputColumns: loanBurndown.get('validOutputColumns'),
+	unloadable: loanBurndown.get('unloadable'),
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -68,12 +69,15 @@ class Controls extends React.Component {
 		columns: PropTypes.object,
 		data: PropTypes.object,
 		inputColumn: PropTypes.string,
+		inputColumnValid: PropTypes.bool,
 		onInputClick: PropTypes.func,
 		onOutputClick: PropTypes.func,
 		outputColumn: PropTypes.string,
+		outputColumnValid: PropTypes.bool,
 		primaryColor: PropTypes.string,
 		validInputColumns: PropTypes.object,
 		validOutputColumns: PropTypes.object,
+		unloadable: PropTypes.bool,
 	};
 
 	renderNothingSelectedDropdown = () => (
@@ -92,6 +96,7 @@ class Controls extends React.Component {
 			primaryColor,
 			validInputColumns,
 			validOutputColumns,
+			unloadable,
 		} = this.props;
 
 		return (
@@ -112,7 +117,8 @@ class Controls extends React.Component {
 								<WarningIcon path="/assets/warning-filled.svg" />
 							)
 						}
-						invalid={!inputColumnValid}>
+						invalid={!inputColumnValid}
+						disabled={unloadable}>
 						{columns
 							.map(column => (
 								<MenuItem
@@ -121,7 +127,11 @@ class Controls extends React.Component {
 									}
 									id={column.get('id')}
 									key={column.get('id')}
-									onClick={onInputClick}>
+									onClick={onInputClick}
+									selected={
+										columns.getIn([inputColumn, 'id']) ===
+										column.get('id')
+									}>
 									{column.get('displayName')}
 								</MenuItem>
 							))
@@ -142,7 +152,8 @@ class Controls extends React.Component {
 								<WarningIcon path="/assets/warning-filled.svg" />
 							)
 						}
-						invalid={!outputColumnValid}>
+						invalid={!outputColumnValid}
+						disabled={unloadable}>
 						{columns
 							.map(column => (
 								<MenuItem
@@ -152,7 +163,11 @@ class Controls extends React.Component {
 									id={column.get('id')}
 									key={column.get('id')}
 									onClick={onOutputClick}
-									color={primaryColor}>
+									color={primaryColor}
+									selected={
+										columns.getIn([outputColumn, 'id']) ===
+										column.get('id')
+									}>
 									{column.get('displayName')}
 								</MenuItem>
 							))

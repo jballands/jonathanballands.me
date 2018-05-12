@@ -28,6 +28,7 @@ const InitialStateRecord = Immutable.Record({
 	outputColumnValid: false,
 	problems: Immutable.List(),
 	ready: false,
+	unloadable: false,
 })();
 
 // -----------------------------------------------------------------------------
@@ -43,7 +44,12 @@ function loanBurndownReducer(state = InitialStateRecord, { type, ...payload }) {
 				.set('columns', payload.columns)
 				.set('validInputColumns', payload.validInputColumns)
 				.set('validOutputColumns', payload.validOutputColumns)
-				.set('ready', true);
+				.set('ready', true)
+				.set(
+					'unloadable',
+					payload.validInputColumns.size <= 0 ||
+						payload.validOutputColumns.size <= 0,
+				);
 		case LOAN_BURNDOWN_LOAD_CSV_FAILED:
 			return state.set('loadingFile', false).set('ready', false);
 		case CHOOSE_INPUT_COLUMN:

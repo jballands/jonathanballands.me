@@ -5,6 +5,14 @@
 //	© 2018 Jonathan Ballands
 //
 
+/*
+ *	TODO:
+ *	- Draw graphs
+ *	- Add checkmarks to selected items in dropdown menus
+ *	- Add screen for when CSV has no columns to choose
+ *	- Add disabled to dropdowns (and use opacity instead of disabledGray)
+ */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';

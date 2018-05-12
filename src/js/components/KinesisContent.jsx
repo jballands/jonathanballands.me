@@ -27,7 +27,7 @@ const KinesisContainer = styled.div`
 	margin: 70px auto;
 	padding: 0 20px;
 	width: 75%;
-	max-width: 860px;
+	max-width: 865px;
 	min-width: 400px;
 `;
 

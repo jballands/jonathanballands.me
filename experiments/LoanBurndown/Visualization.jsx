@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import ReactSVG from 'react-svg';
+import Chart from './Chart';
 
 const ErrorContainer = styled.div`
 	width: 100%;
@@ -58,7 +59,10 @@ const ActionItemsList = styled.ul`
 const mapStateToProps = ({ loanBurndown }) => ({
 	columns: loanBurndown.get('columns'),
 	data: loanBurndown.get('data'),
+	inputColumn: loanBurndown.get('inputColumn'),
+	outputColumn: loanBurndown.get('outputColumn'),
 	problems: loanBurndown.get('problems'),
+	unloadable: loanBurndown.get('unloadable'),
 });
 
 class Visualization extends React.Component {
@@ -67,11 +71,25 @@ class Visualization extends React.Component {
 	static propTypes = {
 		columns: PropTypes.object,
 		data: PropTypes.object,
+		inputColumn: PropTypes.string,
+		outputColumn: PropTypes.string,
 		primaryColor: PropTypes.string,
 		problems: PropTypes.object,
+		unloadable: PropTypes.bool,
 	};
 
-	renderError = () => {
+	renderUnloadable = () => {
+		const { primaryColor } = this.props;
+		return (
+			<ErrorContainer>
+				<ErrorTitle color={primaryColor}>
+					Unable to Visualize
+				</ErrorTitle>
+			</ErrorContainer>
+		);
+	};
+
+	renderNeedsConfiguration = () => {
 		const { primaryColor, problems } = this.props;
 		return (
 			<ErrorContainer>
@@ -102,10 +120,27 @@ class Visualization extends React.Component {
 	};
 
 	render() {
-		if (this.props.problems.size > 0) {
-			return this.renderError();
+		const {
+			data,
+			inputColumn,
+			outputColumn,
+			problems,
+			unloadable,
+		} = this.props;
+
+		if (unloadable) {
+			return this.renderUnloadable();
+		} else if (problems.size > 0) {
+			return this.renderNeedsConfiguration();
 		}
-		return <div>Ok</div>;
+
+		return (
+			<Chart
+				data={data}
+				inputColumn={inputColumn}
+				outputColumn={outputColumn}
+			/>
+		);
 	}
 }
 
