@@ -6,6 +6,35 @@
 //
 
 import Immutable from 'immutable';
+import moment from 'moment';
+import { dataGroupedByProperty } from 'experiments/common/GraphUtils';
+
+export function extrapolateData(data, inputColumn, outputColumn) {
+	const dataByProperty = dataGroupedByProperty(data);
+
+	const inputData = dataByProperty.get(inputColumn);
+	const outputData = dataByProperty.get(outputColumn);
+
+	const yIntercept = outputData.last();
+	const slope =
+		(outputData.first() - outputData.last()) /
+		moment(inputData.first()).diff(moment(inputData.last()), 'months');
+	// xIntercept is measured in months
+	const xIntercept = yIntercept * -1 / slope;
+
+	const endExtrapolation = moment(inputData.last())
+		.add(xIntercept, 'months')
+		.format('M/D/YYYY');
+
+	return Immutable.List().push(
+		Immutable.Map()
+			.set(inputColumn, inputData.first())
+			.set(outputColumn, outputData.first()),
+		Immutable.Map()
+			.set(inputColumn, endExtrapolation)
+			.set(outputColumn, 0),
+	);
+}
 
 export function readCSV(file) {
 	return new Promise((resolve, reject) => {

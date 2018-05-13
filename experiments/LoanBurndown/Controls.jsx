@@ -61,6 +61,7 @@ const mapStateToProps = ({ loanBurndown }) => ({
 	validOutputColumns: loanBurndown.get('validOutputColumns'),
 	unloadable: loanBurndown.get('unloadable'),
 	extrapolate: loanBurndown.get('extrapolate'),
+	problems: loanBurndown.get('problems'),
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
@@ -93,6 +94,7 @@ class Controls extends React.Component {
 		outputColumn: PropTypes.string,
 		outputColumnValid: PropTypes.bool,
 		primaryColor: PropTypes.string,
+		problems: PropTypes.array,
 		validInputColumns: PropTypes.object,
 		validOutputColumns: PropTypes.object,
 		unloadable: PropTypes.bool,
@@ -114,6 +116,7 @@ class Controls extends React.Component {
 			onInputClick,
 			onOutputClick,
 			primaryColor,
+			problems,
 			validInputColumns,
 			validOutputColumns,
 			unloadable,
@@ -199,7 +202,8 @@ class Controls extends React.Component {
 						accentColor={primaryColor}
 						id="project"
 						onClick={onExtrapolateClick}
-						selected={extrapolate}>
+						selected={extrapolate}
+						disabled={problems.size > 0 || unloadable}>
 						Show extrapolated graph
 					</CheckboxItem>
 				</Options>

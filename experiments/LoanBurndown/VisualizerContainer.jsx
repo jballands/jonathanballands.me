@@ -9,8 +9,6 @@ import React from 'react';
 import styled from 'styled-components';
 import Controls from './Controls';
 import Visualization from './Visualization';
-import HelpSvg from 'svg/HelpSvg';
-import { linkShade } from 'helpers/palette';
 
 const VisualizerContainerContainer = styled.div`
 	width: 100%;
@@ -33,31 +31,6 @@ const VisualizationContainer = styled.div`
 	margin-bottom: 20px;
 `;
 
-const HelpButton = styled.div`
-	display: flex;
-	flex-flow: row;
-	align-items: center;
-	font-style: italic;
-	color: ${props => props.color};
-	align-self: center;
-
-	svg {
-		fill: ${props => props.color};
-		margin-right: 7px;
-	}
-
-	&:hover {
-		color: ${props => linkShade(props.color)};
-
-		svg {
-			fill: ${props => linkShade(props.color)};
-			margin-right: 7px;
-		}
-
-		cursor: pointer;
-	}
-`;
-
 export default class VisualizerContainer extends React.Component {
 	static displayName = 'VisualizerContainer';
 
@@ -70,9 +43,6 @@ export default class VisualizerContainer extends React.Component {
 				<VisualizationContainer>
 					<Visualization {...this.props} />
 				</VisualizationContainer>
-				<HelpButton color={this.props.primaryColor}>
-					<HelpSvg width={22} height={22} />Help
-				</HelpButton>
 			</VisualizerContainerContainer>
 		);
 	}

@@ -45,6 +45,7 @@ export default class Chart extends React.Component {
 	static propTypes = {
 		color: PropTypes.string,
 		data: PropTypes.object,
+		extrapolatedData: PropTypes.object,
 		inputColumn: PropTypes.string,
 		outputColumn: PropTypes.string,
 	};
@@ -73,9 +74,16 @@ export default class Chart extends React.Component {
 	};
 
 	render() {
-		const { color, data, inputColumn, outputColumn } = this.props;
+		const {
+			color,
+			data,
+			extrapolatedData,
+			inputColumn,
+			outputColumn,
+		} = this.props;
 
 		const dataByProperty = dataGroupedByProperty(data);
+		console.log(extrapolatedData);
 
 		this.timeScale
 			.domain(
@@ -103,8 +111,6 @@ export default class Chart extends React.Component {
 			.curve(curveBasis)
 			.x(d => this.timeScale(new Date(d[inputColumn])))
 			.y(d => this.linearScale(d[outputColumn]));
-
-		console.log(lineFn(data.toJS()));
 
 		return (
 			<Svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`}>

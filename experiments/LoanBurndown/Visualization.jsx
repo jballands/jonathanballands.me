@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import ReactSVG from 'react-svg';
 import Chart from './Chart';
+import { extrapolateData } from './utils';
 
 const ErrorContainer = styled.div`
 	width: 100%;
@@ -63,6 +64,7 @@ const mapStateToProps = ({ loanBurndown }) => ({
 	outputColumn: loanBurndown.get('outputColumn'),
 	problems: loanBurndown.get('problems'),
 	unloadable: loanBurndown.get('unloadable'),
+	extrapolate: loanBurndown.get('extrapolate'),
 });
 
 class Visualization extends React.Component {
@@ -76,6 +78,7 @@ class Visualization extends React.Component {
 		primaryColor: PropTypes.string,
 		problems: PropTypes.object,
 		unloadable: PropTypes.bool,
+		extrapolate: PropTypes.bool,
 	};
 
 	renderUnloadable = () => {
@@ -122,6 +125,7 @@ class Visualization extends React.Component {
 	render() {
 		const {
 			data,
+			extrapolate,
 			inputColumn,
 			outputColumn,
 			problems,
@@ -137,6 +141,10 @@ class Visualization extends React.Component {
 		return (
 			<Chart
 				data={data}
+				extrapolatedData={
+					extrapolate &&
+					extrapolateData(data, inputColumn, outputColumn)
+				}
 				inputColumn={inputColumn}
 				outputColumn={outputColumn}
 			/>
