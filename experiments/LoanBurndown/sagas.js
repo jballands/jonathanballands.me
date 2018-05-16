@@ -43,20 +43,29 @@ function* loadCSV({ file }) {
 			columns,
 		);
 
-		yield put({
-			type: LOAN_BURNDOWN_LOAD_CSV_SUCCESS,
-			data,
-			columns,
-			validInputColumns,
-			validOutputColumns,
-		});
-
 		if (validInputColumns.size === 1) {
 			yield put(chooseInputColumn(validInputColumns.first().get('id')));
 		}
 		if (validOutputColumns.size === 1) {
 			yield put(chooseOutputColumn(validOutputColumns.first().get('id')));
 		}
+
+		yield put({
+			type: LOAN_BURNDOWN_LOAD_CSV_SUCCESS,
+			data: data.map(datum => {
+				// Only valid input columns are dates
+				validInputColumns.forEach(
+					inputColumn =>
+						(datum = datum.update(inputColumn.get('id'), v =>
+							new Date(v).getTime(),
+						)),
+				);
+				return datum;
+			}),
+			columns,
+			validInputColumns,
+			validOutputColumns,
+		});
 	} catch (e) {
 		yield put({
 			type: LOAN_BURNDOWN_LOAD_CSV_FAILED,
