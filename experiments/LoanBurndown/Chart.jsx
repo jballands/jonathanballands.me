@@ -7,6 +7,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import ImmutablePropTypes from 'react-immutable-proptypes';
 import styled from 'styled-components';
 import { extent } from 'd3-array';
 import { axisBottom, axisLeft } from 'd3-axis';
@@ -44,7 +45,9 @@ export default class Chart extends React.Component {
 
 	static propTypes = {
 		color: PropTypes.string,
-		data: PropTypes.object,
+		data: ImmutablePropTypes.mapContains({
+			original: ImmutablePropTypes.list,
+		}),
 		inputColumn: PropTypes.string,
 		outputColumn: PropTypes.string,
 	};
@@ -75,7 +78,7 @@ export default class Chart extends React.Component {
 	render() {
 		const { color, data, inputColumn, outputColumn } = this.props;
 
-		const dataByProperty = dataGroupedByProperty(data);
+		const dataByProperty = dataGroupedByProperty(data.get('original'));
 
 		this.timeScale
 			.domain(
@@ -122,7 +125,10 @@ export default class Chart extends React.Component {
 						)}px)`, // Translate up by the 0th value on the linearScale
 					}}
 				/>
-				<StyledPath d={lineFn(data.toJS())} color="red" />
+				<StyledPath
+					d={lineFn(data.get('original').toJS())}
+					color="red"
+				/>
 			</Svg>
 		);
 	}

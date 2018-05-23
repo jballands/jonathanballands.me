@@ -15,7 +15,7 @@ import {
 	LOAN_BURNDOWN_CHOOSE_OUTPUT_COLUMN,
 	LOAN_BURNDOWN_EXTRAPOLATE,
 } from './actions';
-import { validateState } from './utils';
+import { validateState, getExtrapolatedData } from './utils';
 
 const InitialStateRecord = Immutable.Record({
 	loadingFile: false,
@@ -42,7 +42,12 @@ function loanBurndownReducer(state = InitialStateRecord, { type, ...payload }) {
 		case LOAN_BURNDOWN_LOAD_CSV_SUCCESS:
 			return state
 				.set('loadingFile', false)
-				.set('data', payload.data)
+				.set(
+					'data',
+					Immutable.Map({
+						original: payload.data,
+					}),
+				)
 				.set('columns', payload.columns)
 				.set('validInputColumns', payload.validInputColumns)
 				.set('validOutputColumns', payload.validOutputColumns)
@@ -59,7 +64,14 @@ function loanBurndownReducer(state = InitialStateRecord, { type, ...payload }) {
 		case LOAN_BURNDOWN_CHOOSE_OUTPUT_COLUMN:
 			return state.set('outputColumn', payload.columnId);
 		case LOAN_BURNDOWN_EXTRAPOLATE:
-			return state.set('extrapolate', payload.value);
+			return state.set('extrapolate', payload.value).setIn(
+				['data', 'extrapolated'],
+				getExtrapolatedData({
+					series: state.getIn(['data', 'original']),
+					inputColumn: state.get('inputColumn'),
+					outputColumn: state.get('outputColumn'),
+				}),
+			);
 		default:
 			return state;
 	}

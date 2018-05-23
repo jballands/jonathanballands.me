@@ -7,6 +7,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import ImmutablePropTypes from 'react-immutable-proptypes';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import ReactSVG from 'react-svg';
@@ -70,7 +71,9 @@ class Visualization extends React.Component {
 
 	static propTypes = {
 		columns: PropTypes.object,
-		data: PropTypes.object,
+		data: ImmutablePropTypes.mapContains({
+			original: ImmutablePropTypes.list,
+		}),
 		inputColumn: PropTypes.string,
 		outputColumn: PropTypes.string,
 		primaryColor: PropTypes.string,

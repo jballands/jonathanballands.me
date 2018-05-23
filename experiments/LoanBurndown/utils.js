@@ -24,7 +24,7 @@ const mean = values => {
 const standardDeviation = ({ values, mean }) => {
 	const variance =
 		values
-			.map(v => Math.pow(v - mean), 2)
+			.map(v => Math.pow(v - mean, 2))
 			.reduce((acc, sd) => sd + acc, 0) / values.size;
 	return Math.sqrt(variance);
 };
@@ -43,6 +43,32 @@ const normalize = ({ values, standardDeviation, mean }) => {
 //
 //	Graphing
 //
+
+const squash = ({ series, inputColumn, outputColumn }) => {
+	return series
+		.reduce(
+			(dataByInputColumn, dp) =>
+				dataByInputColumn.update(
+					dp.get(inputColumn),
+					Immutable.List(),
+					list => list.push(dp.get(outputColumn)),
+				),
+			Immutable.Map(),
+		)
+		.reduce(
+			(squashedSeries, data, input) =>
+				squashedSeries.push(
+					Immutable.Map()
+						.set(inputColumn, input)
+						.set(
+							outputColumn,
+							data.reduce((sum, d) => sum + parseFloat(d), 0),
+						),
+				),
+
+			Immutable.List(),
+		);
+};
 
 const makeDataPointPairs = ({ series, inputColumn, outputColumn }) => {
 	const seriesWithoutFirst = series.delete(0);
@@ -65,7 +91,12 @@ const getSlopesForSeries = ({ series, inputColumn, outputColumn }) => {
 };
 
 export function getExtrapolatedData({ series, inputColumn, outputColumn }) {
-	const slopes = getSlopesForSeries({ series, inputColumn, outputColumn });
+	const squashedSeries = squash({ series, inputColumn, outputColumn });
+	const slopes = getSlopesForSeries({
+		series: squashedSeries,
+		inputColumn,
+		outputColumn,
+	});
 	const m = mean(slopes);
 	const sd = standardDeviation({ values: slopes, mean: m });
 	const normalized = normalize({
@@ -74,17 +105,24 @@ export function getExtrapolatedData({ series, inputColumn, outputColumn }) {
 		standardDeviation: sd,
 	});
 
+	console.log(squashedSeries);
+
 	const avgSlope = mean(normalized);
-	const latestValue = series.reduce(
+	const latestValue = squashedSeries.reduce(
 		(latest, dp) =>
 			dp.get(inputColumn) > latest.get(inputColumn) ? dp : latest,
 	);
-	const yIntercept =
-		-1 * (avgSlope * latestValue.get(inputColumn)) -
-		latestValue.get(outputColumn);
+	const earliestValue = squashedSeries.reduce(
+		(earliest, dp) =>
+			dp.get(inputColumn) < earliest.get(inputColumn) ? dp : earliest,
+	);
+
+	console.log(`avg slope is => $${avgSlope * 2628000000}/mo`);
+	console.log(`y intercept is => $${earliestValue}`);
 
 	// This right here is the magic number!
-	const targetDate = -1 * yIntercept / avgSlope;
+	console.log(-1 * earliestValue.get(outputColumn));
+	const targetDate = -1 * earliestValue.get(outputColumn) / avgSlope;
 
 	return Immutable.List([
 		latestValue,
