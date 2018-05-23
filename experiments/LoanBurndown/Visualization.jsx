@@ -64,6 +64,7 @@ const mapStateToProps = ({ loanBurndown }) => ({
 	outputColumn: loanBurndown.get('outputColumn'),
 	problems: loanBurndown.get('problems'),
 	unloadable: loanBurndown.get('unloadable'),
+	extrapolate: loanBurndown.get('extrapolate'),
 });
 
 class Visualization extends React.Component {
@@ -74,6 +75,7 @@ class Visualization extends React.Component {
 		data: ImmutablePropTypes.mapContains({
 			original: ImmutablePropTypes.list,
 		}),
+		extrapolate: PropTypes.bool,
 		inputColumn: PropTypes.string,
 		outputColumn: PropTypes.string,
 		primaryColor: PropTypes.string,
@@ -125,6 +127,7 @@ class Visualization extends React.Component {
 	render() {
 		const {
 			data,
+			extrapolate,
 			inputColumn,
 			outputColumn,
 			problems,
@@ -139,7 +142,7 @@ class Visualization extends React.Component {
 
 		return (
 			<Chart
-				data={data}
+				data={extrapolate ? data : data.delete('extrapolated')}
 				inputColumn={inputColumn}
 				outputColumn={outputColumn}
 			/>

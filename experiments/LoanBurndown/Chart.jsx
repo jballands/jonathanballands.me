@@ -8,6 +8,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
+import Immutable from 'immutable';
 import styled from 'styled-components';
 import { extent } from 'd3-array';
 import { axisBottom, axisLeft } from 'd3-axis';
@@ -78,12 +79,20 @@ export default class Chart extends React.Component {
 	render() {
 		const { color, data, inputColumn, outputColumn } = this.props;
 
-		const dataByProperty = dataGroupedByProperty(data.get('original'));
+		const originalDataByProperty = dataGroupedByProperty(
+			data.get('original'),
+		);
+		const extrapolatedDataByProperty = dataGroupedByProperty(
+			data.get('extrapolated', Immutable.List()),
+		);
+		const mergedDataByProperty = originalDataByProperty.mergeDeep(
+			extrapolatedDataByProperty,
+		);
 
 		this.timeScale
 			.domain(
 				extent(
-					dataByProperty
+					mergedDataByProperty
 						.get(inputColumn) // Get reference to data
 						.map(d => new Date(d)) // d3 timeScale accepts JS dates
 						.toSet() // Ensure uniqueness
@@ -94,7 +103,7 @@ export default class Chart extends React.Component {
 		this.linearScale
 			.domain(
 				extent(
-					dataByProperty
+					mergedDataByProperty
 						.get(outputColumn) // Get reference to data
 						.push([0]) // Add 0 because we want this zero-based
 						.toJS(), // Make d3 understand it
@@ -128,6 +137,12 @@ export default class Chart extends React.Component {
 				<StyledPath
 					d={lineFn(data.get('original').toJS())}
 					color="red"
+				/>
+				<StyledPath
+					d={lineFn(
+						data.get('extrapolated', Immutable.List()).toJS(),
+					)}
+					color="blue"
 				/>
 			</Svg>
 		);
