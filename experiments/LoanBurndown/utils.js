@@ -105,8 +105,6 @@ export function getExtrapolatedData({ series, inputColumn, outputColumn }) {
 		standardDeviation: sd,
 	});
 
-	console.log(squashedSeries);
-
 	const avgSlope = mean(normalized);
 	const latestValue = squashedSeries.reduce(
 		(latest, dp) =>
@@ -117,12 +115,10 @@ export function getExtrapolatedData({ series, inputColumn, outputColumn }) {
 			dp.get(inputColumn) < earliest.get(inputColumn) ? dp : earliest,
 	);
 
-	console.log(`avg slope is => $${avgSlope * 2628000000}/mo`);
-	console.log(`y intercept is => $${earliestValue}`);
-
 	// This right here is the magic number!
-	console.log(-1 * earliestValue.get(outputColumn));
-	const targetDate = -1 * earliestValue.get(outputColumn) / avgSlope;
+	const targetDate =
+		-1 * earliestValue.get(outputColumn) / avgSlope +
+		earliestValue.get(inputColumn);
 
 	return Immutable.List([
 		latestValue,
