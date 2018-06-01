@@ -91,6 +91,10 @@ const getSlopesForSeries = ({ series, inputColumn, outputColumn }) => {
 };
 
 export function getExtrapolatedData({ series, inputColumn, outputColumn }) {
+	if (!inputColumn || !outputColumn) {
+		return Immutable.List();
+	}
+
 	const squashedSeries = squash({ series, inputColumn, outputColumn });
 	const slopes = getSlopesForSeries({
 		series: squashedSeries,

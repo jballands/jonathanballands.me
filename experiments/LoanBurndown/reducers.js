@@ -33,6 +33,23 @@ const InitialStateRecord = Immutable.Record({
 	extrapolate: false,
 })();
 
+function extrapolate(state) {
+	console.log(state);
+
+	if (!state.get('inputColumn') || !state.get('outputColumn')) {
+		return state;
+	}
+
+	return state.setIn(
+		['data', 'extrapolated'],
+		getExtrapolatedData({
+			series: state.getIn(['data', 'original']),
+			inputColumn: state.get('inputColumn'),
+			outputColumn: state.get('outputColumn'),
+		}),
+	);
+}
+
 // -----------------------------------------------------------------------------
 
 function loanBurndownReducer(state = InitialStateRecord, { type, ...payload }) {
@@ -60,18 +77,23 @@ function loanBurndownReducer(state = InitialStateRecord, { type, ...payload }) {
 		case LOAN_BURNDOWN_LOAD_CSV_FAILED:
 			return state.set('loadingFile', false).set('ready', false);
 		case LOAN_BURNDOWN_CHOOSE_INPUT_COLUMN:
-			return state.set('inputColumn', payload.columnId);
+			return state
+				.set('inputColumn', payload.columnId)
+				.update(state => extrapolate(state));
 		case LOAN_BURNDOWN_CHOOSE_OUTPUT_COLUMN:
-			return state.set('outputColumn', payload.columnId);
+			return state
+				.set('outputColumn', payload.columnId)
+				.update(state => extrapolate(state));
 		case LOAN_BURNDOWN_EXTRAPOLATE:
-			return state.set('extrapolate', payload.value).setIn(
-				['data', 'extrapolated'],
-				getExtrapolatedData({
-					series: state.getIn(['data', 'original']),
-					inputColumn: state.get('inputColumn'),
-					outputColumn: state.get('outputColumn'),
-				}),
-			);
+			return state.set('extrapolate', payload.value);
+		// .setIn(
+		// 	['data', 'extrapolated'],
+		// 	getExtrapolatedData({
+		// 		series: state.getIn(['data', 'original']),
+		// 		inputColumn: state.get('inputColumn'),
+		// 		outputColumn: state.get('outputColumn'),
+		// 	}),
+		// );
 		default:
 			return state;
 	}
