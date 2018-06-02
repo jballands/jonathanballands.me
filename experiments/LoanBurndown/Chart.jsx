@@ -14,7 +14,8 @@ import { extent } from 'd3-array';
 import { axisBottom, axisLeft } from 'd3-axis';
 import { select } from 'd3-selection';
 import { scaleLinear, scaleTime } from 'd3-scale';
-import { curveBasis, line } from 'd3-shape';
+import { area, curveBasis } from 'd3-shape';
+import 'd3-transition';
 import { dataGroupedByProperty } from 'experiments/common/GraphUtils';
 
 const Svg = styled.svg`
@@ -26,10 +27,12 @@ const Svg = styled.svg`
 	}
 `;
 
-const StyledPath = styled.path`
-	stroke: ${props => props.color};
-	fill: none;
-	stroke-width: 2px;
+const OriginalArea = styled.path`
+	fill: url(#original-gradient);
+`;
+
+const ProjectedArea = styled.path`
+	fill: #c6efef;
 `;
 
 const WIDTH = 865;
@@ -111,13 +114,35 @@ export default class Chart extends React.Component {
 			)
 			.range([HEIGHT - MARGINS.top - MARGINS.bottom, MARGINS.top]);
 
-		const lineFn = line()
+		const areaFn = area()
 			.curve(curveBasis)
 			.x(d => this.timeScale(new Date(d[inputColumn])))
-			.y(d => this.linearScale(d[outputColumn]));
+			.y0(this.linearScale.range()[0])
+			.y1(d => this.linearScale(d[outputColumn]));
 
 		return (
 			<Svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`}>
+				<defs>
+					<linearGradient
+						id="original-gradient"
+						x1="0%"
+						y1="0%"
+						x2="0%"
+						y2="100%">
+						<stop offset="0%" stopColor={color} />
+						<stop
+							offset="100%"
+							stopColor={color}
+							stopOpacity={0.1}
+						/>
+					</linearGradient>
+				</defs>
+				<OriginalArea d={areaFn(data.get('original').toJS())} />
+				<ProjectedArea
+					d={areaFn(
+						data.get('extrapolated', Immutable.List()).toJS(),
+					)}
+				/>
 				<g
 					ref={this.linearScaleContainer}
 					style={{
@@ -133,16 +158,6 @@ export default class Chart extends React.Component {
 							this.linearScale.domain()[0],
 						)}px)`, // Translate up by the 0th value on the linearScale
 					}}
-				/>
-				<StyledPath
-					d={lineFn(data.get('original').toJS())}
-					color="red"
-				/>
-				<StyledPath
-					d={lineFn(
-						data.get('extrapolated', Immutable.List()).toJS(),
-					)}
-					color="blue"
 				/>
 			</Svg>
 		);

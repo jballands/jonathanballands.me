@@ -34,8 +34,6 @@ const InitialStateRecord = Immutable.Record({
 })();
 
 function extrapolate(state) {
-	console.log(state);
-
 	if (!state.get('inputColumn') || !state.get('outputColumn')) {
 		return state;
 	}

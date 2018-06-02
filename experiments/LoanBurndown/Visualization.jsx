@@ -130,6 +130,7 @@ class Visualization extends React.Component {
 			extrapolate,
 			inputColumn,
 			outputColumn,
+			primaryColor,
 			problems,
 			unloadable,
 		} = this.props;
@@ -142,6 +143,7 @@ class Visualization extends React.Component {
 
 		return (
 			<Chart
+				color={primaryColor}
 				data={extrapolate ? data : data.delete('extrapolated')}
 				inputColumn={inputColumn}
 				outputColumn={outputColumn}
