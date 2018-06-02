@@ -144,7 +144,8 @@ class Visualization extends React.Component {
 		return (
 			<Chart
 				color={primaryColor}
-				data={extrapolate ? data : data.delete('extrapolated')}
+				data={data}
+				extrapolate={extrapolate}
 				inputColumn={inputColumn}
 				outputColumn={outputColumn}
 			/>

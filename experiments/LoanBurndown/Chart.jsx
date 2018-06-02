@@ -12,10 +12,11 @@ import Immutable from 'immutable';
 import styled from 'styled-components';
 import { extent } from 'd3-array';
 import { axisBottom, axisLeft } from 'd3-axis';
+import { easePolyOut } from 'd3-ease';
 import { select } from 'd3-selection';
 import { scaleLinear, scaleTime } from 'd3-scale';
 import { area, curveBasis } from 'd3-shape';
-import 'd3-transition';
+import { transition } from 'd3-transition';
 import { dataGroupedByProperty } from 'experiments/common/GraphUtils';
 
 const Svg = styled.svg`
@@ -52,21 +53,27 @@ export default class Chart extends React.Component {
 		data: ImmutablePropTypes.mapContains({
 			original: ImmutablePropTypes.list,
 		}),
+		extrapolate: PropTypes.bool,
 		inputColumn: PropTypes.string,
 		outputColumn: PropTypes.string,
 	};
 
 	linearScaleContainer = React.createRef();
 	timeScaleContainer = React.createRef();
+	originalArea = React.createRef();
+	projectedArea = React.createRef();
+
 	timeScale = scaleTime();
 	linearScale = scaleLinear();
 
 	componentDidMount() {
 		this.renderAxes();
+		this.renderLines();
 	}
 
 	componentDidUpdate() {
 		this.renderAxes();
+		this.renderLines();
 	}
 
 	renderAxes = () => {
@@ -75,12 +82,48 @@ export default class Chart extends React.Component {
 			.scale(this.linearScale)
 			.tickFormat(t => `$${(t / 1000).toFixed(1)}k`);
 
-		select(this.timeScaleContainer.current).call(timeAxis);
-		select(this.linearScaleContainer.current).call(linearAxis);
+		select(this.timeScaleContainer.current)
+			.transition()
+			.duration(500)
+			.ease(easePolyOut)
+			.call(timeAxis);
+		select(this.linearScaleContainer.current)
+			.transition()
+			.duration(500)
+			.ease(easePolyOut)
+			.call(linearAxis);
+	};
+
+	renderLines = () => {
+		const { data, extrapolate, inputColumn, outputColumn } = this.props;
+
+		const areaFn = area()
+			.curve(curveBasis)
+			.x(d => this.timeScale(new Date(d[inputColumn])))
+			.y0(this.linearScale.range()[0])
+			.y1(d => this.linearScale(d[outputColumn]));
+
+		select(this.originalArea.current)
+			.transition()
+			.duration(500)
+			.ease(easePolyOut)
+			.attr('d', areaFn(data.get('original').toJS()));
+
+		select(this.projectedArea.current)
+			.transition()
+			.duration(500)
+			.ease(easePolyOut)
+			.attr(
+				'd',
+				areaFn(data.get('extrapolated', Immutable.List()).toJS()),
+			)
+			.attr('opacity', extrapolate ? 1 : 0);
 	};
 
 	render() {
-		const { color, data, inputColumn, outputColumn } = this.props;
+		const { color } = this.props;
+
+		const { data, extrapolate, inputColumn, outputColumn } = this.props;
 
 		const originalDataByProperty = dataGroupedByProperty(
 			data.get('original'),
@@ -88,9 +131,9 @@ export default class Chart extends React.Component {
 		const extrapolatedDataByProperty = dataGroupedByProperty(
 			data.get('extrapolated', Immutable.List()),
 		);
-		const mergedDataByProperty = originalDataByProperty.mergeDeep(
-			extrapolatedDataByProperty,
-		);
+		const mergedDataByProperty = extrapolate
+			? originalDataByProperty.mergeDeep(extrapolatedDataByProperty)
+			: originalDataByProperty;
 
 		this.timeScale
 			.domain(
@@ -114,12 +157,6 @@ export default class Chart extends React.Component {
 			)
 			.range([HEIGHT - MARGINS.top - MARGINS.bottom, MARGINS.top]);
 
-		const areaFn = area()
-			.curve(curveBasis)
-			.x(d => this.timeScale(new Date(d[inputColumn])))
-			.y0(this.linearScale.range()[0])
-			.y1(d => this.linearScale(d[outputColumn]));
-
 		return (
 			<Svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`}>
 				<defs>
@@ -137,12 +174,8 @@ export default class Chart extends React.Component {
 						/>
 					</linearGradient>
 				</defs>
-				<OriginalArea d={areaFn(data.get('original').toJS())} />
-				<ProjectedArea
-					d={areaFn(
-						data.get('extrapolated', Immutable.List()).toJS(),
-					)}
-				/>
+				<OriginalArea innerRef={this.originalArea} />
+				<ProjectedArea innerRef={this.projectedArea} />
 				<g
 					ref={this.linearScaleContainer}
 					style={{

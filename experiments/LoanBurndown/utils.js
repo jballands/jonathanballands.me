@@ -109,6 +109,9 @@ export function getExtrapolatedData({ series, inputColumn, outputColumn }) {
 		standardDeviation: sd,
 	});
 
+	console.log(slopes);
+	console.log(normalized);
+
 	const avgSlope = mean(normalized);
 	const latestValue = squashedSeries.reduce(
 		(latest, dp) =>
@@ -118,6 +121,8 @@ export function getExtrapolatedData({ series, inputColumn, outputColumn }) {
 		(earliest, dp) =>
 			dp.get(inputColumn) < earliest.get(inputColumn) ? dp : earliest,
 	);
+
+	console.log(avgSlope * 2628000000);
 
 	// This right here is the magic number!
 	const targetDate =
