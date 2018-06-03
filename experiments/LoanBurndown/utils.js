@@ -6,34 +6,59 @@
 //
 
 import Immutable from 'immutable';
-// import moment from 'moment';
-// import { dataGroupedByProperty } from 'experiments/common/GraphUtils';
 
 //
 //	Math
 //
 
-const slope = ({ x1, x2, y1, y2 }) => {
+export const slope = ({ x1, x2, y1, y2 }) => {
+	if (x1 === x2) {
+		return NaN;
+	}
 	return (y2 - y1) / (x2 - x1);
 };
 
-const mean = values => {
+export const mean = values => {
+	if (values.size <= 0) {
+		return NaN;
+	}
 	return values.reduce((acc, v) => acc + v, 0) / values.size;
 };
 
-const standardDeviation = ({ values, mean }) => {
+export const standardDeviation = ({ values, mean }) => {
+	if (values.size <= 0 || !mean) {
+		return NaN;
+	}
+
+	if (values.size === 1) {
+		return 0;
+	}
+
 	const variance =
 		values
 			.map(v => Math.pow(v - mean, 2))
-			.reduce((acc, sd) => sd + acc, 0) / values.size;
+			.reduce((acc, sd) => sd + acc, 0) /
+		(values.size - 1);
 	return Math.sqrt(variance);
 };
 
-const normalize = ({ values, standardDeviation, mean }) => {
+export const normalize = ({
+	values,
+	standardDeviation,
+	mean,
+	tolerance = 2,
+}) => {
+	if (
+		(!standardDeviation && standardDeviation !== 0) ||
+		(!mean && mean !== 0)
+	) {
+		return values;
+	}
+
 	return values.filter(v => {
-		if (v <= mean - 2 * standardDeviation) {
+		if (v < mean - tolerance * standardDeviation) {
 			return false;
-		} else if (v >= mean + 2 * standardDeviation) {
+		} else if (v > mean + tolerance * standardDeviation) {
 			return false;
 		}
 		return true;
@@ -44,7 +69,7 @@ const normalize = ({ values, standardDeviation, mean }) => {
 //	Graphing
 //
 
-const squash = ({ series, inputColumn, outputColumn }) => {
+export const squash = ({ series, inputColumn, outputColumn }) => {
 	return series
 		.reduce(
 			(dataByInputColumn, dp) =>
@@ -55,22 +80,20 @@ const squash = ({ series, inputColumn, outputColumn }) => {
 				),
 			Immutable.Map(),
 		)
-		.reduce(
-			(squashedSeries, data, input) =>
-				squashedSeries.push(
-					Immutable.Map()
-						.set(inputColumn, input)
-						.set(
-							outputColumn,
-							data.reduce((sum, d) => sum + parseFloat(d), 0),
-						),
-				),
-
-			Immutable.List(),
-		);
+		.reduce((squashedSeries, data, input) => {
+			return squashedSeries.push(
+				Immutable.Map()
+					.set(inputColumn, input)
+					.set(
+						outputColumn,
+						data.reduce((sum, d) => sum + parseFloat(d), 0) /
+							data.size,
+					),
+			);
+		}, Immutable.List());
 };
 
-const makeDataPointPairs = ({ series, inputColumn, outputColumn }) => {
+export const makeDataPointPairs = (series = Immutable.List()) => {
 	const seriesWithoutFirst = series.delete(0);
 	return seriesWithoutFirst.reduce((groups, dataPoint, index) => {
 		return groups.push(
@@ -79,8 +102,12 @@ const makeDataPointPairs = ({ series, inputColumn, outputColumn }) => {
 	}, Immutable.List());
 };
 
-const getSlopesForSeries = ({ series, inputColumn, outputColumn }) => {
-	return makeDataPointPairs({ series, inputColumn, outputColumn }).map(pair =>
+export const getSlopesForPairs = ({
+	pairs = Immutable.List(),
+	inputColumn,
+	outputColumn,
+}) => {
+	return pairs.map(pair =>
 		slope({
 			x1: pair.getIn(['a', inputColumn]),
 			x2: pair.getIn(['b', inputColumn]),
@@ -90,14 +117,35 @@ const getSlopesForSeries = ({ series, inputColumn, outputColumn }) => {
 	);
 };
 
-export function getExtrapolatedData({ series, inputColumn, outputColumn }) {
+export const xIntercept = ({
+	series = Immutable.List(),
+	slopes = Immutable.List(),
+	inputColumn,
+	outputColumn,
+}) => {
+	const avgSlope = mean(slopes);
+
+	const latestValue = series.reduce(
+		(latest, dp) =>
+			dp.get(inputColumn) > latest.get(inputColumn) ? dp : latest,
+	);
+
+	// This right here is the magic number!
+	return (
+		-1 * latestValue.get(outputColumn) / avgSlope +
+		latestValue.get(inputColumn)
+	);
+};
+
+export const getExtrapolatedData = ({ series, inputColumn, outputColumn }) => {
 	if (!inputColumn || !outputColumn) {
 		return Immutable.List();
 	}
 
 	const squashedSeries = squash({ series, inputColumn, outputColumn });
-	const slopes = getSlopesForSeries({
-		series: squashedSeries,
+	const pairs = makeDataPointPairs(squashedSeries);
+	const slopes = getSlopesForPairs({
+		pairs,
 		inputColumn,
 		outputColumn,
 	});
@@ -109,25 +157,16 @@ export function getExtrapolatedData({ series, inputColumn, outputColumn }) {
 		standardDeviation: sd,
 	});
 
-	console.log(slopes);
-	console.log(normalized);
-
-	const avgSlope = mean(normalized);
 	const latestValue = squashedSeries.reduce(
 		(latest, dp) =>
 			dp.get(inputColumn) > latest.get(inputColumn) ? dp : latest,
 	);
-	const earliestValue = squashedSeries.reduce(
-		(earliest, dp) =>
-			dp.get(inputColumn) < earliest.get(inputColumn) ? dp : earliest,
-	);
-
-	console.log(avgSlope * 2628000000);
-
-	// This right here is the magic number!
-	const targetDate =
-		-1 * earliestValue.get(outputColumn) / avgSlope +
-		earliestValue.get(inputColumn);
+	const targetDate = xIntercept({
+		series: squashedSeries,
+		slopes: normalized,
+		inputColumn,
+		outputColumn,
+	});
 
 	return Immutable.List([
 		latestValue,
@@ -135,9 +174,9 @@ export function getExtrapolatedData({ series, inputColumn, outputColumn }) {
 			.set(inputColumn, targetDate)
 			.set(outputColumn, 0),
 	]);
-}
+};
 
-export function readCSV(file) {
+export const readCSV = file => {
 	return new Promise((resolve, reject) => {
 		const reader = new FileReader();
 
@@ -150,9 +189,9 @@ export function readCSV(file) {
 
 		reader.readAsText(file, 'utf-8');
 	});
-}
+};
 
-export function getValidColumns(data, columns) {
+export const getValidColumns = (data, columns) => {
 	return data.reduce(
 		(validColumns, datum) => {
 			datum.forEach((value, property) => {
@@ -175,9 +214,9 @@ export function getValidColumns(data, columns) {
 			validOutputColumns: columns,
 		},
 	);
-}
+};
 
-export function validateState(state) {
+export const validateState = state => {
 	state = state.set('problems', Immutable.List());
 
 	// Validate an input is selected
@@ -203,4 +242,4 @@ export function validateState(state) {
 	}
 
 	return state;
-}
+};

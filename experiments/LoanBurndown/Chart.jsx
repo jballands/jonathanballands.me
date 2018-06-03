@@ -12,11 +12,11 @@ import Immutable from 'immutable';
 import styled from 'styled-components';
 import { extent } from 'd3-array';
 import { axisBottom, axisLeft } from 'd3-axis';
-import { easePolyOut } from 'd3-ease';
+import { easeCubicOut } from 'd3-ease';
 import { select } from 'd3-selection';
 import { scaleLinear, scaleTime } from 'd3-scale';
 import { area, curveBasis } from 'd3-shape';
-import { transition } from 'd3-transition';
+import 'd3-transition';
 import { dataGroupedByProperty } from 'experiments/common/GraphUtils';
 
 const Svg = styled.svg`
@@ -26,6 +26,7 @@ const Svg = styled.svg`
 		font-family: 'Roboto', sans-serif;
 		font-size: 13px;
 	}
+	overflow: hidden;
 `;
 
 const OriginalArea = styled.path`
@@ -40,7 +41,7 @@ const WIDTH = 865;
 const HEIGHT = 600;
 const MARGINS = {
 	top: 6,
-	right: 6,
+	right: 4,
 	bottom: 25,
 	left: 60,
 };
@@ -84,13 +85,13 @@ export default class Chart extends React.Component {
 
 		select(this.timeScaleContainer.current)
 			.transition()
-			.duration(500)
-			.ease(easePolyOut)
+			.duration(750)
+			.ease(easeCubicOut)
 			.call(timeAxis);
 		select(this.linearScaleContainer.current)
 			.transition()
-			.duration(500)
-			.ease(easePolyOut)
+			.duration(750)
+			.ease(easeCubicOut)
 			.call(linearAxis);
 	};
 
@@ -106,13 +107,13 @@ export default class Chart extends React.Component {
 		select(this.originalArea.current)
 			.transition()
 			.duration(500)
-			.ease(easePolyOut)
+			.ease(easeCubicOut)
 			.attr('d', areaFn(data.get('original').toJS()));
 
 		select(this.projectedArea.current)
 			.transition()
 			.duration(500)
-			.ease(easePolyOut)
+			.ease(easeCubicOut)
 			.attr(
 				'd',
 				areaFn(data.get('extrapolated', Immutable.List()).toJS()),
