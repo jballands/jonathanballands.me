@@ -59,7 +59,7 @@ const ActionItemsList = styled.ul`
 
 const mapStateToProps = ({ loanBurndown }) => ({
 	columns: loanBurndown.get('columns'),
-	data: loanBurndown.get('data'),
+	data: loanBurndown.get('graphingData'),
 	inputColumn: loanBurndown.get('inputColumn'),
 	outputColumn: loanBurndown.get('outputColumn'),
 	problems: loanBurndown.get('problems'),

@@ -15,11 +15,12 @@ import {
 	LOAN_BURNDOWN_CHOOSE_OUTPUT_COLUMN,
 	LOAN_BURNDOWN_EXTRAPOLATE,
 } from './actions';
-import { validateState, getExtrapolatedData } from './utils';
+import { validateState, getExtrapolatedData, squash } from './utils';
 
 const InitialStateRecord = Immutable.Record({
 	loadingFile: false,
 	data: null,
+	graphingData: null,
 	columns: null,
 	validInputColumns: null,
 	validOutputColumns: null,
@@ -33,19 +34,31 @@ const InitialStateRecord = Immutable.Record({
 	extrapolate: false,
 })();
 
-function extrapolate(state) {
-	if (!state.get('inputColumn') || !state.get('outputColumn')) {
+function extrapolateAndSort(state) {
+	const inputColumn = state.get('inputColumn');
+	const outputColumn = state.get('outputColumn');
+
+	if (!inputColumn || !outputColumn) {
 		return state;
 	}
 
-	return state.setIn(
-		['data', 'extrapolated'],
-		getExtrapolatedData({
-			series: state.getIn(['data', 'original']),
-			inputColumn: state.get('inputColumn'),
-			outputColumn: state.get('outputColumn'),
-		}),
-	);
+	return state
+		.setIn(
+			['graphingData', 'extrapolated'],
+			getExtrapolatedData({
+				series: state.get('data'),
+				inputColumn,
+				outputColumn,
+			}),
+		)
+		.setIn(
+			['graphingData', 'original'],
+			squash({
+				series: state.get('data'),
+				inputColumn,
+				outputColumn,
+			}).sort((a, b) => a.get(inputColumn) - b.get(inputColumn)),
+		);
 }
 
 // -----------------------------------------------------------------------------
@@ -57,12 +70,8 @@ function loanBurndownReducer(state = InitialStateRecord, { type, ...payload }) {
 		case LOAN_BURNDOWN_LOAD_CSV_SUCCESS:
 			return state
 				.set('loadingFile', false)
-				.set(
-					'data',
-					Immutable.Map({
-						original: payload.data,
-					}),
-				)
+				.set('data', payload.data)
+				.set('graphingData', Immutable.Map())
 				.set('columns', payload.columns)
 				.set('validInputColumns', payload.validInputColumns)
 				.set('validOutputColumns', payload.validOutputColumns)
@@ -77,21 +86,13 @@ function loanBurndownReducer(state = InitialStateRecord, { type, ...payload }) {
 		case LOAN_BURNDOWN_CHOOSE_INPUT_COLUMN:
 			return state
 				.set('inputColumn', payload.columnId)
-				.update(state => extrapolate(state));
+				.update(state => extrapolateAndSort(state));
 		case LOAN_BURNDOWN_CHOOSE_OUTPUT_COLUMN:
 			return state
 				.set('outputColumn', payload.columnId)
-				.update(state => extrapolate(state));
+				.update(state => extrapolateAndSort(state));
 		case LOAN_BURNDOWN_EXTRAPOLATE:
 			return state.set('extrapolate', payload.value);
-		// .setIn(
-		// 	['data', 'extrapolated'],
-		// 	getExtrapolatedData({
-		// 		series: state.getIn(['data', 'original']),
-		// 		inputColumn: state.get('inputColumn'),
-		// 		outputColumn: state.get('outputColumn'),
-		// 	}),
-		// );
 		default:
 			return state;
 	}

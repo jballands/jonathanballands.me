@@ -34,7 +34,7 @@ const OriginalArea = styled.path`
 `;
 
 const ProjectedArea = styled.path`
-	fill: #c6efef;
+	fill: url(#projection-gradient);
 `;
 
 const WIDTH = 865;
@@ -63,6 +63,9 @@ export default class Chart extends React.Component {
 	timeScaleContainer = React.createRef();
 	originalArea = React.createRef();
 	projectedArea = React.createRef();
+	overlay = React.createRef();
+	tooltip = React.createRef();
+	tooltipText = React.createRef();
 
 	timeScale = scaleTime();
 	linearScale = scaleLinear();
@@ -85,12 +88,12 @@ export default class Chart extends React.Component {
 
 		select(this.timeScaleContainer.current)
 			.transition()
-			.duration(750)
+			.duration(800)
 			.ease(easeCubicOut)
 			.call(timeAxis);
 		select(this.linearScaleContainer.current)
 			.transition()
-			.duration(750)
+			.duration(800)
 			.ease(easeCubicOut)
 			.call(linearAxis);
 	};
@@ -172,6 +175,19 @@ export default class Chart extends React.Component {
 							offset="100%"
 							stopColor={color}
 							stopOpacity={0.1}
+						/>
+					</linearGradient>
+					<linearGradient
+						id="projection-gradient"
+						x1="0%"
+						y1="0%"
+						x2="0%"
+						y2="100%">
+						<stop offset="0%" stopColor="#c6efef" />
+						<stop
+							offset="100%"
+							stopColor="#c6efef"
+							stopOpacity={0.2}
 						/>
 					</linearGradient>
 				</defs>
