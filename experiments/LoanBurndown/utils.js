@@ -171,7 +171,7 @@ export const getExtrapolatedData = ({ series, inputColumn, outputColumn }) => {
 	return Immutable.List([
 		latestValue,
 		Immutable.Map()
-			.set(inputColumn, targetDate)
+			.set(inputColumn, Math.floor(targetDate))
 			.set(outputColumn, 0),
 	]);
 };

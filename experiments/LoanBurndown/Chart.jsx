@@ -102,7 +102,6 @@ export default class Chart extends React.Component {
 		const { data, extrapolate, inputColumn, outputColumn } = this.props;
 
 		const areaFn = area()
-			.curve(curveBasis)
 			.x(d => this.timeScale(new Date(d[inputColumn])))
 			.y0(this.linearScale.range()[0])
 			.y1(d => this.linearScale(d[outputColumn]));
@@ -136,7 +135,14 @@ export default class Chart extends React.Component {
 			data.get('extrapolated', Immutable.List()),
 		);
 		const mergedDataByProperty = extrapolate
-			? originalDataByProperty.mergeDeep(extrapolatedDataByProperty)
+			? originalDataByProperty.map((d, property) =>
+					d.concat(
+						extrapolatedDataByProperty.get(
+							property,
+							Immutable.List(),
+						),
+					),
+			  )
 			: originalDataByProperty;
 
 		this.timeScale
