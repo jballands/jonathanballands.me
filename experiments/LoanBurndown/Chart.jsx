@@ -63,9 +63,6 @@ export default class Chart extends React.Component {
 	timeScaleContainer = React.createRef();
 	originalArea = React.createRef();
 	projectedArea = React.createRef();
-	overlay = React.createRef();
-	tooltip = React.createRef();
-	tooltipText = React.createRef();
 
 	timeScale = scaleTime();
 	linearScale = scaleLinear();
@@ -102,6 +99,7 @@ export default class Chart extends React.Component {
 		const { data, extrapolate, inputColumn, outputColumn } = this.props;
 
 		const areaFn = area()
+			.curve(curveBasis)
 			.x(d => this.timeScale(new Date(d[inputColumn])))
 			.y0(this.linearScale.range()[0])
 			.y1(d => this.linearScale(d[outputColumn]));
@@ -155,7 +153,7 @@ export default class Chart extends React.Component {
 						.toJS(), // Make d3 understand it
 				),
 			)
-			.range([MARGINS.left, WIDTH - MARGINS.left - MARGINS.right]);
+			.range([MARGINS.left, WIDTH - MARGINS.right]);
 		this.linearScale
 			.domain(
 				extent(
@@ -165,7 +163,10 @@ export default class Chart extends React.Component {
 						.toJS(), // Make d3 understand it
 				),
 			)
-			.range([HEIGHT - MARGINS.top - MARGINS.bottom, MARGINS.top]);
+			.range([HEIGHT - MARGINS.bottom, MARGINS.top]);
+
+		const operatingWidth = WIDTH - MARGINS.right - MARGINS.left;
+		const operatingHeight = HEIGHT - MARGINS.bottom - MARGINS.top;
 
 		return (
 			<Svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`}>
@@ -197,6 +198,7 @@ export default class Chart extends React.Component {
 						/>
 					</linearGradient>
 				</defs>
+
 				<OriginalArea innerRef={this.originalArea} />
 				<ProjectedArea innerRef={this.projectedArea} />
 				<g
