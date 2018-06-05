@@ -137,7 +137,11 @@ export const xIntercept = ({
 	);
 };
 
-export const getExtrapolatedData = ({ series, inputColumn, outputColumn }) => {
+export const getSeriesCalculations = ({
+	series,
+	inputColumn,
+	outputColumn,
+}) => {
 	if (!inputColumn || !outputColumn) {
 		return Immutable.List();
 	}
@@ -168,12 +172,15 @@ export const getExtrapolatedData = ({ series, inputColumn, outputColumn }) => {
 		outputColumn,
 	});
 
-	return Immutable.List([
-		latestValue,
-		Immutable.Map()
-			.set(inputColumn, Math.floor(targetDate))
-			.set(outputColumn, 0),
-	]);
+	return {
+		averageRatePerMillisecond: mean(normalized),
+		extrapolated: Immutable.List([
+			latestValue,
+			Immutable.Map()
+				.set(inputColumn, Math.floor(targetDate))
+				.set(outputColumn, 0),
+		]),
+	};
 };
 
 export const readCSV = file => {

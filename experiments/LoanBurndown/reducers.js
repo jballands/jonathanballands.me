@@ -15,7 +15,7 @@ import {
 	LOAN_BURNDOWN_CHOOSE_OUTPUT_COLUMN,
 	LOAN_BURNDOWN_EXTRAPOLATE,
 } from './actions';
-import { validateState, getExtrapolatedData, squash } from './utils';
+import { validateState, getSeriesCalculations, squash } from './utils';
 
 const InitialStateRecord = Immutable.Record({
 	loadingFile: false,
@@ -34,7 +34,7 @@ const InitialStateRecord = Immutable.Record({
 	extrapolate: false,
 })();
 
-function extrapolateAndSort(state) {
+const extrapolateAndSort = state => {
 	const inputColumn = state.get('inputColumn');
 	const outputColumn = state.get('outputColumn');
 
@@ -42,24 +42,26 @@ function extrapolateAndSort(state) {
 		return state;
 	}
 
-	return state
-		.setIn(
-			['graphingData', 'extrapolated'],
-			getExtrapolatedData({
-				series: state.get('data'),
-				inputColumn,
-				outputColumn,
-			}),
-		)
-		.setIn(
-			['graphingData', 'original'],
-			squash({
-				series: state.get('data'),
-				inputColumn,
-				outputColumn,
-			}).sort((a, b) => a.get(inputColumn) - b.get(inputColumn)),
-		);
-}
+	const { extrapolated, averageRatePerMillisecond } = getSeriesCalculations({
+		series: state.get('data'),
+		inputColumn,
+		outputColumn,
+	});
+
+	return state.update('graphingData', (graphingData = Immutable.Map()) => {
+		return graphingData
+			.set('extrapolated', extrapolated)
+			.set('averageRatePerMillisecond', averageRatePerMillisecond)
+			.set(
+				'original',
+				squash({
+					series: state.get('data'),
+					inputColumn,
+					outputColumn,
+				}).sort((a, b) => a.get(inputColumn) - b.get(inputColumn)),
+			);
+	});
+};
 
 // -----------------------------------------------------------------------------
 

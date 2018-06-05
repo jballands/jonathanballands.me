@@ -13,6 +13,7 @@ import styled from 'styled-components';
 import { extent } from 'd3-array';
 import { axisBottom, axisLeft } from 'd3-axis';
 import { easeCubicOut } from 'd3-ease';
+import { format } from 'd3-format';
 import { select } from 'd3-selection';
 import { scaleLinear, scaleTime } from 'd3-scale';
 import { area, curveBasis } from 'd3-shape';
@@ -81,7 +82,8 @@ export default class Chart extends React.Component {
 		const timeAxis = axisBottom().scale(this.timeScale);
 		const linearAxis = axisLeft()
 			.scale(this.linearScale)
-			.tickFormat(t => `$${(t / 1000).toFixed(1)}k`);
+			.tickFormat(format('$,.3s'));
+		// .tickFormat(t => `$${(t / 1000).toFixed(1)}k`);
 
 		select(this.timeScaleContainer.current)
 			.transition()

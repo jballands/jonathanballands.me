@@ -1,6 +1,6 @@
 //
 //	jballands/jonathanaballands.me
-//	Graph.jsx
+//	Visualization.jsx
 //
 //	© 2018 Jonathan Ballands
 //
@@ -9,9 +9,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { connect } from 'react-redux';
+import { format } from 'd3-format';
 import styled from 'styled-components';
 import ReactSVG from 'react-svg';
 import Chart from './Chart';
+import Metric from './Metric';
+
+const MILLISECONDS_IN_A_MONTH = 2629746000;
 
 const ErrorContainer = styled.div`
 	width: 100%;
@@ -57,9 +61,29 @@ const ActionItemsList = styled.ul`
 	}
 `;
 
+const VisualizationContainer = styled.div`
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: flex-start;
+`;
+
+const VisualizationMetrics = styled.div`
+	display: flex;
+	flex-flow: row;
+	margin-bottom: 10px;
+
+	div + div {
+		margin-left: 10px;
+	}
+`;
+
+const StyledMetric = styled(Metric)`
+	color: ${props => props.color};
+`;
+
 const mapStateToProps = ({ loanBurndown }) => ({
 	columns: loanBurndown.get('columns'),
-	data: loanBurndown.get('graphingData'),
+	graphingData: loanBurndown.get('graphingData'),
 	inputColumn: loanBurndown.get('inputColumn'),
 	outputColumn: loanBurndown.get('outputColumn'),
 	problems: loanBurndown.get('problems'),
@@ -72,7 +96,7 @@ class Visualization extends React.Component {
 
 	static propTypes = {
 		columns: PropTypes.object,
-		data: ImmutablePropTypes.mapContains({
+		graphingData: ImmutablePropTypes.mapContains({
 			original: ImmutablePropTypes.list,
 		}),
 		extrapolate: PropTypes.bool,
@@ -126,7 +150,7 @@ class Visualization extends React.Component {
 
 	render() {
 		const {
-			data,
+			graphingData,
 			extrapolate,
 			inputColumn,
 			outputColumn,
@@ -142,13 +166,35 @@ class Visualization extends React.Component {
 		}
 
 		return (
-			<Chart
-				color={primaryColor}
-				data={data}
-				extrapolate={extrapolate}
-				inputColumn={inputColumn}
-				outputColumn={outputColumn}
-			/>
+			<VisualizationContainer>
+				<VisualizationMetrics>
+					<StyledMetric
+						color={primaryColor}
+						title="Avg Rate"
+						value={format('$,.2f')(
+							graphingData.get('averageRatePerMillisecond') *
+								MILLISECONDS_IN_A_MONTH,
+						)}
+					/>
+					<StyledMetric
+						color={primaryColor}
+						title="Balance Remaining"
+						value={format('$,.2f')(
+							graphingData
+								.get('original')
+								.last()
+								.get(outputColumn),
+						)}
+					/>
+				</VisualizationMetrics>
+				<Chart
+					color={primaryColor}
+					data={graphingData.delete('averageRatePerMillisecond')}
+					extrapolate={extrapolate}
+					inputColumn={inputColumn}
+					outputColumn={outputColumn}
+				/>
+			</VisualizationContainer>
 		);
 	}
 }
