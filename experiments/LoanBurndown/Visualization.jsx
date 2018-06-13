@@ -71,13 +71,13 @@ const VisualizationMetrics = styled.div`
 	display: flex;
 	flex-flow: row;
 	margin-bottom: 10px;
-
-	div + div {
-		margin-left: 10px;
-	}
 `;
 
 const StyledMetric = styled(Metric)`
+	& + & {
+		margin-left: 25px;
+	}
+
 	color: ${props => props.color};
 `;
 
@@ -175,6 +175,7 @@ class Visualization extends React.Component {
 							graphingData.get('averageRatePerMillisecond') *
 								MILLISECONDS_IN_A_MONTH,
 						)}
+						size={extrapolate ? 'small' : 'big'}
 					/>
 					<StyledMetric
 						color={primaryColor}
@@ -185,6 +186,7 @@ class Visualization extends React.Component {
 								.last()
 								.get(outputColumn),
 						)}
+						size={extrapolate ? 'small' : 'big'}
 					/>
 				</VisualizationMetrics>
 				<Chart
