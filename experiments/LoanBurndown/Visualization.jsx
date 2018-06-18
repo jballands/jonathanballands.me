@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { connect } from 'react-redux';
 import { format } from 'd3-format';
+import moment from 'moment';
 import styled from 'styled-components';
 import ReactSVG from 'react-svg';
 import Chart from './Chart';
@@ -73,12 +74,14 @@ const VisualizationMetrics = styled.div`
 	margin-bottom: 10px;
 `;
 
-const StyledMetric = styled(Metric)`
+const StyledMetric = styled(Metric).attrs({
+	style: props => ({
+		color: props.color,
+	}),
+})`
 	& + & {
-		margin-left: 25px;
+		margin-left: 30px;
 	}
-
-	color: ${props => props.color};
 `;
 
 const mapStateToProps = ({ loanBurndown }) => ({
@@ -187,6 +190,36 @@ class Visualization extends React.Component {
 								.get(outputColumn),
 						)}
 						size={extrapolate ? 'small' : 'big'}
+					/>
+					<StyledMetric
+						color="#10d3a3"
+						title="Estimated Completion"
+						value={moment(
+							graphingData
+								.get('extrapolated')
+								.last()
+								.get(inputColumn),
+						).format('MMM GGGG')}
+						size={extrapolate ? 'big' : 'none'}
+					/>
+					<StyledMetric
+						color="#10d3a3"
+						title="Months Left"
+						value={moment(
+							graphingData
+								.get('extrapolated')
+								.last()
+								.get(inputColumn),
+						).diff(
+							moment(
+								graphingData
+									.get('extrapolated')
+									.first()
+									.get(inputColumn),
+							),
+							'months',
+						)}
+						size={extrapolate ? 'big' : 'none'}
 					/>
 				</VisualizationMetrics>
 				<Chart

@@ -13,8 +13,14 @@ import ReactSVG from 'react-svg';
 import DropdownMenu from '@jballands/vespyr/lib/DropdownMenu';
 import MenuItem from '@jballands/vespyr/lib/MenuItem';
 import CheckboxItem from '@jballands/vespyr/lib/CheckboxItem';
+import BoldButton from '@jballands/vespyr/lib/BoldButton';
 
-import { chooseInputColumn, chooseOutputColumn, extrapolate } from './actions';
+import {
+	chooseInputColumn,
+	chooseOutputColumn,
+	extrapolate,
+	loadCSV,
+} from './actions';
 
 const Options = styled.div`
 	display: flex;
@@ -50,6 +56,10 @@ const Icon = styled(ReactSVG)`
 	height: 25px;
 `;
 
+const UploadCSV = styled(BoldButton)`
+	font-size: 16px;
+`;
+
 const mapStateToProps = ({ loanBurndown }) => ({
 	columns: loanBurndown.get('columns'),
 	data: loanBurndown.get('data'),
@@ -67,6 +77,7 @@ const mapStateToProps = ({ loanBurndown }) => ({
 const mapDispatchToProps = (dispatch, ownProps) => ({
 	onInputClick: columnId => dispatch(chooseInputColumn(columnId)),
 	onOutputClick: columnId => dispatch(chooseOutputColumn(columnId)),
+	loadCSV: file => dispatch(loadCSV(file)),
 	dispatch,
 });
 
@@ -88,6 +99,7 @@ class Controls extends React.Component {
 		extrapolate: PropTypes.bool,
 		inputColumn: PropTypes.string,
 		inputColumnValid: PropTypes.bool,
+		loadCSV: PropTypes.func,
 		onExtrapolateClick: PropTypes.func,
 		onInputClick: PropTypes.func,
 		onOutputClick: PropTypes.func,
@@ -98,6 +110,20 @@ class Controls extends React.Component {
 		validInputColumns: PropTypes.object,
 		validOutputColumns: PropTypes.object,
 		unloadable: PropTypes.bool,
+	};
+
+	uploadCSVRef = null;
+
+	bindUploadCSVRef = node => (this.uploadCSVRef = node);
+
+	onUploadCSVClick = () => {
+		if (this.uploadCSVRef) {
+			this.uploadCSVRef.click();
+		}
+	};
+
+	onCSVChosen = e => {
+		this.props.loadCSV(e.target.files[0]);
 	};
 
 	renderNothingSelectedDropdown = () => (
@@ -124,6 +150,13 @@ class Controls extends React.Component {
 
 		return (
 			<div>
+				<input
+					type="file"
+					accept=".csv"
+					onChange={this.onCSVChosen}
+					ref={this.bindUploadCSVRef}
+					style={{ visibility: 'hidden' }}
+				/>
 				<Options>
 					<StyledDropdown
 						value={
@@ -198,13 +231,18 @@ class Controls extends React.Component {
 					</StyledDropdown>
 				</Options>
 				<Options>
+					<UploadCSV
+						onClick={this.onUploadCSVClick}
+						accentColor={primaryColor}>
+						Choose New .CSV
+					</UploadCSV>
 					<CheckboxItem
 						accentColor={primaryColor}
 						id="project"
 						onClick={onExtrapolateClick}
 						selected={extrapolate}
 						disabled={problems.size > 0 || unloadable}>
-						Show extrapolated graph
+						Show estimated loan completion
 					</CheckboxItem>
 				</Options>
 			</div>
@@ -212,6 +250,8 @@ class Controls extends React.Component {
 	}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(
-	Controls,
-);
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps,
+	mergeProps,
+)(Controls);

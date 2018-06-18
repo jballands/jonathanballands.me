@@ -25,6 +25,7 @@ const Title = styled.div`
 const Value = styled.div.attrs({
 	style: props => ({
 		fontSize: props.fontSize,
+		opacity: props.opacity,
 	}),
 })`
 	transition: color 300ms;
@@ -38,7 +39,7 @@ export default class Metric extends React.Component {
 		className: PropTypes.string,
 		color: PropTypes.stirng,
 		style: PropTypes.object,
-		size: PropTypes.oneOf(['big', 'small']),
+		size: PropTypes.oneOf(['big', 'small', 'none']),
 		title: PropTypes.string,
 		value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 	};
@@ -46,9 +47,23 @@ export default class Metric extends React.Component {
 	render() {
 		const { color, size, title, value, style, className } = this.props;
 
-		const styles = {
-			fontSize: size === 'big' ? spring(48) : spring(18),
-		};
+		let styles;
+		switch (size) {
+			case 'big':
+				styles = { fontSize: spring(48), opacity: spring(1) };
+				break;
+
+			case 'small':
+				styles = {
+					fontSize: spring(18),
+					opacity: spring(1),
+				};
+				break;
+
+			case 'none':
+				styles = { fontSize: spring(48), opacity: spring(0) };
+				break;
+		}
 
 		const valueColor = size === 'big' ? color : 'black';
 
@@ -56,7 +71,7 @@ export default class Metric extends React.Component {
 			<MetricContainer className={className} style={style}>
 				<Motion style={styles}>
 					{interpolated => (
-						<div>
+						<div style={{ opacity: interpolated.opacity }}>
 							{title && <Title>{title}</Title>}
 							{value && (
 								<Value
