@@ -73,7 +73,7 @@ function loanBurndownReducer(state = InitialStateRecord, { type, ...payload }) {
 			return state
 				.set('loadingFile', false)
 				.set('data', payload.data)
-				.set('graphingData', Immutable.Map())
+				.set('graphingData', Immutable.Map({}))
 				.set('columns', payload.columns)
 				.set('validInputColumns', payload.validInputColumns)
 				.set('validOutputColumns', payload.validOutputColumns)
@@ -82,7 +82,8 @@ function loanBurndownReducer(state = InitialStateRecord, { type, ...payload }) {
 					'unloadable',
 					payload.validInputColumns.size <= 0 ||
 						payload.validOutputColumns.size <= 0,
-				);
+				)
+				.update(state => extrapolateAndSort(state));
 		case LOAN_BURNDOWN_LOAD_CSV_FAILED:
 			return state.set('loadingFile', false).set('ready', false);
 		case LOAN_BURNDOWN_CHOOSE_INPUT_COLUMN:
