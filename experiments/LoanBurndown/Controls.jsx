@@ -13,7 +13,7 @@ import ReactSVG from 'react-svg';
 import DropdownMenu from '@jballands/vespyr/lib/DropdownMenu';
 import MenuItem from '@jballands/vespyr/lib/MenuItem';
 import CheckboxItem from '@jballands/vespyr/lib/CheckboxItem';
-import BoldButton from '@jballands/vespyr/lib/BoldButton';
+import FlatButton from '@jballands/vespyr/lib/FlatButton';
 
 import {
 	chooseInputColumn,
@@ -56,8 +56,21 @@ const Icon = styled(ReactSVG)`
 	height: 25px;
 `;
 
-const UploadCSV = styled(BoldButton)`
+const UploadCSV = styled(FlatButton)`
 	font-size: 16px;
+`;
+
+const UploadCSVContainer = styled.div`
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: center;
+`;
+
+const UploadIcon = styled(ReactSVG)`
+	width: 17px;
+	fill: ${props => props.color};
+	margin-right: 7px;
+	padding-top: 2px;
 `;
 
 const mapStateToProps = ({ loanBurndown }) => ({
@@ -231,11 +244,6 @@ class Controls extends React.Component {
 					</StyledDropdown>
 				</Options>
 				<Options>
-					<UploadCSV
-						onClick={this.onUploadCSVClick}
-						accentColor={primaryColor}>
-						Choose New .CSV
-					</UploadCSV>
 					<CheckboxItem
 						accentColor={primaryColor}
 						id="project"
@@ -244,6 +252,17 @@ class Controls extends React.Component {
 						disabled={problems.size > 0 || unloadable}>
 						Show estimated loan completion
 					</CheckboxItem>
+					<UploadCSV
+						onClick={this.onUploadCSVClick}
+						accentColor={primaryColor}>
+						<UploadCSVContainer>
+							<UploadIcon
+								path="/assets/upload.svg"
+								color={primaryColor}
+							/>
+							Choose New .CSV
+						</UploadCSVContainer>
+					</UploadCSV>
 				</Options>
 			</div>
 		);

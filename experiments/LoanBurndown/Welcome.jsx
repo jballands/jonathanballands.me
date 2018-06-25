@@ -48,6 +48,19 @@ const UploadCSV = styled(BoldButton)`
 	font-size: 16px;
 `;
 
+const UploadCSVButtonContainer = styled.div`
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: center;
+`;
+
+const UploadIcon = styled(ReactSVG)`
+	width: 17px;
+	fill: white;
+	margin-right: 7px;
+	padding-top: 2px;
+`;
+
 const mapStateToProps = null;
 
 const mapDispatchToProps = dispatch => ({
@@ -107,11 +120,17 @@ class Welcome extends React.Component {
 				<UploadCSV
 					accentColor={primaryColor}
 					onClick={this.onUploadCSVClick}>
-					Choose .CSV file
+					<UploadCSVButtonContainer>
+						<UploadIcon path="/assets/upload.svg" /> Choose .CSV
+						file
+					</UploadCSVButtonContainer>
 				</UploadCSV>
 			</WelcomeContainer>
 		);
 	}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Welcome);
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps,
+)(Welcome);
