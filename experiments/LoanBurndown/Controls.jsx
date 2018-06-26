@@ -36,6 +36,18 @@ const Options = styled.div`
 	}
 `;
 
+const ContextualError = styled.div`
+	margin-top: 10px;
+	color: red;
+	display: flex;
+	flex-flow: row;
+	align-items: center;
+
+	svg {
+		margin-right: 7px;
+	}
+`;
+
 const StyledDropdown = styled(DropdownMenu)`
 	line-height: normal;
 `;
@@ -78,6 +90,7 @@ const mapStateToProps = ({ loanBurndown }) => ({
 	data: loanBurndown.get('data'),
 	inputColumn: loanBurndown.get('inputColumn'),
 	inputColumnValid: loanBurndown.get('inputColumnValid'),
+	graphingData: loanBurndown.get('graphingData'),
 	outputColumn: loanBurndown.get('outputColumn'),
 	outputColumnValid: loanBurndown.get('outputColumnValid'),
 	validInputColumns: loanBurndown.get('validInputColumns'),
@@ -107,11 +120,13 @@ class Controls extends React.Component {
 	static displayName = 'Controls';
 
 	static propTypes = {
+		canExtrapolate: PropTypes.bool,
 		columns: PropTypes.object,
 		data: PropTypes.object,
 		extrapolate: PropTypes.bool,
 		inputColumn: PropTypes.string,
 		inputColumnValid: PropTypes.bool,
+		graphingData: PropTypes.object,
 		loadCSV: PropTypes.func,
 		onExtrapolateClick: PropTypes.func,
 		onInputClick: PropTypes.func,
@@ -149,6 +164,7 @@ class Controls extends React.Component {
 			extrapolate,
 			inputColumn,
 			inputColumnValid,
+			graphingData,
 			outputColumn,
 			outputColumnValid,
 			onExtrapolateClick,
@@ -160,6 +176,16 @@ class Controls extends React.Component {
 			validOutputColumns,
 			unloadable,
 		} = this.props;
+
+		const columnsAreDefined = inputColumnValid && outputColumnValid;
+
+		const rateIsNaN =
+			columnsAreDefined &&
+			isNaN(graphingData.get('averageRatePerMillisecond'));
+
+		const rateIsPositive =
+			columnsAreDefined &&
+			graphingData.get('averageRatePerMillisecond', null) >= 0;
 
 		return (
 			<div>
@@ -249,7 +275,12 @@ class Controls extends React.Component {
 						id="project"
 						onClick={onExtrapolateClick}
 						selected={extrapolate}
-						disabled={problems.size > 0 || unloadable}>
+						disabled={
+							problems.size > 0 ||
+							unloadable ||
+							rateIsPositive ||
+							rateIsNaN
+						}>
 						Show estimated loan completion
 					</CheckboxItem>
 					<UploadCSV
@@ -264,6 +295,20 @@ class Controls extends React.Component {
 						</UploadCSVContainer>
 					</UploadCSV>
 				</Options>
+				{rateIsNaN && (
+					<ContextualError>
+						<WarningIcon path="/assets/warning-filled.svg" />
+						Invalid columns. Choose different columns until you see
+						a graph with descending slope.
+					</ContextualError>
+				)}
+				{rateIsPositive && (
+					<ContextualError>
+						<WarningIcon path="/assets/warning-filled.svg" /> "Show
+						estimated loan completion" is unavailable because your
+						loan is increasing in value over time.
+					</ContextualError>
+				)}
 			</div>
 		);
 	}

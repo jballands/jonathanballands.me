@@ -114,9 +114,26 @@ class Visualization extends React.Component {
 		const { primaryColor } = this.props;
 		return (
 			<ErrorContainer>
+				<Error
+					path="/assets/broken-burndown.svg"
+					color={primaryColor}
+					style={{ width: 250 }}
+				/>
+
 				<ErrorTitle color={primaryColor}>
 					Unable to Visualize
 				</ErrorTitle>
+
+				<ErrorActionItemsContainer>
+					<ActionItemsInstructions color={primaryColor}>
+						There was a problem with the CSV you chose. Your CSV
+						must contain:
+					</ActionItemsInstructions>
+					<ActionItemsList>
+						<li>One column consisting entirely of dates</li>
+						<li>One column constisting entirely of numbers</li>
+					</ActionItemsList>
+				</ErrorActionItemsContainer>
 			</ErrorContainer>
 		);
 	};
@@ -173,7 +190,7 @@ class Visualization extends React.Component {
 				<VisualizationMetrics>
 					<StyledMetric
 						color={primaryColor}
-						title="Avg Rate"
+						title="Burndown Rate"
 						value={format('$,.2f')(
 							graphingData.get('averageRatePerMillisecond') *
 								MILLISECONDS_IN_A_MONTH,
@@ -182,7 +199,7 @@ class Visualization extends React.Component {
 					/>
 					<StyledMetric
 						color={primaryColor}
-						title="Balance Remaining"
+						title="Balance"
 						value={format('$,.2f')(
 							graphingData
 								.get('original')

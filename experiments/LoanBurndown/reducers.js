@@ -32,6 +32,7 @@ const InitialStateRecord = Immutable.Record({
 	ready: false,
 	unloadable: false,
 	extrapolate: false,
+	canExtrapolate: false,
 })();
 
 const extrapolateAndSort = state => {
@@ -48,19 +49,21 @@ const extrapolateAndSort = state => {
 		outputColumn,
 	});
 
-	return state.update('graphingData', (graphingData = Immutable.Map()) => {
-		return graphingData
-			.set('extrapolated', extrapolated)
-			.set('averageRatePerMillisecond', averageRatePerMillisecond)
-			.set(
-				'original',
-				squash({
-					series: state.get('data'),
-					inputColumn,
-					outputColumn,
-				}).sort((a, b) => a.get(inputColumn) - b.get(inputColumn)),
-			);
-	});
+	return state
+		.update('graphingData', (graphingData = Immutable.Map()) => {
+			return graphingData
+				.set('extrapolated', extrapolated)
+				.set('averageRatePerMillisecond', averageRatePerMillisecond)
+				.set(
+					'original',
+					squash({
+						series: state.get('data'),
+						inputColumn,
+						outputColumn,
+					}).sort((a, b) => a.get(inputColumn) - b.get(inputColumn)),
+				);
+		})
+		.set('extrapolate', false);
 };
 
 // -----------------------------------------------------------------------------

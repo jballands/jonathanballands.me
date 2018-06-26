@@ -19,7 +19,7 @@ const MetricContainer = styled.div`
 const Title = styled.div`
 	font-size: 16px;
 	margin-bottom: 5px;
-	color: #606060;
+	color: #000;
 `;
 
 const Value = styled.div.attrs({
