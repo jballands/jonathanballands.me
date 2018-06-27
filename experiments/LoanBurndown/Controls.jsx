@@ -237,7 +237,7 @@ class Controls extends React.Component {
 							columns.getIn([outputColumn, 'displayName']) ||
 							this.renderNothingSelectedDropdown()
 						}
-						title="Value"
+						title="Balance"
 						accentColor={primaryColor}
 						key="output"
 						icon={

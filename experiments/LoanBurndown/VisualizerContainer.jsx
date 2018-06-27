@@ -5,7 +5,8 @@
 //	© 2018 Jonathan Ballands
 //
 
-import React from 'react';
+import React, { Component, Fragment } from 'react';
+import propTypes from 'prop-types';
 import styled from 'styled-components';
 import Controls from './Controls';
 import Visualization from './Visualization';
@@ -28,22 +29,28 @@ const VisualizerControlsContainer = styled.div`
 
 const VisualizationContainer = styled.div`
 	width: 100%;
-	margin-bottom: 20px;
+	margin-bottom: 25px;
 `;
 
-export default class VisualizerContainer extends React.Component {
+export default class VisualizerContainer extends Component {
 	static displayName = 'VisualizerContainer';
+
+	static propTypes = {
+		primaryColor: propTypes.string,
+	};
 
 	render() {
 		return (
-			<VisualizerContainerContainer>
-				<VisualizerControlsContainer>
-					<Controls {...this.props} />
-				</VisualizerControlsContainer>
-				<VisualizationContainer>
-					<Visualization {...this.props} />
-				</VisualizationContainer>
-			</VisualizerContainerContainer>
+			<Fragment>
+				<VisualizerContainerContainer>
+					<VisualizerControlsContainer>
+						<Controls {...this.props} />
+					</VisualizerControlsContainer>
+					<VisualizationContainer>
+						<Visualization {...this.props} />
+					</VisualizationContainer>
+				</VisualizerContainerContainer>
+			</Fragment>
 		);
 	}
 }

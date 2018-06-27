@@ -132,7 +132,7 @@ export const xIntercept = ({
 
 	// This right here is the magic number!
 	return (
-		-1 * latestValue.get(outputColumn) / avgSlope +
+		(-1 * latestValue.get(outputColumn)) / avgSlope +
 		latestValue.get(inputColumn)
 	);
 };
@@ -242,7 +242,9 @@ export const validateState = state => {
 		state = state
 			.set('outputColumnValid', false)
 			.update('problems', problems =>
-				problems.push('Choose a value column using the value menu.'),
+				problems.push(
+					'Choose a balance column using the balance menu.',
+				),
 			);
 	} else {
 		state = state.set('outputColumnValid', true);

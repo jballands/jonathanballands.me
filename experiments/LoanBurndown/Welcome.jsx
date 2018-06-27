@@ -10,7 +10,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import ReactSVG from 'react-svg';
+import KinesisMarkdown from 'components/KinesisMarkdown';
 import BoldButton from '@jballands/vespyr/lib/BoldButton';
+import { privacyMd } from './markdown';
 
 import { loadCSV } from './actions';
 
@@ -20,6 +22,7 @@ const WelcomeContainer = styled.div`
 	align-items: center;
 	justify-content: center;
 	height: 100%;
+	margin-bottom: 50px;
 `;
 
 const BurndownLogo = styled(ReactSVG)`
@@ -59,6 +62,20 @@ const UploadIcon = styled(ReactSVG)`
 	fill: white;
 	margin-right: 7px;
 	padding-top: 2px;
+`;
+
+const PrivacyContainer = styled.div`
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: center;
+	font-size: 14px;
+	margin-top: 15px;
+`;
+
+const PrivacyIcon = styled(ReactSVG)`
+	width: 30px;
+	fill: ${props => props.color};
+	margin-right: 7px;
 `;
 
 const mapStateToProps = null;
@@ -104,10 +121,9 @@ class Welcome extends React.Component {
 				</BurndownTitle>
 
 				<BurndownDescription>
-					Getting to $0.00 on a loan is an exciting thought for most
-					people. This app will visualize how your loan payments are
-					progressing, as well as when you can expect to hit that
-					magic number.
+					This is an app that helps you visualize how payments on your
+					loan are progressing, as well as give you an estimate on
+					when you'll finish it.
 				</BurndownDescription>
 
 				<input
@@ -125,6 +141,14 @@ class Welcome extends React.Component {
 						file
 					</UploadCSVButtonContainer>
 				</UploadCSV>
+
+				<PrivacyContainer>
+					<PrivacyIcon
+						path="/assets/privacy.svg"
+						color={primaryColor}
+					/>
+					<KinesisMarkdown color={primaryColor} content={privacyMd} />
+				</PrivacyContainer>
 			</WelcomeContainer>
 		);
 	}

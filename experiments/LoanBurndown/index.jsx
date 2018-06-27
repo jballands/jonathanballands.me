@@ -18,8 +18,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
+import KinesisMarkdown from 'components/KinesisMarkdown';
 import Welcome from './Welcome';
 import VisualizerContainer from './VisualizerContainer';
+import { explanationMd } from './markdown';
 import * as reducers from './reducers';
 import * as sagas from './sagas';
 
@@ -39,16 +41,18 @@ class LoanBurndown extends React.Component {
 	static displayName = 'LoanBurndown';
 
 	static propTypes = {
+		primaryColor: PropTypes.string,
 		ready: PropTypes.bool,
 	};
 
 	render() {
-		const { ready } = this.props;
+		const { primaryColor, ready } = this.props;
 
 		return (
 			<BurndownAppContainer>
 				{!ready && <Welcome {...this.props} />}
 				{ready && <VisualizerContainer {...this.props} />}
+				<KinesisMarkdown color={primaryColor} content={explanationMd} />
 			</BurndownAppContainer>
 		);
 	}
