@@ -62,6 +62,10 @@ export const KinesisHashtags = {
 		id: 'visualization',
 		displayName: 'visualization',
 	},
+	tool: {
+		id: 'tool',
+		displayName: 'tool',
+	},
 };
 
 //
@@ -87,23 +91,23 @@ export const kinesisPosts = [
 		primaryColor: '#ff6b6b',
 		secondaryColor: '#ffcfb1',
 	}),
-	new Post({
-		name: 'HomeKit All the Things',
-		date: new Date(2018, 2, 20),
-		hashtags: [
-			KinesisHashtags.home_automation,
-			KinesisHashtags.diy,
-			KinesisHashtags.dev,
-		],
-		type: Type.article,
-		resource: '/markdown/homekitAllTheThings.md',
-		primaryColor: '#549ff7',
-		secondaryColor: '#b3d5fc',
-	}),
+	// new Post({
+	// 	name: 'HomeKit All the Things',
+	// 	date: new Date(2018, 2, 20),
+	// 	hashtags: [
+	// 		KinesisHashtags.home_automation,
+	// 		KinesisHashtags.diy,
+	// 		KinesisHashtags.dev,
+	// 	],
+	// 	type: Type.article,
+	// 	resource: '/markdown/homekitAllTheThings.md',
+	// 	primaryColor: '#549ff7',
+	// 	secondaryColor: '#b3d5fc',
+	// }),
 	new Post({
 		name: 'Loan Burndown',
-		date: new Date(2018, 3, 10),
-		hashtags: [KinesisHashtags.visualization],
+		date: new Date(2018, 5, 27),
+		hashtags: [KinesisHashtags.visualization, KinesisHashtags.tool],
 		type: Type.experiment,
 		resource: () => import('~/experiments/LoanBurndown'),
 		primaryColor: '#68bf4c',
