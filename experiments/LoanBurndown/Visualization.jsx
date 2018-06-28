@@ -161,7 +161,9 @@ class Visualization extends React.Component {
 						to work:
 					</ActionItemsInstructions>
 					<ActionItemsList>
-						{problems.map(problem => <li>{problem}</li>)}
+						{problems.map((problem, i) => (
+							<li key={i}>{problem}</li>
+						))}
 					</ActionItemsList>
 				</ErrorActionItemsContainer>
 			</ErrorContainer>

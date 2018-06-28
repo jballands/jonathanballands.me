@@ -134,7 +134,7 @@ class Controls extends React.Component {
 		outputColumn: PropTypes.string,
 		outputColumnValid: PropTypes.bool,
 		primaryColor: PropTypes.string,
-		problems: PropTypes.array,
+		problems: PropTypes.object,
 		validInputColumns: PropTypes.object,
 		validOutputColumns: PropTypes.object,
 		unloadable: PropTypes.bool,
