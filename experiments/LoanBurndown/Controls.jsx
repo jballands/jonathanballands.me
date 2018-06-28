@@ -215,6 +215,7 @@ class Controls extends React.Component {
 						invalid={!inputColumnValid}
 						disabled={unloadable}>
 						{columns
+							.valueSeq()
 							.map(column => (
 								<MenuItem
 									disabled={
@@ -250,6 +251,7 @@ class Controls extends React.Component {
 						invalid={!outputColumnValid}
 						disabled={unloadable}>
 						{columns
+							.valueSeq()
 							.map(column => (
 								<MenuItem
 									disabled={
