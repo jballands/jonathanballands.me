@@ -35,9 +35,9 @@ const InitialStateRecord = Immutable.Record({
 function sortKinesisEntries(sortOrder, entries) {
 	return entries.toOrderedMap().sort((a, b) => {
 		if (sortOrder === 'later') {
-			return moment(a.date).isBefore(b.date);
+			return moment(a.date).isBefore(b.date) ? 1 : -1;
 		}
-		return moment(a.date).isAfter(b.date);
+		return moment(a.date).isAfter(b.date) ? 1 : -1;
 	});
 }
 
@@ -70,6 +70,7 @@ export default function kinesisReducer(
 				);
 		case KINESIS_SET_SORT_ORDER:
 			sortedEntries = sortKinesisEntries(action.sortOrder, entries);
+			console.log(sortedEntries);
 
 			return state
 				.set('sortOrder', action.sortOrder)

@@ -38,6 +38,7 @@ const BurndownTitle = styled.div`
 	font-weight: 700;
 	margin-top: 50px;
 	color: ${props => props.color};
+	text-align: center;
 `;
 
 const BurndownDescription = styled.div`

@@ -75,7 +75,7 @@ export const KinesisHashtags = {
 export const kinesisPosts = [
 	new Post({
 		name: 'Hello jb.me 3',
-		date: new Date(2018, 0, 31),
+		date: new Date(2018, 0, 30),
 		hashtags: [KinesisHashtags.dev, KinesisHashtags.design],
 		type: Type.article,
 		resource: '/markdown/helloJBMe.md',
