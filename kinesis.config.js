@@ -91,19 +91,6 @@ export const kinesisPosts = [
 		primaryColor: '#ff6b6b',
 		secondaryColor: '#ffcfb1',
 	}),
-	// new Post({
-	// 	name: 'HomeKit All the Things',
-	// 	date: new Date(2018, 2, 20),
-	// 	hashtags: [
-	// 		KinesisHashtags.home_automation,
-	// 		KinesisHashtags.diy,
-	// 		KinesisHashtags.dev,
-	// 	],
-	// 	type: Type.article,
-	// 	resource: '/markdown/homekitAllTheThings.md',
-	// 	primaryColor: '#549ff7',
-	// 	secondaryColor: '#b3d5fc',
-	// }),
 	new Post({
 		name: 'Loan Burndown',
 		date: new Date(2018, 5, 27),
@@ -112,5 +99,14 @@ export const kinesisPosts = [
 		resource: () => import('~/experiments/LoanBurndown'),
 		primaryColor: '#68bf4c',
 		secondaryColor: '#c1ffad',
+	}),
+	new Post({
+		name: 'Apple TV Paralax',
+		date: new Date(2018, 6, 15),
+		hashtags: [],
+		type: Type.experiment,
+		resource: () => import('~/experiments/AppleTVParalax'),
+		primaryColor: '#91adbc',
+		secondaryColor: '#deebf2',
 	}),
 ];
