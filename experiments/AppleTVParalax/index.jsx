@@ -11,6 +11,6 @@ export default class AppleTVParalax extends Component {
 	};
 
 	render() {
-		return <AppleTVIcon />;
+		return <AppleTVIcon style={{ height: 500, width: 250 }} />;
 	}
 }

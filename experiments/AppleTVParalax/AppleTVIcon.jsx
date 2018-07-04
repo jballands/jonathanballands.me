@@ -5,8 +5,9 @@
 //	© 2018 Jonathan Ballands
 //
 
-import React, { Component, Fragment } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import PropTypes from 'prop-types';
+import Measure from 'react-measure';
 import { Motion, spring } from 'react-motion';
 import styled from 'styled-components';
 import { scaleLinear } from 'd3-scale';
@@ -84,11 +85,12 @@ const Shade = styled.div.attrs({
 
 const MOUSE_OFFSET = 0.52;
 
-export default class AppleTVIcon extends Component {
+export default class AppleTVIcon extends PureComponent {
 	static displayName = 'AppleTVIcon';
 
 	static propTypes = {
 		className: PropTypes.string,
+		layers: PropTypes.arrayOf(PropTypes.node),
 		style: PropTypes.object,
 	};
 
@@ -104,6 +106,8 @@ export default class AppleTVIcon extends Component {
 		hx: 0,
 		hy: 0,
 		hb: 0,
+		width: 0,
+		height: 0,
 	};
 
 	root = React.createRef();
@@ -122,34 +126,36 @@ export default class AppleTVIcon extends Component {
 		// const dx = raw.x - center.x;
 		// const dy = raw.y - center.y;
 
+		const { width, height } = this.state;
+
 		// These values calculate the rotation angle of the icon
 		const rotateScaleX = scaleLinear()
-			.domain([0, 190])
+			.domain([0, height])
 			.range([-12, 12]);
 		const rotateScaleY = scaleLinear()
-			.domain([0, 320])
+			.domain([0, width])
 			.range([12, -12]);
 
 		const shineScaleX = scaleLinear()
-			.domain([0, 320])
+			.domain([0, width])
 			.range([0, 100]);
 		const shineScaleY = scaleLinear()
-			.domain([0, 160, 320])
-			.range([25, 25, 100])
+			.domain([0, height / 1.5, height])
+			.range([5, 25, 100])
 			.clamp(true);
 		const shineScaleBrightness = scaleLinear()
-			.domain([160, 0])
+			.domain([height, 0])
 			.range([0, 0.6]);
 
 		const shadowScaleX = scaleLinear()
-			.domain([0, 320])
+			.domain([0, width])
 			.range([0, 100]);
 		const shadowScaleY = scaleLinear()
-			.domain([0, 160, 320])
+			.domain([0, height / 1.5, height])
 			.range([0, 100, 100])
 			.clamp(true);
 		const shadowScaleDarkness = scaleLinear()
-			.domain([100, 190])
+			.domain([height / 1.5, height])
 			.range([0, 0.35]);
 
 		return {
@@ -164,6 +170,13 @@ export default class AppleTVIcon extends Component {
 			hy: shadowScaleY(raw.y),
 			hb: shadowScaleDarkness(raw.y),
 		};
+	};
+
+	onMeasure = ({ bounds: { width, height } }) => {
+		this.setState({
+			width,
+			height,
+		});
 	};
 
 	onEnter = e => {
@@ -247,21 +260,26 @@ export default class AppleTVIcon extends Component {
 								length={interpolated.shadowLength}
 								spread={interpolated.shadowSpread}
 							/>
-							<IconContainer
-								scale={interpolated.scale}
-								rx={interpolated.rx}
-								ry={interpolated.ry}>
-								<Shine
-									sx={interpolated.sx}
-									sy={interpolated.sy}
-									sb={interpolated.sb}
-								/>
-								<Shade
-									hx={interpolated.hx}
-									hy={interpolated.hy}
-									hb={interpolated.hb}
-								/>
-							</IconContainer>
+							<Measure bounds onResize={this.onMeasure}>
+								{({ measureRef }) => (
+									<IconContainer
+										scale={interpolated.scale}
+										rx={interpolated.rx}
+										ry={interpolated.ry}
+										innerRef={measureRef}>
+										<Shine
+											sx={interpolated.sx}
+											sy={interpolated.sy}
+											sb={interpolated.sb}
+										/>
+										<Shade
+											hx={interpolated.hx}
+											hy={interpolated.hy}
+											hb={interpolated.hb}
+										/>
+									</IconContainer>
+								)}
+							</Measure>
 						</Fragment>
 					)}
 				</Motion>
