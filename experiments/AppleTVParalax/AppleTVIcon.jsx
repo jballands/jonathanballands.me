@@ -21,16 +21,16 @@ const Root = styled.div`
 
 const DropShadow = styled.div.attrs({
 	style: props => ({
-		boxShadow: `0px ${props.length}px ${
-			props.spread
-		}px 0px rgba(0,0,0,0.75)`,
+		boxShadow: `0px ${props.length}px ${props.spread}px 0px rgba(0,0,0, ${
+			props.opacity
+		})`,
 	}),
 })`
 	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
+	top: 5px;
+	left: 5px;
+	right: 5px;
+	bottom: 5px;
 	background: transparent;
 `;
 
@@ -201,6 +201,7 @@ export default class AppleTVIcon extends PureComponent {
 
 	onLeave = () => {
 		this.setState({
+			isSelecting: false,
 			isOver: false,
 		});
 	};
@@ -235,13 +236,13 @@ export default class AppleTVIcon extends PureComponent {
 	onTouchStart = e => {
 		switch (e.touches.length) {
 			case 1:
-				return this.onEnter();
+				return this.onEnter(e.touches[0]);
 			case 2:
 				return this.setState({
 					isSelecting: true,
 				});
 			default:
-				return this.onEnter();
+				return this.onEnter(e.touches[0]);
 		}
 	};
 
@@ -249,7 +250,7 @@ export default class AppleTVIcon extends PureComponent {
 		this.onMove(e.touches[0]);
 	};
 
-	onTouchEnd = () => {
+	onTouchEnd = e => {
 		switch (e.touches.length) {
 			case 1:
 				return this.onLeave();
@@ -282,16 +283,17 @@ export default class AppleTVIcon extends PureComponent {
 
 		const styles = {
 			scale: isOverAndNotSelecting ? spring(1.1) : spring(1),
-			rx: isOverAndNotSelecting ? spring(rx) : spring(0),
-			ry: isOverAndNotSelecting ? spring(ry) : spring(0),
-			sx: isOverAndNotSelecting ? spring(sx) : spring(50),
-			sy: isOverAndNotSelecting ? spring(sy) : spring(0),
-			sb: isOverAndNotSelecting ? spring(sb) : spring(0),
-			hx: isOverAndNotSelecting ? spring(hx) : spring(50),
-			hy: isOverAndNotSelecting ? spring(hy) : spring(100),
-			hb: isOverAndNotSelecting ? spring(hb) : spring(0),
-			shadowLength: isOverAndNotSelecting ? spring(25) : spring(0),
+			rx: isOver ? spring(rx) : spring(0),
+			ry: isOver ? spring(ry) : spring(0),
+			sx: isOver ? spring(sx) : spring(50),
+			sy: isOver ? spring(sy) : spring(0),
+			sb: isOver ? spring(sb) : spring(0),
+			hx: isOver ? spring(hx) : spring(50),
+			hy: isOver ? spring(hy) : spring(100),
+			hb: isOver ? spring(hb) : spring(0),
+			shadowLength: isOverAndNotSelecting ? spring(45) : spring(0),
 			shadowSpread: isOverAndNotSelecting ? spring(45) : spring(0),
+			shadowOpacity: isOverAndNotSelecting ? spring(0.5) : spring(0),
 		};
 
 		return (
@@ -314,6 +316,7 @@ export default class AppleTVIcon extends PureComponent {
 							<DropShadow
 								length={interpolated.shadowLength}
 								spread={interpolated.shadowSpread}
+								opacity={interpolated.shadowOpacity}
 							/>
 							<Measure bounds onResize={this.onMeasure}>
 								{({ measureRef }) => (
