@@ -40,7 +40,7 @@ const Shadow = styled.div.attrs({
 	style: props => ({
 		boxShadow: `0px ${props.length}px ${
 			props.spread
-		}px 0px rgba(0,0,0,0.75)`,
+		}px 0px rgba(0,0,0,0.6)`,
 	}),
 })`
 	position: absolute;
@@ -50,18 +50,31 @@ const Shadow = styled.div.attrs({
 	left: 0;
 `;
 
-const Shine = styled.div.attrs({})`
+const Shine = styled.div.attrs({
+	style: props => ({
+		background: `radial-gradient(
+			circle at ${props.sx}% ${props.sy}%,
+			rgba(255, 255, 255, ${props.sb}),
+			transparent
+		)`,
+	}),
+})`
 	position: absolute;
 	top: 0;
 	left: 0;
 	right: 0;
 	bottom: 0;
 	border-radius: 5px;
-	background: linear-gradient(
-		135deg,
-		rgba(255, 255, 255, 0.6) 0%,
-		rgba(255, 255, 255, 0) 60%
-	);
+`;
+
+const Shine = styled.div`
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	border-radius: 5px;
+	linear-gradient: ;
 `;
 
 const MOUSE_OFFSET = 0.52;
@@ -96,25 +109,41 @@ export default class AppleTVIcon extends Component {
 			y: raw.y / 2,
 		};
 
-		const dx = raw.x - center.x;
-		const dy = raw.y - center.y;
-		const arad = Math.atan2(dy, dx);
-		const rawAngle = (arad * 180) / Math.PI - 90;
-		const angle = rawAngle < 0 ? rawAngle + 360 : rawAngle;
+		// const dx = raw.x - center.x;
+		// const dy = raw.y - center.y;
 
+		// These values calculate the rotation angle of the icon
 		const rotateScaleX = scaleLinear()
 			.domain([0, 190])
-			.range([25, -25]);
+			.range([-15, 15]);
 		const rotateScaleY = scaleLinear()
 			.domain([0, 320])
-			.range([25, -25]);
+			.range([15, -15]);
+
+		const shineScaleX = scaleLinear()
+			.domain([0, 320])
+			.range([0, 100]);
+		const shineScaleY = scaleLinear()
+			.domain([0, 160, 320])
+			.range([25, 25, 100])
+			.clamp(true);
+		const shineScaleBrightness = scaleLinear()
+			.domain([160, 0])
+			.range([0, 0.6]);
+
+		const shadowScaleDarkness = scaleLinear()
+			.domain([150, 190])
+			.range([0, 0.6]);
 
 		return {
-			dx,
-			dy,
+			dx: raw.x,
+			dy: raw.y,
 			rx: rotateScaleX(raw.y),
 			ry: rotateScaleY(raw.x),
-			angle,
+			sx: shineScaleX(raw.x),
+			sy: shineScaleY(raw.y),
+			sb: shineScaleBrightness(raw.y),
+			sd: shadowScaleDarkness(raw.y),
 		};
 	};
 
@@ -165,12 +194,16 @@ export default class AppleTVIcon extends Component {
 
 	render() {
 		const { className, style } = this.props;
-		const { dx, dy, isOver, rx, ry } = this.state;
+		const { dx, isOver, rx, ry, sx, sy, sb, sd } = this.state;
 
 		const styles = {
 			scale: isOver ? spring(1.1) : spring(1),
 			rx: isOver ? spring(rx) : spring(0),
 			ry: isOver ? spring(ry) : spring(0),
+			sx: isOver ? spring(sx) : spring(0),
+			sy: isOver ? spring(sy) : spring(0),
+			sb: isOver ? spring(sb) : spring(0),
+			sd: isOver ? spring(sd) : spring(0),
 			shadowLength: isOver ? spring(25) : spring(0),
 			shadowSpread: isOver ? spring(45) : spring(0),
 		};
@@ -195,7 +228,12 @@ export default class AppleTVIcon extends Component {
 								ry={interpolated.ry}
 								length={interpolated.shadowLength}
 								spread={interpolated.shadowSpread}>
-								<Shine dx={dx} dy={dy} />
+								<Shine
+									sx={interpolated.sx}
+									sy={interpolated.sy}
+									sb={interpolated.sb}
+								/>
+								<Shade sd={interpolated.sd} />
 							</IconContainer>
 						</Fragment>
 					)}
