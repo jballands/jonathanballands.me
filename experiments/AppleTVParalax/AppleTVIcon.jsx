@@ -17,14 +17,26 @@ const Root = styled.div`
 	position: relative;
 `;
 
+const DropShadow = styled.div.attrs({
+	style: props => ({
+		boxShadow: `0px ${props.length}px ${
+			props.spread
+		}px 0px rgba(0,0,0,0.75)`,
+	}),
+})`
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: transparent;
+`;
+
 const IconContainer = styled.div.attrs({
 	style: props => ({
 		transform: `rotateX(${props.rx}deg) rotateY(${props.ry}deg) scale3d(${
 			props.scale
 		}, ${props.scale}, ${props.scale})`,
-		boxShadow: `0px ${props.length}px ${
-			props.spread
-		}px 0px rgba(0,0,0,0.75)`,
 	}),
 })`
 	position: relative;
@@ -34,20 +46,6 @@ const IconContainer = styled.div.attrs({
 	background: red;
 	border-radius: 5px;
 	transform-style: preserve-3d;
-`;
-
-const Shadow = styled.div.attrs({
-	style: props => ({
-		boxShadow: `0px ${props.length}px ${
-			props.spread
-		}px 0px rgba(0,0,0,0.6)`,
-	}),
-})`
-	position: absolute;
-	width: 100%;
-	height: 100%;
-	top: 0;
-	left: 0;
 `;
 
 const Shine = styled.div.attrs({
@@ -67,14 +65,21 @@ const Shine = styled.div.attrs({
 	border-radius: 5px;
 `;
 
-const Shine = styled.div`
+const Shade = styled.div.attrs({
+	style: props => ({
+		background: `radial-gradient(
+			circle at ${props.hx}% ${props.hy}%,
+			rgba(0, 0, 0, ${props.hb}),
+			transparent 135%
+		)`,
+	}),
+})`
 	position: absolute;
 	top: 0;
 	left: 0;
 	right: 0;
 	bottom: 0;
 	border-radius: 5px;
-	linear-gradient: ;
 `;
 
 const MOUSE_OFFSET = 0.52;
@@ -93,7 +98,12 @@ export default class AppleTVIcon extends Component {
 		dy: 0,
 		rx: 0,
 		ry: 0,
-		angle: 0,
+		sx: 0,
+		sy: 0,
+		sb: 0,
+		hx: 0,
+		hy: 0,
+		hb: 0,
 	};
 
 	root = React.createRef();
@@ -104,10 +114,10 @@ export default class AppleTVIcon extends Component {
 			x: pageX - offsets.left - MOUSE_OFFSET,
 			y: pageY - offsets.top - MOUSE_OFFSET,
 		};
-		const center = {
-			x: raw.x / 2,
-			y: raw.y / 2,
-		};
+		// const center = {
+		// 	x: raw.x / 2,
+		// 	y: raw.y / 2,
+		// };
 
 		// const dx = raw.x - center.x;
 		// const dy = raw.y - center.y;
@@ -115,10 +125,10 @@ export default class AppleTVIcon extends Component {
 		// These values calculate the rotation angle of the icon
 		const rotateScaleX = scaleLinear()
 			.domain([0, 190])
-			.range([-15, 15]);
+			.range([-12, 12]);
 		const rotateScaleY = scaleLinear()
 			.domain([0, 320])
-			.range([15, -15]);
+			.range([12, -12]);
 
 		const shineScaleX = scaleLinear()
 			.domain([0, 320])
@@ -131,9 +141,16 @@ export default class AppleTVIcon extends Component {
 			.domain([160, 0])
 			.range([0, 0.6]);
 
+		const shadowScaleX = scaleLinear()
+			.domain([0, 320])
+			.range([0, 100]);
+		const shadowScaleY = scaleLinear()
+			.domain([0, 160, 320])
+			.range([0, 100, 100])
+			.clamp(true);
 		const shadowScaleDarkness = scaleLinear()
-			.domain([150, 190])
-			.range([0, 0.6]);
+			.domain([100, 190])
+			.range([0, 0.35]);
 
 		return {
 			dx: raw.x,
@@ -143,7 +160,9 @@ export default class AppleTVIcon extends Component {
 			sx: shineScaleX(raw.x),
 			sy: shineScaleY(raw.y),
 			sb: shineScaleBrightness(raw.y),
-			sd: shadowScaleDarkness(raw.y),
+			hx: shadowScaleX(raw.x),
+			hy: shadowScaleY(raw.y),
+			hb: shadowScaleDarkness(raw.y),
 		};
 	};
 
@@ -194,16 +213,18 @@ export default class AppleTVIcon extends Component {
 
 	render() {
 		const { className, style } = this.props;
-		const { dx, isOver, rx, ry, sx, sy, sb, sd } = this.state;
+		const { isOver, rx, ry, sx, sy, sb, hx, hy, hb } = this.state;
 
 		const styles = {
 			scale: isOver ? spring(1.1) : spring(1),
 			rx: isOver ? spring(rx) : spring(0),
 			ry: isOver ? spring(ry) : spring(0),
-			sx: isOver ? spring(sx) : spring(0),
+			sx: isOver ? spring(sx) : spring(50),
 			sy: isOver ? spring(sy) : spring(0),
 			sb: isOver ? spring(sb) : spring(0),
-			sd: isOver ? spring(sd) : spring(0),
+			hx: isOver ? spring(hx) : spring(50),
+			hy: isOver ? spring(hy) : spring(100),
+			hb: isOver ? spring(hb) : spring(0),
 			shadowLength: isOver ? spring(25) : spring(0),
 			shadowSpread: isOver ? spring(45) : spring(0),
 		};
@@ -222,18 +243,24 @@ export default class AppleTVIcon extends Component {
 				<Motion style={styles}>
 					{interpolated => (
 						<Fragment>
+							<DropShadow
+								length={interpolated.shadowLength}
+								spread={interpolated.shadowSpread}
+							/>
 							<IconContainer
 								scale={interpolated.scale}
 								rx={interpolated.rx}
-								ry={interpolated.ry}
-								length={interpolated.shadowLength}
-								spread={interpolated.shadowSpread}>
+								ry={interpolated.ry}>
 								<Shine
 									sx={interpolated.sx}
 									sy={interpolated.sy}
 									sb={interpolated.sb}
 								/>
-								<Shade sd={interpolated.sd} />
+								<Shade
+									hx={interpolated.hx}
+									hy={interpolated.hy}
+									hb={interpolated.hb}
+								/>
 							</IconContainer>
 						</Fragment>
 					)}
