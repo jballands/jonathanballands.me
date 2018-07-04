@@ -16,6 +16,7 @@ const Root = styled.div`
 	width: 320px;
 	height: 190px;
 	position: relative;
+	z-index: ${props => (props.isOver ? 10 : 0)};
 `;
 
 const DropShadow = styled.div.attrs({
@@ -131,10 +132,10 @@ export default class AppleTVIcon extends PureComponent {
 		// These values calculate the rotation angle of the icon
 		const rotateScaleX = scaleLinear()
 			.domain([0, height])
-			.range([-12, 12]);
+			.range([-15, 15]);
 		const rotateScaleY = scaleLinear()
 			.domain([0, width])
-			.range([12, -12]);
+			.range([15, -15]);
 
 		const shineScaleX = scaleLinear()
 			.domain([0, width])
@@ -225,7 +226,7 @@ export default class AppleTVIcon extends PureComponent {
 	};
 
 	render() {
-		const { className, style } = this.props;
+		const { className, layers, style } = this.props;
 		const { isOver, rx, ry, sx, sy, sb, hx, hy, hb } = this.state;
 
 		const styles = {
@@ -252,7 +253,8 @@ export default class AppleTVIcon extends PureComponent {
 				onTouchStart={this.onTouchStart}
 				onTouchMove={this.onTouchMove}
 				onTouchEnd={this.onTouchEnd}
-				innerRef={this.root}>
+				innerRef={this.root}
+				isOver={isOver}>
 				<Motion style={styles}>
 					{interpolated => (
 						<Fragment>
@@ -267,6 +269,7 @@ export default class AppleTVIcon extends PureComponent {
 										rx={interpolated.rx}
 										ry={interpolated.ry}
 										innerRef={measureRef}>
+										{layers}
 										<Shine
 											sx={interpolated.sx}
 											sy={interpolated.sy}
