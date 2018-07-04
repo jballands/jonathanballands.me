@@ -92,11 +92,13 @@ export default class AppleTVIcon extends PureComponent {
 	static propTypes = {
 		className: PropTypes.string,
 		layers: PropTypes.arrayOf(PropTypes.node),
+		onClick: PropTypes.func,
 		style: PropTypes.object,
 	};
 
 	state = {
 		isOver: false,
+		isSelecting: false,
 		dx: 0,
 		dy: 0,
 		rx: 0,
@@ -203,6 +205,8 @@ export default class AppleTVIcon extends PureComponent {
 		});
 	};
 
+	onSelect = () => {};
+
 	onMouseEnter = e => {
 		this.onEnter(e);
 	};
@@ -215,32 +219,79 @@ export default class AppleTVIcon extends PureComponent {
 		this.onLeave();
 	};
 
-	onTouchStart = () => {
-		this.onEnter();
+	onMouseDown = () => {
+		this.setState({
+			isSelecting: true,
+		});
 	};
 
-	onTouchMove = () => {};
+	onMouseUp = () => {
+		this.onSelect();
+		this.setState({
+			isSelecting: false,
+		});
+	};
+
+	onTouchStart = e => {
+		switch (e.touches.length) {
+			case 1:
+				return this.onEnter();
+			case 2:
+				return this.setState({
+					isSelecting: true,
+				});
+			default:
+				return this.onEnter();
+		}
+	};
+
+	onTouchMove = e => {
+		this.onMove(e.touches[0]);
+	};
 
 	onTouchEnd = () => {
-		this.onLeave();
+		switch (e.touches.length) {
+			case 1:
+				return this.onLeave();
+			case 2:
+				this.setState({
+					isSelecting: false,
+				});
+				return this.onSelect();
+			default:
+				return this.onLeave();
+		}
 	};
 
 	render() {
 		const { className, layers, style } = this.props;
-		const { isOver, rx, ry, sx, sy, sb, hx, hy, hb } = this.state;
+		const {
+			isOver,
+			isSelecting,
+			rx,
+			ry,
+			sx,
+			sy,
+			sb,
+			hx,
+			hy,
+			hb,
+		} = this.state;
+
+		const isOverAndNotSelecting = isOver && !isSelecting;
 
 		const styles = {
-			scale: isOver ? spring(1.1) : spring(1),
-			rx: isOver ? spring(rx) : spring(0),
-			ry: isOver ? spring(ry) : spring(0),
-			sx: isOver ? spring(sx) : spring(50),
-			sy: isOver ? spring(sy) : spring(0),
-			sb: isOver ? spring(sb) : spring(0),
-			hx: isOver ? spring(hx) : spring(50),
-			hy: isOver ? spring(hy) : spring(100),
-			hb: isOver ? spring(hb) : spring(0),
-			shadowLength: isOver ? spring(25) : spring(0),
-			shadowSpread: isOver ? spring(45) : spring(0),
+			scale: isOverAndNotSelecting ? spring(1.1) : spring(1),
+			rx: isOverAndNotSelecting ? spring(rx) : spring(0),
+			ry: isOverAndNotSelecting ? spring(ry) : spring(0),
+			sx: isOverAndNotSelecting ? spring(sx) : spring(50),
+			sy: isOverAndNotSelecting ? spring(sy) : spring(0),
+			sb: isOverAndNotSelecting ? spring(sb) : spring(0),
+			hx: isOverAndNotSelecting ? spring(hx) : spring(50),
+			hy: isOverAndNotSelecting ? spring(hy) : spring(100),
+			hb: isOverAndNotSelecting ? spring(hb) : spring(0),
+			shadowLength: isOverAndNotSelecting ? spring(25) : spring(0),
+			shadowSpread: isOverAndNotSelecting ? spring(45) : spring(0),
 		};
 
 		return (
@@ -253,6 +304,8 @@ export default class AppleTVIcon extends PureComponent {
 				onTouchStart={this.onTouchStart}
 				onTouchMove={this.onTouchMove}
 				onTouchEnd={this.onTouchEnd}
+				onMouseDown={this.onMouseDown}
+				onMouseUp={this.onMouseUp}
 				innerRef={this.root}
 				isOver={isOver}>
 				<Motion style={styles}>
