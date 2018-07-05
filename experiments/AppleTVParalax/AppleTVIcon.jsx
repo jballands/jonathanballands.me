@@ -24,14 +24,14 @@ const DropShadow = styled.div.attrs({
 		boxShadow: `0px ${props.length}px ${props.spread}px 0px rgba(0,0,0, ${
 			props.opacity
 		})`,
+		background: `rgba(0,0,0, ${props.opacity})`,
 	}),
 })`
 	position: absolute;
-	top: 5px;
-	left: 5px;
-	right: 5px;
-	bottom: 5px;
-	background: transparent;
+	top: 15px;
+	left: 15px;
+	right: 15px;
+	bottom: 15px;
 `;
 
 const IconContainer = styled.div.attrs({
@@ -302,23 +302,41 @@ export default class AppleTVIcon extends PureComponent {
 			hb,
 		} = this.state;
 
-		const isOverAndNotSelecting = isOver && !isSelecting;
-
 		const styles = {
-			scale: isOverAndNotSelecting ? spring(1.1) : spring(1),
+			scale: isOver
+				? isSelecting
+					? spring(1.05)
+					: spring(1.1)
+				: spring(1),
 			dx: isOver ? spring(dx) : spring(0),
 			dy: isOver ? spring(dy) : spring(0),
-			rx: isOver ? spring(rx) : spring(0),
-			ry: isOver ? spring(ry) : spring(0),
+			rx: isOver
+				? isSelecting
+					? spring(rx * 1.4)
+					: spring(rx)
+				: spring(0),
+			ry: isOver
+				? isSelecting
+					? spring(ry * 1.4)
+					: spring(ry)
+				: spring(0),
 			sx: isOver ? spring(sx) : spring(50),
 			sy: isOver ? spring(sy) : spring(0),
 			sb: isOver ? spring(sb) : spring(0),
 			hx: isOver ? spring(hx) : spring(50),
 			hy: isOver ? spring(hy) : spring(100),
 			hb: isOver ? spring(hb) : spring(0),
-			shadowLength: isOverAndNotSelecting ? spring(45) : spring(0),
-			shadowSpread: isOverAndNotSelecting ? spring(45) : spring(0),
-			shadowOpacity: isOverAndNotSelecting ? spring(0.5) : spring(0),
+			shadowLength: isOver
+				? isSelecting
+					? spring(30)
+					: spring(45)
+				: spring(0),
+			shadowSpread: isOver
+				? isSelecting
+					? spring(30)
+					: spring(45)
+				: spring(0),
+			shadowOpacity: isOver ? spring(0.5) : spring(0),
 		};
 
 		return (
