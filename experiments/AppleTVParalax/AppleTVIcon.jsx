@@ -45,7 +45,6 @@ const IconContainer = styled.div.attrs({
 	width: 100%;
 	height: 100%;
 	overflow: hidden;
-	background: red;
 	border-radius: 5px;
 	transform-style: preserve-3d;
 `;
@@ -84,7 +83,7 @@ const Shade = styled.div.attrs({
 	border-radius: 5px;
 `;
 
-const MOUSE_OFFSET = 0.52;
+const MOUSE_OFFSET = 0;
 
 export default class AppleTVIcon extends PureComponent {
 	static displayName = 'AppleTVIcon';
@@ -93,7 +92,12 @@ export default class AppleTVIcon extends PureComponent {
 		className: PropTypes.string,
 		layers: PropTypes.arrayOf(PropTypes.node),
 		onClick: PropTypes.func,
+		paralaxMultiplier: PropTypes.number,
 		style: PropTypes.object,
+	};
+
+	static defaultProps = {
+		paralaxMultiplier: 0.05,
 	};
 
 	state = {
@@ -121,13 +125,13 @@ export default class AppleTVIcon extends PureComponent {
 			x: pageX - offsets.left - MOUSE_OFFSET,
 			y: pageY - offsets.top - MOUSE_OFFSET,
 		};
-		// const center = {
-		// 	x: raw.x / 2,
-		// 	y: raw.y / 2,
-		// };
+		const center = {
+			x: raw.x / 2,
+			y: raw.y / 2,
+		};
 
-		// const dx = raw.x - center.x;
-		// const dy = raw.y - center.y;
+		const dx = raw.x - center.x;
+		const dy = raw.y - center.y;
 
 		const { width, height } = this.state;
 
@@ -162,8 +166,8 @@ export default class AppleTVIcon extends PureComponent {
 			.range([0, 0.35]);
 
 		return {
-			dx: raw.x,
-			dy: raw.y,
+			dx,
+			dy,
 			rx: rotateScaleX(raw.y),
 			ry: rotateScaleY(raw.x),
 			sx: shineScaleX(raw.x),
@@ -264,11 +268,30 @@ export default class AppleTVIcon extends PureComponent {
 		}
 	};
 
+	renderLayers = ({ dx, dy }) => {
+		// return this.props.layers;
+		const { layers, paralaxMultiplier } = this.props;
+
+		return layers.map((layer, i) => {
+			const props = {
+				style: {
+					transform: `translateX(${i *
+						paralaxMultiplier *
+						dx}px) translateY(${i * paralaxMultiplier * dy}px)`,
+				},
+			};
+
+			return React.cloneElement(layer, props);
+		});
+	};
+
 	render() {
-		const { className, layers, style } = this.props;
+		const { className, style } = this.props;
 		const {
 			isOver,
 			isSelecting,
+			dx,
+			dy,
 			rx,
 			ry,
 			sx,
@@ -283,6 +306,8 @@ export default class AppleTVIcon extends PureComponent {
 
 		const styles = {
 			scale: isOverAndNotSelecting ? spring(1.1) : spring(1),
+			dx: isOver ? spring(dx) : spring(0),
+			dy: isOver ? spring(dy) : spring(0),
 			rx: isOver ? spring(rx) : spring(0),
 			ry: isOver ? spring(ry) : spring(0),
 			sx: isOver ? spring(sx) : spring(50),
@@ -325,7 +350,7 @@ export default class AppleTVIcon extends PureComponent {
 										rx={interpolated.rx}
 										ry={interpolated.ry}
 										innerRef={measureRef}>
-										{layers}
+										{this.renderLayers(interpolated)}
 										<Shine
 											sx={interpolated.sx}
 											sy={interpolated.sy}

@@ -20,6 +20,14 @@ const Layer = styled.img`
 	height: 100%;
 `;
 
+const LayerAbove = styled.img`
+	position: absolute;
+	top: -10px;
+	left: -10px;
+	width: 105%;
+	height: 105%;
+`;
+
 export default class AppleTVParalax extends Component {
 	static displayName = 'AppleTVParalax';
 
@@ -32,11 +40,18 @@ export default class AppleTVParalax extends Component {
 			<Grid>
 				<AppleTVIcon
 					style={{ height: 250, width: 250 }}
-					layers={[<Layer src="/assets/music-for-cars.jpg" />]}
+					layers={[
+						<Layer src="/assets/1975-2.png" />,
+						<Layer src="/assets/1975-1.png" />,
+					]}
 				/>
 				<AppleTVIcon
 					style={{ height: 250, width: 250 }}
-					layers={[<Layer src="/assets/kinda.jpg" />]}
+					layers={[
+						<Layer src="/assets/singing-saw-3.png" />,
+						<LayerAbove src="/assets/singing-saw-2.png" />,
+						<LayerAbove src="/assets/singing-saw-1.png" />,
+					]}
 				/>
 				<AppleTVIcon
 					style={{ height: 250, width: 250 }}
