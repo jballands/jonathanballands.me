@@ -12,21 +12,6 @@ const Grid = styled.div`
 	width: 100%;
 `;
 
-const GridIcon = styled.div`
-	display: flex;
-	flex-flow: column nowrap;
-	align-items: center;
-	max-width: 250px;
-	justify-content: flex-start;
-`;
-
-const AlbumName = styled.div`
-	font-size: 16px;
-	margin-top: 40px;
-	color: ${props => props.color};
-	text-align: center;
-`;
-
 const Layer = styled.img`
 	position: absolute;
 	top: 0;
@@ -51,43 +36,33 @@ export default class AppleTVParalax extends Component {
 	};
 
 	render() {
-		const { primaryColor } = this.props;
-
 		return (
 			<Grid>
-				<GridIcon>
-					<AppleTVIcon
-						style={{ height: 250, width: 250 }}
-						layers={[
-							<Layer src="/assets/singing-saw-3.png" />,
-							<LayerAbove src="/assets/singing-saw-2.png" />,
-							<LayerAbove src="/assets/singing-saw-1.png" />,
-						]}
-					/>
-					<AlbumName color={primaryColor}>Singing Saw</AlbumName>
-				</GridIcon>
-				<GridIcon>
-					<AppleTVIcon
-						style={{ height: 250, width: 250 }}
-						layers={[
-							<Layer src="/assets/1975-2.png" />,
-							<Layer src="/assets/1975-1.png" />,
-						]}
-					/>
-					<AlbumName color={primaryColor}>
-						I like it when you sleep, for you are so beautiful yet
-						so unaware of it
-					</AlbumName>
-				</GridIcon>
-				<GridIcon>
-					<AppleTVIcon
-						style={{ height: 250, width: 250 }}
-						layers={[
-							<Layer src="/assets/tranquility-base-hotel-and-casino.jpg" />,
-						]}
-					/>
-					<AlbumName color={primaryColor}>The 1975</AlbumName>
-				</GridIcon>
+				<AppleTVIcon
+					style={{ height: 250, width: 250 }}
+					parallaxMultiplier={0.06}
+					layers={[
+						<Layer src="/assets/singing-saw-3.png" />,
+						<LayerAbove src="/assets/singing-saw-2.png" />,
+						<LayerAbove src="/assets/singing-saw-1.png" />,
+					]}
+				/>
+				<AppleTVIcon
+					style={{ height: 250, width: 250 }}
+					parallaxMultiplier={0.065}
+					layers={[
+						<Layer src="/assets/1975-2.png" />,
+						<Layer src="/assets/1975-1.png" />,
+					]}
+				/>
+				<AppleTVIcon
+					style={{ height: 250, width: 250 }}
+					layers={[
+						<Layer src="/assets/tranquility-base-hotel-and-casino-3.png" />,
+						<Layer src="/assets/tranquility-base-hotel-and-casino-2.png" />,
+						<Layer src="/assets/tranquility-base-hotel-and-casino-1.png" />,
+					]}
+				/>
 			</Grid>
 		);
 	}

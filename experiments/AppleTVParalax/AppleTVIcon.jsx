@@ -83,21 +83,23 @@ const Shade = styled.div.attrs({
 	border-radius: 5px;
 `;
 
-const MOUSE_OFFSET = 0;
-
 export default class AppleTVIcon extends PureComponent {
 	static displayName = 'AppleTVIcon';
 
 	static propTypes = {
 		className: PropTypes.string,
+		dropShadowSpread: PropTypes.number,
+		dropShadowDepth: PropTypes.number,
 		layers: PropTypes.arrayOf(PropTypes.node),
 		onClick: PropTypes.func,
-		paralaxMultiplier: PropTypes.number,
+		parallaxMultiplier: PropTypes.number,
 		style: PropTypes.object,
 	};
 
 	static defaultProps = {
-		paralaxMultiplier: 0.05,
+		dropShadowSpread: 45,
+		dropShadowDepth: 45,
+		parallaxMultiplier: 0.05,
 	};
 
 	state = {
@@ -122,8 +124,8 @@ export default class AppleTVIcon extends PureComponent {
 	getCalculations = ({ pageX, pageY }) => {
 		const offsets = this.root.current.getBoundingClientRect();
 		const raw = {
-			x: pageX - offsets.left - MOUSE_OFFSET,
-			y: pageY - offsets.top - MOUSE_OFFSET,
+			x: pageX - offsets.left,
+			y: pageY - offsets.top,
 		};
 		const center = {
 			x: raw.x / 2,
@@ -270,14 +272,14 @@ export default class AppleTVIcon extends PureComponent {
 
 	renderLayers = ({ dx, dy }) => {
 		// return this.props.layers;
-		const { layers, paralaxMultiplier } = this.props;
+		const { layers, parallaxMultiplier } = this.props;
 
 		return layers.map((layer, i) => {
 			const props = {
 				style: {
 					transform: `translateX(${i *
-						paralaxMultiplier *
-						dx}px) translateY(${i * paralaxMultiplier * dy}px)`,
+						parallaxMultiplier *
+						dx}px) translateY(${i * parallaxMultiplier * dy}px)`,
 				},
 			};
 
@@ -286,7 +288,12 @@ export default class AppleTVIcon extends PureComponent {
 	};
 
 	render() {
-		const { className, style } = this.props;
+		const {
+			className,
+			dropShadowSpread,
+			dropShadowDepth,
+			style,
+		} = this.props;
 		const {
 			isOver,
 			isSelecting,
@@ -328,13 +335,13 @@ export default class AppleTVIcon extends PureComponent {
 			hb: isOver ? spring(hb) : spring(0),
 			shadowLength: isOver
 				? isSelecting
-					? spring(30)
-					: spring(45)
+					? spring(dropShadowDepth - 15)
+					: spring(dropShadowDepth)
 				: spring(0),
 			shadowSpread: isOver
 				? isSelecting
-					? spring(30)
-					: spring(45)
+					? spring(dropShadowSpread - 15)
+					: spring(dropShadowSpread)
 				: spring(0),
 			shadowOpacity: isOver ? spring(0.5) : spring(0),
 		};
