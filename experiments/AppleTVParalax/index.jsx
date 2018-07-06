@@ -32,6 +32,8 @@ const StyledAppleTVIcon = styled(AppleTVIcon)`
 	width: 250px;
 	height: 250px;
 	margin: 15px;
+	border: 1px solid #e0e0e0;
+	border-radius: 5px;
 `;
 
 export default class AppleTVParalax extends Component {
@@ -86,6 +88,27 @@ export default class AppleTVParalax extends Component {
 						<Layer src="/assets/chronovision-3.png" />,
 						<Layer src="/assets/chronovision-2.png" />,
 						<Layer src="/assets/chronovision-1.png" />,
+					]}
+				/>
+				<StyledAppleTVIcon
+					layers={[
+						<Layer src="/assets/hanging-gardens-3.png" />,
+						<Layer src="/assets/hanging-gardens-2.png" />,
+						<Layer src="/assets/hanging-gardens-1.png" />,
+					]}
+				/>
+				<StyledAppleTVIcon
+					layers={[
+						<Layer src="/assets/painting-of-a-panic-attack-3.png" />,
+						<Layer src="/assets/painting-of-a-panic-attack-2.png" />,
+						<Layer src="/assets/painting-of-a-panic-attack-1.png" />,
+					]}
+				/>
+				<StyledAppleTVIcon
+					layers={[
+						<Layer src="/assets/latigo-3.png" />,
+						<LayerAbove src="/assets/latigo-2.png" />,
+						<Layer src="/assets/latigo-1.png" />,
 					]}
 				/>
 			</Grid>
