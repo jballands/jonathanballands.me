@@ -32,7 +32,6 @@ const StyledAppleTVIcon = styled(AppleTVIcon)`
 	width: 250px;
 	height: 250px;
 	margin: 15px;
-	border: 1px solid #e0e0e0;
 	border-radius: 5px;
 `;
 

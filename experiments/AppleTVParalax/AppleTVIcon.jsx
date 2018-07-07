@@ -123,9 +123,12 @@ export default class AppleTVIcon extends PureComponent {
 
 	getCalculations = ({ pageX, pageY }) => {
 		const offsets = this.root.current.getBoundingClientRect();
+
+		console.log(offsets);
+
 		const raw = {
-			x: pageX - offsets.left,
-			y: pageY - offsets.top,
+			x: pageX - offsets.left - document.documentElement.scrollLeft,
+			y: pageY - offsets.top - document.documentElement.scrollTop,
 		};
 		const center = {
 			x: raw.x / 2,
