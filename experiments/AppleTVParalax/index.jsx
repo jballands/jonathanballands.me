@@ -46,7 +46,6 @@ export default class AppleTVParalax extends Component {
 		return (
 			<Grid>
 				<StyledAppleTVIcon
-					parallaxMultiplier={0.06}
 					layers={[
 						<Layer src="/assets/singing-saw-3.png" />,
 						<LayerAbove src="/assets/singing-saw-2.png" />,
@@ -54,7 +53,6 @@ export default class AppleTVParalax extends Component {
 					]}
 				/>
 				<StyledAppleTVIcon
-					parallaxMultiplier={0.065}
 					layers={[
 						<Layer src="/assets/1975-2.png" />,
 						<Layer src="/assets/1975-1.png" />,
@@ -68,7 +66,6 @@ export default class AppleTVParalax extends Component {
 					]}
 				/>
 				<StyledAppleTVIcon
-					parallaxMultiplier={0.06}
 					layers={[
 						<Layer src="/assets/99-cents-3.png" />,
 						<Layer src="/assets/99-cents-2.png" />,

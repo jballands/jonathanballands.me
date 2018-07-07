@@ -99,7 +99,7 @@ export default class AppleTVIcon extends PureComponent {
 	static defaultProps = {
 		dropShadowSpread: 45,
 		dropShadowDepth: 45,
-		parallaxMultiplier: 0.05,
+		parallaxMultiplier: 0.02,
 	};
 
 	state = {
@@ -122,23 +122,21 @@ export default class AppleTVIcon extends PureComponent {
 	root = React.createRef();
 
 	getCalculations = ({ pageX, pageY }) => {
-		const offsets = this.root.current.getBoundingClientRect();
+		const { width, height } = this.state;
 
-		console.log(offsets);
+		const offsets = this.root.current.getBoundingClientRect();
 
 		const raw = {
 			x: pageX - offsets.left - document.documentElement.scrollLeft,
 			y: pageY - offsets.top - document.documentElement.scrollTop,
 		};
 		const center = {
-			x: raw.x / 2,
-			y: raw.y / 2,
+			x: width / 2,
+			y: height / 2,
 		};
 
 		const dx = raw.x - center.x;
 		const dy = raw.y - center.y;
-
-		const { width, height } = this.state;
 
 		// These values calculate the rotation angle of the icon
 		const rotateScaleX = scaleLinear()
