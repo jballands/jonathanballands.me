@@ -99,7 +99,7 @@ export default class AppleTVIcon extends PureComponent {
 	static defaultProps = {
 		dropShadowSpread: 45,
 		dropShadowDepth: 45,
-		parallaxMultiplier: 0.02,
+		parallaxMultiplier: 0.03,
 	};
 
 	state = {
