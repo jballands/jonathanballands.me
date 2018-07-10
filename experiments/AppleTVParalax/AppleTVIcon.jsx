@@ -17,6 +17,7 @@ const Root = styled.div`
 	height: 190px;
 	position: relative;
 	z-index: ${props => (props.isOver ? 10 : 0)};
+	touch-action: manipulation;
 `;
 
 const DropShadow = styled.div.attrs({
@@ -90,16 +91,22 @@ export default class AppleTVIcon extends PureComponent {
 		className: PropTypes.string,
 		dropShadowSpread: PropTypes.number,
 		dropShadowDepth: PropTypes.number,
+		hideShadow: PropTypes.bool,
 		layers: PropTypes.arrayOf(PropTypes.node),
 		onClick: PropTypes.func,
 		parallaxMultiplier: PropTypes.number,
+		rotationAngleDegrees: PropTypes.number,
+		shadowOpacity: PropTypes.number,
 		style: PropTypes.object,
 	};
 
 	static defaultProps = {
 		dropShadowSpread: 45,
 		dropShadowDepth: 45,
+		hideShadow: false,
 		parallaxMultiplier: 0.03,
+		rotationAngleDegrees: 15,
+		shadowOpacity: 0.4,
 	};
 
 	state = {
@@ -123,12 +130,13 @@ export default class AppleTVIcon extends PureComponent {
 
 	getCalculations = ({ pageX, pageY }) => {
 		const { width, height } = this.state;
+		const { rotationAngleDegrees } = this.props;
 
 		const offsets = this.root.current.getBoundingClientRect();
 
 		const raw = {
-			x: pageX - offsets.left - document.documentElement.scrollLeft,
-			y: pageY - offsets.top - document.documentElement.scrollTop,
+			x: pageX - offsets.left - document.body.scrollLeft,
+			y: pageY - offsets.top - document.body.scrollTop,
 		};
 		const center = {
 			x: width / 2,
@@ -141,32 +149,38 @@ export default class AppleTVIcon extends PureComponent {
 		// These values calculate the rotation angle of the icon
 		const rotateScaleX = scaleLinear()
 			.domain([0, height])
-			.range([-15, 15]);
+			.range([-rotationAngleDegrees, rotationAngleDegrees])
+			.clamp(true);
 		const rotateScaleY = scaleLinear()
 			.domain([0, width])
-			.range([15, -15]);
+			.range([rotationAngleDegrees, -rotationAngleDegrees])
+			.clamp(true);
 
 		const shineScaleX = scaleLinear()
 			.domain([0, width])
-			.range([0, 100]);
+			.range([0, 100])
+			.clamp(true);
 		const shineScaleY = scaleLinear()
 			.domain([0, height / 1.5, height])
 			.range([5, 25, 100])
 			.clamp(true);
 		const shineScaleBrightness = scaleLinear()
 			.domain([height, 0])
-			.range([0, 0.6]);
+			.range([0, 0.6])
+			.clamp(true);
 
 		const shadowScaleX = scaleLinear()
 			.domain([0, width])
-			.range([0, 100]);
+			.range([0, 100])
+			.clamp(true);
 		const shadowScaleY = scaleLinear()
 			.domain([0, height / 1.5, height])
 			.range([0, 100, 100])
 			.clamp(true);
 		const shadowScaleDarkness = scaleLinear()
 			.domain([height / 1.5, height])
-			.range([0, 0.35]);
+			.range([0, 0.35])
+			.clamp(true);
 
 		return {
 			dx,
@@ -241,6 +255,15 @@ export default class AppleTVIcon extends PureComponent {
 	};
 
 	onTouchStart = e => {
+		document.body.addEventListener(
+			'touchmove',
+			e => {
+				console.log('rawr');
+				return e.preventDefault();
+			},
+			false,
+		);
+
 		switch (e.touches.length) {
 			case 1:
 				return this.onEnter(e.touches[0]);
@@ -258,6 +281,8 @@ export default class AppleTVIcon extends PureComponent {
 	};
 
 	onTouchEnd = e => {
+		document.body.addEventListener('touchmove', () => true, false);
+
 		switch (e.touches.length) {
 			case 1:
 				return this.onLeave();
@@ -272,7 +297,6 @@ export default class AppleTVIcon extends PureComponent {
 	};
 
 	renderLayers = ({ dx, dy }) => {
-		// return this.props.layers;
 		const { layers, parallaxMultiplier } = this.props;
 
 		return layers.map((layer, i) => {
@@ -293,6 +317,8 @@ export default class AppleTVIcon extends PureComponent {
 			className,
 			dropShadowSpread,
 			dropShadowDepth,
+			hideShadow,
+			shadowOpacity,
 			style,
 		} = this.props;
 		const {
@@ -344,7 +370,7 @@ export default class AppleTVIcon extends PureComponent {
 					? spring(dropShadowSpread - 15)
 					: spring(dropShadowSpread)
 				: spring(0),
-			shadowOpacity: isOver ? spring(0.5) : spring(0),
+			shadowOpacity: isOver ? shadowOpacity : spring(0),
 		};
 
 		return (
@@ -357,6 +383,8 @@ export default class AppleTVIcon extends PureComponent {
 				onTouchStart={this.onTouchStart}
 				onTouchMove={this.onTouchMove}
 				onTouchEnd={this.onTouchEnd}
+				onTouchStartCapture={this.onTouchStart}
+				onTouchEndCapture={this.onTouchEnd}
 				onMouseDown={this.onMouseDown}
 				onMouseUp={this.onMouseUp}
 				innerRef={this.root}
@@ -364,11 +392,13 @@ export default class AppleTVIcon extends PureComponent {
 				<Motion style={styles}>
 					{interpolated => (
 						<Fragment>
-							<DropShadow
-								length={interpolated.shadowLength}
-								spread={interpolated.shadowSpread}
-								opacity={interpolated.shadowOpacity}
-							/>
+							{!hideShadow && (
+								<DropShadow
+									length={interpolated.shadowLength}
+									spread={interpolated.shadowSpread}
+									opacity={interpolated.shadowOpacity}
+								/>
+							)}
 							<Measure bounds onResize={this.onMeasure}>
 								{({ measureRef }) => (
 									<IconContainer

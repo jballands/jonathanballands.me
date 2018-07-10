@@ -29,8 +29,14 @@ const LayerAbove = styled.img`
 `;
 
 const StyledAppleTVIcon = styled(AppleTVIcon)`
-	width: 250px;
-	height: 250px;
+	@media only screen and (max-device-width: 812px) {
+		width: 350px;
+		height: 350px;
+	}
+	@media only screen and (min-device-width: 813px) {
+		width: 250px;
+		height: 250px;
+	}
 	margin: 15px;
 	border-radius: 5px;
 `;
