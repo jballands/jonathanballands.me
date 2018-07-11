@@ -124,9 +124,28 @@ export default class AppleTVIcon extends PureComponent {
 		hb: 0,
 		width: 0,
 		height: 0,
+		preventScroll: false,
 	};
 
 	root = React.createRef();
+
+	componentDidMount() {
+		document.addEventListener('touchmove', this.preventScroll, {
+			passive: false,
+		});
+	}
+
+	componentWillUnmount() {
+		document.removeEventListener('touchmove', this.preventScroll, {
+			passive: false,
+		});
+	}
+
+	preventScroll = e => {
+		if (this.state.preventScroll) {
+			e.preventDefault();
+		}
+	};
 
 	getCalculations = ({ pageX, pageY }) => {
 		const { width, height } = this.state;
@@ -208,6 +227,7 @@ export default class AppleTVIcon extends PureComponent {
 
 		this.setState({
 			isOver: true,
+			preventScroll: true,
 			...calcs,
 		});
 	};
@@ -224,6 +244,7 @@ export default class AppleTVIcon extends PureComponent {
 		this.setState({
 			isSelecting: false,
 			isOver: false,
+			preventScroll: false,
 		});
 	};
 
@@ -255,15 +276,6 @@ export default class AppleTVIcon extends PureComponent {
 	};
 
 	onTouchStart = e => {
-		document.body.addEventListener(
-			'touchmove',
-			e => {
-				console.log('rawr');
-				return e.preventDefault();
-			},
-			false,
-		);
-
 		switch (e.touches.length) {
 			case 1:
 				return this.onEnter(e.touches[0]);
@@ -281,7 +293,7 @@ export default class AppleTVIcon extends PureComponent {
 	};
 
 	onTouchEnd = e => {
-		document.body.addEventListener('touchmove', () => true, false);
+		window.preventScroll = false;
 
 		switch (e.touches.length) {
 			case 1:
