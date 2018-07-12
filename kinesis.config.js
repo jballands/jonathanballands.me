@@ -105,11 +105,11 @@ export const kinesisPosts = [
 		secondaryColor: '#c1ffad',
 	}),
 	new Post({
-		name: 'Apple TV Paralax',
+		name: 'Apple TV Parallax',
 		date: new Date(2018, 6, 11),
 		hashtags: [KinesisHashtags.dev, KinesisHashtags.aesthetic],
 		type: Type.experiment,
-		resource: () => import('~/experiments/AppleTVParalax'),
+		resource: () => import('~/experiments/AppleTVParallax'),
 		primaryColor: '#91adbc',
 		secondaryColor: '#deebf2',
 	}),
