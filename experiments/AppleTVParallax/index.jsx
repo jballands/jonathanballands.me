@@ -80,12 +80,12 @@ export default class AppleTVParalax extends Component {
 				<DirectionsMouse
 					color={primaryColor}
 					content="Hover over any album, click to select. Allow
-					popups for best experience. [Click to see the code.](https://github.com/jballands/jonathanballands.me/blob/master/experiments/AppleTVParalax/AppleTVIcon.jsx)"
+					popups for best experience. [Click to see the code.](https://github.com/jballands/jonathanballands.me/blob/master/experiments/AppleTVParallax/AppleTVIcon.jsx)"
 				/>
 				<DirectionsTouch
 					color={primaryColor}
 					content="Tap and drag on any album, two finger touch to select. Allow
-					popups for best experience. [Click to see the code.](https://github.com/jballands/jonathanballands.me/blob/master/experiments/AppleTVParalax/AppleTVIcon.jsx)"
+					popups for best experience. [Click to see the code.](https://github.com/jballands/jonathanballands.me/blob/master/experiments/AppleTVParallax/AppleTVIcon.jsx)"
 				/>
 				<Grid>
 					<StyledAppleTVIcon
