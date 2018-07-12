@@ -55,9 +55,10 @@ const DirectionsMouse = styled(KinesisMarkdown)`
 
 const DirectionsTouch = styled(KinesisMarkdown)`
 	text-align: center;
+	margin-bottom: 40px;
 	@media (pointer: fine) {
 		visibility: hidden;
-		margin-bottom: 0px;
+		margin-bottom: 0;
 	}
 	p {
 		margin: 0;
