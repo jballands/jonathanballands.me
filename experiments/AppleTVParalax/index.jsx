@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+import KinesisMarkdown from 'components/KinesisMarkdown';
 import AppleTVIcon from './AppleTVIcon';
 
 const Grid = styled.div`
@@ -37,27 +38,29 @@ const StyledAppleTVIcon = styled(AppleTVIcon)`
 		width: 250px;
 		height: 250px;
 	}
-	margin: 15px;
+	margin: 12px;
 	border-radius: 5px;
 `;
 
-const DirectionsMouse = styled.div`
-	color: ${props => props.color};
+const DirectionsMouse = styled(KinesisMarkdown)`
 	text-align: center;
-	margin-bottom: 20px;
 	@media (pointer: coarse) {
 		visibility: hidden;
 		margin-bottom: 0px;
 	}
+	p {
+		margin: 0;
+	}
 `;
 
-const DirectionsTouch = styled.div`
-	color: ${props => props.color};
+const DirectionsTouch = styled(KinesisMarkdown)`
 	text-align: center;
-	margin-bottom: 50px;
 	@media (pointer: fine) {
 		visibility: hidden;
 		margin-bottom: 0px;
+	}
+	p {
+		margin: 0;
 	}
 `;
 
@@ -73,14 +76,16 @@ export default class AppleTVParalax extends Component {
 
 		return (
 			<Fragment>
-				<DirectionsMouse color={primaryColor}>
-					Hover over any album, click to select. You must allow
-					popups.
-				</DirectionsMouse>
-				<DirectionsTouch color={primaryColor}>
-					Tap and drag on any album, two finger touch to select. You
-					must allow popups.
-				</DirectionsTouch>
+				<DirectionsMouse
+					color={primaryColor}
+					content="Hover over any album, click to select. Allow
+					popups for best experience. [Click to see the code.](https://github.com/jballands/jonathanballands.me/blob/master/experiments/AppleTVParalax/AppleTVIcon.jsx)"
+				/>
+				<DirectionsTouch
+					color={primaryColor}
+					content="Tap and drag on any album, two finger touch to select. Allow
+					popups for best experience. [Click to see the code.](https://github.com/jballands/jonathanballands.me/blob/master/experiments/AppleTVParalax/AppleTVIcon.jsx)"
+				/>
 				<Grid>
 					<StyledAppleTVIcon
 						onClick={() =>
@@ -104,6 +109,7 @@ export default class AppleTVParalax extends Component {
 							<Layer src="/assets/1975-2.png" />,
 							<Layer src="/assets/1975-1.png" />,
 						]}
+						parallaxMultiplier={0.035}
 					/>
 					<StyledAppleTVIcon
 						onClick={() =>
@@ -120,14 +126,15 @@ export default class AppleTVParalax extends Component {
 					<StyledAppleTVIcon
 						onClick={() =>
 							window.open(
-								'https://open.spotify.com/album/0DOzmXcSztIomiurOwMivk?si=p4D3AhV7TYWpLb2oRXhltw',
+								'https://open.spotify.com/album/2Ew28hPUgNR8DSf5rxKqym?si=ukk7sNbNQ9-3oiBc0gk2QA',
 							)
 						}
 						layers={[
-							<Layer src="/assets/99-cents-3.png" />,
-							<Layer src="/assets/99-cents-2.png" />,
-							<Layer src="/assets/99-cents-1.png" />,
+							<Layer src="/assets/latigo-3.png" />,
+							<LayerAbove src="/assets/latigo-2.png" />,
+							<Layer src="/assets/latigo-1.png" />,
 						]}
+						parallaxMultiplier={0.035}
 					/>
 					<StyledAppleTVIcon
 						onClick={() =>
@@ -164,6 +171,7 @@ export default class AppleTVParalax extends Component {
 							<Layer src="/assets/hanging-gardens-2.png" />,
 							<Layer src="/assets/hanging-gardens-1.png" />,
 						]}
+						parallaxMultiplier={0.03}
 					/>
 					<StyledAppleTVIcon
 						onClick={() =>
@@ -180,14 +188,15 @@ export default class AppleTVParalax extends Component {
 					<StyledAppleTVIcon
 						onClick={() =>
 							window.open(
-								'https://open.spotify.com/album/2Ew28hPUgNR8DSf5rxKqym?si=ukk7sNbNQ9-3oiBc0gk2QA',
+								'https://open.spotify.com/album/0DOzmXcSztIomiurOwMivk?si=p4D3AhV7TYWpLb2oRXhltw',
 							)
 						}
 						layers={[
-							<Layer src="/assets/latigo-3.png" />,
-							<LayerAbove src="/assets/latigo-2.png" />,
-							<Layer src="/assets/latigo-1.png" />,
+							<Layer src="/assets/99-cents-3.png" />,
+							<Layer src="/assets/99-cents-2.png" />,
+							<Layer src="/assets/99-cents-1.png" />,
 						]}
+						parallaxMultiplier={0.035}
 					/>
 				</Grid>
 			</Fragment>

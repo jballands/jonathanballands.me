@@ -66,6 +66,10 @@ export const KinesisHashtags = {
 		id: 'tool',
 		displayName: 'tool',
 	},
+	aesthetic: {
+		id: 'aesthetic',
+		displayName: 'aesthetic',
+	},
 };
 
 //
@@ -102,8 +106,8 @@ export const kinesisPosts = [
 	}),
 	new Post({
 		name: 'Apple TV Paralax',
-		date: new Date(2018, 6, 15),
-		hashtags: [],
+		date: new Date(2018, 6, 11),
+		hashtags: [KinesisHashtags.dev, KinesisHashtags.aesthetic],
 		type: Type.experiment,
 		resource: () => import('~/experiments/AppleTVParalax'),
 		primaryColor: '#91adbc',
