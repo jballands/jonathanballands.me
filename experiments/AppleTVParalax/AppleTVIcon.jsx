@@ -153,9 +153,23 @@ export default class AppleTVIcon extends PureComponent {
 
 		const offsets = this.root.current.getBoundingClientRect();
 
+		// https://stackoverflow.com/questions/11193453/find-the-vertical-position-of-scrollbar-without-jquery/11193504
+		const supportPageOffset = window.pageXOffset !== undefined;
+		const isCSS1Compat = (document.compatMode || '') === 'CSS1Compat';
+		var scrollLeft = supportPageOffset
+			? window.pageXOffset
+			: isCSS1Compat
+				? document.documentElement.scrollLeft
+				: document.body.scrollLeft;
+		var scrollTop = supportPageOffset
+			? window.pageYOffset
+			: isCSS1Compat
+				? document.documentElement.scrollTop
+				: document.body.scrollTop;
+
 		const raw = {
-			x: pageX - offsets.left - document.body.scrollLeft,
-			y: pageY - offsets.top - document.body.scrollTop,
+			x: pageX - offsets.left - scrollLeft,
+			y: pageY - offsets.top - scrollTop,
 		};
 		const center = {
 			x: width / 2,
@@ -248,7 +262,9 @@ export default class AppleTVIcon extends PureComponent {
 		});
 	};
 
-	onSelect = () => {};
+	onSelect = () => {
+		this.props.onClick && this.props.onClick();
+	};
 
 	onMouseEnter = e => {
 		this.onEnter(e);
@@ -295,14 +311,17 @@ export default class AppleTVIcon extends PureComponent {
 	onTouchEnd = e => {
 		window.preventScroll = false;
 
+		if (this.state.isSelecting) {
+			this.onSelect();
+		}
+
 		switch (e.touches.length) {
 			case 1:
 				return this.onLeave();
 			case 2:
-				this.setState({
+				return this.setState({
 					isSelecting: false,
 				});
-				return this.onSelect();
 			default:
 				return this.onLeave();
 		}

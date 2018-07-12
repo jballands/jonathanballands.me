@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -41,6 +41,26 @@ const StyledAppleTVIcon = styled(AppleTVIcon)`
 	border-radius: 5px;
 `;
 
+const DirectionsMouse = styled.div`
+	color: ${props => props.color};
+	text-align: center;
+	margin-bottom: 20px;
+	@media (pointer: coarse) {
+		visibility: hidden;
+		margin-bottom: 0px;
+	}
+`;
+
+const DirectionsTouch = styled.div`
+	color: ${props => props.color};
+	text-align: center;
+	margin-bottom: 50px;
+	@media (pointer: fine) {
+		visibility: hidden;
+		margin-bottom: 0px;
+	}
+`;
+
 export default class AppleTVParalax extends Component {
 	static displayName = 'AppleTVParalax';
 
@@ -49,71 +69,128 @@ export default class AppleTVParalax extends Component {
 	};
 
 	render() {
+		const { primaryColor } = this.props;
+
 		return (
-			<Grid>
-				<StyledAppleTVIcon
-					layers={[
-						<Layer src="/assets/singing-saw-3.png" />,
-						<LayerAbove src="/assets/singing-saw-2.png" />,
-						<LayerAbove src="/assets/singing-saw-1.png" />,
-					]}
-				/>
-				<StyledAppleTVIcon
-					layers={[
-						<Layer src="/assets/1975-2.png" />,
-						<Layer src="/assets/1975-1.png" />,
-					]}
-				/>
-				<StyledAppleTVIcon
-					layers={[
-						<Layer src="/assets/tranquility-base-hotel-and-casino-3.png" />,
-						<Layer src="/assets/tranquility-base-hotel-and-casino-2.png" />,
-						<Layer src="/assets/tranquility-base-hotel-and-casino-1.png" />,
-					]}
-				/>
-				<StyledAppleTVIcon
-					layers={[
-						<Layer src="/assets/99-cents-3.png" />,
-						<Layer src="/assets/99-cents-2.png" />,
-						<Layer src="/assets/99-cents-1.png" />,
-					]}
-				/>
-				<StyledAppleTVIcon
-					layers={[
-						<Layer src="/assets/this-old-dog-3.png" />,
-						<Layer src="/assets/this-old-dog-2.png" />,
-						<Layer src="/assets/this-old-dog-1.png" />,
-					]}
-				/>
-				<StyledAppleTVIcon
-					layers={[
-						<Layer src="/assets/chronovision-3.png" />,
-						<Layer src="/assets/chronovision-2.png" />,
-						<Layer src="/assets/chronovision-1.png" />,
-					]}
-				/>
-				<StyledAppleTVIcon
-					layers={[
-						<Layer src="/assets/hanging-gardens-3.png" />,
-						<Layer src="/assets/hanging-gardens-2.png" />,
-						<Layer src="/assets/hanging-gardens-1.png" />,
-					]}
-				/>
-				<StyledAppleTVIcon
-					layers={[
-						<Layer src="/assets/painting-of-a-panic-attack-3.png" />,
-						<Layer src="/assets/painting-of-a-panic-attack-2.png" />,
-						<Layer src="/assets/painting-of-a-panic-attack-1.png" />,
-					]}
-				/>
-				<StyledAppleTVIcon
-					layers={[
-						<Layer src="/assets/latigo-3.png" />,
-						<LayerAbove src="/assets/latigo-2.png" />,
-						<Layer src="/assets/latigo-1.png" />,
-					]}
-				/>
-			</Grid>
+			<Fragment>
+				<DirectionsMouse color={primaryColor}>
+					Hover over any album, click to select. You must allow
+					popups.
+				</DirectionsMouse>
+				<DirectionsTouch color={primaryColor}>
+					Tap and drag on any album, two finger touch to select. You
+					must allow popups.
+				</DirectionsTouch>
+				<Grid>
+					<StyledAppleTVIcon
+						onClick={() =>
+							window.open(
+								'https://open.spotify.com/album/1s8RmcZjTuvDt9eQ4MAKLI?si=g6Gx1EV8QhmmyjIvKdGftA',
+							)
+						}
+						layers={[
+							<Layer src="/assets/singing-saw-3.png" />,
+							<LayerAbove src="/assets/singing-saw-2.png" />,
+							<LayerAbove src="/assets/singing-saw-1.png" />,
+						]}
+					/>
+					<StyledAppleTVIcon
+						onClick={() =>
+							window.open(
+								'https://open.spotify.com/album/1JFmNyVPdBF1ECvv4fhpW4?si=8mf_5X8cRm29w0yFHA4oqg',
+							)
+						}
+						layers={[
+							<Layer src="/assets/1975-2.png" />,
+							<Layer src="/assets/1975-1.png" />,
+						]}
+					/>
+					<StyledAppleTVIcon
+						onClick={() =>
+							window.open(
+								'https://open.spotify.com/album/1jeMiSeSnNS0Oys375qegp?si=kRZJ0Hx4RgeETwsZQDc0XQ',
+							)
+						}
+						layers={[
+							<Layer src="/assets/tranquility-base-hotel-and-casino-3.png" />,
+							<Layer src="/assets/tranquility-base-hotel-and-casino-2.png" />,
+							<Layer src="/assets/tranquility-base-hotel-and-casino-1.png" />,
+						]}
+					/>
+					<StyledAppleTVIcon
+						onClick={() =>
+							window.open(
+								'https://open.spotify.com/album/0DOzmXcSztIomiurOwMivk?si=p4D3AhV7TYWpLb2oRXhltw',
+							)
+						}
+						layers={[
+							<Layer src="/assets/99-cents-3.png" />,
+							<Layer src="/assets/99-cents-2.png" />,
+							<Layer src="/assets/99-cents-1.png" />,
+						]}
+					/>
+					<StyledAppleTVIcon
+						onClick={() =>
+							window.open(
+								'https://open.spotify.com/album/6XzoFb3hP14jVQeCMRdVJR?si=AkOh3I4KQviwu6bUWQ86Ng',
+							)
+						}
+						layers={[
+							<Layer src="/assets/this-old-dog-3.png" />,
+							<Layer src="/assets/this-old-dog-2.png" />,
+							<Layer src="/assets/this-old-dog-1.png" />,
+						]}
+					/>
+					<StyledAppleTVIcon
+						onClick={() =>
+							window.open(
+								'https://open.spotify.com/album/09HqWRS5Ct0s5Iqq1yurjt?si=SkLG3afPSoy8wz_YAfBYog',
+							)
+						}
+						layers={[
+							<Layer src="/assets/chronovision-3.png" />,
+							<Layer src="/assets/chronovision-2.png" />,
+							<Layer src="/assets/chronovision-1.png" />,
+						]}
+					/>
+					<StyledAppleTVIcon
+						onClick={() =>
+							window.open(
+								'https://open.spotify.com/album/1wW4VymlWFy0wUKKBhcDWS?si=nAw71MZrQNaztGFCqsdeYQ',
+							)
+						}
+						layers={[
+							<Layer src="/assets/hanging-gardens-3.png" />,
+							<Layer src="/assets/hanging-gardens-2.png" />,
+							<Layer src="/assets/hanging-gardens-1.png" />,
+						]}
+					/>
+					<StyledAppleTVIcon
+						onClick={() =>
+							window.open(
+								'https://open.spotify.com/album/2I7bN0vjfoFw9di77xAZ4Y?si=XaxfO_fcSPuUkX4v97Y3Lg',
+							)
+						}
+						layers={[
+							<Layer src="/assets/painting-of-a-panic-attack-3.png" />,
+							<Layer src="/assets/painting-of-a-panic-attack-2.png" />,
+							<Layer src="/assets/painting-of-a-panic-attack-1.png" />,
+						]}
+					/>
+					<StyledAppleTVIcon
+						onClick={() =>
+							window.open(
+								'https://open.spotify.com/album/2Ew28hPUgNR8DSf5rxKqym?si=ukk7sNbNQ9-3oiBc0gk2QA',
+							)
+						}
+						layers={[
+							<Layer src="/assets/latigo-3.png" />,
+							<LayerAbove src="/assets/latigo-2.png" />,
+							<Layer src="/assets/latigo-1.png" />,
+						]}
+					/>
+				</Grid>
+			</Fragment>
 		);
 	}
 }
