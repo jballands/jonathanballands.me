@@ -24,7 +24,9 @@ const InitialStateRecord = Immutable.Record({
 	searchTerms: '',
 	sortOrder: 'later',
 	filteredEntries: sortKinesisEntries('later', entries),
-	selectedEntry: sortKinesisEntries('later', entries).get(0),
+	selectedEntry: sortKinesisEntries('later', entries)
+		.valueSeq()
+		.get(0),
 	content: null,
 	contentLoading: true,
 	error: null,

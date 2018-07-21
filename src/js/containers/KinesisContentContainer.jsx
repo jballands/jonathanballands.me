@@ -43,7 +43,7 @@ class KinesisContentContainer extends React.Component {
 
 	chooseEntryBasedOnRoute = () => {
 		this.props.chooseEntry(
-			entries.get(this.props.match.params.kinesisId).id,
+			entries.get(this.props.match.params.kinesisId).get('id'),
 		);
 	};
 
@@ -83,6 +83,7 @@ class KinesisContentContainer extends React.Component {
 	}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(
-	KinesisContentContainer,
-);
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps,
+)(KinesisContentContainer);
