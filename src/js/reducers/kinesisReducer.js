@@ -7,7 +7,7 @@
 
 import Immutable from 'immutable';
 import moment from 'moment';
-import _toLower from 'lodash.tolower';
+import matchSorter from 'match-sorter';
 
 import {
 	KINESIS_SEARCH_POSTS,
@@ -42,18 +42,18 @@ function sortKinesisEntries(sortOrder, entries) {
 }
 
 function filterKinesisEntries(terms, entries) {
-	const lowerCaseTerms = _toLower(terms);
-
-	if (terms === '') {
-		return entries;
-	}
-
-	return entries.filter(post => {
-		return (
-			_toLower(post.name).indexOf(lowerCaseTerms) > -1 ||
-			_toLower(post.hashtags.join(' ')).indexOf(lowerCaseTerms) > -1
-		);
-	});
+	return Immutable.fromJS(
+		matchSorter(entries, terms, {
+			keys: [
+				entry => entry.get('name'),
+				entry => entry.get('date').toString(),
+				entry =>
+					entry
+						.get('hashtags')
+						.map(hashtag => `#${hashtag.displayName}`),
+			],
+		}),
+	);
 }
 
 export default function kinesisReducer(

@@ -92,20 +92,23 @@ export default class KinesisBrowserSearchResult extends React.Component {
 	};
 
 	render() {
-		const { active, id, match, result } = this.props;
+		const { active, match, result } = this.props;
 		return (
 			<KinesisBrowserSearchResultContainer
-				to={`${match.url}/${id}`}
+				to={`${match.url}/${result.get('id')}`}
 				onClick={this.handleOnClick}>
 				<ActiveIcon>
 					{active && (
-						<EyeSvg color={result.primaryColor} width="100%" />
+						<EyeSvg
+							color={result.get('primaryColor')}
+							width="100%"
+						/>
 					)}
 				</ActiveIcon>
 				<Content>
-					<Title color={shark}>{result.name}</Title>
+					<Title color={shark}>{result.get('name')}</Title>
 					<Subtitle>
-						{moment(result.date).format('MMMM Do, YYYY')}
+						{moment(result.get('date')).format('MMMM Do, YYYY')}
 					</Subtitle>
 					<Subtitle>{this.renderHashtags()}</Subtitle>
 				</Content>

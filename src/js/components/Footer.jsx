@@ -48,7 +48,7 @@ export default class Footer extends React.Component {
 	render() {
 		return (
 			<FooterContainer>
-				<FooterCopyright title="Made with <3 in Austin, TX">
+				<FooterCopyright title="Made with ❤️ in Austin, TX">
 					© 2018 Jonathan Ballands
 				</FooterCopyright>
 				<FooterSocialMediaContainer>

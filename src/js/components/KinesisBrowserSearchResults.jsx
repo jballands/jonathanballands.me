@@ -13,6 +13,7 @@ import styled from 'styled-components';
 import KinesisBrowserSearchResult from 'components/KinesisBrowserSearchResult';
 
 import { alto, silver } from 'helpers/palette';
+import { filter } from 'rsvp';
 
 const KinesisBrowserSearchResultsContainer = styled.div`
 	margin-top: 25px;
@@ -76,26 +77,28 @@ export default class KinesisBrowserSearchResults extends React.Component {
 
 		return (
 			<KinesisBrowserSearchResultsContainer>
-				{filteredEntries.entrySeq().map(result => {
-					if (result[1].hidden) {
-						return null;
-					}
+				{filteredEntries
+					.map(result => {
+						if (result.get('hidden')) {
+							return null;
+						}
 
-					return (
-						<KinesisBrowserSearchResult
-							key={result[0]}
-							id={result[0]}
-							result={result[1]}
-							onClick={this.handleChooseKinesisEntry}
-							match={match}
-							active={
-								selectedEntry
-									? selectedEntry.id === result[0]
-									: false
-							}
-						/>
-					);
-				})}
+						return (
+							<KinesisBrowserSearchResult
+								key={result.get('id')}
+								result={result}
+								onClick={this.handleChooseKinesisEntry}
+								match={match}
+								active={
+									selectedEntry
+										? selectedEntry.get('id') ===
+										  result.get('id')
+										: false
+								}
+							/>
+						);
+					})
+					.valueSeq()}
 			</KinesisBrowserSearchResultsContainer>
 		);
 	}
