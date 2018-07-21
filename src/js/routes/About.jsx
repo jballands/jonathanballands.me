@@ -21,22 +21,24 @@ import DownArrowSvg from 'svg/DownArrowSvg';
 import { fuchsiaBlue, eastSide, moonRaker, shark } from 'helpers/palette';
 
 const aboutSpiel = `
-I'm a frontend web developer with an eye for design. This means I use tools like React, D3, Webpack 
-and the like to architect, build, and maintain beautiful web applications. Note how I said web apps
-and not websites.
+I'm a frontend web developer with a keen eye for good design. Having a background in Computer Science means
+that I can not only design beautiful websites, but I can also architect, build, and maintain rich web
+applications with performance and UX in mind.
 
-I graduated in 2014 from Virginia Tech with a BS in Computer Science. I went on to join IBM
-for two years, building iOS apps in Objective-C and Swift thinking that's what I'd like to do.
-While that stuff can be enjoyable, I found myself enjoying web development much more. So I started
-doing more of that and in 2016, jumped ship to go work on the analytics solution at
-[Spredfast](https://www.spredfast.com/).
+I graduated in 2014 from Virginia Tech with a BS in Computer Science. While in Virginia, I wrote a
+shell, learned how compilers work, [designed and wrote a video game](https://github.com/12-01Game), took a
+human-computer interaction capstone course, wrote proofs about popular algorithms, and much more. I'm a computer
+scientist that specializes in web development.
 
-I believe that apps should both inspire creativity and be efficent for the end user. This involves a balance of 
-strict engineering and design disipline combined with user empathy and a little imagination. Too
-rigid in practice and your app is soulless, not enough and your app is spaghetti.
+When I graduated college, I joined IBM for two years in Austin, Texas. I learned [Objective-C](https://en.wikipedia.org/wiki/Objective-C) and
+[Swift](https://en.wikipedia.org/wiki/Swift_(programming_language)) because I thought I wanted to be an iOS developer. That stuff
+was super fun, but after learning [D3](https://d3js.org/) and [Angular](https://angular.io/) for a project at work,
+I became really interested in web development and web frameworks. So I started doing more of that and in 2016, I jumped ship to
+go work on the analytics solution at [Spredfast](https://www.spredfast.com/), where we use [React](https://reactjs.org/).
 
-I designed and built this website from the ground up. It should give you an idea of my attention to detail.
-Feel free to take a look around; hopefully you'll find something you like.
+I designed, programmed, and put up this website myself from scratch ([source](https://github.com/jballands/jonathanballands.me));
+no Squarespace, Wordpress, or whatever funny business. It should give you an idea of what I'm capable of. Feel free to take a look around;
+hopefully you'll find something you like.
 `;
 
 const AboutContainer = styled.div`

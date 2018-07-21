@@ -74,7 +74,9 @@ const Price = styled(TextInput)`
 	}
 `;
 
-const DollarSign = styled.span`font-size: 28px;`;
+const DollarSign = styled.span`
+	font-size: 28px;
+`;
 
 const RevenueValue = styled.div`
 	font-size: 28px;
@@ -175,12 +177,12 @@ export default class Revenue extends React.Component {
 					validPrice: val,
 					invalidPrice: !valid,
 					priceError: error,
-				})
+			  })
 			: this.setState({
 					price: val,
 					invalidPrice: !valid,
 					priceError: error,
-				});
+			  });
 	};
 
 	formatInput = val => {
@@ -234,7 +236,7 @@ export default class Revenue extends React.Component {
 				</IOControls>
 
 				<DownArrow
-					rotate={90}
+					rotate="90deg"
 					width={50}
 					flashColor={this.props.primaryColor}
 					key={`${output}-first`}
@@ -246,7 +248,7 @@ export default class Revenue extends React.Component {
 				</OutputValue>
 
 				<DownArrow
-					rotate={90}
+					rotate="90deg"
 					width={50}
 					flashColor={this.props.primaryColor}
 					key={`${output}-second`}
@@ -265,7 +267,7 @@ export default class Revenue extends React.Component {
 				<PriceError>{this.state.priceError}</PriceError>
 
 				<DownArrow
-					rotate={90}
+					rotate="90deg"
 					width={50}
 					flashColor={this.props.primaryColor}
 					key={revenue}

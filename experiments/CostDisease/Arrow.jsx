@@ -31,7 +31,7 @@ export default class RightArrow extends React.Component {
 				viewBox="0 0 24 24"
 				version="1.1"
 				{...this.props}
-				transform={`rotate(${this.props.rotate})`}>
+				style={{ transform: `rotate(${this.props.rotate})` }}>
 				<path d="M24 12l-9-8v6h-15v4h15v6z" />
 			</Svg>
 		);

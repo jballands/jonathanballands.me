@@ -138,7 +138,7 @@ export default class Productivity extends React.Component {
 				</IOControls>
 
 				<DownArrow
-					rotate={90}
+					rotate="90deg"
 					width={50}
 					color={this.props.primaryColor}
 				/>
