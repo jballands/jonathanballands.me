@@ -20,13 +20,11 @@ import {
 
 import entries from 'helpers/kinesisEntries';
 
-let sortedEntries = sortKinesisEntries('later', entries);
-
 const InitialStateRecord = Immutable.Record({
 	searchTerms: '',
 	sortOrder: 'later',
-	filteredEntries: sortedEntries,
-	selectedEntry: sortedEntries.valueSeq().get(0),
+	filteredEntries: sortKinesisEntries('later', entries),
+	selectedEntry: sortKinesisEntries('later', entries).get(0),
 	content: null,
 	contentLoading: true,
 	error: null,
@@ -64,20 +62,23 @@ export default function kinesisReducer(
 		case KINESIS_SEARCH_POSTS:
 			return state
 				.set('searchTerms', action.terms)
-				.set(
-					'filteredEntries',
-					filterKinesisEntries(action.terms, sortedEntries),
-				);
+				.update('filteredEntries', () => {
+					const filtered = filterKinesisEntries(
+						action.terms,
+						entries,
+					);
+					return sortKinesisEntries(state.sortOrder, filtered);
+				});
 		case KINESIS_SET_SORT_ORDER:
-			sortedEntries = sortKinesisEntries(action.sortOrder, entries);
-			console.log(sortedEntries);
-
 			return state
 				.set('sortOrder', action.sortOrder)
-				.set(
-					'filteredEntries',
-					filterKinesisEntries(state.searchTerms, sortedEntries),
-				);
+				.update('filteredEntries', () => {
+					const filtered = filterKinesisEntries(
+						state.searchTerms,
+						entries,
+					);
+					return sortKinesisEntries(action.sortOrder, filtered);
+				});
 		case KINESIS_CHOOSE_ENTRY:
 			return state.set('selectedEntry', entries.get(action.id));
 		case KINESIS_CHOOSE_ENTRY_START_LOADING:
