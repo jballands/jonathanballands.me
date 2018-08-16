@@ -38,6 +38,10 @@ export class Post extends Immutable.Record({
 //
 
 export const KinesisHashtags = {
+	aesthetic: {
+		id: 'aesthetic',
+		displayName: 'aesthetic',
+	},
 	design: {
 		id: 'design',
 		displayName: 'design',
@@ -58,6 +62,10 @@ export const KinesisHashtags = {
 		id: 'home_automation',
 		displayName: 'home-automation',
 	},
+	react: {
+		id: 'react',
+		displayName: 'react',
+	},
 	visualization: {
 		id: 'visualization',
 		displayName: 'visualization',
@@ -65,10 +73,6 @@ export const KinesisHashtags = {
 	tool: {
 		id: 'tool',
 		displayName: 'tool',
-	},
-	aesthetic: {
-		id: 'aesthetic',
-		displayName: 'aesthetic',
 	},
 };
 
@@ -113,4 +117,13 @@ export const kinesisPosts = [
 		primaryColor: '#91adbc',
 		secondaryColor: '#deebf2',
 	}),
+	// new Post({
+	// 	name: 'Nicer React Apps',
+	// 	date: new Date(2018, 7, 31),
+	// 	hashtags: [KinesisHashtags.dev, KinesisHashtags.react],
+	// 	type: Type.article,
+	// 	resource: '/markdown/nicerReactApps.md',
+	// 	primaryColor: '#42c8f4',
+	// 	secondaryColor: '#dbf6ff',
+	// }),
 ];
