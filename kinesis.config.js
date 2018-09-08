@@ -118,7 +118,7 @@ export const kinesisPosts = [
 		secondaryColor: '#deebf2',
 	}),
 	// new Post({
-	// 	name: 'Nicer React Apps',
+	// 	name: 'Should Component Update',
 	// 	date: new Date(2018, 7, 31),
 	// 	hashtags: [KinesisHashtags.dev, KinesisHashtags.react],
 	// 	type: Type.article,
