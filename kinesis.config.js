@@ -117,13 +117,13 @@ export const kinesisPosts = [
 		primaryColor: '#91adbc',
 		secondaryColor: '#deebf2',
 	}),
-	// new Post({
-	// 	name: 'Should Component Update',
-	// 	date: new Date(2018, 7, 31),
-	// 	hashtags: [KinesisHashtags.dev, KinesisHashtags.react],
-	// 	type: Type.article,
-	// 	resource: '/markdown/nicerReactApps.md',
-	// 	primaryColor: '#42c8f4',
-	// 	secondaryColor: '#dbf6ff',
-	// }),
+	new Post({
+		name: 'f-stops',
+		date: new Date(2018, 8, 30),
+		hashtags: [KinesisHashtags.dev, KinesisHashtags.aesthetic],
+		type: Type.experiment,
+		resource: () => import('~/experiments/AppleTVParallax'),
+		primaryColor: '#91adbc',
+		secondaryColor: '#deebf2',
+	}),
 ];
