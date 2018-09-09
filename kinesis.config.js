@@ -118,12 +118,12 @@ export const kinesisPosts = [
 		secondaryColor: '#deebf2',
 	}),
 	new Post({
-		name: 'f-stops',
+		name: 'Aperture',
 		date: new Date(2018, 8, 30),
-		hashtags: [KinesisHashtags.dev, KinesisHashtags.aesthetic],
+		hashtags: [KinesisHashtags.visualization, KinesisHashtags.aesthetic],
 		type: Type.experiment,
-		resource: () => import('~/experiments/AppleTVParallax'),
-		primaryColor: '#91adbc',
-		secondaryColor: '#deebf2',
+		resource: () => import('~/experiments/ApertureViz'),
+		primaryColor: '#e58e19',
+		secondaryColor: '#ffe6c4',
 	}),
 ];

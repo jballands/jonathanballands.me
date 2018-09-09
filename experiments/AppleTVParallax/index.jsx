@@ -1,3 +1,10 @@
+//
+//	jballands/jonathanballands.me
+//	AppleTVParallax/index.jsx
+//
+//	© 2018 Jonathan Ballands
+//
+
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
