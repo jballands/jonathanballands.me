@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Slider from '@jballands/vespyr/lib/Slider';
 import ApertureSprial from './ApertureSprial';
-import { STOP_128 } from './utils';
+import { formatStop, STOP_128 } from './utils';
 
 const ApertureVizContainer = styled.div``;
 
@@ -22,22 +22,16 @@ export default class ApertureViz extends Component {
 	};
 
 	state = {
-		fStopValue: 1,
+		fStopIndex: 1,
 	};
 
 	onfStopChange = value => {
 		this.setState({
-			fStopValue: value,
+			fStopIndex: value,
 		});
 	};
 
-	fStopSliderFormatter = index => {
-		return `f/${
-			STOP_128[index - 1] < 10
-				? Math.trunc(STOP_128[index - 1] * 10) / 10
-				: Math.floor(STOP_128[index - 1])
-		}`;
-	};
+	fStopSliderFormatter = index => formatStop(STOP_128[index - 1]);
 
 	render() {
 		const { primaryColor } = this.props;
@@ -45,7 +39,7 @@ export default class ApertureViz extends Component {
 		return (
 			<ApertureVizContainer>
 				<Slider
-					value={this.state.fStopValue}
+					value={this.state.fStopIndex}
 					onChange={this.onfStopChange}
 					title="f-Stop"
 					accentColor={primaryColor}
@@ -56,8 +50,10 @@ export default class ApertureViz extends Component {
 				/>
 				<ApertureSprial
 					focalLength={50}
-					fStop={this.state.fStopValue}
-					maxFStop={STOP_128[STOP_128.length - 1]}
+					fStop={STOP_128[this.state.fStopIndex]}
+					fStops={STOP_128}
+					minFStop={1}
+					maxFStop={128}
 				/>
 			</ApertureVizContainer>
 		);

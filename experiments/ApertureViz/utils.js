@@ -5,6 +5,9 @@
 //	© 2018 Jonathan Ballands
 //
 
+export const formatStop = stop =>
+	`f/${stop < 10 ? Math.trunc(stop * 10) / 10 : Math.floor(stop)}`;
+
 /**
  * Generates camera stops using the formula `sqrt(2) * S`.
  * @param {number} max The number to quit calculating f-stops at. Defaults to 128.
