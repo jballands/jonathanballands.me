@@ -8,19 +8,17 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { scaleLinear, scaleLog } from 'd3-scale';
+import { spring, Motion } from 'react-motion';
+import { scaleLog } from 'd3-scale';
 import { curveBasis, lineRadial } from 'd3-shape';
-import { formatStop } from './utils';
 
 const Svg = styled.svg`
 	width: 500px;
 	height: 500px;
 	* {
 		font-family: 'Roboto', sans-serif;
-		font-size: 13px;
 	}
 	overflow: hidden;
-	background: rgba(255, 0, 0, 0.1);
 `;
 
 const Lens = styled.circle`
@@ -29,18 +27,21 @@ const Lens = styled.circle`
 	stroke-width: 2px;
 `;
 
-const SpiralPath = styled.path`
+const LensOutline = styled.circle`
 	fill: none;
-	stroke: black;
-	stroke-width: 2px;
-	font: 8px;
+	stroke: #ccc;
+	stroke-width: 1px;
 `;
 
-const SpiralText = styled.text``;
+const SpiralPath = styled.path`
+	fill: none;
+	stroke: blue;
+	stroke-width: 2px;
+`;
 
 const WIDTH = 500;
 const HEIGHT = 500;
-const OFFSET = 10;
+const OFFSET = 25;
 
 export default class ApertureSprial extends PureComponent {
 	static displayName = 'ApertureSpiral';
@@ -57,52 +58,46 @@ export default class ApertureSprial extends PureComponent {
 		const { focalLength, fStop, fStops, minFStop, maxFStop } = this.props;
 
 		const smallestDimension = WIDTH > HEIGHT ? HEIGHT : WIDTH;
-		const maxRadius = smallestDimension / 2 - OFFSET;
 
-		const circleRadius = scaleLog()
-			.domain([minFStop, maxFStop])
-			.range([maxRadius, OFFSET]);
+		const radius = f => {
+			return (smallestDimension - OFFSET * 2) / (f * 2);
+		};
 
-		const spiralRadius = scaleLinear()
+		const theta = scaleLog()
 			.domain([minFStop, maxFStop])
-			.range([maxRadius, OFFSET]);
-
-		const theta = scaleLinear()
-			.domain([minFStop, maxFStop])
-			.range([0, 2 * Math.PI]);
+			.range([0, 10]);
 
 		const spiral = lineRadial()
+			.radius(radius)
 			.angle(theta)
-			.radius(spiralRadius)
 			.curve(curveBasis);
 
 		return (
 			<Svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`}>
 				<g>
-					<Lens
-						cx={maxRadius + OFFSET}
-						cy={maxRadius + OFFSET}
-						r={`${circleRadius(fStop)}px`}
-					/>
+					{fStops.map(s => {
+						return (
+							<LensOutline
+								cx={smallestDimension / 2}
+								cy={smallestDimension / 2}
+								r={radius(s)}
+							/>
+						);
+					})}
+					<Motion style={{ radius: spring(radius(fStop)) }}>
+						{interpolated => (
+							<Lens
+								cx={smallestDimension / 2}
+								cy={smallestDimension / 2}
+								r={interpolated.radius}
+							/>
+						)}
+					</Motion>
 					<SpiralPath
 						id="spiral"
 						d={spiral(fStops)}
 						transform={`translate(${WIDTH / 2}, ${HEIGHT / 2})`}
 					/>
-				</g>
-				<g>
-					{fStops.map((s, i) => {
-						return (
-							<SpiralText dy="13" key={s}>
-								<textPath
-									href="#spiral"
-									startOffset={`${(i / (fStops.length - 1)) *
-										100}%`}>
-									{formatStop(s)}
-								</textPath>
-							</SpiralText>
-						);
-					})}
 				</g>
 			</Svg>
 		);

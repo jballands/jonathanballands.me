@@ -22,12 +22,12 @@ export default class ApertureViz extends Component {
 	};
 
 	state = {
-		fStopIndex: 1,
+		fStopIndex: 0,
 	};
 
 	onfStopChange = value => {
 		this.setState({
-			fStopIndex: value,
+			fStopIndex: value - 1,
 		});
 	};
 
@@ -35,11 +35,12 @@ export default class ApertureViz extends Component {
 
 	render() {
 		const { primaryColor } = this.props;
+		console.log(this.state.fStopIndex);
 
 		return (
 			<ApertureVizContainer>
 				<Slider
-					value={this.state.fStopIndex}
+					value={this.state.fStopIndex + 1}
 					onChange={this.onfStopChange}
 					title="f-Stop"
 					accentColor={primaryColor}
@@ -49,7 +50,7 @@ export default class ApertureViz extends Component {
 					showValue
 				/>
 				<ApertureSprial
-					focalLength={50}
+					focalLength={400}
 					fStop={STOP_128[this.state.fStopIndex]}
 					fStops={STOP_128}
 					minFStop={1}
