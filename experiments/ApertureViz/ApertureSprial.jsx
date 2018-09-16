@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { spring, Motion } from 'react-motion';
 import { scaleLog } from 'd3-scale';
-import { curveBasis, lineRadial } from 'd3-shape';
+import { curveNatural, lineRadial } from 'd3-shape';
 
 const Svg = styled.svg`
 	width: 500px;
@@ -22,6 +22,12 @@ const Svg = styled.svg`
 `;
 
 const Lens = styled.circle`
+	fill: none;
+	stroke: red;
+	stroke-width: 2px;
+`;
+
+const Radius = styled.line`
 	fill: none;
 	stroke: red;
 	stroke-width: 2px;
@@ -59,6 +65,9 @@ export default class ApertureSprial extends PureComponent {
 
 		const smallestDimension = WIDTH > HEIGHT ? HEIGHT : WIDTH;
 
+		const originX = WIDTH / 2;
+		const originY = HEIGHT / 2;
+
 		const radius = f => {
 			return (smallestDimension - OFFSET * 2) / (f * 2);
 		};
@@ -70,33 +79,35 @@ export default class ApertureSprial extends PureComponent {
 		const spiral = lineRadial()
 			.radius(radius)
 			.angle(theta)
-			.curve(curveBasis);
+			.curve(curveNatural);
 
 		return (
 			<Svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`}>
-				<g>
-					{fStops.map(s => {
+				<Motion
+					style={{
+						r: spring(radius(fStop)),
+						a: spring(theta(fStop)),
+					}}>
+					{({ r, a }) => {
 						return (
-							<LensOutline
-								cx={smallestDimension / 2}
-								cy={smallestDimension / 2}
-								r={radius(s)}
-							/>
+							<g>
+								<Lens cx={originX} cy={originY} r={r} />
+								<Radius
+									x1={originX}
+									y1={originY}
+									x2={originX + r * Math.sin(a)}
+									y2={originY - r * Math.cos(a)}
+								/>
+							</g>
 						);
-					})}
-					<Motion style={{ radius: spring(radius(fStop)) }}>
-						{interpolated => (
-							<Lens
-								cx={smallestDimension / 2}
-								cy={smallestDimension / 2}
-								r={interpolated.radius}
-							/>
-						)}
-					</Motion>
+					}}
+				</Motion>
+
+				<g>
 					<SpiralPath
 						id="spiral"
 						d={spiral(fStops)}
-						transform={`translate(${WIDTH / 2}, ${HEIGHT / 2})`}
+						transform={`translate(${originX}, ${originY})`}
 					/>
 				</g>
 			</Svg>

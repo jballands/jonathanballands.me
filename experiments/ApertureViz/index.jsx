@@ -35,7 +35,6 @@ export default class ApertureViz extends Component {
 
 	render() {
 		const { primaryColor } = this.props;
-		console.log(this.state.fStopIndex);
 
 		return (
 			<ApertureVizContainer>
