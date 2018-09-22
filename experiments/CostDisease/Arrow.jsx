@@ -15,7 +15,7 @@ export default class RightArrow extends React.Component {
 
 	static propTypes = {
 		color: PropTypes.string,
-		rotate: PropTypes.number,
+		rotate: PropTypes.string,
 		width: PropTypes.number,
 	};
 
