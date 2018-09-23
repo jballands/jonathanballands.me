@@ -23,4 +23,6 @@ export const generateStops = (max = 128, s0 = 1, stops = [1]) => {
 	return generateStops(max, s1, stops.concat([s1]));
 };
 
+export const radiansToDegrees = radians => radians * (180 / Math.PI);
+
 export const STOP_128 = generateStops(128);
