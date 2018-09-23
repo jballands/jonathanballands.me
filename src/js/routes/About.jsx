@@ -21,8 +21,6 @@ import DownArrowSvg from 'svg/DownArrowSvg';
 import { fuchsiaBlue, eastSide, moonRaker, shark } from 'helpers/palette';
 
 const aboutSpiel = `
-Rawr
-
 I'm a frontend web developer with an eye for design. Having a background in Computer Science means
 that I can not only design beautiful websites, but I can also architect, build, and maintain rich web
 applications with performance and UX in mind.
