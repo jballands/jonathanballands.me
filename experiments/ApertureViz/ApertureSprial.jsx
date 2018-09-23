@@ -11,6 +11,7 @@ import styled from 'styled-components';
 import { spring, Motion } from 'react-motion';
 import { scaleLog } from 'd3-scale';
 import { curveNatural, lineRadial } from 'd3-shape';
+import { radiansToDegrees } from './utils';
 
 const Svg = styled.svg`
 	width: 500px;
@@ -33,6 +34,10 @@ const Radius = styled.line`
 	stroke-width: 2px;
 `;
 
+const RadiusText = styled.text`
+	text-anchor: middle;
+`;
+
 const LensOutline = styled.circle`
 	fill: none;
 	stroke: #ccc;
@@ -42,7 +47,7 @@ const LensOutline = styled.circle`
 const SpiralPath = styled.path`
 	fill: none;
 	stroke: blue;
-	stroke-width: 2px;
+	stroke-width: 1px;
 `;
 
 const WIDTH = 500;
@@ -89,15 +94,23 @@ export default class ApertureSprial extends PureComponent {
 						a: spring(theta(fStop)),
 					}}>
 					{({ r, a }) => {
+						const x2 = originX + r * Math.sin(a);
+						const y2 = originY - r * Math.cos(a);
+
 						return (
 							<g>
 								<Lens cx={originX} cy={originY} r={r} />
 								<Radius
 									x1={originX}
 									y1={originY}
-									x2={originX + r * Math.sin(a)}
-									y2={originY - r * Math.cos(a)}
+									x2={x2}
+									y2={y2}
 								/>
+								<RadiusText
+									transform={`translate(${x2}, ${y2 -
+										10})rotate(${radiansToDegrees(a)})`}>
+									{fStop}
+								</RadiusText>
 							</g>
 						);
 					}}
