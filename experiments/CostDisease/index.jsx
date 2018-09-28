@@ -65,11 +65,13 @@ const VisualizationTitle = styled.div`
 	font-size: 28px;
 	margin-bottom: 5px;
 	color: ${props => props.color};
+	font-weight: 700;
 `;
 
 const VisualizationSubtitle = styled.div`
 	font-size: 16px;
 	color: ${props => props.color};
+	font-weight: 500;
 `;
 
 const VisualizationCredit = styled.div`

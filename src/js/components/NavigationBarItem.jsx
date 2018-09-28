@@ -15,7 +15,6 @@ const StyledLink = styled(Link)`
 	font-size: 16px;
 	letter-spacing: 1px;
 	color: white;
-	font-weight: 700;
 
 	&:not(:first-child) {
 		margin-left: 40px;

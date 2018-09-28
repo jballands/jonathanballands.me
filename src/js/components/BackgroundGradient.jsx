@@ -34,7 +34,6 @@ const Content = styled.div`
 	display: flex;
 	flex-flow: column nowrap;
 	position: relative;
-	overflow: scroll;
 `;
 
 export default class BackgroundGradient extends React.Component {
