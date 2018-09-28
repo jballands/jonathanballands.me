@@ -61,7 +61,8 @@
 		"react-transition-group": "2.3.0-beta.0",
 		"redux": "^3.6.0",
 		"redux-saga": "^0.15.6",
-		"styled-components": "^2.1.2"
+		"styled-components": "^2.1.2",
+		"system-font-css": "^2.0.2"
 	},
 	"devDependencies": {
 		"autoprefixer-loader": "^3.2.0",

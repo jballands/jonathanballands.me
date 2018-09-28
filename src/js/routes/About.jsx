@@ -68,8 +68,7 @@ const AboutHeroUnitTitle = styled.div`
 `;
 
 const AboutHeroUnitSubtitle = styled.div`
-	font-family: 'Roboto', 'serif';
-	font-weight: 300;
+	font-weight: 500;
 	color: ${shark};
 	font-size: 28px;
 	letter-spacing: 1px;
@@ -130,27 +129,6 @@ const ViewResume = styled(BoldButton)`
 const StyledLinkInTabSvg = styled(LinkInTabSvg)`
 	margin-left: 10px;
 `;
-
-// const InstagramContainer = styled.div`
-// 	width: 100%;
-// 	margin: 100px 0 50px 0;
-// `;
-
-// const InstagramTitle = styled.div`
-// 	display: flex;
-// 	flex-flow: row nowrap;
-// 	justify-content: flex-start;
-// 	align-items: center;
-// 	font-size: 28px;
-// 	letter-spacing: 1px;
-// 	color: ${fuchsiaBlue};
-// 	border-bottom: 1px solid ${fuchsiaBlue};
-// 	padding-bottom: 10px;
-// `;
-
-// const InstagramUsername = styled.div`
-// 	margin-left: 10px;
-// `;
 
 const AboutMe = styled.div`
 	width: 75%;

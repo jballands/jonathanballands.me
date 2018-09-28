@@ -40,9 +40,6 @@ const CPIOverTimeContainer = styled.div`
 
 const Svg = styled.svg`
 	width: 100%;
-	* {
-		font-family: 'Roboto', sans-serif;
-	}
 `;
 
 const GraphContainer = styled.g`

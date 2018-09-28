@@ -11,11 +11,11 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 const StyledLink = styled(Link)`
-	font-family: 'Roboto', sans-serif;
 	text-transform: uppercase;
 	font-size: 16px;
 	letter-spacing: 1px;
 	color: white;
+	font-weight: 700;
 
 	&:not(:first-child) {
 		margin-left: 40px;

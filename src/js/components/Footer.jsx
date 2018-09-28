@@ -20,7 +20,6 @@ const FooterContainer = styled.div`
 	background: #24292e;
 	height: 70px;
 	padding: 0px 20px;
-	font-family: 'Roboto', sans-serif;
 	font-size: 16px;
 	width: calc(100% - 40px);
 `;
