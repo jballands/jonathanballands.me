@@ -40,9 +40,8 @@ import recreation9817 from './recreation9817.json';
 
 const Title = styled.div`
 	font-size: 58px;
-	font-weight: 700;
 	color: ${props => props.color};
-	font-family: 'Raleway', sans-serif;
+	font-family: header;
 	text-transform: uppercase;
 	text-align: center;
 `;
@@ -65,11 +64,13 @@ const VisualizationTitle = styled.div`
 	font-size: 28px;
 	margin-bottom: 5px;
 	color: ${props => props.color};
+	font-weight: 700;
 `;
 
 const VisualizationSubtitle = styled.div`
 	font-size: 16px;
 	color: ${props => props.color};
+	font-weight: 500;
 `;
 
 const VisualizationCredit = styled.div`

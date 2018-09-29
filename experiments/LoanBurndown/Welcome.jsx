@@ -32,10 +32,9 @@ const BurndownLogo = styled(ReactSVG)`
 `;
 
 const BurndownTitle = styled.div`
-	font-family: 'Raleway', sans-serif;
+	font-family: header;
 	text-transform: uppercase;
 	font-size: 48px;
-	font-weight: 700;
 	margin-top: 50px;
 	color: ${props => props.color};
 	text-align: center;

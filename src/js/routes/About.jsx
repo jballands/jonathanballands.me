@@ -58,8 +58,7 @@ const AboutHeroUnit = styled.div`
 `;
 
 const AboutHeroUnitTitle = styled.div`
-	font-family: 'Raleway', sans-serif;
-	font-weight: 700;
+	font-family: header;
 	text-transform: uppercase;
 	font-size: 54px;
 	letter-spacing: 1px;

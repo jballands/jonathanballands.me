@@ -31,7 +31,7 @@ const KinesisStyle = styled.div`
 	h3,
 	h4 {
 		line-height: 1.2em;
-		font-weight: 400;
+		font-weight: 700;
 		color: ${props => props.color};
 		margin: 1em 0;
 	}

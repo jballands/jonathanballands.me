@@ -23,8 +23,7 @@ const NavigationBarContainerContainer = styled.div`
 `;
 
 const NavigationBarTitle = styled.span`
-	font-family: 'Raleway', sans-serif;
-	font-weight: 700;
+	font-family: header;
 	text-transform: uppercase;
 	font-size: 20px;
 	letter-spacing: 1px;
