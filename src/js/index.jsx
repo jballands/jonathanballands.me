@@ -17,7 +17,6 @@ import App from 'routes/App';
 import storeConfiguration from 'helpers/configureStore';
 
 import 'normalize.css';
-import 'system-font-css/system-font.css';
 
 class JonathanBallandsMe extends React.Component {
 	store = null;
