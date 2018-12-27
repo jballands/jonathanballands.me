@@ -1,0 +1,23 @@
+@font-face {
+	font-family: Hero;
+	font-weight: 700;
+	src: local('Raleway Bold'), local('Raleway-Bold'), url(https://fonts.gstatic.com/s/raleway/v12/1Ptrg8zYS_SKggPNwJYtWqZPANqczVs.woff2) format('woff2');
+}
+
+@font-face {
+	font-family: BodytextBold;
+	font-weight: 700;
+	src: local('Roboto Bold'), local('Roboto-Bold'), url(https://fonts.gstatic.com/s/roboto/v18/KFOlCnqEu92Fr1MmWUlfBBc4AMP6lQ.woff2) format('woff2');
+}
+
+@font-face {
+	font-family: Bodytext;
+	font-weight: 400;
+	src: local('Roboto'), local('Roboto-Regular'), url(https://fonts.gstatic.com/s/roboto/v18/KFOmCnqEu92Fr1Mu4mxKKTU1Kg.woff2) format('woff2');
+}
+
+@font-face {
+	font-family: Quote;
+	font-weight: 400;
+	src: local('Droid Serif'), local('Droid-Serif'), url(https://fonts.gstatic.com/s/droidserif/v8/tDbK2oqRg1oM3QBjjcaDkOr4nAfcHi6FRUI.woff2) format('woff2');
+}

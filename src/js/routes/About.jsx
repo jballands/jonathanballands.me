@@ -58,7 +58,7 @@ const AboutHeroUnit = styled.div`
 `;
 
 const AboutHeroUnitTitle = styled.div`
-	font-family: header;
+	font-family: Hero;
 	text-transform: uppercase;
 	font-size: 54px;
 	letter-spacing: 1px;
@@ -158,7 +158,7 @@ export default class About extends React.Component {
 									Web developer. Wannabe designer.
 								</AboutHeroUnitSubtitle>
 								<ViewResumeContainer
-									href="/assets/jonathan_ballands_resume_18.pdf"
+									href="/assets/pdf/jonathan_ballands_resume_18.pdf"
 									target="_blank">
 									<ViewResume accentColor={fuchsiaBlue}>
 										View My Résumé <StyledLinkInTabSvg />

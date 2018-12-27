@@ -2,29 +2,25 @@
 //  jonathanballands.me
 //  webpack.config.dev.js
 //
-//  © 2017 Jonathan Ballands
+//  © 2018 Jonathan Ballands
 //
 
 const path = require('path');
-const webpack = require('webpack');
 
 // -----------------------------------------------------------------------------
 
 module.exports = {
+	mode: 'development',
 	context: path.resolve(__dirname),
 	entry: {
 		index: './src/js/index.jsx',
 	},
-	plugins: [
-		new webpack.DefinePlugin({
-			'process.env': {
-				NODE_ENV: JSON.stringify('development'),
-			},
-		}),
-	],
+	optimization: {
+		minimize: false,
+	},
 	output: {
-		path: path.resolve(__dirname, './public/assets'),
-		publicPath: '/assets/',
+		path: path.resolve(__dirname, './public'),
+		publicPath: '/',
 		filename: '[name].bundle.js',
 		chunkFilename: '[name].bundle.js',
 	},
@@ -76,7 +72,6 @@ module.exports = {
 		},
 	},
 	devServer: {
-		publicPath: '/assets/',
 		contentBase: './public',
 		historyApiFallback: true,
 		watchContentBase: true,

@@ -2,27 +2,26 @@
 //  jonathanballands.me
 //  webpack.config.prod.js
 //
-//  © 2017 Jonathan Ballands
+//  © 2018 Jonathan Ballands
 //
 
 const path = require('path');
-const webpack = require('webpack');
+const CompressionPlugin = require('compression-webpack-plugin');
 
 // -----------------------------------------------------------------------------
 
 module.exports = {
+	mode: 'production',
 	entry: {
 		index: './src/js/index',
 	},
-	plugins: [
-		new webpack.optimize.UglifyJsPlugin(),
-		new webpack.DefinePlugin({
-			'process.env.NODE_ENV': "'production'",
-		}),
-	],
+	plugins: [new CompressionPlugin()],
+	optimization: {
+		minimize: true,
+	},
 	output: {
-		path: path.resolve(__dirname, './public/assets'),
-		publicPath: '/assets/',
+		path: path.resolve(__dirname, './public'),
+		publicPath: '/',
 		filename: '[name].bundle.js',
 		chunkFilename: '[name].bundle.js',
 	},
