@@ -15,10 +15,14 @@ module.exports = {
 	entry: {
 		index: './src/js/index',
 	},
-	plugins: [new CompressionPlugin()],
 	optimization: {
 		minimize: true,
 	},
+	plugins: [
+		new CompressionPlugin({
+			filename: '[path]',
+		}),
+	],
 	output: {
 		path: path.resolve(__dirname, './public'),
 		publicPath: '/',
