@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Route } from 'react-router-dom';
 
-import KinesisBrowserContainer from 'containers/KinesisBrowserContainer';
+import KinesisBrowser from 'components/KinesisBrowser';
 import KinesisContentContainer from 'containers/KinesisContentContainer';
 
 const KinesisContainer = styled.div`
@@ -31,7 +31,7 @@ export default class Kinesis extends React.Component {
 
 		return (
 			<KinesisContainer>
-				<KinesisBrowserContainer history={history} match={match} />
+				<KinesisBrowser history={history} match={match} />
 				<Route
 					path={`${match.url}/:kinesisId?`}
 					component={KinesisContentContainer}

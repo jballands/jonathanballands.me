@@ -2,16 +2,23 @@
 //	jballands/jonathanballands.me
 //	KinesisBrowser.jsx
 //
-//	© 2017 Jonathan Ballands
+//	© 2018 Jonathan Ballands
 //
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import Immutable from 'immutable';
 import styled from 'styled-components';
 import TextInput from '@jballands/vespyr/lib/TextInput';
 import RadioGroup from '@jballands/vespyr/lib/RadioGroup';
 import RadioItem from '@jballands/vespyr/lib/RadioItem';
+
+import {
+	searchKinesisPosts,
+	setSortOrder,
+	chooseEntry,
+} from 'actions/KinesisActions';
 
 import StickyDrawer from 'components/StickyDrawer';
 import KinesisBrowserSearchResults from 'components/KinesisBrowserSearchResults';
@@ -21,6 +28,19 @@ import { shark, white, linkShade } from 'helpers/palette';
 import LeftArrowSvg from 'svg/LeftArrowSvg';
 import MagnifyingGlassSvg from 'svg/MagnifyingGlassSvg';
 import OpenDrawerSvg from 'svg/OpenDrawerSvg';
+
+const mapStateToProps = ({ kinesis }) => ({
+	filteredEntries: kinesis.get('filteredEntries'),
+	searchTerms: kinesis.get('searchTerms'),
+	selectedEntry: kinesis.get('selectedEntry'),
+	sortOrder: kinesis.get('sortOrder'),
+});
+
+const mapDispatchToProps = dispatch => ({
+	chooseEntry: uri => dispatch(chooseEntry(uri)),
+	searchKinesisPosts: terms => dispatch(searchKinesisPosts(terms)),
+	setSortOrder: sortOrder => dispatch(setSortOrder(sortOrder)),
+});
 
 const StyledTextInput = styled(TextInput)`
 	width: 100%;
@@ -95,7 +115,7 @@ const StyledMagnifyingGlassSvg = styled(MagnifyingGlassSvg)`
 	width: 23px;
 `;
 
-export default class KinesisBrowser extends React.Component {
+class KinesisBrowser extends React.Component {
 	static displayName = 'KinesisBrowser';
 
 	static propTypes = {
@@ -235,3 +255,8 @@ export default class KinesisBrowser extends React.Component {
 		);
 	}
 }
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps,
+)(KinesisBrowser);
