@@ -18,7 +18,7 @@ the visualization will prompt you to pick a date and/or balance column; simply p
 the most sense. If a column outputs bad data, simply choose another one. If you choose correctly, you
 should see a line graph that looks a bit like this:
 
-![](/assets/loan_burndown_example.jpg)
+![](/assets/experiments/loan-burndown/loan_burndown_example.jpg)
 
 # Why I Made This
 

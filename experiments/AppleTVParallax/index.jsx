@@ -102,9 +102,9 @@ export default class AppleTVParalax extends Component {
 							)
 						}
 						layers={[
-							<Layer src="/assets/singing-saw-3.png" />,
-							<LayerAbove src="/assets/singing-saw-2.png" />,
-							<LayerAbove src="/assets/singing-saw-1.png" />,
+							<Layer src="/assets/experiments/apple-tv-parallax/singing-saw-3.png" />,
+							<LayerAbove src="/assets/experiments/apple-tv-parallax/singing-saw-2.png" />,
+							<LayerAbove src="/assets/experiments/apple-tv-parallax/singing-saw-1.png" />,
 						]}
 					/>
 					<StyledAppleTVIcon
@@ -114,8 +114,8 @@ export default class AppleTVParalax extends Component {
 							)
 						}
 						layers={[
-							<Layer src="/assets/1975-2.png" />,
-							<Layer src="/assets/1975-1.png" />,
+							<Layer src="/assets/experiments/apple-tv-parallax/1975-2.png" />,
+							<Layer src="/assets/experiments/apple-tv-parallax/1975-1.png" />,
 						]}
 						parallaxMultiplier={0.035}
 					/>
@@ -126,9 +126,9 @@ export default class AppleTVParalax extends Component {
 							)
 						}
 						layers={[
-							<Layer src="/assets/tranquility-base-hotel-and-casino-3.png" />,
-							<Layer src="/assets/tranquility-base-hotel-and-casino-2.png" />,
-							<Layer src="/assets/tranquility-base-hotel-and-casino-1.png" />,
+							<Layer src="/assets/experiments/apple-tv-parallax/tranquility-base-hotel-and-casino-3.png" />,
+							<Layer src="/assets/experiments/apple-tv-parallax/tranquility-base-hotel-and-casino-2.png" />,
+							<Layer src="/assets/experiments/apple-tv-parallax/tranquility-base-hotel-and-casino-1.png" />,
 						]}
 					/>
 					<StyledAppleTVIcon
@@ -138,9 +138,9 @@ export default class AppleTVParalax extends Component {
 							)
 						}
 						layers={[
-							<Layer src="/assets/latigo-3.png" />,
-							<LayerAbove src="/assets/latigo-2.png" />,
-							<Layer src="/assets/latigo-1.png" />,
+							<Layer src="/assets/experiments/apple-tv-parallax/latigo-3.png" />,
+							<LayerAbove src="/assets/experiments/apple-tv-parallax/latigo-2.png" />,
+							<Layer src="/assets/experiments/apple-tv-parallax/latigo-1.png" />,
 						]}
 						parallaxMultiplier={0.035}
 					/>
@@ -151,9 +151,9 @@ export default class AppleTVParalax extends Component {
 							)
 						}
 						layers={[
-							<Layer src="/assets/this-old-dog-3.png" />,
-							<Layer src="/assets/this-old-dog-2.png" />,
-							<Layer src="/assets/this-old-dog-1.png" />,
+							<Layer src="/assets/experiments/apple-tv-parallax/this-old-dog-3.png" />,
+							<Layer src="/assets/experiments/apple-tv-parallax/this-old-dog-2.png" />,
+							<Layer src="/assets/experiments/apple-tv-parallax/this-old-dog-1.png" />,
 						]}
 					/>
 					<StyledAppleTVIcon
@@ -163,9 +163,9 @@ export default class AppleTVParalax extends Component {
 							)
 						}
 						layers={[
-							<Layer src="/assets/chronovision-3.png" />,
-							<Layer src="/assets/chronovision-2.png" />,
-							<Layer src="/assets/chronovision-1.png" />,
+							<Layer src="/assets/experiments/apple-tv-parallax/chronovision-3.png" />,
+							<Layer src="/assets/experiments/apple-tv-parallax/chronovision-2.png" />,
+							<Layer src="/assets/experiments/apple-tv-parallax/chronovision-1.png" />,
 						]}
 					/>
 					<StyledAppleTVIcon
@@ -175,9 +175,9 @@ export default class AppleTVParalax extends Component {
 							)
 						}
 						layers={[
-							<Layer src="/assets/hanging-gardens-3.png" />,
-							<Layer src="/assets/hanging-gardens-2.png" />,
-							<Layer src="/assets/hanging-gardens-1.png" />,
+							<Layer src="/assets/experiments/apple-tv-parallax/hanging-gardens-3.png" />,
+							<Layer src="/assets/experiments/apple-tv-parallax/hanging-gardens-2.png" />,
+							<Layer src="/assets/experiments/apple-tv-parallax/hanging-gardens-1.png" />,
 						]}
 						parallaxMultiplier={0.03}
 					/>
@@ -188,9 +188,9 @@ export default class AppleTVParalax extends Component {
 							)
 						}
 						layers={[
-							<Layer src="/assets/painting-of-a-panic-attack-3.png" />,
-							<Layer src="/assets/painting-of-a-panic-attack-2.png" />,
-							<Layer src="/assets/painting-of-a-panic-attack-1.png" />,
+							<Layer src="/assets/experiments/apple-tv-parallax/painting-of-a-panic-attack-3.png" />,
+							<Layer src="/assets/experiments/apple-tv-parallax/painting-of-a-panic-attack-2.png" />,
+							<Layer src="/assets/experiments/apple-tv-parallax/painting-of-a-panic-attack-1.png" />,
 						]}
 					/>
 					<StyledAppleTVIcon
@@ -200,9 +200,9 @@ export default class AppleTVParalax extends Component {
 							)
 						}
 						layers={[
-							<Layer src="/assets/99-cents-3.png" />,
-							<Layer src="/assets/99-cents-2.png" />,
-							<Layer src="/assets/99-cents-1.png" />,
+							<Layer src="/assets/experiments/apple-tv-parallax/99-cents-3.png" />,
+							<Layer src="/assets/experiments/apple-tv-parallax/99-cents-2.png" />,
+							<Layer src="/assets/experiments/apple-tv-parallax/99-cents-1.png" />,
 						]}
 						parallaxMultiplier={0.035}
 					/>

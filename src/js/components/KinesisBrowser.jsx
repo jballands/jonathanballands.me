@@ -24,6 +24,11 @@ import OpenDrawerSvg from 'svg/OpenDrawerSvg';
 
 const StyledTextInput = styled(TextInput)`
 	width: 100%;
+
+	::placeholder {
+		font-style: normal;
+		font-family: Bodytext;
+	}
 `;
 
 const StyledRadioGroup = styled(RadioGroup)`
@@ -79,7 +84,7 @@ const TitleButton = styled.div`
 `;
 
 const Title = styled.span`
-	font-weight: 700;
+	font-family: BodytextBold;
 	font-size: 22px;
 	text-transform: uppercase;
 	margin-left: 10px;

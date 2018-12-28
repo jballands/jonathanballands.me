@@ -34,7 +34,7 @@ const KinesisContainer = styled.div`
 const KinesisArticleTitle = styled.div`
 	font-size: 42px;
 	color: ${props => props.color};
-	font-family: header;
+	font-family: Hero;
 	text-transform: uppercase;
 `;
 

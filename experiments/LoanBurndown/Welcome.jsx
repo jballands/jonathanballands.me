@@ -32,7 +32,7 @@ const BurndownLogo = styled(ReactSVG)`
 `;
 
 const BurndownTitle = styled.div`
-	font-family: header;
+	font-family: Hero;
 	text-transform: uppercase;
 	font-size: 48px;
 	margin-top: 50px;
@@ -113,7 +113,7 @@ class Welcome extends React.Component {
 		return (
 			<WelcomeContainer>
 				<BurndownLogo
-					path="/assets/burndown.svg"
+					path="/assets/experiments/loan-burndown/burndown.svg"
 					color={primaryColor}
 				/>
 				<BurndownTitle color={primaryColor}>
@@ -144,7 +144,7 @@ class Welcome extends React.Component {
 
 				<PrivacyContainer>
 					<PrivacyIcon
-						path="/assets/privacy.svg"
+						path="/assets/experiments/loan-burndown/privacy.svg"
 						color={primaryColor}
 					/>
 					<KinesisMarkdown color={primaryColor} content={privacyMd} />

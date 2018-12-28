@@ -23,7 +23,7 @@ const NavigationBarContainerContainer = styled.div`
 `;
 
 const NavigationBarTitle = styled.span`
-	font-family: header;
+	font-family: Hero;
 	text-transform: uppercase;
 	font-size: 20px;
 	letter-spacing: 1px;

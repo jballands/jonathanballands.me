@@ -41,7 +41,7 @@ import recreation9817 from './recreation9817.json';
 const Title = styled.div`
 	font-size: 58px;
 	color: ${props => props.color};
-	font-family: header;
+	font-family: Hero;
 	text-transform: uppercase;
 	text-align: center;
 `;
