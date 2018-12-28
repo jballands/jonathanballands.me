@@ -16,7 +16,7 @@ import Kinesis from 'routes/Kinesis';
 import PageNotFound from 'routes/404';
 
 import ContentScroller from 'components/ContentScroller';
-import NavigationBarContainer from 'containers/NavigationBarContainer';
+import NavigationBar from 'components/NavigationBar';
 import RouteWithFooter from 'components/RouteWithFooter';
 
 const AppContainer = styled.div`
@@ -58,7 +58,7 @@ export default class App extends React.Component {
 
 		return (
 			<AppContainer>
-				<NavigationBarContainer location={location} />
+				<NavigationBar location={location} />
 				<RouteWrapper>
 					<ContentScroller history={history} location={location}>
 						<TransitionGroup>

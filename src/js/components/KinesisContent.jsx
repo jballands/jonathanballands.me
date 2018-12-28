@@ -7,15 +7,32 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import ImmutablePropTypes from 'react-immutable-proptypes';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 import moment from 'moment';
+
+import { chooseEntry } from 'actions/KinesisActions';
 
 import BackgroundGradient from 'components/BackgroundGradient';
 import ContentScroller from 'components/ContentScroller';
 import KinesisMarkdown from 'components/KinesisMarkdown';
 import LoadingAnimation from 'components/LoadingAnimation';
 
+import entries from 'helpers/kinesisEntries';
+
 import { Type } from '~/kinesis.config.js';
+
+const mapStateToProps = ({ kinesis }) => ({
+	content: kinesis.get('content'),
+	contentLoading: kinesis.get('contentLoading'),
+	filteredEntries: kinesis.get('filteredEntries'),
+	selectedEntry: kinesis.get('selectedEntry'),
+});
+
+const mapDispatchToProps = dispatch => ({
+	chooseEntry: id => dispatch(chooseEntry(id)),
+});
 
 const StyledLoadingAnimation = styled(LoadingAnimation)`
 	width: 100%;
@@ -49,16 +66,37 @@ const KinesisArticleMarkdown = styled(KinesisMarkdown)`
 	margin-top: 35px;
 `;
 
-export default class KinesisContent extends React.Component {
+class KinesisContent extends React.Component {
 	static displayName = 'KinesisContent';
 
 	static propTypes = {
+		chooseEntry: PropTypes.func,
 		content: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
 		contentLoading: PropTypes.bool,
+		filteredEntries: ImmutablePropTypes.orderedMap,
 		history: PropTypes.object,
 		location: PropTypes.object,
-		selectedEntry: PropTypes.object.isRequired,
+		match: PropTypes.object,
+		selectedEntry: PropTypes.object,
 	};
+
+	chooseEntryBasedOnRoute = () => {
+		this.props.chooseEntry(
+			entries.get(this.props.match.params.kinesisId).get('id'),
+		);
+	};
+
+	componentDidMount() {
+		// When this component mounts, just choose an entry
+		this.chooseEntryBasedOnRoute();
+	}
+
+	componentDidUpdate(prevProps) {
+		// We only react when the route changes
+		if (this.props.location.pathname !== prevProps.location.pathname) {
+			this.chooseEntryBasedOnRoute();
+		}
+	}
 
 	renderContent = () => {
 		const { content, selectedEntry } = this.props;
@@ -115,6 +153,10 @@ export default class KinesisContent extends React.Component {
 	render() {
 		const { selectedEntry } = this.props;
 
+		if (!selectedEntry) {
+			return null;
+		}
+
 		return (
 			<BackgroundGradient backgroundColor={selectedEntry.secondaryColor}>
 				<KinesisContainer>
@@ -124,3 +166,8 @@ export default class KinesisContent extends React.Component {
 		);
 	}
 }
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps,
+)(KinesisContent);

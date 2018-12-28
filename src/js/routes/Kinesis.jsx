@@ -11,7 +11,7 @@ import styled from 'styled-components';
 import { Route } from 'react-router-dom';
 
 import KinesisBrowser from 'components/KinesisBrowser';
-import KinesisContentContainer from 'containers/KinesisContentContainer';
+import KinesisContent from 'components/KinesisContent';
 
 const KinesisContainer = styled.div`
 	width: 100%;
@@ -34,7 +34,7 @@ export default class Kinesis extends React.Component {
 				<KinesisBrowser history={history} match={match} />
 				<Route
 					path={`${match.url}/:kinesisId?`}
-					component={KinesisContentContainer}
+					component={KinesisContent}
 				/>
 			</KinesisContainer>
 		);

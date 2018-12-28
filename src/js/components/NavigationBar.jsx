@@ -40,8 +40,8 @@ const mapStateToProps = ({ kinesis }) => ({
 	currentKinesisEntryId: kinesis.getIn(['selectedEntry', 'id']),
 });
 
-class NavigationBarContainer extends React.Component {
-	static displayName = 'NavigationBarContainer';
+class NavigationBar extends React.Component {
+	static displayName = 'NavigationBar';
 
 	static propTypes = {
 		currentKinesisEntryId: PropTypes.string,
@@ -78,4 +78,4 @@ class NavigationBarContainer extends React.Component {
 	}
 }
 
-export default connect(mapStateToProps)(NavigationBarContainer);
+export default connect(mapStateToProps)(NavigationBar);
