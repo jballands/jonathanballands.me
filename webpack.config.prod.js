@@ -12,9 +12,7 @@ const CompressionPlugin = require('compression-webpack-plugin');
 
 module.exports = {
 	mode: 'production',
-	entry: {
-		index: './src/js/index',
-	},
+	entry: ['./src/index'],
 	optimization: {
 		minimize: true,
 	},
@@ -26,7 +24,7 @@ module.exports = {
 	output: {
 		path: path.resolve(__dirname, './public'),
 		publicPath: '/',
-		filename: '[name].bundle.js',
+		filename: 'bundle.js',
 		chunkFilename: '[name].bundle.js',
 	},
 	module: {
@@ -58,15 +56,15 @@ module.exports = {
 		extensions: ['.js', '.jsx'],
 		modules: [path.resolve(__dirname, 'node_modules'), 'node_modules'],
 		alias: {
-			actions: path.resolve(__dirname, './src/js/actions'),
-			components: path.resolve(__dirname, './src/js/components'),
-			containers: path.resolve(__dirname, './src/js/containers'),
+			actions: path.resolve(__dirname, './src/actions'),
+			components: path.resolve(__dirname, './src/components'),
+			containers: path.resolve(__dirname, './src/containers'),
 			experiments: path.resolve(__dirname, './experiments'),
-			helpers: path.resolve(__dirname, './src/js/helpers'),
-			reducers: path.resolve(__dirname, './src/js/reducers'),
-			routes: path.resolve(__dirname, './src/js/routes'),
-			sagas: path.resolve(__dirname, './src/js/sagas'),
-			svg: path.resolve(__dirname, './src/js/svg'),
+			helpers: path.resolve(__dirname, './src/helpers'),
+			reducers: path.resolve(__dirname, './src/reducers'),
+			routes: path.resolve(__dirname, './src/routes'),
+			sagas: path.resolve(__dirname, './src/sagas'),
+			svg: path.resolve(__dirname, './src/svg'),
 			styles: path.resolve(__dirname, './src/styles'),
 			'~': path.resolve(__dirname, '.'),
 		},

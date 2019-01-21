@@ -5,6 +5,7 @@
 //  © 2018 Jonathan Ballands
 //
 
+const webpack = require('webpack');
 const path = require('path');
 
 // -----------------------------------------------------------------------------
@@ -12,16 +13,14 @@ const path = require('path');
 module.exports = {
 	mode: 'development',
 	context: path.resolve(__dirname),
-	entry: {
-		index: './src/index.jsx',
-	},
+	entry: ['webpack/hot/dev-server', './src/index.jsx'],
 	optimization: {
 		minimize: false,
 	},
 	output: {
 		path: path.resolve(__dirname, './public'),
 		publicPath: '/',
-		filename: '[name].bundle.js',
+		filename: 'bundle.js',
 		chunkFilename: '[name].bundle.js',
 	},
 	module: {
@@ -53,6 +52,7 @@ module.exports = {
 			},
 		],
 	},
+	plugins: [new webpack.HotModuleReplacementPlugin()],
 	resolve: {
 		extensions: ['.js', '.jsx', '.md'],
 		alias: {
@@ -70,10 +70,16 @@ module.exports = {
 		},
 	},
 	devServer: {
-		contentBase: './public',
+		contentBase: [
+			path.resolve(__dirname, './public'),
+			path.resolve(__dirname, './public/markdown'),
+			path.resolve(__dirname, './public/assets'),
+		],
 		historyApiFallback: true,
 		watchContentBase: true,
 		host: '0.0.0.0',
 		port: 3001,
+		hot: true,
 	},
+	devtool: 'source-map',
 };

@@ -38,3 +38,7 @@ class JonathanBallandsMe extends React.Component {
 }
 
 render(<JonathanBallandsMe />, document.getElementById('reactroot'));
+
+if (module.hot) {
+	module.hot.accept();
+}
