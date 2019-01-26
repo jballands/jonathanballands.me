@@ -25,6 +25,7 @@ const Svg = styled.svg`
 	height: 600px;
 	* {
 		font-size: 13px;
+		font-family: Bodytext;
 	}
 	overflow: hidden;
 `;
