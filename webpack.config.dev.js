@@ -30,11 +30,6 @@ module.exports = {
 				use: [{ loader: 'style-loader' }, { loader: 'css-loader' }],
 			},
 			{
-				test: /\.jsx?$/,
-				include: /src/,
-				use: [{ loader: 'source-map-loader' }],
-			},
-			{
 				test: /\.(jpe?g|png|gif|svg)$/i,
 				use: [
 					{ loader: 'url-loader?limit=8192' },

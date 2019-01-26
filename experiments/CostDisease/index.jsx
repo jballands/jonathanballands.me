@@ -121,13 +121,6 @@ export default class CostDiseaseExperiment extends React.Component {
 		/>
 	);
 
-	renderEmploymentVizExplanationMd = () => (
-		<MarkdownForExplainations
-			color={this.props.primaryColor}
-			content={employmentVizExplanationMd}
-		/>
-	);
-
 	render() {
 		return (
 			<div>

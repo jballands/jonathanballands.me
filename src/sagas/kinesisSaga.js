@@ -12,7 +12,7 @@ import {
 	KINESIS_CHOOSE_ENTRY,
 	KINESIS_CHOOSE_ENTRY_START_LOADING,
 	KINESIS_CHOOSE_ENTRY_LOADING_SUCCESS,
-	KINESIS_CHOOSE_ENTRY_LOADING_FAILED,
+	KINESIS_CHOOSE_ENTRY_LOADING_FAILURE,
 } from 'actions/KinesisActions';
 import entries from 'helpers/kinesisEntries';
 
@@ -38,12 +38,12 @@ function* loadKinesisArticleEntry({ resource }) {
 			});
 		}
 		yield put({
-			type: KINESIS_CHOOSE_ENTRY_LOADING_FAILED,
+			type: KINESIS_CHOOSE_ENTRY_LOADING_FAILURE,
 			error: "Couldn't fetch the kinesis post",
 		});
 	} catch (e) {
 		yield put({
-			type: KINESIS_CHOOSE_ENTRY_LOADING_FAILED,
+			type: KINESIS_CHOOSE_ENTRY_LOADING_FAILURE,
 			error: "Couldn't fetch the kinesis post",
 		});
 	}
@@ -61,12 +61,12 @@ function* loadKinesisExperimentEntry({ resource }) {
 		}
 
 		yield put({
-			type: KINESIS_CHOOSE_ENTRY_LOADING_FAILED,
+			type: KINESIS_CHOOSE_ENTRY_LOADING_FAILURE,
 			error: "Couldn't fetch the kinesis post",
 		});
 	} catch (e) {
 		yield put({
-			type: KINESIS_CHOOSE_ENTRY_LOADING_FAILED,
+			type: KINESIS_CHOOSE_ENTRY_LOADING_FAILURE,
 			error: "Couldn't fetch the kinesis post",
 		});
 	}
@@ -85,7 +85,7 @@ function* loadKinesisEntry({ id }) {
 			break;
 		default:
 			return yield put({
-				type: KINESIS_CHOOSE_ENTRY_LOADING_FAILED,
+				type: KINESIS_CHOOSE_ENTRY_LOADING_FAILURE,
 				error: 'Unrecognized Kinesis post type',
 			});
 	}
