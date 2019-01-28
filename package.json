@@ -4,11 +4,10 @@
 	"description": "Third version of my personal website",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"dev": "npm run fresh && ./node_modules/.bin/webpack-dev-server --config webpack.config.dev.js",
+		"start": "npm run fresh && ./node_modules/.bin/webpack-dev-server --config webpack.config.dev.js",
 		"build": "npm run fresh && ./node_modules/.bin/webpack --config webpack.config.prod.js",
 		"fresh": "find ./public -name \"*.js\" -type f -delete",
-		"s3:upload": "npm run build && aws s3 sync ./public s3://jonathanballands.me --exclude \".DS_Store\" --exclude \"*.js\" --cache-control max-age=2592000 && aws s3 sync ./public s3://jonathanballands.me --exclude \"*\"  --include \"*.js\" --cache-control max-age=2592000 --content-encoding \"gzip\"",
-		"s3:test": "npm run fresh && ./node_modules/.bin/webpack --compress false --config webpack.config.prod.js && static-server --port 3001 --index public/index.html"
+		"s3:upload": "npm run build && aws s3 sync ./public s3://jonathanballands.me --exclude \".DS_Store\" --exclude \"*.js\" --cache-control max-age=2592000 && aws s3 sync ./public s3://jonathanballands.me --exclude \"*\"  --include \"*.js\" --cache-control max-age=2592000 --content-encoding \"gzip\""
 	},
 	"repository": {
 		"type": "git",
