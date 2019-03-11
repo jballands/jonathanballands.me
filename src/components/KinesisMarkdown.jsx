@@ -91,7 +91,7 @@ const KinesisStyle = styled.div`
 		border-left: 1px solid ${props => props.color};
 		padding: 1px 15px;
 		margin: 20px 0;
-		font-family: 'Droid Serif', serif;
+		font-family: Quote;
 	}
 
 	hr {

@@ -12,20 +12,16 @@ const CompressionPlugin = require('compression-webpack-plugin');
 
 module.exports = {
 	mode: 'production',
-	entry: ['./src/index'],
+	context: path.resolve(__dirname),
+	entry: ['./src/index.jsx'],
 	optimization: {
 		minimize: true,
 	},
-	plugins: [
-		new CompressionPlugin({
-			filename: '[path]',
-		}),
-	],
 	output: {
 		path: path.resolve(__dirname, './public'),
 		publicPath: '/',
 		filename: 'bundle.js',
-		chunkFilename: '[name].bundle.js',
+		chunkFilename: '[chunkhash].bundle.js',
 	},
 	module: {
 		rules: [
@@ -45,13 +41,17 @@ module.exports = {
 				exclude: /(node_modules|bower_components)/,
 				use: [
 					{
-						loader:
-							'babel-loader?presets[]=stage-0,presets[]=react,plugins[]=transform-class-properties',
+						loader: 'babel-loader',
 					},
 				],
 			},
 		],
 	},
+	plugins: [
+		new CompressionPlugin({
+			filename: '[path]',
+		}),
+	],
 	resolve: {
 		extensions: ['.js', '.jsx'],
 		modules: [path.resolve(__dirname, 'node_modules'), 'node_modules'],

@@ -18,6 +18,7 @@ const AxisContainer = styled.g`
 
 	text {
 		font-size: 10px;
+		font-family: Bodytext;
 	}
 `;
 

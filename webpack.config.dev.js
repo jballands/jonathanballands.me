@@ -21,18 +21,13 @@ module.exports = {
 		path: path.resolve(__dirname, './public'),
 		publicPath: '/',
 		filename: 'bundle.js',
-		chunkFilename: '[name].bundle.js',
+		chunkFilename: '[chunkhash].bundle.js',
 	},
 	module: {
 		rules: [
 			{
 				test: /\.css$/,
 				use: [{ loader: 'style-loader' }, { loader: 'css-loader' }],
-			},
-			{
-				test: /\.jsx?$/,
-				include: /src/,
-				use: [{ loader: 'source-map-loader' }],
 			},
 			{
 				test: /\.(jpe?g|png|gif|svg)$/i,
