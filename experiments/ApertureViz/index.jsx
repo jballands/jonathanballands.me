@@ -48,6 +48,26 @@ export default class ApertureViz extends Component {
 					formatter={this.fStopSliderFormatter}
 					showValue
 				/>
+				<Slider
+					value={this.state.fStopIndex + 1}
+					onChange={this.onfStopChange}
+					title="Focal Length"
+					accentColor={primaryColor}
+					min={1}
+					max={STOP_128.length}
+					formatter={this.fStopSliderFormatter}
+					showValue
+				/>
+				<Slider
+					value={this.state.fStopIndex + 1}
+					onChange={this.onfStopChange}
+					title="Diameter"
+					accentColor={primaryColor}
+					min={1}
+					max={STOP_128.length}
+					formatter={this.fStopSliderFormatter}
+					showValue
+				/>
 				<ApertureSprial
 					focalLength={400}
 					fStop={STOP_128[this.state.fStopIndex]}

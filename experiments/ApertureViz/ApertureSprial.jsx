@@ -11,7 +11,7 @@ import styled from 'styled-components';
 import { spring, Motion } from 'react-motion';
 import { scaleLog } from 'd3-scale';
 import { curveNatural, lineRadial } from 'd3-shape';
-import { radiansToDegrees } from './utils';
+import { formatStop, radiansToDegrees } from './utils';
 
 const Svg = styled.svg`
 	width: 500px;
@@ -97,6 +97,9 @@ export default class ApertureSprial extends PureComponent {
 						const x2 = originX + r * Math.sin(a);
 						const y2 = originY - r * Math.cos(a);
 
+						const xText = originX + (r + 7) * Math.sin(a);
+						const yText = originY - (r + 7) * Math.cos(a);
+
 						return (
 							<g>
 								<Lens cx={originX} cy={originY} r={r} />
@@ -107,9 +110,10 @@ export default class ApertureSprial extends PureComponent {
 									y2={y2}
 								/>
 								<RadiusText
-									transform={`translate(${x2}, ${y2 -
-										10})rotate(${radiansToDegrees(a)})`}>
-									{fStop}
+									transform={`translate(${xText}, ${yText})rotate(${radiansToDegrees(
+										a,
+									)})`}>
+									{formatStop(fStop)}
 								</RadiusText>
 							</g>
 						);
