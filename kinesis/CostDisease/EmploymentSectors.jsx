@@ -1,6 +1,6 @@
 //
 //	jballands/jonathanballands.me
-//	CPIOverTime.jsx
+//	EmploymentSectors.jsx
 //
 //	© 2017 Jonathan Ballands
 //
@@ -15,16 +15,10 @@ import { curveBasis, line } from 'd3-shape';
 import { scaleLinear, scaleTime } from 'd3-scale';
 import _concat from 'lodash.concat';
 
-import Axis from 'experiments/common/Axis';
+import Axis from 'kinesis/CostDisease/Axis';
 
-import tuition7817 from './tuition7817.json';
-import medical7817 from './medical7817.json';
-import furniture7817 from './furniture7817.json';
-import foodAway7817 from './foodAway7817.json';
-import foodHome7817 from './foodHome7817.json';
-import cars7817 from './cars7817.json';
-import apparel7817 from './apparel7817.json';
-import housing7817 from './housing7817.json';
+import services4017 from './services4017.json';
+import manufacturing4017 from './manufacturing4017.json';
 
 const VIEWBOX = {
 	width: 500,
@@ -33,8 +27,8 @@ const VIEWBOX = {
 
 const MARGINS = {
 	top: 0,
-	left: 52,
-	right: 60,
+	left: 75,
+	right: 64,
 	bottom: 35,
 };
 
@@ -77,18 +71,10 @@ const LineLabel = styled.text`
 	font-style: italic;
 	fill: ${props => props.color};
 	transform: translate(5px, 2px);
-
-	&.foodHome {
-		transform: translate(5px, 5px);
-	}
-
-	&.furniture {
-		transform: translate(5px, 4px);
-	}
 `;
 
-export default class CPIOverTime extends React.Component {
-	static displayName = 'CPIOverTime';
+export default class EmploymentSectors extends React.Component {
+	static displayName = 'EmploymentSectors';
 
 	static propTypes = {
 		primaryColor: PropTypes.string,
@@ -109,52 +95,16 @@ export default class CPIOverTime extends React.Component {
 	render() {
 		const sectorData = [
 			{
-				id: 'tuition',
-				displayName: 'College Tuition',
-				data: tuition7817,
-				color: '#4286f4',
+				id: 'services',
+				displayName: 'Services',
+				data: services4017,
+				color: '#a769ff',
 			},
 			{
-				id: 'medical',
-				displayName: 'Medical Care',
-				data: medical7817,
-				color: '#41d9f4',
-			},
-			{
-				id: 'foodHome',
-				displayName: 'Eating at Home',
-				data: foodHome7817,
-				color: '#09a00c',
-			},
-			{
-				id: 'foodAway',
-				displayName: 'Eating Out',
-				data: foodAway7817,
-				color: '#35c69d',
-			},
-			{
-				id: 'cars',
-				displayName: 'New Cars',
-				data: cars7817,
-				color: '#730077',
-			},
-			{
-				id: 'furniture',
-				displayName: 'Furniture',
-				data: furniture7817,
-				color: '#cc0a67',
-			},
-			{
-				id: 'apparel',
-				displayName: 'Clothing',
-				data: apparel7817,
-				color: '#f237d9',
-			},
-			{
-				id: 'housing',
-				displayName: 'Housing',
-				data: housing7817,
-				color: '#0ed69d',
+				id: 'manufacturing',
+				displayName: 'Manufacturing',
+				data: manufacturing4017,
+				color: '#ff69f5',
 			},
 		];
 		const allData = _concat(...sectorData.map(d => d.data));
@@ -165,10 +115,10 @@ export default class CPIOverTime extends React.Component {
 		const lineFn = line()
 			.curve(curveBasis)
 			.x(d => x(this.stringToDate(d.Label)))
-			.y(d => y(d.Value));
+			.y(d => y(d.Value / 1000));
 
 		x.domain(extent(allData, d => this.stringToDate(d.Label))).nice();
-		y.domain(extent(allData, d => +d.Value)).nice();
+		y.domain(extent(allData, d => +d.Value / 1000)).nice();
 
 		sectorData.map(sector => {
 			sector.d = lineFn(sector.data);
@@ -191,7 +141,7 @@ export default class CPIOverTime extends React.Component {
 							scale={y}
 							orientation="left"
 							numberOfTicks={6}
-							label="← CPI →"
+							label="← Employees (millions) →"
 						/>
 
 						{sectorData.map(sector => (
@@ -209,7 +159,7 @@ export default class CPIOverTime extends React.Component {
 											this.last(sector.data).Label,
 										),
 									)}
-									y={y(this.last(sector.data).Value)}
+									y={y(this.last(sector.data).Value / 1000)}
 									color={sector.color}
 									className={sector.id}>
 									{sector.displayName}

@@ -16,7 +16,7 @@ import {
 } from 'actions/KinesisActions';
 import entries from 'helpers/kinesisEntries';
 
-import { Type } from '~/kinesis.config.js';
+import { Type } from 'kinesis/kinesis.config.js';
 
 function fetchKinesisArticleEntry(endpoint) {
 	return axios.get(endpoint);

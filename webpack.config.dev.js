@@ -56,6 +56,7 @@ module.exports = {
 			containers: path.resolve(__dirname, './src/containers'),
 			experiments: path.resolve(__dirname, './experiments'),
 			helpers: path.resolve(__dirname, './src/helpers'),
+			kinesis: path.resolve(__dirname, './kinesis'),
 			reducers: path.resolve(__dirname, './src/reducers'),
 			routes: path.resolve(__dirname, './src/routes'),
 			sagas: path.resolve(__dirname, './src/sagas'),

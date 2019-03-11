@@ -1,6 +1,6 @@
 //
 //	jballands/jonathanballands.me
-//	EmploymentSectors.jsx
+//	SingleCPIOverTime.jsx
 //
 //	© 2017 Jonathan Ballands
 //
@@ -13,22 +13,18 @@ import styled from 'styled-components';
 import { extent } from 'd3-array';
 import { curveBasis, line } from 'd3-shape';
 import { scaleLinear, scaleTime } from 'd3-scale';
-import _concat from 'lodash.concat';
 
-import Axis from 'experiments/common/Axis';
-
-import services4017 from './services4017.json';
-import manufacturing4017 from './manufacturing4017.json';
+import Axis from 'kinesis/CostDisease/Axis';
 
 const VIEWBOX = {
 	width: 500,
-	height: 400,
+	height: 250,
 };
 
 const MARGINS = {
 	top: 0,
-	left: 75,
-	right: 64,
+	left: 52,
+	right: 60,
 	bottom: 35,
 };
 
@@ -66,18 +62,13 @@ const StyledAxis = styled(Axis)`
 	}
 `;
 
-const LineLabel = styled.text`
-	font-size: 9px;
-	font-style: italic;
-	fill: ${props => props.color};
-	transform: translate(5px, 2px);
-`;
-
-export default class EmploymentSectors extends React.Component {
-	static displayName = 'EmploymentSectors';
+export default class SingleCPIOverTime extends React.Component {
+	static displayName = 'SingleCPIOverTime';
 
 	static propTypes = {
+		data: PropTypes.array,
 		primaryColor: PropTypes.string,
+		range: PropTypes.array,
 	};
 
 	last = array => {
@@ -93,21 +84,7 @@ export default class EmploymentSectors extends React.Component {
 	};
 
 	render() {
-		const sectorData = [
-			{
-				id: 'services',
-				displayName: 'Services',
-				data: services4017,
-				color: '#a769ff',
-			},
-			{
-				id: 'manufacturing',
-				displayName: 'Manufacturing',
-				data: manufacturing4017,
-				color: '#ff69f5',
-			},
-		];
-		const allData = _concat(...sectorData.map(d => d.data));
+		const { data, primaryColor, range } = this.props;
 
 		const x = scaleTime().range([0, DIMENSIONS.width]);
 		const y = scaleLinear().range([0, -DIMENSIONS.height + MARGINS.top]);
@@ -115,57 +92,36 @@ export default class EmploymentSectors extends React.Component {
 		const lineFn = line()
 			.curve(curveBasis)
 			.x(d => x(this.stringToDate(d.Label)))
-			.y(d => y(d.Value / 1000));
+			.y(d => y(d.Value));
 
-		x.domain(extent(allData, d => this.stringToDate(d.Label))).nice();
-		y.domain(extent(allData, d => +d.Value / 1000)).nice();
-
-		sectorData.map(sector => {
-			sector.d = lineFn(sector.data);
-			return sector;
-		});
+		x.domain(extent(data, d => this.stringToDate(d.Label))).nice();
+		y.domain(range);
 
 		return (
 			<CPIOverTimeContainer>
 				<Svg viewBox={`0 0 ${VIEWBOX.width} ${VIEWBOX.height}`}>
 					<GraphContainer>
 						<StyledAxis
-							color={this.props.primaryColor}
+							color={primaryColor}
 							scale={x}
 							orientation="bottom"
 							numberOfTicks={6}
 							label="← Time →"
 						/>
 						<StyledAxis
-							color={this.props.primaryColor}
+							color={primaryColor}
 							scale={y}
 							orientation="left"
 							numberOfTicks={6}
-							label="← Employees (millions) →"
+							label="← CPI →"
 						/>
 
-						{sectorData.map(sector => (
-							<g key={sector.id}>
-								<path
-									d={sector.d}
-									stroke={sector.color}
-									fill="transparent"
-									strokeWidth={1}
-									key={sector.id}
-								/>
-								<LineLabel
-									x={x(
-										this.stringToDate(
-											this.last(sector.data).Label,
-										),
-									)}
-									y={y(this.last(sector.data).Value / 1000)}
-									color={sector.color}
-									className={sector.id}>
-									{sector.displayName}
-								</LineLabel>
-							</g>
-						))}
+						<path
+							d={lineFn(data)}
+							stroke={primaryColor}
+							fill="transparent"
+							strokeWidth={1}
+						/>
 					</GraphContainer>
 				</Svg>
 			</CPIOverTimeContainer>

@@ -21,7 +21,7 @@ import LoadingAnimation from 'components/LoadingAnimation';
 
 import entries from 'helpers/kinesisEntries';
 
-import { Type } from '~/kinesis.config.js';
+import { Type } from 'kinesis/kinesis.config.js';
 
 const mapStateToProps = ({ kinesis }) => ({
 	content: kinesis.get('content'),

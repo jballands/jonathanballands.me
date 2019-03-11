@@ -69,6 +69,23 @@ export const normalize = ({
 //	Graphing
 //
 
+export const dataGroupedByProperty = data => {
+	return data.reduce(
+		(groupedByProperty, dataPoint) =>
+			dataPoint
+				.delete('series')
+				.reduce(
+					(groupedByProperty, val, key) =>
+						groupedByProperty.update(
+							key,
+							(list = Immutable.List()) => list.push(val),
+						),
+					groupedByProperty,
+				),
+		Immutable.Map(),
+	);
+};
+
 export const squash = ({ series, inputColumn, outputColumn }) => {
 	return series
 		.reduce(
@@ -125,9 +142,8 @@ export const xIntercept = ({
 }) => {
 	const avgSlope = mean(slopes);
 
-	const latestValue = series.reduce(
-		(latest, dp) =>
-			dp.get(inputColumn) > latest.get(inputColumn) ? dp : latest,
+	const latestValue = series.reduce((latest, dp) =>
+		dp.get(inputColumn) > latest.get(inputColumn) ? dp : latest,
 	);
 
 	// This right here is the magic number!
@@ -161,9 +177,8 @@ export const getSeriesCalculations = ({
 		standardDeviation: sd,
 	});
 
-	const latestValue = squashedSeries.reduce(
-		(latest, dp) =>
-			dp.get(inputColumn) > latest.get(inputColumn) ? dp : latest,
+	const latestValue = squashedSeries.reduce((latest, dp) =>
+		dp.get(inputColumn) > latest.get(inputColumn) ? dp : latest,
 	);
 	const targetDate = xIntercept({
 		series: squashedSeries,

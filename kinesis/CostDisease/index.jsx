@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import KinesisMarkdown from 'components/KinesisMarkdown';
-import ExplanationPanel from 'experiments/common/ExplanationPanel';
+import ExplanationPanel from 'kinesis/CostDisease/ExplanationPanel';
 
 import CPIOverTime from './CPIOverTime';
 import Productivity from './Productivity';
@@ -31,7 +31,6 @@ import {
 	recreationCpiVizExplanationMd,
 	paradoxExplanationMd,
 	implicationsMd,
-	employmentVizExplanationMd,
 	costDiseaseAndLowProductivityMd,
 } from './markdown';
 
