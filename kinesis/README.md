@@ -23,15 +23,14 @@ Starting in jb.me 3.3, the schema for posts is the following:
 }
 ```
 
-You may notice that `resource` can now only be a string, the color members are consolidated
-underneath a new `kinesis` member, and the `type` member is gone.
+You may notice that `resource` can now only be a string and the `type` member is gone.
 
 > The `resource` member must resolve to a React component.
 
-In jb.me 3.3, the core app is expecting a path in the `resource` member. This path must resolve
+In jb.me 3.3, Kinesis is expecting a path in the `resource` member. This path must resolve
 to a React component as the default export. Under the hood, jb.me 3.3 will call:
 
-```js
+```jsx
 const Resource = React.lazy(() => import(entry.resource));
 
 ...
