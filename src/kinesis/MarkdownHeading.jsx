@@ -1,15 +1,15 @@
 //
 //	jballands/jonathanballands.me
-//	KinesisMarkdownHeader.js
+//	MarkdownHeader.js
 //
-//	© 2017 Jonathan Ballands
+//	© 2019 Jonathan Ballands
 //
 
-import React from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-export default class KinesisMarkdownHeading extends React.PureComponent {
-	static displayName = 'KinesisMarkdownHeading';
+export default class MarkdownHeading extends PureComponent {
+	static displayName = 'MarkdownHeading';
 
 	static propTypes = {
 		children: PropTypes.node,

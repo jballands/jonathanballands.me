@@ -48,20 +48,6 @@ const KinesisContainer = styled.div`
 	min-width: 400px;
 `;
 
-const KinesisArticleTitle = styled.div`
-	font-size: 42px;
-	color: ${props => props.color};
-	font-family: Hero;
-	text-transform: uppercase;
-`;
-
-const KinesisArticleSubtitle = styled.div`
-	display: flex;
-	flex-flow: column nowrap;
-	color: ${props => props.color};
-	margin-top: 5px;
-`;
-
 const KinesisArticleMarkdown = styled(KinesisMarkdown)`
 	margin-top: 35px;
 `;

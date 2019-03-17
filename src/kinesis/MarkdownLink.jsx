@@ -1,15 +1,15 @@
 //
 //	jballands/jonathanballands.me
-//	KinesisMarkdownLink.js
+//	MarkdownLink.js
 //
-//	© 2017 Jonathan Ballands
+//	© 2019 Jonathan Ballands
 //
 
-import React from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-export default class KinesisMarkdownLink extends React.PureComponent {
-	static displayName = 'KinesisMarkdownLink';
+export default class MarkdownLink extends PureComponent {
+	static displayName = 'MarkdownLink';
 
 	static propTypes = {
 		href: PropTypes.string,

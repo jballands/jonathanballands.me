@@ -1,18 +1,18 @@
 //
 //	jballands/jonathanballands.me
-//	KinesisMarkdown.jsx
+//	Markdown.jsx
 //
-//	© 2017 Jonathan Ballands
+//	© 2019 Jonathan Ballands
 //
 
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Markdown from 'react-markdown';
+import ReactMarkdown from 'react-markdown';
 import styled from 'styled-components';
 
-import KinesisMarkdownCodeBlock from 'components/KinesisMarkdownCodeBlock';
-import KinesisMarkdownHeading from 'components/KinesisMarkdownHeading';
-import KinesisMarkdownLink from 'components/KinesisMarkdownLink';
+import KinesisMarkdownCodeBlock from 'kinesis/KinesisMarkdownCodeBlock';
+import KinesisMarkdownHeading from 'kinesis/KinesisMarkdownHeading';
+import KinesisMarkdownLink from 'kinesis/KinesisMarkdownLink';
 
 import { black, shark, linkShade } from 'helpers/palette';
 
@@ -118,8 +118,8 @@ const KinesisStyle = styled.div`
 	}
 `;
 
-export default class KinesisMarkdown extends React.Component {
-	static displayName = 'KinesisMarkdown';
+export default class Markdown extends Component {
+	static displayName = 'Markdown';
 
 	static propTypes = {
 		className: PropTypes.string,
@@ -133,7 +133,7 @@ export default class KinesisMarkdown extends React.Component {
 
 		return (
 			<KinesisStyle className={className} color={color} style={style}>
-				<Markdown
+				<ReactMarkdown
 					renderers={{
 						CodeBlock: KinesisMarkdownCodeBlock,
 						Heading: KinesisMarkdownHeading,

@@ -1,11 +1,11 @@
 //
 //	jballands/jonathanballands.me
-//	KinesisMarkdownCodeBlock.js
+//	MarkdownCodeBlock.js
 //
-//	© 2017 Jonathan Ballands
+//	© 2019 Jonathan Ballands
 //
 
-import React from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import Lowlight from 'react-lowlight';
 import js from 'highlight.js/lib/languages/javascript';
@@ -94,8 +94,8 @@ const StyledLowlight = styled(Lowlight)`
 Lowlight.registerLanguage('js', js);
 Lowlight.registerLanguage('bash', bash);
 
-export default class KinesisMarkdownCodeBlock extends React.PureComponent {
-	static displayName = 'KinesisMarkdownCodeBlock';
+export default class MarkdownCodeBlock extends PureComponent {
+	static displayName = 'MarkdownCodeBlock';
 
 	static propTypes = {
 		language: PropTypes.string,

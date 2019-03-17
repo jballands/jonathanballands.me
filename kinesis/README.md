@@ -19,9 +19,7 @@ Starting in jb.me 3.3, the schema for posts is the following:
 	resource: <string>,
 	primaryColor: <string>,
 	secondaryColor: <string>,
-	props: {
-		...
-	}
+	props: { ... },
 }
 ```
 
@@ -39,7 +37,7 @@ const Resource = React.lazy(() => import(entry.resource));
 ...
 
 <Suspense>
-	<Resource {...entry.props} />
+	<Resource primaryColor={primaryColor} secondaryColor={secondaryColor} {...entry.props} />
 </Suspense>
 ```
 
@@ -60,9 +58,119 @@ it could feed it into the correct pipeline (either into `<KinesisMarkdown />` or
 `React.createElement`). Since all Kinesis entries are just React components, this check is no
 longer necessary.
 
-## Writing an Entry
+## API
 
-TBD
+Here's an outline of what a Kinesis entry looks like:
 
-## Technical Notes
+```JSX
+import React, { Fragment } from 'react';
+import Header from 'kinesis/Header';
+import Markdown from 'kinesis/Markdown';
+import md from './foobar.md';
+
+const Foobar = ({ name, date, hashtags, primaryColor, secondaryColor }) => (
+	<Fragment>
+		<Header title={name} />
+		<Markdown color={primaryColor} content={md} />
+	</Fragment>
+);
+
+export default Foobar;
+```
+
+As you can see, Kinesis' only expectation is that a React component is returned from the `resource` member of `Post`.
+
+You can expect at least 5 props to be passed to this component, all of which come directly from `Post`:
+
+- `name`
+- `date`
+- `hashtags`
+- `primaryColor`
+- `secondaryColor`
+
+Note that if `props` is defined, that member will be spread into your component as well.
+
+### Post
+
+```js
+{
+	name: <string>,
+	date: <Date>,
+	hashtags: [<KinesisHashtag>],
+	resource: <string>,
+	primaryColor: <string>,
+	secondaryColor: <string>,
+	props: { ... },
+}
+```
+
+`name: <string>`  
+A string representing the name of the Kinesis post.
+
+`date: <Date>`  
+A [Date](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date) object
+representing the date the Kinesis post was published.
+
+`hashtags: [<KinesisHashtag>]`  
+An array of `KinesisHashtag`s. These are used in the search field to look for your post.
+
+`resource: <string>`  
+A path (understood by Webpack) that Kinesis will use to resolve your entry with `React.lazy`.
+
+`primaryColor: <string>`  
+A hex string representing the main color of your entry. Kinesis will use this to style the rest of the UI to
+match your color. It's recommended you use this as an accent color in your post, or as the `color` prop
+in any of Kinesis' helper components.
+
+`secondaryColor: <string>`  
+A hex string representing the secondary color of your entry. Kinesis will use this as a background color,
+so it's not recommended you use this.
+
+`props: <Object>`  
+An object of additional props you'd like to pass into your component.
+
+### KinesisHashtag
+
+```js
+<<id>>: {
+	id: <string>,
+	displayName: <string>,
+}
+```
+
+Since hashtags exist in an object, you should key your hashtag by the `id`.
+
+`id: <string>`  
+A string used under-the-hood by Kinesis to help identify this hashtag. The only requirement is that it is unique to this hashtag.
+
+`displayName: <string>`  
+A string representing the way you want Kinesis to display this hashtag in the UI.  
+
+### Header
+
+Example usage:
+
+```JSX
+import Header from 'kinesis/Header';
+
+<Header
+	title="Foobar"
+	date={new Date()}
+	hashtags="#foo, #bar"
+	color="#f00"
+/>
+```
+
+### Markdown
+
+Example usage:
+
+```JSX
+import Markdown from 'kinesis/Markdown';
+
+<Markdown
+	color="#F00"
+	content="Hello world! This *is* _markdown_."
+/>
+```
 
