@@ -34,3 +34,5 @@ Header.propTypes = {
 	hashtags: PropTypes.string,
 	color: PropTypes.string,
 };
+
+export default Header;

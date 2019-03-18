@@ -84,7 +84,6 @@ class KinesisContent extends Component {
 				secondaryColor,
 				name,
 				date,
-				hashtags,
 				resource,
 				props,
 			},
@@ -109,7 +108,7 @@ class KinesisContent extends Component {
 						<Resource
 							name={name}
 							date={date}
-							hashtags={hashtags}
+							hashtags={selectedEntry.getReadableHashtags()}
 							primaryColor={primaryColor}
 							secondaryColor={secondaryColor}
 							{...props}
