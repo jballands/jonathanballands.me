@@ -6,6 +6,7 @@
 //
 
 import Immutable from 'immutable';
+import moment from 'moment';
 
 import { kinesisPosts } from 'posts/kinesis.config.js';
 import encodeToUri from 'helpers/encodeToUri';
@@ -17,10 +18,6 @@ const entries = Immutable.Map(
 		map[id] = postWithId;
 		return map;
 	}, {}),
-);
-export const helpEntry = entries
-	.filter(entry => entry.help)
-	.toList()
-	.get(0);
+).sort((a, b) => (moment(a.date).isBefore(b.date) ? 1 : -1));
 
 export default entries;

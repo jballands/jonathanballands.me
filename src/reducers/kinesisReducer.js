@@ -24,16 +24,14 @@ const InitialStateRecord = Immutable.Record({
 	searchTerms: '',
 	sortOrder: 'later',
 	filteredEntries: sortKinesisEntries('later', entries),
-	selectedEntry: sortKinesisEntries('later', entries)
-		.valueSeq()
-		.get(0),
+	selectedEntry: null,
 	content: null,
 	contentLoading: true,
 	error: null,
 });
 
 function sortKinesisEntries(sortOrder, entries) {
-	return entries.toOrderedMap().sort((a, b) => {
+	return entries.sort((a, b) => {
 		if (sortOrder === 'later') {
 			return moment(a.date).isBefore(b.date) ? 1 : -1;
 		}

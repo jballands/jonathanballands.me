@@ -58,22 +58,11 @@ class KinesisContent extends Component {
 		selectedEntry: PropTypes.object,
 	};
 
-	chooseEntryBasedOnRoute = () => {
+	componentDidMount() {
+		// When this component mounts, just choose the entry
 		this.props.chooseEntry(
 			entries.get(this.props.match.params.kinesisId).get('id'),
 		);
-	};
-
-	componentDidMount() {
-		// When this component mounts, just choose an entry
-		this.chooseEntryBasedOnRoute();
-	}
-
-	componentDidUpdate(prevProps) {
-		// We only react when the route changes
-		if (this.props.location.pathname !== prevProps.location.pathname) {
-			this.chooseEntryBasedOnRoute();
-		}
 	}
 
 	render() {
@@ -88,10 +77,6 @@ class KinesisContent extends Component {
 				props,
 			},
 		} = this.props;
-
-		if (!selectedEntry) {
-			return null;
-		}
 
 		const Resource = lazy(resource);
 
