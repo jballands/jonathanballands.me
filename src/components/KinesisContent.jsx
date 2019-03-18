@@ -2,26 +2,22 @@
 //	jballands/jonathanballands.me
 //	KinesisContent.jsx
 //
-//	© 2017 Jonathan Ballands
+//	© 2019 Jonathan Ballands
 //
 
-import React from 'react';
+import React, { Component, Suspense, lazy } from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import moment from 'moment';
 
 import { chooseEntry } from 'actions/KinesisActions';
 
 import BackgroundGradient from 'components/BackgroundGradient';
 import ContentScroller from 'components/ContentScroller';
-import KinesisMarkdown from 'components/KinesisMarkdown';
 import LoadingAnimation from 'components/LoadingAnimation';
 
 import entries from 'helpers/kinesisEntries';
-
-import { Type } from 'kinesis/kinesis.config.js';
 
 const mapStateToProps = ({ kinesis }) => ({
 	content: kinesis.get('content'),
@@ -48,11 +44,7 @@ const KinesisContainer = styled.div`
 	min-width: 400px;
 `;
 
-const KinesisArticleMarkdown = styled(KinesisMarkdown)`
-	margin-top: 35px;
-`;
-
-class KinesisContent extends React.Component {
+class KinesisContent extends Component {
 	static displayName = 'KinesisContent';
 
 	static propTypes = {
@@ -84,69 +76,45 @@ class KinesisContent extends React.Component {
 		}
 	}
 
-	renderContent = () => {
-		const { content, selectedEntry } = this.props;
-
-		if (selectedEntry.type === Type.article) {
-			return (
-				<div>
-					<KinesisArticleTitle color={selectedEntry.primaryColor}>
-						{selectedEntry.name}
-					</KinesisArticleTitle>
-
-					<KinesisArticleSubtitle color={selectedEntry.primaryColor}>
-						<div>
-							{selectedEntry.date &&
-								moment(selectedEntry.date).format(
-									'MMMM Do, YYYY',
-								)}
-						</div>
-						<div>{selectedEntry.getReadableHashtags()}</div>
-					</KinesisArticleSubtitle>
-					<KinesisArticleMarkdown
-						color={selectedEntry.primaryColor}
-						content={content}
-					/>
-				</div>
-			);
-		} else if (selectedEntry.type === Type.experiment) {
-			return React.createElement(content, {
-				primaryColor: selectedEntry.primaryColor,
-				secondaryColor: selectedEntry.secondaryColor,
-			});
-		}
-		return <div>Ruh oh!</div>;
-	};
-
-	renderLoadingOrContent = () => {
-		const { contentLoading, history, location, selectedEntry } = this.props;
-
-		if (contentLoading) {
-			return (
-				<StyledLoadingAnimation
-					color={selectedEntry.primaryColor}
-					text={selectedEntry.name}
-				/>
-			);
-		}
-		return (
-			<ContentScroller history={history} location={location}>
-				{this.renderContent()}
-			</ContentScroller>
-		);
-	};
-
 	render() {
-		const { selectedEntry } = this.props;
+		const {
+			selectedEntry,
+			selectedEntry: {
+				primaryColor,
+				secondaryColor,
+				name,
+				date,
+				hashtags,
+				resource,
+				props,
+			},
+		} = this.props;
 
 		if (!selectedEntry) {
 			return null;
 		}
 
+		const Resource = lazy(resource);
+
 		return (
-			<BackgroundGradient backgroundColor={selectedEntry.secondaryColor}>
+			<BackgroundGradient backgroundColor={secondaryColor}>
 				<KinesisContainer>
-					{this.renderLoadingOrContent()}
+					<Suspense
+						fallback={
+							<StyledLoadingAnimation
+								color={primaryColor}
+								text={name}
+							/>
+						}>
+						<Resource
+							name={name}
+							date={date}
+							hashtags={hashtags}
+							primaryColor={primaryColor}
+							secondaryColor={secondaryColor}
+							{...props}
+						/>
+					</Suspense>
 				</KinesisContainer>
 			</BackgroundGradient>
 		);

@@ -10,9 +10,9 @@ import PropTypes from 'prop-types';
 import ReactMarkdown from 'react-markdown';
 import styled from 'styled-components';
 
-import KinesisMarkdownCodeBlock from 'kinesis/KinesisMarkdownCodeBlock';
-import KinesisMarkdownHeading from 'kinesis/KinesisMarkdownHeading';
-import KinesisMarkdownLink from 'kinesis/KinesisMarkdownLink';
+import MarkdownCodeBlock from 'kinesis/MarkdownCodeBlock';
+import MarkdownHeading from 'kinesis/MarkdownHeading';
+import MarkdownLink from 'kinesis/MarkdownLink';
 
 import { black, shark, linkShade } from 'helpers/palette';
 
@@ -135,9 +135,9 @@ export default class Markdown extends Component {
 			<KinesisStyle className={className} color={color} style={style}>
 				<ReactMarkdown
 					renderers={{
-						CodeBlock: KinesisMarkdownCodeBlock,
-						Heading: KinesisMarkdownHeading,
-						Link: KinesisMarkdownLink,
+						CodeBlock: MarkdownCodeBlock,
+						Heading: MarkdownHeading,
+						Link: MarkdownLink,
 					}}
 					source={content}
 				/>

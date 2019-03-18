@@ -10,11 +10,10 @@ import createSagaMiddleware from 'redux-saga';
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 
 //
-//	Startup reducers and sagas
+//	Startup reducers
 //
 
 import rootReducer from 'reducers/index';
-import rootSaga from 'sagas/index';
 
 /**
  * @member { object } store The redux store for the application.
@@ -35,8 +34,6 @@ class StoreConfiguration {
 		this.store = compose(applyMiddleware(...middleware))(createStore)(
 			combineReducers(this.reducers.toJS()),
 		);
-
-		this.sagaMiddleware.run(rootSaga);
 	}
 
 	/**

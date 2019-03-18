@@ -83,16 +83,6 @@ export default function kinesisReducer(
 				});
 		case KINESIS_CHOOSE_ENTRY:
 			return state.set('selectedEntry', entries.get(action.id));
-		case KINESIS_CHOOSE_ENTRY_START_LOADING:
-			return state.set('contentLoading', true).set('error', null);
-		case KINESIS_CHOOSE_ENTRY_LOADING_SUCCESS:
-			return state
-				.set('content', action.data)
-				.set('contentLoading', false);
-		case KINESIS_CHOOSE_ENTRY_LOADING_FAILURE:
-			return state
-				.set('error', action.error)
-				.set('contentLoading', false);
 		default:
 			return state;
 	}

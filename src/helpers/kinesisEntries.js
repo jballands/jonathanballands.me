@@ -7,7 +7,7 @@
 
 import Immutable from 'immutable';
 
-import { kinesisPosts } from 'kinesis/kinesis.config.js';
+import { kinesisPosts } from 'posts/kinesis.config.js';
 import encodeToUri from 'helpers/encodeToUri';
 
 const entries = Immutable.Map(

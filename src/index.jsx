@@ -9,10 +9,9 @@ import 'regenerator-runtime/runtime';
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import { Router, Route } from 'react-router-dom';
-import createHistory from 'history/createBrowserHistory';
+import { BrowserRouter, Route } from 'react-router-dom';
 
-import App from 'routes/App';
+import App from 'src/App';
 
 import storeConfiguration from 'helpers/configureStore';
 
@@ -29,9 +28,9 @@ class JonathanBallandsMe extends React.Component {
 	render() {
 		return (
 			<Provider store={this.store}>
-				<Router history={createHistory()}>
+				<BrowserRouter>
 					<Route path="/" component={App} />
-				</Router>
+				</BrowserRouter>
 			</Provider>
 		);
 	}

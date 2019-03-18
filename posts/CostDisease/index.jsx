@@ -9,9 +9,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import KinesisMarkdown from 'components/KinesisMarkdown';
-import ExplanationPanel from 'kinesis/CostDisease/ExplanationPanel';
+import Markdown from 'components/Markdown';
 
+import ExplanationPanel from './ExplanationPanel';
 import CPIOverTime from './CPIOverTime';
 import Productivity from './Productivity';
 import SellingWidgets from './SellingWidgets';
@@ -80,7 +80,7 @@ const VisualizationCredit = styled.div`
 	align-self: flex-end;
 `;
 
-const MarkdownForExplainations = styled(KinesisMarkdown)`
+const MarkdownForExplainations = styled(Markdown)`
 	font-size: 11pt;
 `;
 
@@ -128,10 +128,7 @@ export default class CostDiseaseExperiment extends React.Component {
 					And how it explains rising healthcare and education costs.
 				</Subtitle>
 
-				<KinesisMarkdown
-					color={this.props.primaryColor}
-					content={introMd}
-				/>
+				<Markdown color={this.props.primaryColor} content={introMd} />
 
 				<Visualization>
 					<ExplanationPanel
@@ -153,12 +150,9 @@ export default class CostDiseaseExperiment extends React.Component {
 					</VisualizationCredit>
 				</Visualization>
 
-				<KinesisMarkdown
-					color={this.props.primaryColor}
-					content={baumolMd}
-				/>
+				<Markdown color={this.props.primaryColor} content={baumolMd} />
 
-				<KinesisMarkdown
+				<Markdown
 					color={this.props.primaryColor}
 					content={productivityMd}
 				/>
@@ -167,7 +161,7 @@ export default class CostDiseaseExperiment extends React.Component {
 					<Productivity primaryColor={this.props.primaryColor} />
 				</Visualization>
 
-				<KinesisMarkdown
+				<Markdown
 					color={this.props.primaryColor}
 					content={realisticExampleMd}
 				/>
@@ -189,12 +183,12 @@ export default class CostDiseaseExperiment extends React.Component {
 					<SellingWidgets primaryColor={this.props.primaryColor} />
 				</Visualization>
 
-				<KinesisMarkdown
+				<Markdown
 					color={this.props.primaryColor}
 					content={realisticExampleTheoryMd}
 				/>
 
-				<KinesisMarkdown
+				<Markdown
 					color={this.props.primaryColor}
 					content={paradoxSallyMd}
 				/>
@@ -223,7 +217,7 @@ export default class CostDiseaseExperiment extends React.Component {
 					</VisualizationCredit>
 				</Visualization>
 
-				<KinesisMarkdown
+				<Markdown
 					color={this.props.primaryColor}
 					content={paradoxBarbraMd}
 				/>
@@ -254,12 +248,12 @@ export default class CostDiseaseExperiment extends React.Component {
 					</VisualizationCredit>
 				</Visualization>
 
-				<KinesisMarkdown
+				<Markdown
 					color={this.props.primaryColor}
 					content={paradoxExplanationMd}
 				/>
 
-				<KinesisMarkdown
+				<Markdown
 					color={this.props.primaryColor}
 					content={implicationsMd}
 				/>
@@ -283,7 +277,7 @@ export default class CostDiseaseExperiment extends React.Component {
 					</VisualizationCredit>
 				</Visualization>
 
-				<KinesisMarkdown
+				<Markdown
 					color={this.props.primaryColor}
 					content={costDiseaseAndLowProductivityMd}
 				/>

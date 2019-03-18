@@ -13,7 +13,7 @@ import BoldButton from '@jballands/vespyr/lib/BoldButton';
 // import InstagramViewerContainer from 'containers/InstagramViewerContainer';
 import BackgroundGradient from 'components/BackgroundGradient';
 import Particles from 'components/Particles';
-import KinesisMarkdown from 'components/KinesisMarkdown';
+import Markdown from 'kinesis/Markdown';
 import LinkInTabSvg from 'svg/LinkInTabSvg';
 // import InstagramSvg from 'svg/InstagramSvg';
 import DownArrowSvg from 'svg/DownArrowSvg';
@@ -180,10 +180,7 @@ export default class About extends React.Component {
 					</AboutHeroUnitContainer>
 
 					<AboutMe>
-						<KinesisMarkdown
-							color={eastSide}
-							content={aboutSpiel}
-						/>
+						<Markdown color={eastSide} content={aboutSpiel} />
 					</AboutMe>
 				</BackgroundGradient>
 			</AboutContainer>

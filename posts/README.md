@@ -36,7 +36,7 @@ const Resource = React.lazy(() => import(entry.resource));
 ...
 
 <Suspense>
-	<Resource primaryColor={primaryColor} secondaryColor={secondaryColor} {...entry.props} />
+	<Resource />
 </Suspense>
 ```
 
