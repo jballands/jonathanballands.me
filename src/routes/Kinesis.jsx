@@ -7,6 +7,7 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 
 import KinesisBrowser from 'components/KinesisBrowser';
@@ -29,6 +30,10 @@ export default class Kinesis extends Component {
 
 	render() {
 		const { match } = this.props;
+
+		if (!match.params.kinesisId) {
+			return <Redirect to={`/kinesis/${entries.first().get('id')}`} />;
+		}
 
 		const selectedEntry = entries.get(match.params.kinesisId);
 
