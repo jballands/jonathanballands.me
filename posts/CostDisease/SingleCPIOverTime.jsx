@@ -14,7 +14,7 @@ import { extent } from 'd3-array';
 import { curveBasis, line } from 'd3-shape';
 import { scaleLinear, scaleTime } from 'd3-scale';
 
-import Axis from 'kinesis/CostDisease/Axis';
+import Axis from 'posts/CostDisease/Axis';
 
 const VIEWBOX = {
 	width: 500,

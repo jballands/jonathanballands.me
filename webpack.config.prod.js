@@ -7,6 +7,7 @@
 
 const path = require('path');
 const CompressionPlugin = require('compression-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 // -----------------------------------------------------------------------------
 
@@ -15,7 +16,15 @@ module.exports = {
 	context: path.resolve(__dirname),
 	entry: ['./src/index.jsx'],
 	optimization: {
-		minimize: true,
+		minimizer: [
+			new UglifyJsPlugin({
+				uglifyOptions: {
+					output: {
+						comments: false,
+					},
+				},
+			}),
+		],
 	},
 	output: {
 		path: path.resolve(__dirname, './public'),
@@ -42,6 +51,14 @@ module.exports = {
 				use: [
 					{
 						loader: 'babel-loader',
+					},
+				],
+			},
+			{
+				test: /\.md$/,
+				use: [
+					{
+						loader: 'raw-loader',
 					},
 				],
 			},

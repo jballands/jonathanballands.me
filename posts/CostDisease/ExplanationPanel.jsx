@@ -15,7 +15,7 @@ import { linkShade } from 'helpers/palette';
 import HelpSvg from 'svg/HelpSvg';
 import CollapseSvg from 'svg/CollapseSvg';
 
-import AnchorTag from 'kinesis/CostDisease/AnchorTag';
+import AnchorTag from 'posts/CostDisease/AnchorTag';
 
 const ExplanationPanelContainer = styled.div`
 	display: flex;

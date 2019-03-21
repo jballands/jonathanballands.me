@@ -9,7 +9,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import Markdown from 'components/Markdown';
+import Markdown from 'kinesis/Markdown';
 
 import ExplanationPanel from './ExplanationPanel';
 import CPIOverTime from './CPIOverTime';

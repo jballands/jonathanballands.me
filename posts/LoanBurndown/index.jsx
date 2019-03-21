@@ -18,7 +18,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
-import KinesisMarkdown from 'components/KinesisMarkdown';
+import Markdown from 'kinesis/Markdown';
 import Welcome from './Welcome';
 import VisualizerContainer from './VisualizerContainer';
 import { explanationMd } from './markdown';
@@ -52,7 +52,7 @@ class LoanBurndown extends React.Component {
 			<BurndownAppContainer>
 				{!ready && <Welcome {...this.props} />}
 				{ready && <VisualizerContainer {...this.props} />}
-				<KinesisMarkdown color={primaryColor} content={explanationMd} />
+				<Markdown color={primaryColor} content={explanationMd} />
 			</BurndownAppContainer>
 		);
 	}

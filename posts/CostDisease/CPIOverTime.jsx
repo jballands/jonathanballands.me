@@ -15,7 +15,7 @@ import { curveBasis, line } from 'd3-shape';
 import { scaleLinear, scaleTime } from 'd3-scale';
 import _concat from 'lodash.concat';
 
-import Axis from 'kinesis/CostDisease/Axis';
+import Axis from 'posts/CostDisease/Axis';
 
 import tuition7817 from './tuition7817.json';
 import medical7817 from './medical7817.json';

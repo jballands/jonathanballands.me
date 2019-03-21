@@ -18,7 +18,7 @@ import { select } from 'd3-selection';
 import { scaleLinear, scaleTime } from 'd3-scale';
 import { area, curveBasis } from 'd3-shape';
 import 'd3-transition';
-import { dataGroupedByProperty } from 'kinesis/LoanBurndown/utils';
+import { dataGroupedByProperty } from 'posts/LoanBurndown/utils';
 
 const Svg = styled.svg`
 	width: 100%;

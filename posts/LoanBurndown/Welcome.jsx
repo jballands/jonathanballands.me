@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import ReactSVG from 'react-svg';
-import KinesisMarkdown from 'components/KinesisMarkdown';
+import Markdown from 'kinesis/Markdown';
 import BoldButton from '@jballands/vespyr/lib/BoldButton';
 import { privacyMd } from './markdown';
 
@@ -147,7 +147,7 @@ class Welcome extends React.Component {
 						path="/assets/experiments/loan-burndown/privacy.svg"
 						color={primaryColor}
 					/>
-					<KinesisMarkdown color={primaryColor} content={privacyMd} />
+					<Markdown color={primaryColor} content={privacyMd} />
 				</PrivacyContainer>
 			</WelcomeContainer>
 		);

@@ -49,7 +49,7 @@ class NavigationBar extends React.Component {
 	};
 
 	render() {
-		const { currentKinesisEntryId, location } = this.props;
+		const { location } = this.props;
 
 		return (
 			<NavigationBarContainerContainer>

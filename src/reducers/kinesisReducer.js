@@ -12,10 +12,6 @@ import matchSorter from 'match-sorter';
 import {
 	KINESIS_SEARCH_POSTS,
 	KINESIS_SET_SORT_ORDER,
-	KINESIS_CHOOSE_ENTRY,
-	KINESIS_CHOOSE_ENTRY_START_LOADING,
-	KINESIS_CHOOSE_ENTRY_LOADING_SUCCESS,
-	KINESIS_CHOOSE_ENTRY_LOADING_FAILURE,
 } from 'actions/KinesisActions';
 
 import entries from 'helpers/kinesisEntries';
@@ -79,8 +75,6 @@ export default function kinesisReducer(
 					);
 					return sortKinesisEntries(action.sortOrder, filtered);
 				});
-		case KINESIS_CHOOSE_ENTRY:
-			return state.set('selectedEntry', entries.get(action.id));
 		default:
 			return state;
 	}

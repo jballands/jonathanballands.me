@@ -9,7 +9,7 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import KinesisMarkdown from 'components/KinesisMarkdown';
+import Markdown from 'kinesis/Markdown';
 import AppleTVIcon from './AppleTVIcon';
 
 const Grid = styled.div`
@@ -49,7 +49,7 @@ const StyledAppleTVIcon = styled(AppleTVIcon)`
 	border-radius: 5px;
 `;
 
-const DirectionsMouse = styled(KinesisMarkdown)`
+const DirectionsMouse = styled(Markdown)`
 	text-align: center;
 	@media (pointer: coarse) {
 		visibility: hidden;
@@ -60,7 +60,7 @@ const DirectionsMouse = styled(KinesisMarkdown)`
 	}
 `;
 
-const DirectionsTouch = styled(KinesisMarkdown)`
+const DirectionsTouch = styled(Markdown)`
 	text-align: center;
 	margin-bottom: 40px;
 	@media (pointer: fine) {
