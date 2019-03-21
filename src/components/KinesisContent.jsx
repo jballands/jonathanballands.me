@@ -11,23 +11,14 @@ import ImmutablePropTypes from 'react-immutable-proptypes';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
-import { chooseEntry } from 'actions/KinesisActions';
-
 import BackgroundGradient from 'components/BackgroundGradient';
 import ContentScroller from 'components/ContentScroller';
 import LoadingAnimation from 'components/LoadingAnimation';
-
-import entries from 'helpers/kinesisEntries';
 
 const mapStateToProps = ({ kinesis }) => ({
 	content: kinesis.get('content'),
 	contentLoading: kinesis.get('contentLoading'),
 	filteredEntries: kinesis.get('filteredEntries'),
-	selectedEntry: kinesis.get('selectedEntry'),
-});
-
-const mapDispatchToProps = dispatch => ({
-	chooseEntry: id => dispatch(chooseEntry(id)),
 });
 
 const StyledLoadingAnimation = styled(LoadingAnimation)`
@@ -52,22 +43,15 @@ class KinesisContent extends Component {
 		content: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
 		contentLoading: PropTypes.bool,
 		filteredEntries: ImmutablePropTypes.orderedMap,
-		history: PropTypes.object,
-		location: PropTypes.object,
-		match: PropTypes.object,
 		selectedEntry: PropTypes.object,
 	};
 
-	componentDidMount() {
-		// When this component mounts, just choose the entry
-		this.props.chooseEntry(
-			entries.get(this.props.match.params.kinesisId).get('id'),
-		);
-	}
-
 	render() {
+		const { selectedEntry } = this.props;
+
+		console.log(selectedEntry);
+
 		const {
-			selectedEntry,
 			selectedEntry: {
 				primaryColor,
 				secondaryColor,
@@ -105,7 +89,4 @@ class KinesisContent extends Component {
 	}
 }
 
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps,
-)(KinesisContent);
+export default connect(mapStateToProps)(KinesisContent);

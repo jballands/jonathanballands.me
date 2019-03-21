@@ -2,13 +2,12 @@
 //	jballands/jonathanballands.me
 //	Kinesis.jsx
 //
-//	© 2017 Jonathan Ballands
+//	© 2019 Jonathan Ballands
 //
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Route, Redirect } from 'react-router-dom';
 
 import KinesisBrowser from 'components/KinesisBrowser';
 import KinesisContent from 'components/KinesisContent';
@@ -29,20 +28,14 @@ export default class Kinesis extends Component {
 	};
 
 	render() {
-		const { history, match } = this.props;
+		const { match } = this.props;
+
+		const selectedEntry = entries.get(match.params.kinesisId);
 
 		return (
 			<KinesisContainer>
-				<KinesisBrowser history={history} match={match} />
-				<Route exact path="/kinesis">
-					{() => (
-						<Redirect to={`kinesis/${entries.first().get('id')}`} />
-					)}
-				</Route>
-				<Route
-					path={`${match.url}/:kinesisId`}
-					component={KinesisContent}
-				/>
+				<KinesisBrowser selectedEntry={selectedEntry} />
+				<KinesisContent selectedEntry={selectedEntry} />
 			</KinesisContainer>
 		);
 	}

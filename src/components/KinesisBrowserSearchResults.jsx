@@ -50,7 +50,6 @@ export default class KinesisBrowserSearchResults extends React.Component {
 	static propTypes = {
 		chooseEntry: PropTypes.func,
 		filteredEntries: PropTypes.instanceOf(Immutable.OrderedMap),
-		match: PropTypes.object,
 		selectedEntry: PropTypes.object,
 	};
 
@@ -88,7 +87,6 @@ export default class KinesisBrowserSearchResults extends React.Component {
 								key={result.get('id')}
 								result={result}
 								onClick={this.handleChooseKinesisEntry}
-								match={match}
 								active={
 									selectedEntry
 										? selectedEntry.get('id') ===

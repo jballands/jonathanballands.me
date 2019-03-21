@@ -61,9 +61,7 @@ class NavigationBar extends React.Component {
 					<NavigationBarItem link="/" location={location}>
 						Hello
 					</NavigationBarItem>
-					<NavigationBarItem
-						link={`/kinesis/${currentKinesisEntryId}`}
-						location={location}>
+					<NavigationBarItem link={`/kinesis`} location={location}>
 						Kinesis
 					</NavigationBarItem>
 					<NavigationBarItem

@@ -73,7 +73,6 @@ export default class KinesisBrowserSearchResult extends React.Component {
 	static propTypes = {
 		active: PropTypes.bool,
 		id: PropTypes.string,
-		match: PropTypes.object,
 		onClick: PropTypes.func,
 		result: PropTypes.instanceOf(Immutable.Record),
 	};
@@ -92,10 +91,10 @@ export default class KinesisBrowserSearchResult extends React.Component {
 	};
 
 	render() {
-		const { active, match, result } = this.props;
+		const { active, result } = this.props;
 		return (
 			<KinesisBrowserSearchResultContainer
-				to={`${match.url}/${result.get('id')}`}
+				to={`/kinesis/${result.get('id')}`}
 				onClick={this.handleOnClick}>
 				<ActiveIcon>
 					{active && (

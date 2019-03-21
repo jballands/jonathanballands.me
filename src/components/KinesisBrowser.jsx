@@ -32,12 +32,10 @@ import OpenDrawerSvg from 'svg/OpenDrawerSvg';
 const mapStateToProps = ({ kinesis }) => ({
 	filteredEntries: kinesis.get('filteredEntries'),
 	searchTerms: kinesis.get('searchTerms'),
-	selectedEntry: kinesis.get('selectedEntry'),
 	sortOrder: kinesis.get('sortOrder'),
 });
 
 const mapDispatchToProps = dispatch => ({
-	chooseEntry: uri => dispatch(chooseEntry(uri)),
 	searchKinesisPosts: terms => dispatch(searchKinesisPosts(terms)),
 	setSortOrder: sortOrder => dispatch(setSortOrder(sortOrder)),
 });

@@ -7,9 +7,8 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Switch } from 'react-router-dom';
+import { Route, Redirect, Switch } from 'react-router-dom';
 import styled from 'styled-components';
-import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 import About from 'routes/About';
 import Kinesis from 'routes/Kinesis';
@@ -18,6 +17,8 @@ import PageNotFound from 'routes/404';
 import ContentScroller from 'components/ContentScroller';
 import NavigationBar from 'components/NavigationBar';
 import RouteWithFooter from 'components/RouteWithFooter';
+
+import entries from 'helpers/kinesisEntries';
 
 const AppContainer = styled.div`
 	min-height: 100vh;
@@ -54,33 +55,32 @@ export default class App extends React.Component {
 
 	render() {
 		const { history, location } = this.props;
-		const topLevelPath = location.pathname.split('/')[1];
 
 		return (
 			<AppContainer>
 				<NavigationBar location={location} />
 				<RouteWrapper>
 					<ContentScroller history={history} location={location}>
-						<TransitionGroup>
-							{/* Timeout is higher here to make up for any inconsistencies between the CSS timer
-							and this timer */}
-							<CSSTransition
-								key={topLevelPath}
-								classNames="fade"
-								timeout={300}>
-								<Switch location={location}>
-									<RouteWithFooter exact path="/">
-										{props => <About {...props} />}
-									</RouteWithFooter>
-									<RouteWithFooter path="/kinesis">
-										{props => <Kinesis {...props} />}
-									</RouteWithFooter>
-									<RouteWithFooter>
-										{props => <PageNotFound {...props} />}
-									</RouteWithFooter>
-								</Switch>
-							</CSSTransition>
-						</TransitionGroup>
+						<Switch location={location}>
+							<RouteWithFooter exact path="/">
+								{props => <About {...props} />}
+							</RouteWithFooter>
+							<Route exact path="/kinesis">
+								{() => (
+									<Redirect
+										to={`/kinesis/${entries
+											.first()
+											.get('id')}`}
+									/>
+								)}
+							</Route>
+							<RouteWithFooter path="/kinesis/:kinesisId">
+								{props => <Kinesis {...props} />}
+							</RouteWithFooter>
+							<RouteWithFooter>
+								{props => <PageNotFound {...props} />}
+							</RouteWithFooter>
+						</Switch>
 					</ContentScroller>
 				</RouteWrapper>
 			</AppContainer>
