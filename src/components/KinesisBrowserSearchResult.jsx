@@ -9,7 +9,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Immutable from 'immutable';
 import styled from 'styled-components';
-import moment from 'moment';
+import { DateTime } from 'luxon';
 import { Link } from 'react-router-dom';
 
 import { mercury, shark } from 'helpers/palette';
@@ -107,7 +107,9 @@ export default class KinesisBrowserSearchResult extends React.Component {
 				<Content>
 					<Title color={shark}>{result.get('name')}</Title>
 					<Subtitle>
-						{moment(result.get('date')).format('MMMM Do, YYYY')}
+						{DateTime.fromJSDate(result.get('date')).toFormat(
+							'DDD',
+						)}
 					</Subtitle>
 					<Subtitle>{this.renderHashtags()}</Subtitle>
 				</Content>

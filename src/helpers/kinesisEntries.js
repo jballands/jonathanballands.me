@@ -2,11 +2,11 @@
 //	jballands/jonathanballands.me
 //	kinesisSpec.js
 //
-//	© 2017 Jonathan Ballands
+//	© 2019 Jonathan Ballands
 //
 
 import Immutable from 'immutable';
-import moment from 'moment';
+import { DateTime } from 'luxon';
 
 import { kinesisPosts } from 'posts/kinesis.config.js';
 import encodeToUri from 'helpers/encodeToUri';
@@ -18,6 +18,6 @@ const entries = Immutable.Map(
 		map[id] = postWithId;
 		return map;
 	}, {}),
-).sort((a, b) => (moment(a.date).isBefore(b.date) ? 1 : -1));
+).sort((a, b) => DateTime.fromJSDate(b.date) - DateTime.fromJSDate(a.date));
 
 export default entries;

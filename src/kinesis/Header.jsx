@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import moment from 'moment';
+import { DateTime } from 'luxon';
 
 const KinesisArticleTitle = styled.div`
 	font-size: 42px;
@@ -22,7 +22,7 @@ const Header = ({ title, date, hashtags, color }) => (
 		<KinesisArticleTitle color={color}>{title}</KinesisArticleTitle>
 
 		<KinesisArticleSubtitle color={color}>
-			<div>{date && moment(date).format('MMMM Do, YYYY')}</div>
+			<div>{date && DateTime.fromJSDate(date).toFormat('DDD')}</div>
 			<div>{hashtags}</div>
 		</KinesisArticleSubtitle>
 	</Fragment>

@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { connect } from 'react-redux';
 import { format } from 'd3-format';
-import moment from 'moment';
+import { DateTime } from 'luxon';
 import styled from 'styled-components';
 import ReactSVG from 'react-svg';
 import Chart from './Chart';
@@ -213,24 +213,24 @@ class Visualization extends React.Component {
 					<StyledMetric
 						color="#10d3a3"
 						title="Estimated Completion"
-						value={moment(
+						value={DateTime.fromJSDate(Date)(
 							graphingData
 								.get('extrapolated')
 								.last()
 								.get(inputColumn),
-						).format('MMM GGGG')}
+						).toFormat('MMM GGGG')}
 						size={extrapolate ? 'big' : 'none'}
 					/>
 					<StyledMetric
 						color="#10d3a3"
 						title="Months Left"
-						value={moment(
+						value={DateTime.fromJSDate(
 							graphingData
 								.get('extrapolated')
 								.last()
 								.get(inputColumn),
 						).diff(
-							moment(
+							DateTime.fromJSDate(
 								graphingData
 									.get('extrapolated')
 									.first()

@@ -2,11 +2,11 @@
 //	jballands/jonathanballands.me
 //	kinesisReducer.js
 //
-//	© 2017 Jonathan Ballands
+//	© 2019 Jonathan Ballands
 //
 
 import Immutable from 'immutable';
-import moment from 'moment';
+import { DateTime } from 'luxon';
 import matchSorter from 'match-sorter';
 
 import {
@@ -27,9 +27,9 @@ const InitialStateRecord = Immutable.Record({
 function sortKinesisEntries(sortOrder, entries) {
 	return entries.sort((a, b) => {
 		if (sortOrder === 'later') {
-			return moment(a.date).isBefore(b.date) ? 1 : -1;
+			return DateTime.fromJSDate(b.date) - DateTime.fromJSDate(a.date);
 		}
-		return moment(a.date).isAfter(b.date) ? 1 : -1;
+		return DateTime.fromJSDate(a.date) - DateTime.fromJSDate(b.date);
 	});
 }
 
