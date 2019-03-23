@@ -55,11 +55,16 @@ export default class NavigationBarItem extends React.Component {
 		children: PropTypes.node,
 		external: PropTypes.bool,
 		link: PropTypes.string,
+		location: PropTypes.object,
 	};
 
 	render() {
-		const route = this.context.router.route.location.pathname;
-		const { children, external, link } = this.props;
+		const {
+			children,
+			external,
+			link,
+			location: { pathname },
+		} = this.props;
 
 		if (external) {
 			return (
@@ -76,9 +81,9 @@ export default class NavigationBarItem extends React.Component {
 		// We treat / special, though, since that doesn't have subroutes
 		let isCurrentRoute = false;
 		if (link === '/') {
-			isCurrentRoute = route === '/';
+			isCurrentRoute = pathname === '/';
 		} else {
-			isCurrentRoute = route.startsWith(link);
+			isCurrentRoute = pathname.startsWith(link);
 		}
 
 		const curr = isCurrentRoute ? ' navigation-bar-current-route' : '';

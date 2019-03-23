@@ -1,6 +1,6 @@
 //
 //	jballands/jonathanballands.me
-//	RightArrow.jsx
+//	Arrow.jsx
 //
 //	© 2017 Jonathan Ballands
 //
@@ -10,8 +10,8 @@ import PropTypes from 'prop-types';
 
 import Svg from 'svg/Svg';
 
-export default class RightArrow extends React.Component {
-	static displayName = 'RightArrow';
+export default class Arrow extends React.Component {
+	static displayName = 'Arrow';
 
 	static propTypes = {
 		color: PropTypes.string,

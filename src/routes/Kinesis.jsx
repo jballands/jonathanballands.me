@@ -5,9 +5,10 @@
 //	© 2019 Jonathan Ballands
 //
 
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 
 import KinesisBrowser from 'components/KinesisBrowser';
@@ -22,26 +23,32 @@ const KinesisContainer = styled.div`
 	flex-flow: row nowrap;
 `;
 
-export default class Kinesis extends Component {
-	static propTypes = {
-		history: PropTypes.object,
-		match: PropTypes.object,
-	};
+const mapStateToProps = ({ kinesis }) => ({
+	selectedEntry: kinesis.get('selectedEntry'),
+});
 
-	render() {
-		const { match } = this.props;
+const Kinesis = ({ history, match, selectedEntry }) => {
+	if (!match.params.kinesisId) {
+		// If there's a selected entry, use that; otherwise, just use the first entry
+		const entryId = selectedEntry || entries.first().get('id');
 
-		if (!match.params.kinesisId) {
-			return <Redirect to={`/kinesis/${entries.first().get('id')}`} />;
-		}
-
-		const selectedEntry = entries.get(match.params.kinesisId);
-
-		return (
-			<KinesisContainer>
-				<KinesisBrowser selectedEntry={selectedEntry} />
-				<KinesisContent selectedEntry={selectedEntry} />
-			</KinesisContainer>
-		);
+		return <Redirect to={`/kinesis/${entryId}`} />;
 	}
-}
+
+	const entryId = entries.get(match.params.kinesisId);
+
+	return (
+		<KinesisContainer>
+			<KinesisBrowser selectedEntry={entryId} />
+			<KinesisContent selectedEntry={entryId} />
+		</KinesisContainer>
+	);
+};
+
+Kinesis.propTypes = {
+	history: PropTypes.object,
+	match: PropTypes.object,
+	selectedEntry: PropTypes.string,
+};
+
+export default connect(mapStateToProps)(Kinesis);

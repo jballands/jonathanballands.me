@@ -123,7 +123,7 @@ export default class Productivity extends React.Component {
 						leftLabel="Less"
 						rightLabel="More"
 					/>
-					<RightArrow />
+					<RightArrow rotate="0deg" />
 					<Slider
 						accentColor="#6bbbff"
 						min={1}

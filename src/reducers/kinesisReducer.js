@@ -12,6 +12,7 @@ import matchSorter from 'match-sorter';
 import {
 	KINESIS_SEARCH_POSTS,
 	KINESIS_SET_SORT_ORDER,
+	KINESIS_SELECT_ENTRY,
 } from 'actions/KinesisActions';
 
 import entries from 'helpers/kinesisEntries';
@@ -21,9 +22,6 @@ const InitialStateRecord = Immutable.Record({
 	sortOrder: 'later',
 	filteredEntries: sortKinesisEntries('later', entries),
 	selectedEntry: null,
-	content: null,
-	contentLoading: true,
-	error: null,
 });
 
 function sortKinesisEntries(sortOrder, entries) {
@@ -52,29 +50,31 @@ function filterKinesisEntries(terms, entries) {
 
 export default function kinesisReducer(
 	state = new InitialStateRecord(),
-	action,
+	{ type, payload },
 ) {
-	switch (action.type) {
+	switch (type) {
 		case KINESIS_SEARCH_POSTS:
 			return state
-				.set('searchTerms', action.terms)
+				.set('searchTerms', payload.terms)
 				.update('filteredEntries', () => {
 					const filtered = filterKinesisEntries(
-						action.terms,
+						payload.terms,
 						entries,
 					);
 					return sortKinesisEntries(state.sortOrder, filtered);
 				});
 		case KINESIS_SET_SORT_ORDER:
 			return state
-				.set('sortOrder', action.sortOrder)
+				.set('sortOrder', payload.sortOrder)
 				.update('filteredEntries', () => {
 					const filtered = filterKinesisEntries(
 						state.searchTerms,
 						entries,
 					);
-					return sortKinesisEntries(action.sortOrder, filtered);
+					return sortKinesisEntries(payload.sortOrder, filtered);
 				});
+		case KINESIS_SELECT_ENTRY:
+			return state.set('selectedEntry', payload.id);
 		default:
 			return state;
 	}

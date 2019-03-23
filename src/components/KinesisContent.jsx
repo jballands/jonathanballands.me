@@ -5,7 +5,7 @@
 //	© 2019 Jonathan Ballands
 //
 
-import React, { Component, Suspense, lazy } from 'react';
+import React, { Suspense, lazy, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import { connect } from 'react-redux';
@@ -14,12 +14,17 @@ import styled from 'styled-components';
 import BackgroundGradient from 'components/BackgroundGradient';
 import ContentScroller from 'components/ContentScroller';
 import LoadingAnimation from 'components/LoadingAnimation';
+import { selectEntry } from 'actions/KinesisActions';
 
 const mapStateToProps = ({ kinesis }) => ({
 	content: kinesis.get('content'),
 	contentLoading: kinesis.get('contentLoading'),
 	filteredEntries: kinesis.get('filteredEntries'),
 });
+
+const actions = {
+	selectEntry,
+};
 
 const StyledLoadingAnimation = styled(LoadingAnimation)`
 	width: 100%;
@@ -35,58 +40,53 @@ const KinesisContainer = styled.div`
 	min-width: 400px;
 `;
 
-class KinesisContent extends Component {
-	static displayName = 'KinesisContent';
+const KinesisContent = ({ filteredEntries, selectedEntry, selectEntry }) => {
+	const {
+		primaryColor,
+		secondaryColor,
+		name,
+		date,
+		resource,
+		props,
+	} = selectedEntry;
 
-	static propTypes = {
-		chooseEntry: PropTypes.func,
-		content: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
-		contentLoading: PropTypes.bool,
-		filteredEntries: ImmutablePropTypes.orderedMap,
-		selectedEntry: PropTypes.object,
-	};
+	useEffect(() => {
+		selectEntry(selectedEntry.get('id'));
+	});
 
-	render() {
-		const { selectedEntry } = this.props;
+	const Resource = lazy(resource);
 
-		console.log(selectedEntry);
-
-		const {
-			selectedEntry: {
-				primaryColor,
-				secondaryColor,
-				name,
-				date,
-				resource,
-				props,
-			},
-		} = this.props;
-
-		const Resource = lazy(resource);
-
-		return (
-			<BackgroundGradient backgroundColor={secondaryColor}>
-				<KinesisContainer>
-					<Suspense
-						fallback={
-							<StyledLoadingAnimation
-								color={primaryColor}
-								text={name}
-							/>
-						}>
-						<Resource
-							name={name}
-							date={date}
-							hashtags={selectedEntry.getReadableHashtags()}
-							primaryColor={primaryColor}
-							secondaryColor={secondaryColor}
-							{...props}
+	return (
+		<BackgroundGradient backgroundColor={secondaryColor}>
+			<KinesisContainer>
+				<Suspense
+					fallback={
+						<StyledLoadingAnimation
+							color={primaryColor}
+							text={name}
 						/>
-					</Suspense>
-				</KinesisContainer>
-			</BackgroundGradient>
-		);
-	}
-}
+					}>
+					<Resource
+						name={name}
+						date={date}
+						hashtags={selectedEntry.getReadableHashtags()}
+						primaryColor={primaryColor}
+						secondaryColor={secondaryColor}
+						{...props}
+					/>
+				</Suspense>
+			</KinesisContainer>
+		</BackgroundGradient>
+	);
+};
 
-export default connect(mapStateToProps)(KinesisContent);
+KinesisContent.propTypes = {
+	filteredEntries: ImmutablePropTypes.orderedMap,
+	selectedEntry: PropTypes.object,
+	selectEntry: PropTypes.func,
+};
+
+export default connect(
+	mapStateToProps,
+	actions,
+)(KinesisContent);

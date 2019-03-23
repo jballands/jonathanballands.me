@@ -159,13 +159,13 @@ export default class AppleTVIcon extends PureComponent {
 		var scrollLeft = supportPageOffset
 			? window.pageXOffset
 			: isCSS1Compat
-				? document.documentElement.scrollLeft
-				: document.body.scrollLeft;
+			? document.documentElement.scrollLeft
+			: document.body.scrollLeft;
 		var scrollTop = supportPageOffset
 			? window.pageYOffset
 			: isCSS1Compat
-				? document.documentElement.scrollTop
-				: document.body.scrollTop;
+			? document.documentElement.scrollTop
+			: document.body.scrollTop;
 
 		const raw = {
 			x: pageX - offsets.left - scrollLeft,
@@ -337,6 +337,7 @@ export default class AppleTVIcon extends PureComponent {
 						parallaxMultiplier *
 						dx}px) translateY(${i * parallaxMultiplier * dy}px)`,
 				},
+				key: i,
 			};
 
 			return React.cloneElement(layer, props);
