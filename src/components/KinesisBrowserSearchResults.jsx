@@ -59,7 +59,7 @@ export default class KinesisBrowserSearchResults extends React.Component {
 	};
 
 	render() {
-		const { filteredEntries, match, selectedEntry } = this.props;
+		const { filteredEntries, selectedEntry } = this.props;
 
 		if (filteredEntries.size <= 0) {
 			return (

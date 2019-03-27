@@ -5,9 +5,11 @@
 //	© 2019 Jonathan Ballands
 //
 
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router';
 import ReactMarkdown from 'react-markdown';
+import { animateScroll } from 'react-scroll';
 import styled from 'styled-components';
 
 import MarkdownCodeBlock from 'kinesis/MarkdownCodeBlock';
@@ -118,30 +120,41 @@ const KinesisStyle = styled.div`
 	}
 `;
 
-export default class Markdown extends Component {
-	static displayName = 'Markdown';
+const Markdown = ({ className, color, content, location, style }) => {
+	useEffect(() => {
+		const animateOptions = { duration: 1000, smooth: 'easeOutQuint' };
 
-	static propTypes = {
-		className: PropTypes.string,
-		color: PropTypes.string,
-		content: PropTypes.string,
-		style: PropTypes.object,
-	};
+		if (location.hash) {
+			const element = document.getElementById(location.hash.slice(1));
+			const offset = element
+				? element.getBoundingClientRect().top - 25
+				: 0;
+			animateScroll.scrollMore(offset, animateOptions);
+		} else {
+			animateScroll.scrollToTop(animateOptions);
+		}
+	}, [location]);
 
-	render() {
-		const { className, color, content, style } = this.props;
+	return (
+		<KinesisStyle className={className} color={color} style={style}>
+			<ReactMarkdown
+				renderers={{
+					CodeBlock: MarkdownCodeBlock,
+					Heading: MarkdownHeading,
+					Link: MarkdownLink,
+				}}
+				source={content}
+			/>
+		</KinesisStyle>
+	);
+};
 
-		return (
-			<KinesisStyle className={className} color={color} style={style}>
-				<ReactMarkdown
-					renderers={{
-						CodeBlock: MarkdownCodeBlock,
-						Heading: MarkdownHeading,
-						Link: MarkdownLink,
-					}}
-					source={content}
-				/>
-			</KinesisStyle>
-		);
-	}
-}
+Markdown.propTypes = {
+	className: PropTypes.string,
+	color: PropTypes.string,
+	content: PropTypes.string,
+	location: PropTypes.object,
+	style: PropTypes.object,
+};
+
+export default withRouter(Markdown);

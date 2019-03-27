@@ -27,7 +27,7 @@ const mapStateToProps = ({ kinesis }) => ({
 	selectedEntry: kinesis.get('selectedEntry'),
 });
 
-const Kinesis = ({ history, match, selectedEntry }) => {
+const Kinesis = ({ history, match, location, selectedEntry }) => {
 	if (!match.params.kinesisId) {
 		// If there's a selected entry, use that; otherwise, just use the first entry
 		const entryId = selectedEntry || entries.first().get('id');
@@ -40,7 +40,11 @@ const Kinesis = ({ history, match, selectedEntry }) => {
 	return (
 		<KinesisContainer>
 			<KinesisBrowser selectedEntry={entryId} />
-			<KinesisContent selectedEntry={entryId} />
+			<KinesisContent
+				selectedEntry={entryId}
+				history={history}
+				location={location}
+			/>
 		</KinesisContainer>
 	);
 };

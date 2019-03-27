@@ -22,6 +22,7 @@ export default class ContentScroller extends React.Component {
 
 	componentDidMount() {
 		const { history, location } = this.props;
+
 		this.unlisten = history.listen(this.scrollToHash);
 		this.scrollToHash(location);
 	}

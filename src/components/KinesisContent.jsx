@@ -12,7 +12,6 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 
 import BackgroundGradient from 'components/BackgroundGradient';
-import ContentScroller from 'components/ContentScroller';
 import LoadingAnimation from 'components/LoadingAnimation';
 import { selectEntry } from 'actions/KinesisActions';
 
@@ -40,7 +39,13 @@ const KinesisContainer = styled.div`
 	min-width: 400px;
 `;
 
-const KinesisContent = ({ filteredEntries, selectedEntry, selectEntry }) => {
+const KinesisContent = ({
+	filteredEntries,
+	selectedEntry,
+	selectEntry,
+	history,
+	location,
+}) => {
 	const {
 		primaryColor,
 		secondaryColor,

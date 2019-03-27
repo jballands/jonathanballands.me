@@ -2,12 +2,12 @@
 //	jballands/jonathanballands.me
 //	App.jsx
 //
-//	© 2017 Jonathan Ballands
+//	© 2019 Jonathan Ballands
 //
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Route, Redirect, Switch } from 'react-router-dom';
+import { Switch } from 'react-router-dom';
 import styled from 'styled-components';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
@@ -15,7 +15,6 @@ import About from 'routes/About';
 import Kinesis from 'routes/Kinesis';
 import PageNotFound from 'routes/404';
 
-import ContentScroller from 'components/ContentScroller';
 import NavigationBar from 'components/NavigationBar';
 import RouteWithFooter from 'components/RouteWithFooter';
 
@@ -49,39 +48,36 @@ const RouteWrapper = styled.div`
 export default class App extends React.Component {
 	static propTypes = {
 		location: PropTypes.object,
-		history: PropTypes.object,
 	};
 
 	render() {
-		const { history, location } = this.props;
+		const { location } = this.props;
 		const topLevelPath = location.pathname.split('/')[1];
 
 		return (
 			<AppContainer>
 				<NavigationBar location={location} />
 				<RouteWrapper>
-					<ContentScroller history={history} location={location}>
-						<TransitionGroup>
-							{/* Timeout is higher here to make up for any inconsistencies between the CSS timer
+					<TransitionGroup>
+						{/* Timeout is higher here to make up for any inconsistencies between the CSS timer
 							and this timer */}
-							<CSSTransition
-								key={topLevelPath}
-								classNames="fade"
-								timeout={300}>
-								<Switch location={location}>
-									<RouteWithFooter exact path="/">
-										{props => <About {...props} />}
-									</RouteWithFooter>
-									<RouteWithFooter path="/kinesis/:kinesisId?">
-										{props => <Kinesis {...props} />}
-									</RouteWithFooter>
-									<RouteWithFooter>
-										{props => <PageNotFound {...props} />}
-									</RouteWithFooter>
-								</Switch>
-							</CSSTransition>
-						</TransitionGroup>
-					</ContentScroller>
+						<CSSTransition
+							key={topLevelPath}
+							classNames="fade"
+							timeout={300}>
+							<Switch location={location}>
+								<RouteWithFooter exact path="/">
+									{props => <About {...props} />}
+								</RouteWithFooter>
+								<RouteWithFooter path="/kinesis/:kinesisId?">
+									{props => <Kinesis {...props} />}
+								</RouteWithFooter>
+								<RouteWithFooter>
+									{props => <PageNotFound {...props} />}
+								</RouteWithFooter>
+							</Switch>
+						</CSSTransition>
+					</TransitionGroup>
 				</RouteWrapper>
 			</AppContainer>
 		);

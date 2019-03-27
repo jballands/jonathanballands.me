@@ -200,7 +200,9 @@ export default class CostDiseaseExperiment extends React.Component {
 						renderExplanation={
 							this.renderNewCarCPIOverTimeExplanation
 						}>
-						<VisualizationTitle color={this.props.primaryColor}>
+						<VisualizationTitle
+							id="new-car-cpi"
+							color={this.props.primaryColor}>
 							CPI for New Cars & Trucks
 						</VisualizationTitle>
 						<VisualizationSubtitle color={this.props.primaryColor}>
