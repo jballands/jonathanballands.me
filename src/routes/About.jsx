@@ -54,7 +54,6 @@ const AboutHeroUnit = styled.div`
 	flex-flow: column;
 	align-items: center;
 	width: 80%;
-	padding-bottom: 70px;
 `;
 
 const AboutHeroUnitTitle = styled.div`
@@ -62,7 +61,7 @@ const AboutHeroUnitTitle = styled.div`
 	text-transform: uppercase;
 	font-size: 54px;
 	letter-spacing: 1px;
-	color: ${fuchsiaBlue};
+	color: #ff7c84;
 	text-align: center;
 `;
 
@@ -85,7 +84,7 @@ const ScrollToSeeMore = styled.div`
 `;
 
 const ScrollToSeeMoreText = styled.div`
-	color: ${eastSide};
+	color: #ff7c84;
 	font-size: 15px;
 `;
 
@@ -144,23 +143,49 @@ export default class About extends React.Component {
 		className: PropTypes.string,
 	};
 
+	state = {
+		salutation: null,
+	};
+
+	componentDidMount() {
+		const salutations = [
+			"Howdy, I'm Jon",
+			"Hi, I'm Jon",
+			"Sup, I'm Jon",
+			'Hola, soy Jon!',
+		];
+
+		const strengths = [
+			'Wannabe designer',
+			'Dork',
+			'Goofball',
+			'Loves React',
+		];
+
+		this.setState({
+			salutation:
+				salutations[Math.floor(Math.random() * salutations.length)],
+			strength: strengths[Math.floor(Math.random() * strengths.length)],
+		});
+	}
+
 	render() {
 		return (
 			<AboutContainer className={this.props.className}>
-				<BackgroundGradient backgroundColor={moonRaker}>
+				<BackgroundGradient backgroundColor="#fb9fa4">
 					<AboutHeroUnitContainer>
-						<Particles height="calc(100vh - 70px)">
+						<Particles>
 							<AboutHeroUnit>
 								<AboutHeroUnitTitle>
-									Howdy, I'm Jon
+									{this.state.salutation}
 								</AboutHeroUnitTitle>
 								<AboutHeroUnitSubtitle>
-									Web developer. Wannabe designer.
+									Web developer. {this.state.strength}.
 								</AboutHeroUnitSubtitle>
 								<ViewResumeContainer
 									href="/assets/pdf/jonathan_ballands_resume_18.pdf"
 									target="_blank">
-									<ViewResume accentColor={fuchsiaBlue}>
+									<ViewResume accentColor="#ff7c84">
 										View My Résumé <StyledLinkInTabSvg />
 									</ViewResume>
 								</ViewResumeContainer>
@@ -172,7 +197,7 @@ export default class About extends React.Component {
 									<ScrollToSeeMoreArrow
 										width={20}
 										height={20}
-										fill={eastSide}
+										fill="#ff7c84"
 									/>
 								</ScrollToSeeMore>
 							</AboutHeroUnit>

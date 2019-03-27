@@ -45,7 +45,7 @@ export default class Particles extends React.Component {
 		const params = {
 			particles: {
 				number: {
-					value: 36,
+					value: 40,
 				},
 				move: {
 					enable: true,
@@ -58,7 +58,7 @@ export default class Particles extends React.Component {
 				line_linked: {
 					enable: true,
 					distance: 250,
-					color: gigas,
+					color: '#fff',
 					opacity: 0.7,
 					width: 1,
 				},
