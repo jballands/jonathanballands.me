@@ -187,6 +187,8 @@ class Visualization extends React.Component {
 			return this.renderNeedsConfiguration();
 		}
 
+		console.log(graphingData);
+
 		return (
 			<VisualizationContainer>
 				<VisualizationMetrics>
@@ -213,31 +215,33 @@ class Visualization extends React.Component {
 					<StyledMetric
 						color="#10d3a3"
 						title="Estimated Completion"
-						value={DateTime.fromJSDate(Date)(
+						value={DateTime.fromMillis(
 							graphingData
 								.get('extrapolated')
 								.last()
 								.get(inputColumn),
-						).toFormat('MMM GGGG')}
+						).toFormat('MMM y')}
 						size={extrapolate ? 'big' : 'none'}
 					/>
 					<StyledMetric
 						color="#10d3a3"
 						title="Months Left"
-						value={DateTime.fromJSDate(
+						value={DateTime.fromMillis(
 							graphingData
 								.get('extrapolated')
 								.last()
 								.get(inputColumn),
-						).diff(
-							DateTime.fromJSDate(
-								graphingData
-									.get('extrapolated')
-									.first()
-									.get(inputColumn),
-							),
-							'months',
-						)}
+						)
+							.diff(
+								DateTime.fromMillis(
+									graphingData
+										.get('extrapolated')
+										.first()
+										.get(inputColumn),
+								),
+							)
+							.as('months')
+							.toFixed(0)}
 						size={extrapolate ? 'big' : 'none'}
 					/>
 				</VisualizationMetrics>
