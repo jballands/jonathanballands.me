@@ -18,27 +18,10 @@ import LinkInTabSvg from 'svg/LinkInTabSvg';
 // import InstagramSvg from 'svg/InstagramSvg';
 import DownArrowSvg from 'svg/DownArrowSvg';
 
-import { fuchsiaBlue, eastSide, moonRaker, shark } from 'helpers/palette';
+import { shark } from 'helpers/palette';
 
 const aboutSpiel = `
-I'm a frontend web developer with an eye for design. Having a background in Computer Science means
-that I can not only design beautiful websites, but I can also architect, build, and maintain rich web
-applications with performance and UX in mind.
-
-I graduated in 2014 from Virginia Tech with a BS in Computer Science. While in Virginia, I wrote a
-shell, learned how compilers work, [designed and wrote a video game](https://github.com/12-01Game), took a
-human-computer interaction capstone course, wrote proofs about popular algorithms, and much more.
-
-When I graduated college, I joined IBM for two years in Austin, Texas. I learned [Objective-C](https://en.wikipedia.org/wiki/Objective-C) and
-[Swift](https://en.wikipedia.org/wiki/Swift_(programming_language)) because I thought I wanted to be an iOS developer. That stuff
-was super fun, but after learning [D3](https://d3js.org/) and [Angular](https://angular.io/) for a project at work,
-I became really interested in web development and web frameworks. So I started doing more of that and in 2016, I jumped ship to
-go work on the analytics solution at [Spredfast](https://www.spredfast.com/), where we used [React](https://reactjs.org/).
-In 2018, I started work as a UI developer at [Apple](https://apple.com), still specializing in React.
-
-I designed, programmed, and put up this website myself [from scratch](https://github.com/jballands/jonathanballands.me).
-No Squarespace, Wordpress, or whatever funny business. It should give you an idea of what I'm capable of. Feel free to take
-a look around; hopefully you'll find something you like.
+I need to write a blurb here.
 `;
 
 const AboutContainer = styled.div`
@@ -47,7 +30,7 @@ const AboutContainer = styled.div`
 
 const AboutHeroUnitContainer = styled.div`
 	width: 100%;
-	height: calc(100vh - 70px);
+	height: calc(100vh - 140px);
 `;
 
 const AboutHeroUnit = styled.div`
@@ -147,9 +130,11 @@ export default class About extends React.Component {
 	render() {
 		return (
 			<AboutContainer className={this.props.className}>
-				<BackgroundGradient height="100vh" backgroundColor="#fb9fa4">
+				<BackgroundGradient
+					height="calc(100vh - 140px)"
+					backgroundColor="#fb9fa4">
 					<AboutHeroUnitContainer>
-						<Particles height="100vh">
+						<Particles height="calc(100vh - 140px)">
 							<AboutHeroUnit>
 								<AboutHeroUnitTitle>
 									Howdy, I'm Jon
@@ -164,24 +149,9 @@ export default class About extends React.Component {
 										View My Résumé <StyledLinkInTabSvg />
 									</ViewResume>
 								</ViewResumeContainer>
-
-								<ScrollToSeeMore>
-									<ScrollToSeeMoreText>
-										Scroll down to learn more
-									</ScrollToSeeMoreText>
-									<ScrollToSeeMoreArrow
-										width={20}
-										height={20}
-										fill="#ff7c84"
-									/>
-								</ScrollToSeeMore>
 							</AboutHeroUnit>
 						</Particles>
 					</AboutHeroUnitContainer>
-
-					<AboutMe>
-						<Markdown color={eastSide} content={aboutSpiel} />
-					</AboutMe>
 				</BackgroundGradient>
 			</AboutContainer>
 		);
