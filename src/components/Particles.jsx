@@ -5,7 +5,7 @@
 //	© 2017 Jonathan Ballands
 //
 
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import ReactParticles from 'react-particles-js';
@@ -33,7 +33,7 @@ const ParticlesContentContainer = styled.div`
 	align-items: center;
 `;
 
-export default class Particles extends React.Component {
+export default class Particles extends Component {
 	static displayName = 'Particles';
 
 	static propTypes = {

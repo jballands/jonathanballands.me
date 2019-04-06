@@ -47,6 +47,7 @@ const AboutContainer = styled.div`
 
 const AboutHeroUnitContainer = styled.div`
 	width: 100%;
+	height: calc(100vh - 70px);
 `;
 
 const AboutHeroUnit = styled.div`
@@ -134,7 +135,7 @@ const AboutMe = styled.div`
 	display: flex;
 	flex-flow: column nowrap;
 	align-items: center;
-	margin: 50px auto 125px auto;
+	margin: 0 auto 125px auto;
 	font-size: 16px;
 `;
 
@@ -143,44 +144,18 @@ export default class About extends React.Component {
 		className: PropTypes.string,
 	};
 
-	state = {
-		salutation: null,
-	};
-
-	componentDidMount() {
-		const salutations = [
-			"Howdy, I'm Jon",
-			"Hi, I'm Jon",
-			"Sup, I'm Jon",
-			'Hola, soy Jon!',
-		];
-
-		const strengths = [
-			'Wannabe designer',
-			'Dork',
-			'Goofball',
-			'Loves React',
-		];
-
-		this.setState({
-			salutation:
-				salutations[Math.floor(Math.random() * salutations.length)],
-			strength: strengths[Math.floor(Math.random() * strengths.length)],
-		});
-	}
-
 	render() {
 		return (
 			<AboutContainer className={this.props.className}>
-				<BackgroundGradient backgroundColor="#fb9fa4">
+				<BackgroundGradient height="100vh" backgroundColor="#fb9fa4">
 					<AboutHeroUnitContainer>
-						<Particles>
+						<Particles height="100vh">
 							<AboutHeroUnit>
 								<AboutHeroUnitTitle>
-									{this.state.salutation}
+									Howdy, I'm Jon
 								</AboutHeroUnitTitle>
 								<AboutHeroUnitSubtitle>
-									Web developer. {this.state.strength}.
+									Web developer. Wannabe designer. Dork.
 								</AboutHeroUnitSubtitle>
 								<ViewResumeContainer
 									href="/assets/pdf/jonathan_ballands_resume_18.pdf"

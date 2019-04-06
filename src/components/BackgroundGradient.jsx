@@ -24,7 +24,7 @@ const Gradient = styled.div`
 	top: 0;
 	left: 0;
 	width: 100%;
-	height: 500px;
+	height: ${props => props.height};
 	background: linear-gradient(to bottom, ${props => props.color}, ${white});
 	transition: background 750ms ease;
 `;
@@ -42,13 +42,20 @@ export default class BackgroundGradient extends React.Component {
 	static propTypes = {
 		backgroundColor: PropTypes.string.isRequired,
 		children: PropTypes.node,
+		height: PropTypes.string,
+	};
+
+	static defaultProps = {
+		height: '500px',
 	};
 
 	render() {
+		const { backgroundColor, children, height } = this.props;
+
 		return (
 			<BackgroundGradientContainer>
-				<Gradient color={this.props.backgroundColor} />
-				<Content>{this.props.children}</Content>
+				<Gradient color={backgroundColor} height={height} />
+				<Content>{children}</Content>
 			</BackgroundGradientContainer>
 		);
 	}
