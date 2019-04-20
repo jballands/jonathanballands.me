@@ -2,7 +2,7 @@
 //	jballands/jonathanballands.me
 //	About.jsx
 //
-//	© 2017 Jonathan Ballands
+//	© 2019 Jonathan Ballands
 //
 
 import React from 'react';
@@ -10,19 +10,10 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import BoldButton from '@jballands/vespyr/lib/BoldButton';
 
-// import InstagramViewerContainer from 'containers/InstagramViewerContainer';
 import BackgroundGradient from 'components/BackgroundGradient';
-import Particles from 'components/Particles';
-import Markdown from 'kinesis/Markdown';
 import LinkInTabSvg from 'svg/LinkInTabSvg';
-// import InstagramSvg from 'svg/InstagramSvg';
-import DownArrowSvg from 'svg/DownArrowSvg';
 
 import { shark } from 'helpers/palette';
-
-const aboutSpiel = `
-I need to write a blurb here.
-`;
 
 const AboutContainer = styled.div`
 	width: 100%;
@@ -31,6 +22,9 @@ const AboutContainer = styled.div`
 const AboutHeroUnitContainer = styled.div`
 	width: 100%;
 	height: calc(100vh - 140px);
+	display: flex;
+	align-items: center;
+	justify-content: center;
 `;
 
 const AboutHeroUnit = styled.div`
@@ -57,48 +51,6 @@ const AboutHeroUnitSubtitle = styled.div`
 	margin-top: 10px;
 `;
 
-const ScrollToSeeMore = styled.div`
-	display: flex;
-	flex-flow: column nowrap;
-	align-items: center;
-	position: relative;
-	bottom: 0;
-	height: 80px;
-	margin-top: 30px;
-`;
-
-const ScrollToSeeMoreText = styled.div`
-	color: #ff7c84;
-	font-size: 15px;
-`;
-
-const ScrollToSeeMoreArrow = styled(DownArrowSvg)`
-	@keyframes bounce {
-		30% {
-			bottom: 35px;
-		}
-		34% {
-			bottom: 25px;
-		}
-		38% {
-			bottom: 35px;
-		}
-		42% {
-			bottom: 25px;
-		}
-		46% {
-			bottom: 35px;
-		}
-	}
-
-	animation-name: bounce;
-	animation-duration: 8s;
-	animation-iteration-count: infinite;
-	animation-timing-function: ease-in-out;
-	bottom: 35px;
-	position: absolute;
-`;
-
 const ViewResumeContainer = styled.a`
 	margin-top: 30px;
 `;
@@ -110,16 +62,6 @@ const ViewResume = styled(BoldButton)`
 
 const StyledLinkInTabSvg = styled(LinkInTabSvg)`
 	margin-left: 10px;
-`;
-
-const AboutMe = styled.div`
-	width: 75%;
-	max-width: 800px;
-	display: flex;
-	flex-flow: column nowrap;
-	align-items: center;
-	margin: 0 auto 125px auto;
-	font-size: 16px;
 `;
 
 export default class About extends React.Component {
@@ -134,23 +76,21 @@ export default class About extends React.Component {
 					height="calc(100vh - 140px)"
 					backgroundColor="#fb9fa4">
 					<AboutHeroUnitContainer>
-						<Particles height="calc(100vh - 140px)">
-							<AboutHeroUnit>
-								<AboutHeroUnitTitle>
-									Howdy, I'm Jon
-								</AboutHeroUnitTitle>
-								<AboutHeroUnitSubtitle>
-									Web developer. Wannabe designer. Dork.
-								</AboutHeroUnitSubtitle>
-								<ViewResumeContainer
-									href="/assets/pdf/jonathan_ballands_resume_18.pdf"
-									target="_blank">
-									<ViewResume accentColor="#ff7c84">
-										View My Résumé <StyledLinkInTabSvg />
-									</ViewResume>
-								</ViewResumeContainer>
-							</AboutHeroUnit>
-						</Particles>
+						<AboutHeroUnit>
+							<AboutHeroUnitTitle>
+								Howdy, I'm Jon
+							</AboutHeroUnitTitle>
+							<AboutHeroUnitSubtitle>
+								Web developer. Wannabe designer. Dork.
+							</AboutHeroUnitSubtitle>
+							<ViewResumeContainer
+								href="/assets/pdf/jonathan_ballands_resume_18.pdf"
+								target="_blank">
+								<ViewResume accentColor="#ff7c84">
+									View My Résumé <StyledLinkInTabSvg />
+								</ViewResume>
+							</ViewResumeContainer>
+						</AboutHeroUnit>
 					</AboutHeroUnitContainer>
 				</BackgroundGradient>
 			</AboutContainer>
