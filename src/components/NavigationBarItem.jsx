@@ -71,6 +71,7 @@ export default class NavigationBarItem extends React.Component {
 				<StyledExternalink
 					className="navigation-bar-item"
 					href={link}
+					rel="noopener noreferrer"
 					target="_blank">
 					<Children>{children}</Children>
 				</StyledExternalink>

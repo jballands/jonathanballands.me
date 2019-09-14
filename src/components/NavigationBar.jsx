@@ -62,13 +62,13 @@ class NavigationBar extends React.Component {
 						Hello
 					</NavigationBarItem>
 					<NavigationBarItem link="/kinesis" location={location}>
-						Kinesis
+						Blog
 					</NavigationBarItem>
 					<NavigationBarItem
-						link="https://github.com/jballands/vespyr"
+						link="https://github.com/jballands"
 						location={location}
 						external>
-						Vespyr
+						Github
 					</NavigationBarItem>
 				</NavigationBarList>
 			</NavigationBarContainerContainer>

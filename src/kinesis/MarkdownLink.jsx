@@ -24,7 +24,7 @@ export default class MarkdownLink extends PureComponent {
 			return <a href={href}>{children}</a>;
 		}
 		return (
-			<a href={href} target="_blank">
+			<a href={href} target="_blank" rel="noopener noreferrer">
 				{children}
 			</a>
 		);

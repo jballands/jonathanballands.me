@@ -13,6 +13,8 @@ import bash from 'highlight.js/lib/languages/bash';
 import styled from 'styled-components';
 
 const StyledLowlight = styled(Lowlight)`
+	tab-size: 2em;
+
 	.hljs {
 		display: block;
 		overflow-x: auto;

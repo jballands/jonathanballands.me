@@ -130,7 +130,7 @@ class KinesisBrowser extends React.Component {
 
 	state = {
 		drawerOpen: true,
-		overrideAutoCollapse: false,
+		overrideAutoCollapse: true,
 	};
 
 	handleOnScroll = ({ isSticky, wasSticky }) => {
@@ -216,8 +216,8 @@ class KinesisBrowser extends React.Component {
 						color={shark}
 						accentColor={selectedEntry.primaryColor}
 						onOptionClick={this.handleSetSortOrder}>
-						<RadioItem id="later">Later Posts First</RadioItem>
-						<RadioItem id="earlier">Earlier Posts First</RadioItem>
+						<RadioItem id="later">Latest to earliest</RadioItem>
+						<RadioItem id="earlier">Earliest to latest</RadioItem>
 					</StyledRadioGroup>
 				</FiltersContainer>
 

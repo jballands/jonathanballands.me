@@ -104,7 +104,6 @@ const KinesisStyle = styled.div`
 
 	code {
 		color: ${black};
-		font-weight: 700;
 	}
 
 	pre {

@@ -49,13 +49,13 @@ export const KinesisHashtags = {
 		id: 'diy',
 		displayName: 'diy',
 	},
+	learning: {
+		id: 'learning',
+		displayName: 'still-learning',
+	},
 	economics: {
 		id: 'economics',
 		displayName: 'economics',
-	},
-	home_automation: {
-		id: 'home_automation',
-		displayName: 'home-automation',
 	},
 	react: {
 		id: 'react',
@@ -107,6 +107,14 @@ export const kinesisPosts = [
 		resource: () => import('posts/AppleTVParallax'),
 		primaryColor: '#91adbc',
 		secondaryColor: '#deebf2',
+	}),
+	new Post({
+		name: 'Stuff I Wish I Knew About React Hooks',
+		date: new Date(2019, 8, 15),
+		hashtags: [KinesisHashtags.react, KinesisHashtags.learning],
+		resource: () => import('posts/LessonsOnHooks'),
+		primaryColor: '#d4af37',
+		secondaryColor: '#ffdb63',
 	}),
 	// new Post({
 	// 	name: 'Aperture',
